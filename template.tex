@@ -25,6 +25,11 @@
 \newcommand\Free{\mathbf{free}}
 \newcommand\Cirx{(x)}
 \newcommand\dtb{\;\;\ \;\;\ \;\;\ \;\;\  }
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{myDef}{Definition}
 
 
 \title{Safe Memory Deallocation for Non-terminating Programs}
@@ -39,12 +44,531 @@ $^2$ \\
 \begin{document}
 \maketitle
 \begin{abstract}
-
+We propose a type system to prevent programs infinitelly consuming memory cells. The main idea is based on the previours type system which augments pointer types with fractional ownerships and behavioral type system which abstract the behavior of programs. The simple idea in our work is to reject allocating a memory cell before recursive calls.
 \end{abstract}
 
 \section{Introduction}
- this is an Introduction
+Manual memory management primitives (e.g., {\tt malloc} and {\tt free} in C) often cause serious problems such as double frees, memory leaks, and illegal read/write to a deallocated memory cell. Verifying \emph{safe memory deallocation} -- a program not leading to such an unsafe state -- is an important problem.
 
-\section{End}
+Most of safe memory deallocation verification techniques proposed so far \cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06} focus on the memory leak for \emph{terminating} programs: If a program terminates, the program satisfies safe memory dealloction. Meanwhile, safe memory deallocation is also important in non-terminating programs such as Web servers and operating systems.
+
+We are currently investigating safe memory deallocation for non-terminating programs. We describe the current status in this extended abstract.
+
+\section{Related Work}
+Safe memory deallocation so far mainly deals with memory leak for terminating programs. For example, the type system by Suenaga and Kobayashi \cite{DBLP:conf/aplas/SuenagaK09} guarrantees that (1) a well-typed program does not perform read/write/free operations to any deallocated memory cell and that (2) after execution of a well-typed program, all the memory cells are deallocated.
+
+We use a behavioral type system in the present paper to abstract the behavior of a program. Behavioral types are heavily used in the context of concurrent program verification \cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}.
+
+
+\section{Approach}
+Our main idea is to decompose the problem into two subproblems: (1) partial correctness and (2) \emph{behavioral correctness}. The former is verified based on the previous type system \cite{DBLP:conf/aplas/SuenagaK09}, whereas the latter based on the type system we describe.
+
+We use an imperative language with manual memory management for presenting examples. The definition of the language is as follows; It is a sublanguage of Suenaga and Kobayashi \cite{DBLP:conf/aplas/SuenagaK09}.
+\begin{eqnarray*}
+s \; (statements)& ::= & \SKIP \tB s_{1};s_{2} \tB *x \leftarrow y \\
+& &\tB \Free \Cirx \tB \LET\; x = \MALLOC \; \IN \; s  \\
+& &\tB f(\vec{x}) \tB \ldots
+\end{eqnarray*}
+%a program is a pair (D,s), where D is a set of definitions.
+
+The command $\SKIP$ does nothing; the sequence $s_{1};s_{2}$ means the executing order of $s_{1}$ and $s_{2}$; the command $\Free\Cirx$ deallocates the memory cell through the pointer $x$; and the command $\LET x = \MALLOC \; \IN s$ first allocates a memory cell which is pointed by $x$ and then executes s; $f(\vec{x})$ means a function call which receives some parameters. Here $\vec{x}$ means that $\{ x_{1},...,x_{n} \}$, the list of distinct variables. Notice that we omit several constructs such as dereferencing pointer, conditional statement, and so on.
+
+\begin{figure}[h]
+1 \;\; $f(x)$= \dtb\dtb \dtb \;\;\;\; \;\;$g(x)$= \\
+2 \;\; $\LET \; x = \MALLOC  \; \IN$ \;\dtb \;\;\;\;$\LET \; x = \MALLOC  \; \IN$\\
+3 \;\; $\Free\Cirx$; \; $f(x)$\dtb\dtb\;\;\; \;\;$g(x)$; \; $\Free\Cirx$
+\caption{Examples of memory leak.}
+\label{example:memoryLeak}
+\end{figure}
+\begin{figure}[h]
+1 \;\; $h(x)$=\\
+2 \;\; $\LET \; x = \MALLOC  \; \IN$\\
+3 \;\; $\LET \; y = \MALLOC  \; \IN$\\
+4 \;\; $\Free\Cirx$; \; $\Free(y) $; \; $h(x)$
+\caption{Example for demonstrating the main observation.}
+\label{example:observation}
+\end{figure}
+
+A program \emph{leaks} memory if the program consumes unbounded number of memory cells.  For example, the left-hand side program in Example~\ref{example:memoryLeak} does not leak memory, whereas the right-hand side does; the former consumes at most one memory cell at once
+but the latter consumes unbounded number of memory cells.  Notice that both are partially correct because they do not terminate.
+
+Our main observation is as follows: once partial correctness is guaranteed, we can guarantee memory-leak freedom
+by estimating upper bound of memory consumption \emph{ignoring the relation between variables and pointers to memory cells}.
+Example~\ref{example:observation} describes the observation.  The function \(h\) is partially correct.  Then, in order to
+verify that it consumes at most two cells at once, we can ignore \(x\) and \(y\) in \(h\); We can focus on the fact that
+\(h\) executes \(\Malloc\) twice, \(\Free\) twice, and then calls \(h\).  This abstraction is sound because
+the correspondence between allocations and deallocations is guaranteed by the partial correctness verification.
+
+In order to verify partial correctness, we use the type system by Suenaga and Kobayashi~\cite{DBLP:conf/aplas/SuenagaK09}.
+Then, we use a \emph{behavioral type system} for the abstraction described above; For example, the behavior of \(h\)
+is abstracted by a CCS-like process \(\mu \alpha. \Malloc.\Malloc.\Free.\Free.\alpha\), which is then passed to a model checker
+for estimating memory consumption.
+
+
+\section{Syntax and Semantics of Language}
+
+\subsection{Syntax}
+\begin{eqnarray*}
+  s \ (statements)& &::=  \SKIP \tB s_{1};s_{2} \tB *x \leftarrow y \tB \Free \Cirx \\
+  & & \tB \LET x = \MALLOC \IN s \tB \LET x = \NULL \IN s  \\
+  & & \tB \LET x = y \; \IN s \tB   \LET x = *y \; \IN s \\
+  & &\tB \IFNULL(x) \; \THEN s_{1}\; \ELSE s_{2} \tB f(\vec{x})
+\end{eqnarray*}
+\subsection{Semantics}
+  $\mathbf{H}$ models the heap address. \\
+  $\mathbf{R}$ models the registers.
+
+% Skip Command
+$$
+    \frac{n \in \mathbb{N}}
+            {\langle H\coma R\coma  \SKIP;s , n \rangle
+              \longrightarrow_{D}
+                \langle H\coma R\coma   s , n \rangle }
+     \Rtab \mbox{(E-Skip)}
+$$
+
+% Assignment
+$$
+     \frac{R(x) \in dom(H), n \in \mathbb{N}}
+           {\langle H\coma R\coma  *x \leftarrow y , n \rangle
+             \longrightarrow_{D}
+             \langle H \Lfc R(x) \rightarrow R(y) \Rfc \coma R \coma   \SKIP , n  \rangle }
+     \Rtab \mbox{(E-Assign)}
+$$
+
+% Free Command
+$$
+     \frac{R(x) \in dom(H) , n \in \mathbb{N}}
+          {\langle H\coma R\coma  \FREE , n \rangle
+            \xlongrightarrow{\Free}_{D}
+            \langle H\backslash \Lfc R(x) \Rfc \coma R \coma   \SKIP , n+1  \rangle }
+     \Rtab \mbox{(E-Free)}
+$$
+
+% Let Null Command
+$$
+     \frac{x' \notin dom(R)}
+           {\langle H\coma R\coma  \LET x = \NULL \IN s , n \rangle
+             \longrightarrow_{D}
+             \langle H\coma R\Lfc x' \rightarrow \NULL \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
+     \Rtab \mbox{(E-LetNull)}
+$$
+
+% Let Eq Command
+$$
+     \frac{x' \notin dom(R)}
+            {\langle H\coma R\coma \LET x = y \; \IN s , n \rangle
+              \longrightarrow_{D}
+              \langle H\coma R\Lfc x' \rightarrow R(y) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
+\Rtab \mbox{(E-LetEq)}
+$$
+
+% Reference Command
+$$
+     \frac{x' \notin dom(R)}
+            {\langle H\coma R\coma  \LET x = *y \; \IN s , n \rangle
+              \longrightarrow_{D}
+              \langle H\coma R\Lfc x' \rightarrow H(R(y)) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
+     \Rtab \mbox{(E-LetDref)}
+$$
+
+% Malloc (allocate) Command
+$$
+     \frac{h \notin dom(H)}
+            {\langle H\coma R\coma  \LET x = \Malloc() \; \IN s , n \rangle
+              \xlongrightarrow{\Malloc}_{D}
+              \langle H \Lfc h \rightarrow v\Rfc \coma R\Lfc x' \rightarrow h \Rfc \coma   \Lb x'/x \Rb s , n-1  \rangle }
+\Rtab \mbox{(E-Malloc)}
+$$
+
+% IFNULL T
+$$
+    \frac{R(x) = \NULL}
+           {\langle H \coma R \coma \IFNULL\Cirx   \THEN   s_{1} \ELSE\  s_{2} \coma  n \rangle
+           \longrightarrow_{D}
+           \langle H\coma R\coma s_{1} \coma n \rangle}
+    \Rtab \mbox{(E-IfNullT)}
+$$
+
+% IFNULL F
+$$
+    \frac{R(x) \neq \NULL}
+           {\langle H \coma R \coma \IFNULL\Cirx \THEN  s_{1} \ELSE  s_{2} \coma  n \rangle
+           \longrightarrow_{D}
+           \langle H\coma R\coma s_{2} \coma  n, \rangle}
+    \Rtab \mbox{(E-IfNullF)}
+$$
+
+% Function Call
+$$
+     \frac{f(\vec{y}) = s \in D}
+            { \langle H\coma R\coma  f(\vec{x}) , n \rangle
+               \longrightarrow_{D}
+               \langle H\coma R\coma  \Lb \vec{x}/\vec{y} \Rb s , n \rangle}
+      \Rtab \mbox{(E-Call)}
+$$
+
+% Error : access the null memory cell
+$$
+      \frac{R(x) = null}
+            {\langle H\coma R\coma  *x \leftarrow y , n \rangle
+              \longrightarrow_{D}
+              NullEx }
+      \Rtab \mbox{(E-AssignNullError)}
+$$
+
+% ERROR : access the null memory cell
+$$
+      \frac{R(y) = null}
+             {\langle H\coma R\coma  x = *y, n \rangle
+               \longrightarrow_{D}
+               NullEx }
+             \Rtab \mbox{(E-DrefNullError)}
+$$
+
+% ERROR :
+$$
+     \frac{R(x) \notin dom(H) \cup \Lfc null \Rfc}
+           {\langle H\coma R\coma   *x \leftarrow y,  n \rangle
+             \longrightarrow_{D}
+             Error }
+    \Rtab \mbox{(E-AssignError)}
+$$
+
+% ERROR
+$$
+      \frac{R(y) \notin dom(H) \cup \Lfc null \Rfc}
+           {\langle H\coma R\coma  \LET x  = *y \; \IN s, n \rangle
+              \longrightarrow_{D}
+                  Error }
+      \Rtab \mbox{(E-DrefError)}
+$$
+
+%
+$$
+      \frac{R(x) \notin dom(H) \cup \Lfc null \Rfc}
+            {\langle H\coma R\coma  \FREE , n \rangle
+              \xlongrightarrow{\Free}_{D}
+              Error }
+     \Rtab \mbox{(E-FreeError)}
+$$
+
+%
+$$
+     \frac{R(x) =  null }
+           {\langle H\coma R\coma  \FREE , n \rangle
+             \xlongrightarrow{\Free}_{D} NullEx  }
+      \Rtab \mbox{(E-FreeNullError)}
+$$
+
+% ERROR: no enough space
+$$
+      \langle H\coma R\coma \LET x = \Malloc() \ \IN s ,  0  \rangle
+      \xlongrightarrow{\Malloc}_{D}
+      Error
+      \Rtab \mbox{(E-MallocError)}
+$$
+
+\section{Type System}
+\subsection{Syntax of Type}
+     \begin{eqnarray*}
+       P (behaviral \ types)::=&& {\bf 0} \tB P_{1};P_{2} \tB P_{1}+P_{2} \tB \Malloc\\
+       &&\tB \Free \tB \alpha \tB \mu\alpha.P \\
+       \tau (value \ types)::=&&    \mathbf{Ref}  \\ %
+       \sigma (function \ types)::=&& (\tau_{1},\dots, \tau_{n}) P
+     \end{eqnarray*}
+
+% Semantics of Behavioral Types %
+\subsection{Semantics of Behavioral Types}
+    $$
+         0;P \rightarrow P
+    $$
+    $$
+          \mu \alpha.P \rightarrow  [\mu \alpha . P/\alpha]  P
+    $$
+    $$
+          \Malloc \xlongrightarrow{\Malloc} 0
+    $$
+    $$
+           \Free \xlongrightarrow{\Free} 0
+    $$
+    $$
+           \frac{P_{1} \xlongrightarrow{\alpha} P_{1}' }
+                 {P_{1};P_{2} \xlongrightarrow{\alpha} P_{1}';P_{2}}
+   $$
+   $$
+          P_{1} + P_{2} \longrightarrow P_{1}
+   $$
+   $$
+          P_{1} + P_{2} \longrightarrow P_{2}
+   $$
+   $
+        \text{where} \  \alpha ::= \Malloc\ | \ \Free
+   $
+
+% Type Judgments
+\subsection{Type Judgments}
+    $$
+        \Theta ; \Gamma \vdash s : P
+    $$
+   %$$\Theta ; \Gamma \vdash x : \tau $$
+    $\Theta$ : a finite mapping from function variables to function types.\\
+    $\Gamma$ : a finite mapping from variables to value types.
+
+% Typing Rules %
+\subsection{Typing Rules}
+
+% Skip type
+$$
+         \Theta ; \Gamma \vdash \SKIP : \mathbf{0}
+      \Rtab \mbox{(T-Skip)}
+$$
+
+% Sequence type
+$$
+      \frac{\Theta ; \Gamma \vdash s_{1} : P_{1} \Rtab \Theta ; \Gamma \vdash s_{2} : P_{2}}
+          {\Theta ; \Gamma \vdash s_{1} ; s_{2} : P_{1};P_{2} }
+     \Rtab \mbox{(T-Seq)}
+$$
+
+% Assignment type
+$$
+     \frac{\Theta ; \Gamma \vdash y :  \mathbf{Ref} \Rtab \Theta ; \Gamma \vdash x : \mathbf{Ref} }
+          {\Theta ; \Gamma \vdash *x \leftarrow y : \mathbf{0} }
+     \Rtab \mbox{(T-Assign)}
+$$
+
+% Free(deallocate) type
+$$
+     \frac{\Theta ; \Gamma \vdash x : \mathbf{Ref} }
+           {\Theta ; \Gamma \vdash \Free(x) : \Free;0}
+     \Rtab \mbox{(T-Free)}
+$$
+
+% Malloc type
+$$
+     \frac{\Theta ; \Gamma,x \vdash s : P}
+           {\Theta ; \Gamma \vdash \LET x = \MALLOC \; \IN s  : \Malloc;P}
+           \Rtab \mbox{(T-Malloc)}
+$$
+
+% Let eq type
+$$
+     \frac{\Theta ; \Gamma \vdash y : \mathbf{Ref}  \Rtab \Theta ; \Gamma , x  \vdash s : P}
+           {\Theta ; \Gamma \vdash \LET x = y \; \IN s : P}
+     \Rtab \mbox{(T-LetEq)}
+$$
+
+% Dereference type
+$$
+     \frac{\Theta ; \Gamma \vdash y : \mathbf{Ref}  \Rtab \Theta ; \Gamma , x  \vdash s : P}
+           {\Theta ; \Gamma \vdash \LET x = *y \; \IN s : P}
+     \Rtab \mbox{(T-LetDref)}
+$$
+
+% Let NULL type
+$$
+     \frac{\Theta ; \Gamma, x \vdash s : P}
+           {\Theta ; \Gamma \vdash \LET x = \mathbf{null} \; \IN s : P}
+     \Rtab \mbox{(T-LetNull)}
+$$
+
+% ifnull s then s type
+$$
+     \frac{\Theta ; \Gamma \vdash x : \mathbf{Ref}   \ \ \ \  \Theta ; \Gamma \vdash s_{1} : P \ \ \ \ \Theta ; \Gamma \vdash s_{1} : P}
+           {\Theta ; \Gamma \vdash \IFNULL(x) \; \THEN s_{1}\; \ELSE s_{2} : P}
+     \Rtab \mbox{(T-IfNull)}
+$$
+
+% Function call type
+$$ \frac{ \Theta(f) = P}
+{\Theta; \Gamma, \vec{x} : \vec{\tau} \vdash f(\vec{x}) : P}
+\Rtab \mbox{(T-Call)} $$
+
+% Program
+$$\frac{\vdash D : \Theta \;\;\;\; \Theta; \emptyset\vdash s : P \Rtab OK_{n}(P)}
+{\vdash (D, s)}
+\Rtab \mbox{(T-Program)} $$
+
+% Subtyping
+$$
+     \frac{\Theta ; \Gamma \vdash s : P_{1} \Rtab P_{1} \le P_{2}}
+            {\Theta ; \Gamma \vdash s : P_{2}}
+     \Rtab \mbox{(T-Sub)}
+$$
+
+\section{Type Soundness}
+\begin{theorem}\label{thm1}
+If $\vdash (D, s)$ then $(D, s)$ does not lead to $memory\;leak$.\\
+Memory leak freedom: $\exists n \in \mathbb{N}$ s.t.
+$\langle \emptyset, \emptyset, s, n \rangle \nrightarrow^{*}Error$
+\end{theorem}
+\noindent
+
+% Lemma Preservation %
+\begin{lemma}[Preservation $\mathbf{I}$]%\label{preser}
+If $OK_{n}(P)$, $\Theta; \Gamma \vdash s : P$ and $\langle H\coma R\coma s\coma n \rangle
+\xlongrightarrow{\alpha}\langle H'\coma R'\coma s'\coma n'
+\rangle$, then $\exists P'$ s.t. \\
+(1) $ \Theta; \Gamma \vdash s' : P' $ \\
+(2) $ P \overset{\text{$\alpha$}}{\Longrightarrow} P'$\\
+(3) $ OK_{n'}(P') $
+\end{lemma}
+\begin{lemma}[Preservation $\mathbf{II}$]%\label{preser}
+If $OK_{n}(P)$, $\Theta ; \Gamma \vdash s : P$ and $\langle H\coma R\coma s\coma n \rangle
+\rightarrow \langle H'\coma R'\coma s'\coma n'
+\rangle$, then $\exists P'$ s.t. \\
+(1) $\Theta; \Gamma \vdash s' : P'$\\
+(2) $ P \xlongrightarrow{\tau}^{*} P'  $\\
+(3) $OK_{n'}(P')$
+\end{lemma}
+
+\begin{lemma}%\label{error}
+$when \  partial \  correctness \  is \  guaranteed \  \vdash \langle H,R,s \rangle and \  if \ \vdash \langle H,R,s,n \rangle, \  then \  \vdash \langle
+H',R',s',n' \rangle \nrightarrow Error$
+\end{lemma}
+
+\section{Syntax Directed Typing Rules}
+
+$C$ is contraint for subtype. \\
+
+$$
+     \frac{ C = \emptyset}
+           {\Theta; \Gamma; C \vdash \SKIP : \mathbf{0}
+             }
+      \Rtab \mbox{(ST-Skip)}
+$$
+
+$$
+      \frac{\Theta;\Gamma ; C_{1} \vdash s_{1} : P_{1} \Rtab \Theta; \Gamma ; C_{2} \vdash s_{2} : P_{2} \Rtab C = C_{1}\cup C_{2} \cup \{ P_{1};P_{2} \le P\}}
+      {\Theta;\Gamma; C \vdash s_{1};s_{2} : P}
+      \Rtab \mbox{(ST-Seq)}
+$$
+
+$$
+      \frac{\Theta;\Gamma;C_{1} \vdash y \Rtab \Theta;\Gamma; C_{2} \vdash x : \mathbf{Ref} \Rtab C = C_{1}\cup C_{2}}
+      {\Theta;\Gamma; C \vdash *x \leftarrow y : \mathbf{0}}
+      \Rtab \mbox{(ST-Assign)}
+$$
+
+$$
+      \frac{C = \emptyset}
+      {\Gamma ; C \vdash \Free() : \Free;\mathbf{0}}
+     \Rtab \mbox{(ST-Free)}
+$$
+
+$$
+     \frac{\Theta;\Gamma, x ; C_{1} \vdash s : P_{1} \Rtab C = C_{1} \cup\{P_{1}\le P\}}
+     {\Theta;\Gamma; C \vdash \LET x = \Malloc() \; \IN s : \Malloc ; P}
+     \Rtab \mbox{(ST-Malloc)}
+$$
+
+$$
+     \frac{\Theta;\Gamma; C_{1} \vdash y \Rtab \Theta;\Gamma, x ; C_{2} \vdash s : P_{1} \Rtab C = C_{1}\cup C_{2} \cup \{P_{1} \le P \}}
+     {\Theta;\Gamma ; C \vdash \LET x = y \;  \IN s : P}
+     \Rtab \mbox{(ST-LetEq)}
+$$
+
+$$
+     \frac{\Theta;\Gamma ; C_{1} \vdash y: \mathbf{Ref} \Rtab \Theta;\Gamma, x ; C_{2} \vdash s : P_{1} \Rtab C = C_{1}\cup C_{2}\cup\{P_{1} \le P\}}
+     {\Theta;\Gamma ; C \vdash \LET x = *y \; \IN s : P}
+     \Rtab \mbox{(ST-LetDref)}
+$$
+
+
+$$
+     \frac{\Theta;\Gamma; C_{1} \vdash x \Rtab \Theta;\Gamma; C_{2} \vdash s_{1} : P_{1} \Rtab \Theta;\Gamma; C_{3} \vdash s_{2} : P_{2}  \Rtab  C = C_{1} \cup C_{2} \cup C_{3} \{P_{1}\le P, P_{2}\le P \}}
+     {\Theta;\Gamma; C \vdash \IFNULL\Cirx \THEN s_{1} \ELSE s_{2} : P }
+     \Rtab \mbox{(ST-IfNull)}
+$$
+
+$$
+     \frac{\Theta(f) = P_{1} \Rtab C = P_{1} \le P}
+     {\Gamma,\vec{x}:\vec{\tau} \vdash f(\vec{x}) : P }
+     \Rtab \mbox{(ST-Call)}
+$$
+
+$$
+     \frac{\Theta \vdash D : \Theta \Rtab \Theta ; \emptyset ; C_{1} \vdash s : P \Rtab C = C_{1}\cup\{OK_{n}(P)\}}
+     {C \vdash (D , s) }
+     \Rtab \mbox{(ST-Prog)}
+$$
+
+\section{Type Inference}
+$PT_{v}(x) = (\emptyset,\emptyset)$, where $x$ maybe a value or reference.\\
+$PT_{\Theta}$ is a mapping from statements to a pair of constraints and types with function $\Theta$ from function names to function types, like $\Theta(f) = P$.
+\begin{flalign*}
+   PT_{\Theta}(f) &  =  &\\
+  \LET & \alpha = \Theta(f) & \\
+  \IN  & (C = \{\alpha \le \beta \}, \beta) &
+\end{flalign*}
+
+\begin{flalign*}
+   PT_{\Theta}(\SKIP) &  =  (\emptyset, 0)&
+\end{flalign*}
+
+\begin{flalign*}
+   PT_{\Theta}(s_{1};s_{2}) &  =  &\\
+   \LET & (C_{1}, P_{1}) = PT_{\Theta}(s_{1}) & \\
+        & (C_{2}, P_{2}) = PT_{\Theta}(s_{2}) & \\
+   \IN   &(C_{1} \cup C_{2}\cup \{P_{1}; P_{2} \le \beta \}, \beta) &
+\end{flalign*}
+
+\begin{flalign*}
+   PT_{\Theta}(*x \leftarrow y) &  =  &\\
+   \LET & (C_{1}, \emptyset) = PT_{v}(*x) & \\
+        & (C_{2}, \emptyset) = PT_{v}(y) & \\
+  \IN &(C_{1} \cup C_{2},  0) &
+\end{flalign*}
+
+\begin{flalign*}
+   PT_{\Theta}(\Free(x)) &  = (\emptyset, \Free; 0)  &
+\end{flalign*}
+
+\begin{flalign*}
+   PT_{\Theta}(\LET x = \Malloc() \  \IN s) &  =  &\\
+   \LET  (C_{1}, P_{1})& = PT_{v}(s) & \\
+   \IN (C_{1} \cup \{P_{1}& \le \beta \} ,  \Malloc; \beta) &
+\end{flalign*}
+
+\begin{flalign*}
+   PT_{\Theta}(\LET x = y \  \IN s ) &  =  &\\
+   \LET & (C_{1}, \emptyset) = PT_{v}(y) & \\
+  & (C_{2}, P_{1}) = PT_{\Theta}(s) & \\
+  \IN &(C_{1} \cup C_{2}\cup \{P_{1} \le \beta \},  \beta) &
+\end{flalign*}
+
+\begin{flalign*}
+   PT_{\Theta}(\LET x = *y \  \IN s ) &  =  &\\
+   \LET & (C_{1}, \emptyset) = PT_{v}(y) & \\
+        & (C_{2}, P_{1}) = PT_{\Theta}(s) & \\
+  \IN &(C_{1} \cup C_{2}\cup \{P_{1} \le \beta \},  \beta) &
+\end{flalign*}
+
+\begin{flalign*}
+   PT_{\Theta}(\IFNULL(x) \  \THEN  s_{1} \  \ELSE \ s_{2} ) &  =  &\\
+   \LET & (C_{1}, P_{1}) = PT_{\Theta}(s_{1}) & \\
+        & (C_{2}, P_{2}) = PT_{\Theta}(s_{2}) & \\
+        & (C_{3}, \emptyset) = PT_{v}(x) & \\
+  \IN &(C_{1} \cup C_{2}\cup C_{3}\cup \{P_{1} \le \beta, P_{2} \le \beta \},  \beta) &
+\end{flalign*}
+
+\begin{flalign*}
+   PT(<D, s>) &  =  &\\
+   \LET & \Theta = \{ f_{1}:\alpha_{1}, \dots, f_{n}:\alpha_{n}  \} &\\
+        & where \ \{ f_{1},\dots, f_{n} \} = dom(D) \ and \ \alpha_{1}, \dots, \alpha_{n} \  are \ fresh  & \\
+  \IN   & \LET  (C_{i}, P_{i}) = PT_{\Theta}(D(f_{i})) \  for \  each \ i & \\
+  \IN   & \LET  C_{i}^{'} = \{ \alpha_{i} \le P_{i} \} \ for \  each \ i & \\
+  \IN   & \LET  (C, P) = PT_{\Theta}(s)  & \\
+  \IN  &(C_{i} \cup C_{i}^{'} ) \cup C \cup  \{OK(P)\},  P) &
+\end{flalign*}
+
+\sectiion{Experiments}
+
+\section{Conclusion}
 this is the end
+
+\bibliographystyle{amsplain}
+\bibliography{tan}
+
 \end{document}
