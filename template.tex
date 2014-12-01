@@ -33,9 +33,9 @@
 
 
 \title{Safe Memory Deallocation for Non-terminating Programs}
-\author{smample}
+\author{Author Name}
 \inst{%
-$^1$ sample\\
+$^1$ \\
 \texttt{sample@example.ac.jp}
 \medskip\par%
 $^2$ \\
@@ -44,23 +44,16 @@ $^2$ \\
 \begin{document}
 \maketitle
 \begin{abstract}
-We propose a type system to prevent programs infinitelly consuming memory cells. The main idea is based on the previours type system which augments pointer types with fractional ownerships and behavioral type system which abstract the behavior of programs. The simple idea in our work is to reject allocating a memory cell before recursive calls.
+We propose a type system to prevent programs infinitely consuming memory cells. The main idea is based on the previous type system that augments pointer types with fractional ownerships and behavioral type system that abstracts the behavior of programs. We design a behavioral type system for verification of behavioral correctness.
 \end{abstract}
 
 \section{Introduction}
 Manual memory management primitives (e.g., {\tt malloc} and {\tt free} in C) often cause serious problems such as double frees, memory leaks, and illegal read/write to a deallocated memory cell. Verifying \emph{safe memory deallocation} -- a program not leading to such an unsafe state -- is an important problem.
 
-Most of safe memory deallocation verification techniques proposed so far \cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06} focus on the memory leak for \emph{terminating} programs: If a program terminates, the program satisfies safe memory dealloction. Meanwhile, safe memory deallocation is also important in non-terminating programs such as Web servers and operating systems.
-
-We are currently investigating safe memory deallocation for non-terminating programs. We describe the current status in this extended abstract.
-
-\section{Related Work}
-Safe memory deallocation so far mainly deals with memory leak for terminating programs. For example, the type system by Suenaga and Kobayashi \cite{DBLP:conf/aplas/SuenagaK09} guarrantees that (1) a well-typed program does not perform read/write/free operations to any deallocated memory cell and that (2) after execution of a well-typed program, all the memory cells are deallocated.
+Most of safe memory deallocation verification techniques proposed so far \cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06} focus on the memory leak for \emph{terminating} programs: If a program terminates, the program satisfies safe memory dealloction. For example, the type system by Suenaga and Kobayashi \cite{DBLP:conf/aplas/SuenagaK09} guarrantees that (1) a well-typed program does not perform read/write/free operations to any deallocated memory cell and that (2) after execution of a well-typed program, all the memory cells are deallocated. Meanwhile, safe memory deallocation is also important in non-terminating programs such as Web servers and operating systems.
 
 We use a behavioral type system in the present paper to abstract the behavior of a program. Behavioral types are heavily used in the context of concurrent program verification \cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}.
 
-
-\section{Approach}
 Our main idea is to decompose the problem into two subproblems: (1) partial correctness and (2) \emph{behavioral correctness}. The former is verified based on the previous type system \cite{DBLP:conf/aplas/SuenagaK09}, whereas the latter based on the type system we describe.
 
 We use an imperative language with manual memory management for presenting examples. The definition of the language is as follows; It is a sublanguage of Suenaga and Kobayashi \cite{DBLP:conf/aplas/SuenagaK09}.
@@ -104,6 +97,7 @@ Then, we use a \emph{behavioral type system} for the abstraction described above
 is abstracted by a CCS-like process \(\mu \alpha. \Malloc.\Malloc.\Free.\Free.\alpha\), which is then passed to a model checker
 for estimating memory consumption.
 
+The rest of this paper is structed as follows.
 
 \section{Syntax and Semantics of Language}
 
@@ -568,7 +562,7 @@ $PT_{\Theta}$ is a mapping from statements to a pair of constraints and types wi
 \section{Conclusion}
 this is the end
 
-\bibliographystyle{amsplain}
-\bibliography{tan}
+%\bibliographystyle{amsplain}
+\thebibliography{tan}
 
 \end{document}
