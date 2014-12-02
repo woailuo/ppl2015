@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.6)  2 DEC 2014 14:06
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  2 DEC 2014 15:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -376,10 +376,17 @@ you left one out. Proceed, with fingers crossed.
 LaTeX Warning: Citation `DBLP:conf/aplas/SuenagaK09' on page 2 undefined on inp
 ut line 83.
 
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 94.
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 94.
+ [2]
 ! Undefined control sequence.
 <argument> n \in \mathbb 
                          {N}
-l.103 ...  \langle H\coma R\coma   s , n \rangle }
+l.105 ...  \langle H\coma R\coma   s , n \rangle }
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -390,7 +397,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> R(x) \in dom(H), n \in \mathbb 
                                           {N}
-l.112 ...\Rfc \coma R \coma   \SKIP , n  \rangle }
+l.114 ...\Rfc \coma R \coma   \SKIP , n  \rangle }
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -398,11 +405,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[2]
 ! Undefined control sequence.
 <argument> R(x) \in dom(H) , n \in \mathbb 
                                            {N}
-l.121 ...fc \coma R \coma   \SKIP , n+1  \rangle }
+l.123 ...fc \coma R \coma   \SKIP , n+1  \rangle }
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -413,7 +419,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> ... \FREE , n \rangle \xlongrightarrow 
                                                   {\Free }_{D} \langle H\bac...
-l.121 ...fc \coma R \coma   \SKIP , n+1  \rangle }
+l.123 ...fc \coma R \coma   \SKIP , n+1  \rangle }
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -424,7 +430,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> ... \IN s , n \rangle \xlongrightarrow 
                                                   {\Malloc }_{D} \langle H \...
-l.157 ...c \coma   \Lb x'/x \Rb s , n-1  \rangle }
+l.159 ...c \coma   \Lb x'/x \Rb s , n-1  \rangle }
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -433,35 +439,15 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (3.19865pt too wide) detected at line 159
+Overfull \hbox (3.19865pt too wide) detected at line 161
 []    []
  []
 
 ! Undefined control sequence.
 <argument> ... \FREE , n \rangle \xlongrightarrow 
                                                   {\Free }_{D} Error 
-l.229               Error }
+l.231               Error }
                            
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument> ... \FREE , n \rangle \xlongrightarrow 
-                                                  {\Free }_{D} NullEx 
-l.237 ...    \xlongrightarrow{\Free}_{D} NullEx  }
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.244       \xlongrightarrow
-                            {\Malloc}_{D}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -470,7 +456,27 @@ and I'll forget about whatever was undefined.
 
 [3]
 ! Undefined control sequence.
-l.267           \Malloc \xlongrightarrow
+<argument> ... \FREE , n \rangle \xlongrightarrow 
+                                                  {\Free }_{D} NullEx 
+l.239 ...    \xlongrightarrow{\Free}_{D} NullEx  }
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.246       \xlongrightarrow
+                            {\Malloc}_{D}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.273           \Malloc \xlongrightarrow
                                         {\Malloc} 0
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -479,7 +485,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.270            \Free \xlongrightarrow
+l.276            \Free \xlongrightarrow
                                        {\Free} 0
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -490,7 +496,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> P_{1} \xlongrightarrow 
                                   {\alpha } P_{1}' 
-l.274 ...2} \xlongrightarrow{\alpha} P_{1}';P_{2}}
+l.280 ...2} \xlongrightarrow{\alpha} P_{1}';P_{2}}
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -501,7 +507,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> P_{1};P_{2} \xlongrightarrow 
                                         {\alpha } P_{1}';P_{2}
-l.274 ...2} \xlongrightarrow{\alpha} P_{1}';P_{2}}
+l.280 ...2} \xlongrightarrow{\alpha} P_{1}';P_{2}}
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -510,7 +516,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.283         \text
+l.289         \text
                    {where} \  \alpha ::= \Malloc\ | \ \Free
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -520,7 +526,7 @@ and I'll forget about whatever was undefined.
 
 [4]
 ! Undefined control sequence.
-l.380 Memory leak freedom: $\exists n \in \mathbb
+l.386 Memory leak freedom: $\exists n \in \mathbb
                                                  {N}$ s.t.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -529,7 +535,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.381 ...set, \emptyset, s, n \rangle \nrightarrow
+l.387 ...set, \emptyset, s, n \rangle \nrightarrow
                                                   ^{*}Error$
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -538,7 +544,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.388 \xlongrightarrow
+l.394 \xlongrightarrow
                       {\alpha}\langle H'\coma R'\coma s'\coma n'
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -547,7 +553,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.391 (2) $ P \overset
+l.397 (2) $ P \overset
                       {\text{$\alpha$}}{\Longrightarrow} P'$\\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -556,7 +562,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.391 (2) $ P \overset{\text
+l.397 (2) $ P \overset{\text
                             {$\alpha$}}{\Longrightarrow} P'$\\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -567,7 +573,7 @@ and I'll forget about whatever was undefined.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.391 (2) $ P \overset{\text{$
+l.397 (2) $ P \overset{\text{$
                               \alpha$}}{\Longrightarrow} P'$\\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -578,7 +584,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.391 (2) $ P \overset{\text{$
+l.397 (2) $ P \overset{\text{$
                               \alpha$}}{\Longrightarrow} P'$\\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -589,13 +595,13 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.391 (2) $ P \overset{\text{$\alpha
+l.397 (2) $ P \overset{\text{$\alpha
                                     $}}{\Longrightarrow} P'$\\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten \endgroup.
-l.391 (2) $ P \overset{\text{$\alpha$}
+l.397 (2) $ P \overset{\text{$\alpha$}
                                       }{\Longrightarrow} P'$\\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -604,7 +610,7 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 ! Extra }, or forgotten \endgroup.
-l.391 (2) $ P \overset{\text{$\alpha$}}
+l.397 (2) $ P \overset{\text{$\alpha$}}
                                        {\Longrightarrow} P'$\\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -615,13 +621,13 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.391 ...\overset{\text{$\alpha$}}{\Longrightarrow
+l.397 ...\overset{\text{$\alpha$}}{\Longrightarrow
                                                   } P'$\\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.391 ...overset{\text{$\alpha$}}{\Longrightarrow}
+l.397 ...overset{\text{$\alpha$}}{\Longrightarrow}
                                                    P'$\\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -632,7 +638,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.393 \end{lemma}
+l.399 \end{lemma}
                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -641,7 +647,7 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 ! Undefined control sequence.
-l.399 (2) $ P \xlongrightarrow
+l.405 (2) $ P \xlongrightarrow
                               {\tau}^{*} P'  $\\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -650,7 +656,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.405 H',R',s',n' \rangle \nrightarrow
+l.411 H',R',s',n' \rangle \nrightarrow
                                        Error$
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -659,120 +665,14 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 410--411
+Underfull \hbox (badness 10000) in paragraph at lines 416--417
 
- []
-
-
-Overfull \hbox (31.80498pt too wide) detected at line 460
-[]    []
  []
 
 [5]
-
-! LaTeX Error: Environment flalign* undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.477 \begin{flalign*}
-                      
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.478    PT_
-            {\Theta}(f) &  =  &\\
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Misplaced alignment tab character &.
-l.478    PT_{\Theta}(f) &
-                           =  &\\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.478    PT_{\Theta}(f) &  =  &
-                               \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.479   \LET &
-               \alpha = \Theta(f) & \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.479   \LET & \alpha = \Theta(f) &
-                                    \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.480   \IN  &
-               (C = \{\alpha \le \beta \}, \beta) &
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.480 ...N  & (C = \{\alpha \le \beta \}, \beta) &
-                                                  
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-
-! LaTeX Error: \begin{document} ended by \end{flalign*}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.481 \end{flalign*}
-                    
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.481 \end{flalign*}
-                    
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
+Overfull \hbox (31.80498pt too wide) detected at line 466
+[]    []
+ []
 
 
 ! LaTeX Error: Environment flalign* undefined.
@@ -791,12 +691,117 @@ or  <return>  to continue without it.
 <inserted text> 
                 $
 l.484    PT_
+            {\Theta}(f) &  =  &\\
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Misplaced alignment tab character &.
+l.484    PT_{\Theta}(f) &
+                           =  &\\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.484    PT_{\Theta}(f) &  =  &
+                               \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.485   \LET &
+               \alpha = \Theta(f) & \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.485   \LET & \alpha = \Theta(f) &
+                                    \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.486   \IN  &
+               (C = \{\alpha \le \beta \}, \beta) &
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.486 ...N  & (C = \{\alpha \le \beta \}, \beta) &
+                                                  
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+
+! LaTeX Error: \begin{document} ended by \end{flalign*}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.487 \end{flalign*}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.487 \end{flalign*}
+                    
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+! LaTeX Error: Environment flalign* undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.489 \begin{flalign*}
+                      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.490    PT_
             {\Theta}(\SKIP) &  =  (\emptyset, 0)&
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Misplaced alignment tab character &.
-l.484    PT_{\Theta}(\SKIP) &
+l.490    PT_{\Theta}(\SKIP) &
                                =  (\emptyset, 0)&
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -806,7 +811,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.484    PT_{\Theta}(\SKIP) &  =  (\emptyset, 0)&
+l.490    PT_{\Theta}(\SKIP) &  =  (\emptyset, 0)&
                                                  
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -822,7 +827,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.485 \end{flalign*}
+l.491 \end{flalign*}
                     
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -831,7 +836,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.485 \end{flalign*}
+l.491 \end{flalign*}
                     
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -846,7 +851,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.487 \begin{flalign*}
+l.493 \begin{flalign*}
                       
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -855,13 +860,13 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.488    PT_
+l.494    PT_
             {\Theta}(s_{1};s_{2}) &  =  &\\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Misplaced alignment tab character &.
-l.488    PT_{\Theta}(s_{1};s_{2}) &
+l.494    PT_{\Theta}(s_{1};s_{2}) &
                                      =  &\\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -871,7 +876,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.488    PT_{\Theta}(s_{1};s_{2}) &  =  &
+l.494    PT_{\Theta}(s_{1};s_{2}) &  =  &
                                          \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -881,7 +886,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.489    \LET &
+l.495    \LET &
                 (C_{1}, P_{1}) = PT_{\Theta}(s_{1}) & \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -891,7 +896,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.489 ...T & (C_{1}, P_{1}) = PT_{\Theta}(s_{1}) &
+l.495 ...T & (C_{1}, P_{1}) = PT_{\Theta}(s_{1}) &
                                                    \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -903,7 +908,7 @@ might try typing `S' now just to see what is salvageable.
 ! Misplaced alignment tab character &.
 <recently read> &
                  
-l.490         &
+l.496         &
                 (C_{2}, P_{2}) = PT_{\Theta}(s_{2}) & \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -913,7 +918,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.490 ...  & (C_{2}, P_{2}) = PT_{\Theta}(s_{2}) &
+l.496 ...  & (C_{2}, P_{2}) = PT_{\Theta}(s_{2}) &
                                                    \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -923,7 +928,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.491    \IN   &
+l.497    \IN   &
                 (C_{1} \cup C_{2}\cup \{P_{1}; P_{2} \le \beta \}, \beta) &
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -933,7 +938,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.491 ...cup \{P_{1}; P_{2} \le \beta \}, \beta) &
+l.497 ...cup \{P_{1}; P_{2} \le \beta \}, \beta) &
                                                   
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -949,7 +954,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.492 \end{flalign*}
+l.498 \end{flalign*}
                     
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -958,7 +963,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.492 \end{flalign*}
+l.498 \end{flalign*}
                     
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -973,7 +978,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.494 \begin{flalign*}
+l.500 \begin{flalign*}
                       
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -982,13 +987,13 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.495    PT_
+l.501    PT_
             {\Theta}(*x \leftarrow y) &  =  &\\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Misplaced alignment tab character &.
-l.495    PT_{\Theta}(*x \leftarrow y) &
+l.501    PT_{\Theta}(*x \leftarrow y) &
                                          =  &\\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -998,7 +1003,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.495    PT_{\Theta}(*x \leftarrow y) &  =  &
+l.501    PT_{\Theta}(*x \leftarrow y) &  =  &
                                              \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1008,7 +1013,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.496    \LET &
+l.502    \LET &
                 (C_{1}, \emptyset) = PT_{v}(*x) & \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1018,7 +1023,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.496    \LET & (C_{1}, \emptyset) = PT_{v}(*x) &
+l.502    \LET & (C_{1}, \emptyset) = PT_{v}(*x) &
                                                   \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1030,7 +1035,7 @@ might try typing `S' now just to see what is salvageable.
 ! Misplaced alignment tab character &.
 <recently read> &
                  
-l.497         &
+l.503         &
                 (C_{2}, \emptyset) = PT_{v}(y) & \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1040,7 +1045,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.497         & (C_{2}, \emptyset) = PT_{v}(y) &
+l.503         & (C_{2}, \emptyset) = PT_{v}(y) &
                                                  \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1050,7 +1055,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.498   \IN &
+l.504   \IN &
              (C_{1} \cup C_{2},  0) &
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1060,7 +1065,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.498   \IN &(C_{1} \cup C_{2},  0) &
+l.504   \IN &(C_{1} \cup C_{2},  0) &
                                      
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1076,7 +1081,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.499 \end{flalign*}
+l.505 \end{flalign*}
                     
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1085,7 +1090,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.499 \end{flalign*}
+l.505 \end{flalign*}
                     
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1100,7 +1105,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.501 \begin{flalign*}
+l.507 \begin{flalign*}
                       
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1109,13 +1114,13 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.502    PT_
+l.508    PT_
             {\Theta}(\Free(x)) &  = (\emptyset, \Free; 0)  &
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Misplaced alignment tab character &.
-l.502    PT_{\Theta}(\Free(x)) &
+l.508    PT_{\Theta}(\Free(x)) &
                                   = (\emptyset, \Free; 0)  &
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1125,112 +1130,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.502 ...}(\Free(x)) &  = (\emptyset, \Free; 0)  &
-                                                  
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-
-! LaTeX Error: \begin{document} ended by \end{flalign*}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.503 \end{flalign*}
-                    
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.503 \end{flalign*}
-                    
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-! LaTeX Error: Environment flalign* undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.505 \begin{flalign*}
-                      
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.506    PT_
-            {\Theta}(\LET x = \Malloc() \  \IN s) &  =  &\\
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Misplaced alignment tab character &.
-l.506 ...T_{\Theta}(\LET x = \Malloc() \  \IN s) &
-                                                    =  &\\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.506 ...eta}(\LET x = \Malloc() \  \IN s) &  =  &
-                                                  \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.507    \LET  (C_{1}, P_{1})&
-                               = PT_{v}(s) & \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.507    \LET  (C_{1}, P_{1})& = PT_{v}(s) &
-                                             \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.508    \IN (C_{1} \cup \{P_{1}&
-                                  \le \beta \} ,  \Malloc; \beta) &
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.508 ...{P_{1}& \le \beta \} ,  \Malloc; \beta) &
+l.508 ...}(\Free(x)) &  = (\emptyset, \Free; 0)  &
                                                   
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1280,266 +1180,12 @@ or  <return>  to continue without it.
 <inserted text> 
                 $
 l.512    PT_
-            {\Theta}(\LET x = y \  \IN s ) &  =  &\\
+            {\Theta}(\LET x = \Malloc() \  \IN s) &  =  &\\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Misplaced alignment tab character &.
-l.512    PT_{\Theta}(\LET x = y \  \IN s ) &
-                                              =  &\\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.512    PT_{\Theta}(\LET x = y \  \IN s ) &  =  &
-                                                  \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.513    \LET &
-                (C_{1}, \emptyset) = PT_{v}(y) & \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.513    \LET & (C_{1}, \emptyset) = PT_{v}(y) &
-                                                 \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-<recently read> &
-                 
-l.514   &
-          (C_{2}, P_{1}) = PT_{\Theta}(s) & \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.514   & (C_{2}, P_{1}) = PT_{\Theta}(s) &
-                                            \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.515   \IN &
-             (C_{1} \cup C_{2}\cup \{P_{1} \le \beta \},  \beta) &
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.515 ...C_{2}\cup \{P_{1} \le \beta \},  \beta) &
-                                                  
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-
-! LaTeX Error: \begin{document} ended by \end{flalign*}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.516 \end{flalign*}
-                    
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.516 \end{flalign*}
-                    
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-! LaTeX Error: Environment flalign* undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.518 \begin{flalign*}
-                      
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.519    PT_
-            {\Theta}(\LET x = *y \  \IN s ) &  =  &\\
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Misplaced alignment tab character &.
-l.519    PT_{\Theta}(\LET x = *y \  \IN s ) &
-                                               =  &\\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.519 ...T_{\Theta}(\LET x = *y \  \IN s ) &  =  &
-                                                  \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.520    \LET &
-                (C_{1}, \emptyset) = PT_{v}(y) & \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.520    \LET & (C_{1}, \emptyset) = PT_{v}(y) &
-                                                 \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-<recently read> &
-                 
-l.521         &
-                (C_{2}, P_{1}) = PT_{\Theta}(s) & \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.521         & (C_{2}, P_{1}) = PT_{\Theta}(s) &
-                                                  \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.522   \IN &
-             (C_{1} \cup C_{2}\cup \{P_{1} \le \beta \},  \beta) &
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.522 ...C_{2}\cup \{P_{1} \le \beta \},  \beta) &
-                                                  
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-
-! LaTeX Error: \begin{document} ended by \end{flalign*}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.523 \end{flalign*}
-                    
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.523 \end{flalign*}
-                    
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-! LaTeX Error: Environment flalign* undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.525 \begin{flalign*}
-                      
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.526    PT_
-            {\Theta}(\IFNULL(x) \  \THEN  s_{1} \  \ELSE \ s_{2} ) &  =  &\\
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Misplaced alignment tab character &.
-l.526 ...L(x) \  \THEN  s_{1} \  \ELSE \ s_{2} ) &
+l.512 ...T_{\Theta}(\LET x = \Malloc() \  \IN s) &
                                                     =  &\\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1549,7 +1195,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.526 ...  \THEN  s_{1} \  \ELSE \ s_{2} ) &  =  &
+l.512 ...eta}(\LET x = \Malloc() \  \IN s) &  =  &
                                                   \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1559,8 +1205,8 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.527    \LET &
-                (C_{1}, P_{1}) = PT_{\Theta}(s_{1}) & \\
+l.513    \LET  (C_{1}, P_{1})&
+                               = PT_{v}(s) & \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
 simple: Just type `I\&' now. But if some right brace
@@ -1569,8 +1215,8 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.527 ...T & (C_{1}, P_{1}) = PT_{\Theta}(s_{1}) &
-                                                   \\
+l.513    \LET  (C_{1}, P_{1})& = PT_{v}(s) &
+                                             \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
 simple: Just type `I\&' now. But if some right brace
@@ -1579,10 +1225,8 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-<recently read> &
-                 
-l.528         &
-                (C_{2}, P_{2}) = PT_{\Theta}(s_{2}) & \\
+l.514    \IN (C_{1} \cup \{P_{1}&
+                                  \le \beta \} ,  \Malloc; \beta) &
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
 simple: Just type `I\&' now. But if some right brace
@@ -1591,49 +1235,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.528 ...  & (C_{2}, P_{2}) = PT_{\Theta}(s_{2}) &
-                                                   \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-<recently read> &
-                 
-l.529         &
-                (C_{3}, \emptyset) = PT_{v}(x) & \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.529         & (C_{3}, \emptyset) = PT_{v}(x) &
-                                                 \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.530   \IN &
-             (C_{1} \cup C_{2}\cup C_{3}\cup \{P_{1} \le \beta, P_{2} \le \b...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.530 ... \le \beta, P_{2} \le \beta \},  \beta) &
+l.514 ...{P_{1}& \le \beta \} ,  \Malloc; \beta) &
                                                   
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1649,7 +1251,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.531 \end{flalign*}
+l.515 \end{flalign*}
                     
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1658,7 +1260,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.531 \end{flalign*}
+l.515 \end{flalign*}
                     
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1673,14 +1275,418 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.533 \begin{flalign*}
+l.517 \begin{flalign*}
+                      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.518    PT_
+            {\Theta}(\LET x = y \  \IN s ) &  =  &\\
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Misplaced alignment tab character &.
+l.518    PT_{\Theta}(\LET x = y \  \IN s ) &
+                                              =  &\\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.518    PT_{\Theta}(\LET x = y \  \IN s ) &  =  &
+                                                  \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.519    \LET &
+                (C_{1}, \emptyset) = PT_{v}(y) & \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.519    \LET & (C_{1}, \emptyset) = PT_{v}(y) &
+                                                 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+<recently read> &
+                 
+l.520   &
+          (C_{2}, P_{1}) = PT_{\Theta}(s) & \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.520   & (C_{2}, P_{1}) = PT_{\Theta}(s) &
+                                            \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.521   \IN &
+             (C_{1} \cup C_{2}\cup \{P_{1} \le \beta \},  \beta) &
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.521 ...C_{2}\cup \{P_{1} \le \beta \},  \beta) &
+                                                  
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+
+! LaTeX Error: \begin{document} ended by \end{flalign*}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.522 \end{flalign*}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.522 \end{flalign*}
+                    
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+! LaTeX Error: Environment flalign* undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.524 \begin{flalign*}
+                      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.525    PT_
+            {\Theta}(\LET x = *y \  \IN s ) &  =  &\\
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Misplaced alignment tab character &.
+l.525    PT_{\Theta}(\LET x = *y \  \IN s ) &
+                                               =  &\\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.525 ...T_{\Theta}(\LET x = *y \  \IN s ) &  =  &
+                                                  \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.526    \LET &
+                (C_{1}, \emptyset) = PT_{v}(y) & \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.526    \LET & (C_{1}, \emptyset) = PT_{v}(y) &
+                                                 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+<recently read> &
+                 
+l.527         &
+                (C_{2}, P_{1}) = PT_{\Theta}(s) & \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.527         & (C_{2}, P_{1}) = PT_{\Theta}(s) &
+                                                  \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.528   \IN &
+             (C_{1} \cup C_{2}\cup \{P_{1} \le \beta \},  \beta) &
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.528 ...C_{2}\cup \{P_{1} \le \beta \},  \beta) &
+                                                  
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+
+! LaTeX Error: \begin{document} ended by \end{flalign*}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.529 \end{flalign*}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.529 \end{flalign*}
+                    
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+! LaTeX Error: Environment flalign* undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.531 \begin{flalign*}
+                      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.532    PT_
+            {\Theta}(\IFNULL(x) \  \THEN  s_{1} \  \ELSE \ s_{2} ) &  =  &\\
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Misplaced alignment tab character &.
+l.532 ...L(x) \  \THEN  s_{1} \  \ELSE \ s_{2} ) &
+                                                    =  &\\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.532 ...  \THEN  s_{1} \  \ELSE \ s_{2} ) &  =  &
+                                                  \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.533    \LET &
+                (C_{1}, P_{1}) = PT_{\Theta}(s_{1}) & \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.533 ...T & (C_{1}, P_{1}) = PT_{\Theta}(s_{1}) &
+                                                   \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+<recently read> &
+                 
+l.534         &
+                (C_{2}, P_{2}) = PT_{\Theta}(s_{2}) & \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.534 ...  & (C_{2}, P_{2}) = PT_{\Theta}(s_{2}) &
+                                                   \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+<recently read> &
+                 
+l.535         &
+                (C_{3}, \emptyset) = PT_{v}(x) & \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.535         & (C_{3}, \emptyset) = PT_{v}(x) &
+                                                 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.536   \IN &
+             (C_{1} \cup C_{2}\cup C_{3}\cup \{P_{1} \le \beta, P_{2} \le \b...
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.536 ... \le \beta, P_{2} \le \beta \},  \beta) &
+                                                  
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+
+! LaTeX Error: \begin{document} ended by \end{flalign*}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.537 \end{flalign*}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.537 \end{flalign*}
+                    
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+[6]
+
+! LaTeX Error: Environment flalign* undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.539 \begin{flalign*}
                       
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 ! Misplaced alignment tab character &.
-l.534    PT(<D, s>) &
+l.540    PT(<D, s>) &
                        =  &\\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1690,7 +1696,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.534    PT(<D, s>) &  =  &
+l.540    PT(<D, s>) &  =  &
                            \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1706,7 +1712,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.535    \LET
+l.541    \LET
               & \Theta = \{ f_{1}:\alpha_{1}, \dots, f_{n}:\alpha_{n}  \} &\\
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1714,13 +1720,13 @@ If that doesn't work, type  X <return>  to quit.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.535    \LET
+l.541    \LET
               & \Theta = \{ f_{1}:\alpha_{1}, \dots, f_{n}:\alpha_{n}  \} &\\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Misplaced alignment tab character &.
-l.535    \LET &
+l.541    \LET &
                 \Theta = \{ f_{1}:\alpha_{1}, \dots, f_{n}:\alpha_{n}  \} &\\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1730,7 +1736,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.535 ...\alpha_{1}, \dots, f_{n}:\alpha_{n}  \} &
+l.541 ...\alpha_{1}, \dots, f_{n}:\alpha_{n}  \} &
                                                   \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1742,7 +1748,7 @@ might try typing `S' now just to see what is salvageable.
 ! Misplaced alignment tab character &.
 <recently read> &
                  
-l.536         &
+l.542         &
                 where \ \{ f_{1},\dots, f_{n} \} = dom(D) \ and \ \alpha_{1}...
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1752,7 +1758,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.536 ..._{1}, \dots, \alpha_{n} \  are \ fresh  &
+l.542 ..._{1}, \dots, \alpha_{n} \  are \ fresh  &
                                                    \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1762,7 +1768,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.537   \IN   &
+l.543   \IN   &
                 \LET  (C_{i}, P_{i}) = PT_{\Theta}(D(f_{i})) \  for \  each ...
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1772,7 +1778,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.537 ...T_{\Theta}(D(f_{i})) \  for \  each \ i &
+l.543 ...T_{\Theta}(D(f_{i})) \  for \  each \ i &
                                                    \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1782,7 +1788,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.538   \IN   &
+l.544   \IN   &
                 \LET  C_{i}^{'} = \{ \alpha_{i} \le P_{i} \} \ for \  each \...
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1792,7 +1798,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.538 ...lpha_{i} \le P_{i} \} \ for \  each \ i &
+l.544 ...lpha_{i} \le P_{i} \} \ for \  each \ i &
                                                    \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1802,7 +1808,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.539   \IN   &
+l.545   \IN   &
                 \LET  (C, P) = PT_{\Theta}(s)  & \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1812,7 +1818,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.539   \IN   & \LET  (C, P) = PT_{\Theta}(s)  &
+l.545   \IN   & \LET  (C, P) = PT_{\Theta}(s)  &
                                                  \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1822,7 +1828,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.540   \IN  &
+l.546   \IN  &
               (C_{i} \cup C_{i}^{'} ) \cup C \cup  \{OK(P)\},  P) &
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1832,7 +1838,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-l.540 ...C_{i}^{'} ) \cup C \cup  \{OK(P)\},  P) &
+l.546 ...C_{i}^{'} ) \cup C \cup  \{OK(P)\},  P) &
                                                   
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1848,7 +1854,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.541 \end{flalign*}
+l.547 \end{flalign*}
                     
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1857,7 +1863,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.541 \end{flalign*}
+l.547 \end{flalign*}
                     
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1866,7 +1872,7 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 ! Undefined control sequence.
-l.543 \sectiion
+l.549 \sectiion
                {Experiments}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1874,23 +1880,23 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[6] [7] (./template.aux)
+[7] (./template.aux)
 
 LaTeX Warning: There were undefined references.
 
  )
 (\end occurred inside a group at level 1)
 
-### simple group (level 1) entered at line 549 ({)
+### simple group (level 1) entered at line 555 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 311 strings out of 493315
- 3289 string characters out of 6137905
+ 329 strings out of 493315
+ 3615 string characters out of 6137910
  63605 words of memory out of 5000000
- 3832 multiletter control sequences out of 15000+600000
+ 3847 multiletter control sequences out of 15000+600000
  9946 words of font info for 35 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 27i,8n,21p,1444b,226s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,8n,21p,1570b,226s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmbx10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmbx12.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/c
@@ -1903,7 +1909,7 @@ fb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb
 ></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><
 /usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></
 usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on template.pdf (7 pages, 159747 bytes).
+Output written on template.pdf (7 pages, 161768 bytes).
 PDF statistics:
  76 PDF objects out of 1000 (max. 8388607)
  54 compressed objects within 1 object stream
