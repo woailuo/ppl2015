@@ -80,14 +80,15 @@ Thanks to the previous type system, which guarantes partial correctness, We can 
 The rest of this paper is structed as follows. Section 2 introduces a simple imperative language, as well as its syntax and operational semantics. Section 3 introduces the behavioral type system and its semantics.
 
 \section{Language}
-This section introduces a sublanguage of Suenaga and Kobayashi~\cite{DBLP:conf/aplas/SuenagaK09} with primitives for memory allocation/deallocation. And the values in our paper are only pointers.
+This section introduces a sublanguage of Suenaga and Kobayashi~\cite{DBLP:conf/aplas/SuenagaK09} with primitives for memory allocation/deallocation. And the values in our paper are only pointers. \\
 The syntax of language is as follows.
 \subsection{Syntax}
 \begin{eqnarray*}
   s \ (statements)& &::=  \SKIP \tB s_{1};s_{2} \tB *x \leftarrow y \tB \Free \Cirx \\
   & & \tB \LET x = \MALLOC \IN s \tB \LET x = \NULL \IN s  \\
   & & \tB \LET x = y \; \IN s \tB   \LET x = *y \; \IN s \\
-  & &\tB \IFNULL(x) \; \THEN s_{1}\; \ELSE s_{2} \tB f(\vec{x})
+  & &\tB \IFNULL(x) \; \THEN s_{1}\; \ELSE s_{2} \tB f(\vec{x})\\
+  d \ (definition)& &::= f(x_{1},\dots,x_{n}) = s
 \end{eqnarray*}
 \subsection{Semantics}
   $\mathbf{H}$ models the heap address. \\
