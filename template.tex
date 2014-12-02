@@ -54,19 +54,7 @@ Most of safe memory deallocation verification techniques proposed so far \cite{D
 
 Currently, we are investigating safe memory deallocation for non-terminating programs, because the safe memory deallocation is very important in real world programs such as Web servers and operating systems.
 
-The main idea of our approach is to decompose the problem into two subproblems: (1) partial correctness and (2) \emph{behavioral correctness}. The former is verified based on the previous type system \cite{DBLP:conf/aplas/SuenagaK09}, whereas the latter based on the behavioral type system that is mainly used to abstact the behavior of a program.
-
-Behavioral types are heavily used in the context of concurrent program verification \cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}.
-
-We use an imperative language with manual memory management for presenting examples. The definition of the language is as follows; It is a sublanguage of Suenaga and Kobayashi \cite{DBLP:conf/aplas/SuenagaK09}.
-\begin{eqnarray*}
-s \; (statements)& ::= & \SKIP \tB s_{1};s_{2} \tB *x \leftarrow y \\
-& &\tB \Free \Cirx \tB \LET\; x = \MALLOC \; \IN \; s  \\
-& &\tB f(\vec{x}) \tB \ldots
-\end{eqnarray*}
-%a program is a pair (D,s), where D is a set of definitions.
-
-The command $\SKIP$ does nothing; the sequence $s_{1};s_{2}$ means the executing order of $s_{1}$ and $s_{2}$; the command $\Free\Cirx$ deallocates the memory cell through the pointer $x$; and the command $\LET x = \MALLOC \; \IN s$ first allocates a memory cell which is pointed by $x$ and then executes s; $f(\vec{x})$ means a function call which receives some parameters. Here $\vec{x}$ means that $\{ x_{1},...,x_{n} \}$, the list of distinct variables. Notice that we omit several constructs such as dereferencing pointer, conditional statement, and so on.
+The main idea of our approach is to decompose this problem into two subproblems: (1) partial correctness and (2) \emph{behavioral correctness}. The former is verified based on the previous type system \cite{DBLP:conf/aplas/SuenagaK09}, whereas the latter based on the behavioral type system that is mainly used to abstact the behavior of a program. I will describe our idea by several examples written in an ML-like language as follows:
 
 \begin{figure}[h]
 1 \;\; $f(x)$= \dtb\dtb \dtb \;\;\;\; \;\;$g(x)$= \\
