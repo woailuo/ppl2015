@@ -90,6 +90,9 @@ The syntax of language is as follows.
   & &\tB \IFNULL(x) \; \THEN s_{1}\; \ELSE s_{2} \tB f(\vec{x})\\
   d \ (definition)& &::= f(x_{1},\dots,x_{n}) = s
 \end{eqnarray*}
+A program is a pair $(D,s)$, where $D$ is the set of definition.\\
+The command $\SKIP$ does nothing. The command $s_{1};s_{2}$ is executed as a sequence, first executing $s_{1}$ and then $s_{2}$. The command $*x \leftarrow y$ update the content of the memory cell which is pointed by pointer $x$ with value $y$. The command $\Free \Cirx$ deallocates the memory cell which is pointed by pointer $x$. Then command $\LET x = e \IN s$ first evaluates the expresstion $e$ and binds the return value of $e$ to $x$ and then executes statement $s$. The command $\LET x = \Malloc \IN s$ first allocates a memory cell to a pointer $x$ and then executes the statement $s$. The command $\LET x = \NULL \IN s$ first allocates a null pointer to $x$ and then executes $s$. The command $\LET x = y \IN s$ assign the pointer $y$ to $x$, so the pointer $x$ and $y$ are said aliases for the same memory cell, and then executes statement $s$. The command $\LET x = *y \IN s$
+
 \subsection{Semantics}
   $\mathbf{H}$ models the heap address. \\
   $\mathbf{R}$ models the registers.
