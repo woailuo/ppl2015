@@ -76,7 +76,7 @@ A program \emph{leaks} memory if the program consumes unbounded number of memory
 \end{figure}
 The same to examples in Figure 1, the left-hand side program does not leak memory but the right-hand side does; these two are all partially corrected by previous type system. Another thing about programs in Figure 2 we should notice is that once partial correctness is guaranteed, we can guarantee memory-leak freedom by estimating upper bound of memory consumption \emph{ignoring the relation between variables and pointers to memory cells}. Specially speaking, partial correctness has proved that there is no double free in programs, which means if allocating a memory cell in the program, definitely there is a deallocation to that pointer. Say, in order to verify $h$ consumes at most two cells at once, we can ignore $x$ and $y$ in $h$; We can focus on the fact that $h$ executes $\Malloc$ twice, $\Free$ twice, and then calls $h$. This abstraction is sound because the correspondence between allocations and deallocations is guaranteed by the partial correctness verification. And from the abstraction of $h$, we know the number of $\Malloc$ and $\Free$ is balanced, so we can say that function $h$ is memory-leak freedom. About the function $h'$, its behavior is abstracted as $\Malloc$ twice,$\Free$ once, calls $h'$ itself ,and then $\Free$ once. So the number of $\Malloc$ exceeds the number of $\Free$ once, which makes the recursive function $h'$ consume infinitely memory cells.
 
-Thanks to the previous type system, which guarantes partial correctness, We can focus on the abstraction of behaviour by \emph{behavioral type system}. In our paper, the behaviour of a program is abstracted by CCS-like processes. For example, the behaviour of $f$ is abstracted as $\mu \alpha. \Malloc;\Free;\alpha$; the behaviour of $g$ is abstracted as $\mu \alpha. \Malloc;\alpha;\Free$; the behaviour of $h$ is abstracted as $\mu \alpha. \Malloc;\Malloc;\Free;\Free;\alpha$; the behaviour of $h'$ is abstracted as $\mu \alpha. \Malloc;$ \\$\Malloc;$\Free;\alpha;\Free$.
+Thanks to the previous type system, which guarantes partial correctness, We can focus on the abstraction of behaviour by \emph{behavioral type system}. In our paper, the behaviour of a program is abstracted by CCS-like processes. For example, the behaviour of $f$ is abstracted as $\mu \alpha. \Malloc;\Free;\alpha$; the behaviour of $g$ is abstracted as $\mu \alpha. \Malloc;\alpha;\Free$; the behaviour of $h$ is abstracted as $\mu \alpha. \Malloc;\Malloc;\Free;\Free;\alpha$; the behaviour of $h'$ is abstracted as $\mu \alpha. \Malloc;\Malloc;\Free;\alpha;\Free$.
 
 The rest of this paper is structed as follows. Section 2 introduces a simple imperative language, as well as its syntax and operational semantics. Section 3 introduces the behavioral type system and its semantics.
 
@@ -299,7 +299,7 @@ The notation $\rightarrow$ denotes that a behavioral type can be reduced by the 
 
 % Type Judgments
 \subsection{Typing Rules}
-The type judgement of our type system is given by the form $\Theta ; \Gamma \vdash s : P$, where $\Theta$ is a mapping from function varibles to function types, $\Gamma$ is type environment that denotes a mapping from variables to value types.
+The type judgement of our type system is given by the form $\Theta ; \Gamma \vdash s : P$, where $\Theta$ is a mapping from function varibles to function types, $\Gamma$ is a type environment that denotes a mapping from variables to value types.
 
 % Skip type
 $$
@@ -546,12 +546,10 @@ $PT_{\Theta}$ is a mapping from statements to a pair of constraints and types wi
   \IN  &(C_{i} \cup C_{i}^{'} ) \cup C \cup  \{OK(P)\},  P) &
 \end{flalign*}
 
-\sectiion{Experiments}
-
 \section{Conclusion}
 this is the end
 
-%\bibliographystyle{amsplain}
-\thebibliography{tan}
+\bibliographystyle{plain}
+\bibliography{tan}
 
 \end{document}
