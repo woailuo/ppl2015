@@ -272,7 +272,7 @@ The function type is described as $(\tau_{1}, \dots, \tau_{n})P$, which means a 
 
 % Semantics of Behavioral Types %
 \subsection{Semantics of Behavioral Types}
-The semantics of behavioral type are given by labeled transition system, which are listed as follows:
+The semantics of behavioral type are given by labeled transition system, and listed as follows:
     $$
          0;P \rightarrow P
     $$
@@ -299,12 +299,7 @@ The notation $\rightarrow$ denotes that a behavioral type can be reduced by the 
 
 % Type Judgments
 \subsection{Typing Rules}
-    $$
-        \Theta ; \Gamma \vdash s : P
-    $$
-   %$$\Theta ; \Gamma \vdash x : \tau $$
-    $\Theta$ : a finite mapping from function variables to function types.\\
-    $\Gamma$ : a finite mapping from variables to value types.
+The type judgement of our type system is given by the form $\Theta ; \Gamma \vdash s : P$, where $\Theta$ is a mapping from function varibles to function types, $\Gamma$ is type environment that denotes a mapping from variables to value types.
 
 % Skip type
 $$
