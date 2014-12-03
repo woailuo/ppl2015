@@ -55,7 +55,7 @@ Most of safe memory deallocation verification techniques proposed so far \cite{D
 
 Currently, we are investigating safe memory deallocation for non-terminating programs, because the safe memory deallocation is very important in real world programs such as Web servers and operating systems.
 
-The main idea of our approach is to decompose this problem into two subproblems: (1) partial correctness and (2) \emph{behavioral correctness}. The former is verified based on the previous type system \cite{DBLP:conf/aplas/SuenagaK09}, whereas the latter based on the behavioral type system that is mainly used to abstact the behavior of a program. Behavioral types are heavily used in the contex of concurrent program verification\cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98} I will describe the concept "memory leak" and  our idea by several examples written in an ML-like language as shown in Figure 1 and Figure 2:
+The main idea of our approach is to decompose this problem into two subproblems: (1) partial correctness and (2) \emph{behavioral correctness}. The former is verified based on the previous type system \cite{DBLP:conf/aplas/SuenagaK09}, whereas the latter based on the behavioral type system that is mainly used to abstact the behavior of a program. Behavioral types are heavily used in the contex of concurrent program verification \cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}. I will describe the concept "memory leak" and  our idea by several examples written in an ML-like language as shown in Figure 1 and Figure 2:
 
 \begin{figure}[h]
 1 \;\; $f(x)$= \dtb\dtb \dtb \;\;\;\; \;\;$g(x)$= \\
