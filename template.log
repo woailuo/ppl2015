@@ -1,7 +1,6 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.6)  3 DEC 2014 15:24
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=latex 2014.4.18)  3 DEC 2014 15:48
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
 **template.tex
 (./template.tex
@@ -118,7 +117,7 @@ Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 )
 (/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in PDF mode is detected.
+Package ifpdf Info: pdfTeX in PDF mode is not detected.
 )
 (/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
@@ -160,9 +159,9 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 45.
 LaTeX Font Info:    ... okay on input line 45.
 
 *geometry* driver: auto-detecting
-*geometry* detected driver: pdftex
+*geometry* detected driver: dvips
 *geometry* verbose mode - [ preamble ] result:
-* driver: pdftex
+* driver: dvips
 * paper: <default>
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
@@ -203,11 +202,52 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 46.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
+LaTeX Warning: Citation `DBLP:conf/aplas/SuenagaK09' on page 1 undefined on inp
+ut line 54.
+
+
+LaTeX Warning: Citation `DBLP:conf/pldi/HeineL03' on page 1 undefined on input 
+line 54.
+
+
+LaTeX Warning: Citation `DBLP:conf/sigsoft/XieA05' on page 1 undefined on input
+ line 54.
+
+
+LaTeX Warning: Citation `DBLP:journals/scp/SwamyHMGJ06' on page 1 undefined on 
+input line 54.
+
+
+LaTeX Warning: Citation `DBLP:conf/aplas/SuenagaK09' on page 1 undefined on inp
+ut line 54.
+
+
+LaTeX Warning: Citation `DBLP:conf/aplas/SuenagaK09' on page 1 undefined on inp
+ut line 58.
+
+
+LaTeX Warning: Citation `DBLP:journals/lmcs/KobayashiSW06' on page 1 undefined 
+on input line 58.
+
+
+LaTeX Warning: Citation `DBLP:journals/tcs/IgarashiK04' on page 1 undefined on 
+input line 58.
+
+
+LaTeX Warning: Citation `DBLP:conf/esop/HondaVK98' on page 1 undefined on input
+ line 58.
+
+
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [1
 
-{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+]
+
+LaTeX Warning: Citation `DBLP:conf/aplas/SuenagaK09' on page 2 undefined on inp
+ut line 84.
+
+
 Underfull \vbox (badness 2435) has occurred while \output is active []
 
  [2]
@@ -241,40 +281,20 @@ Overfull \hbox (75.5513pt too wide) detected at line 466
 []    []
  []
 
-[7] [8] (./template.bbl
-Underfull \hbox (badness 2717) in paragraph at lines 36--39
-[]\OT1/cmr/m/n/10 Y. Xie and A. Aiken, ``Context- and path-sensitive mem-ory le
-ak de-tec-tion,'' in
- []
+[7] [8]
+No file template.bbl.
+[9] (./template.aux)
 
-[9]) [10] (./template.aux) ) 
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 1866 strings out of 493315
- 23384 string characters out of 6137905
- 90428 words of memory out of 5000000
- 5313 multiletter control sequences out of 15000+600000
- 13856 words of font info for 51 fonts, out of 8000000 for 9000
+ 1854 strings out of 493316
+ 23198 string characters out of 6137936
+ 90438 words of memory out of 5000000
+ 5304 multiletter control sequences out of 15000+600000
+ 13510 words of font info for 50 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 27i,12n,26p,1551b,256s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2013/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmmi10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmmi8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr12.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy6.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/c
-msy8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
-i10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt
-10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/symbols/
-msbm10.pfb>
-Output written on template.pdf (10 pages, 183278 bytes).
-PDF statistics:
- 93 PDF objects out of 1000 (max. 8388607)
- 66 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 27i,12n,26p,1551b,200s stack positions out of 5000i,500n,10000p,200000b,80000s
 
+Output written on template.dvi (9 pages, 31896 bytes).
