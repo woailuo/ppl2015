@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  2 DEC 2014 17:02
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.6)  2 DEC 2014 17:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -263,23 +263,13 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 95.
-
-! Undefined control sequence.
-l.98 ...p, we extend the triple $\langle H\coma \R
-                                                  \coma s \rangle$ that is r...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[3]
-Overfull \hbox (53.57794pt too wide) detected at line 162
+ [3]
+Overfull \hbox (53.57794pt too wide) detected at line 164
 []    []
  []
 
-[4] [5]
-Overfull \hbox (37.94627pt too wide) in paragraph at lines 411--413
+[4] [5] [6]
+Overfull \hbox (37.94627pt too wide) in paragraph at lines 413--415
 \OT1/cmr/bx/n/10.95 Lemma 4.4. $\OML/cmm/m/it/10.95 when partial correctness is
  guaranteed  \OMS/cmsy/m/n/10.95 ` h\OML/cmm/m/it/10.95 H; R; s\OMS/cmsy/m/n/10
 .95 i\OML/cmm/m/it/10.95 and if  \OMS/cmsy/m/n/10.95 ` h\OML/cmm/m/it/10.95 H; 
@@ -287,18 +277,18 @@ R; s; n\OMS/cmsy/m/n/10.95 i\OML/cmm/m/it/10.95 ;  then  \OMS/cmsy/m/n/10.95 `
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 417--418
+Underfull \hbox (badness 10000) in paragraph at lines 419--420
 
  []
 
-[6]
-Overfull \hbox (75.5513pt too wide) detected at line 467
+
+Overfull \hbox (75.5513pt too wide) detected at line 469
 []    []
  []
 
 [7] [8]
 ! Undefined control sequence.
-l.550 \sectiion
+l.552 \sectiion
                {Experiments}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -313,12 +303,12 @@ LaTeX Warning: There were undefined references.
  )
 (\end occurred inside a group at level 1)
 
-### simple group (level 1) entered at line 556 ({)
+### simple group (level 1) entered at line 558 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
  1851 strings out of 493315
- 23113 string characters out of 6137910
- 91417 words of memory out of 5000000
+ 23113 string characters out of 6137905
+ 90417 words of memory out of 5000000
  5301 multiletter control sequences out of 15000+600000
  13510 words of font info for 50 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -337,7 +327,7 @@ b></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></us
 r/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr
 /local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on template.pdf (9 pages, 174070 bytes).
+Output written on template.pdf (9 pages, 174585 bytes).
 PDF statistics:
  90 PDF objects out of 1000 (max. 8388607)
  64 compressed objects within 1 object stream

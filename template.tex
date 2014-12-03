@@ -97,6 +97,8 @@ The command $\SKIP$ does nothing. The command $s_{1};s_{2}$ is executed as a seq
 \subsection{Operational Semantics}
 Because we want to estimate the number of available memory cells at every operation step, we extend the triple $\langle H\coma R\coma s \rangle$ that is represented as run-time state in previous type system to a quadruple $\langle H\coma R\coma s\coma n \rangle$ in our paper. The introduced notation $n$ denotes the number of available memory cells. When executing the operation $\Malloc$, the number of available memory cells will decrease 1, which is denoted as ($n - 1$); when executing the opreation $\Free$, the number of available memory cells will increase 1, which is denoted as ($n + 1$). And the notation $H$ is a mapping from finite subset of $\mathcal{H}$ to $\mathcal{H}$ $\cup$ \{$null$\}, where $\mathcal{H}$ represents the set of \emph{heap addresses}. $R$ is a mapping from finite set of variables to $\mathcal{H}$ $\cup$ \{$null$\}.
 
+The transition rules are described in Figure 3. In the Figure, $f\{x->v\}$ is defined
+
 %\begin{figure}[center]
 % Skip Command
 $$
