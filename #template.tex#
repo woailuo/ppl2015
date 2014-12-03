@@ -1,4 +1,4 @@
-%\documentclass[japanese]{jssst_ppl} %% $BF|K\8l(B (default)
+%\documentclass[japanese]{jssst_ppl} %% 日本語 (default)
  \documentclass[english]{jssst_ppl} %% English
 % \documentclass[japanese,draft]{jssst_ppl} %% You can use the draft option
 \usepackage{amsmath,amsthm,amssymb,amsfonts,extarrows,geometry}
@@ -268,7 +268,7 @@ The type $\bf 0$ abstracts the behavior of $\SKIP$ and means "does nothing". $P_
 
 The only value in our paper is reference, and its type is $\mathbf{Ref}$.
 
-The function type is described as $(\tau_{1}, \dots, \tau_{n})P$.
+The function type is described as $(\tau_{1}, \dots, \tau_{n})P$, 
 
 % Semantics of Behavioral Types %
 \subsection{Semantics of Behavioral Types}
