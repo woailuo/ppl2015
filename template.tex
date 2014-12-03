@@ -268,15 +268,13 @@ The type $\bf 0$ abstracts the behavior of $\SKIP$ and means "does nothing". $P_
 
 The only value in our paper is reference, and its type is $\mathbf{Ref}$.
 
-The function type is described as $(\tau_{1}, \dots, \tau_{n})P$.
+The function type is described as $(\tau_{1}, \dots, \tau_{n})P$, which means a function receives some pointers as arguments and then executes its body abstracted as behavioral type $P$.
 
 % Semantics of Behavioral Types %
 \subsection{Semantics of Behavioral Types}
+The semantics of behavioral type are given by labeled transition system, which are listed as follows:
     $$
          0;P \rightarrow P
-    $$
-    $$
-          \mu \alpha.P \rightarrow  [\mu \alpha . P/\alpha]  P
     $$
     $$
           \Malloc \xlongrightarrow{\Malloc} 0
@@ -285,30 +283,28 @@ The function type is described as $(\tau_{1}, \dots, \tau_{n})P$.
            \Free \xlongrightarrow{\Free} 0
     $$
     $$
-           \frac{P_{1} \xlongrightarrow{\alpha} P_{1}' }
-                 {P_{1};P_{2} \xlongrightarrow{\alpha} P_{1}';P_{2}}
-   $$
+          \mu \alpha.P \rightarrow  [\mu \alpha . P/\alpha]  P
+    $$
    $$
           P_{1} + P_{2} \longrightarrow P_{1}
    $$
    $$
           P_{1} + P_{2} \longrightarrow P_{2}
    $$
-   $
-        \text{where} \  \alpha ::= \Malloc\ | \ \Free
-   $
+   $$
+           \frac{P_{1} \xlongrightarrow{\alpha} P_{1}' }
+                 {P_{1};P_{2} \xlongrightarrow{\alpha} P_{1}';P_{2}}
+   $$
+The notation $\rightarrow$ denotes that a behavioral type can be reduced by the internal action. Notation $\xlongrightarrow{\alpha}$ means that a behavioral type can be reduced by executing $\alpha$ actions, and the $\alpha$ here is $\{\Malloc, \Free\}$.
 
 % Type Judgments
-\subsection{Type Judgments}
+\subsection{Typing Rules}
     $$
         \Theta ; \Gamma \vdash s : P
     $$
    %$$\Theta ; \Gamma \vdash x : \tau $$
     $\Theta$ : a finite mapping from function variables to function types.\\
     $\Gamma$ : a finite mapping from variables to value types.
-
-% Typing Rules %
-\subsection{Typing Rules}
 
 % Skip type
 $$
