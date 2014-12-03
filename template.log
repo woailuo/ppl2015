@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.6)  2 DEC 2014 17:07
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  3 DEC 2014 09:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -264,7 +264,7 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 95.
  [3]
-Overfull \hbox (53.57794pt too wide) detected at line 164
+Overfull \hbox (53.57794pt too wide) detected at line 163
 []    []
  []
 
@@ -307,7 +307,7 @@ LaTeX Warning: There were undefined references.
 ### bottom level 
 Here is how much of TeX's memory you used:
  1851 strings out of 493315
- 23113 string characters out of 6137905
+ 23113 string characters out of 6137910
  90417 words of memory out of 5000000
  5301 multiletter control sequences out of 15000+600000
  13510 words of font info for 50 fonts, out of 8000000 for 9000
@@ -327,7 +327,7 @@ b></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></us
 r/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr
 /local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on template.pdf (9 pages, 174585 bytes).
+Output written on template.pdf (9 pages, 175006 bytes).
 PDF statistics:
  90 PDF objects out of 1000 (max. 8388607)
  64 compressed objects within 1 object stream
