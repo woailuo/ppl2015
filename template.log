@@ -1,9 +1,12 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  3 DEC 2014 14:55
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.6)  3 DEC 2014 14:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**\nonstopmode\input template.tex
-(./template.tex (./jssst_ppl.cls
+**template.tex
+(./template.tex
+LaTeX2e <2011/06/27>
+Babel <3.9f> and hyphenation patterns for 78 languages loaded.
+(./jssst_ppl.cls
 Document Class: jssst_ppl 2010/11/19 Kiminori MATSUZAKI
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
@@ -266,21 +269,22 @@ Overfull \hbox (75.5513pt too wide) detected at line 466
 []    []
  []
 
-[7] [8]
-No file template.bbl.
-[9] (./template.aux)
+[7] [8] (./template.bbl) [9] (./template.aux)
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 1852 strings out of 493315
- 23117 string characters out of 6137910
+ 1855 strings out of 493315
+ 23158 string characters out of 6137905
  90407 words of memory out of 5000000
- 5301 multiletter control sequences out of 15000+600000
- 13510 words of font info for 50 fonts, out of 8000000 for 9000
+ 5302 multiletter control sequences out of 15000+600000
+ 13856 words of font info for 51 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 27i,12n,26p,1570b,200s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,12n,26p,1551b,200s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></
@@ -295,7 +299,7 @@ live/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texli
 ve/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texliv
 e/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive
 /2013/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on template.pdf (9 pages, 175837 bytes).
+Output written on template.pdf (9 pages, 182832 bytes).
 PDF statistics:
  90 PDF objects out of 1000 (max. 8388607)
  64 compressed objects within 1 object stream
