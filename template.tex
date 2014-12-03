@@ -45,7 +45,7 @@ $^2$ \\
 \begin{document}
 \maketitle
 \begin{abstract}
-We propose a type system to prevent programs infinitely consuming memory cells. The main idea is based on the previous type system that augments pointer types with fractional ownerships and behavioral type system that abstracts the behavior of programs. We design a behavioral type system for verification of behavioral correctness.
+We propose a type system to prevent programs infinitely consuming memory cells. The main idea is based on the previous type system that augments pointer types with fractional ownerships~\cite{DBLP:conf/aplas/SuenagaK09} and behavioral type system that abstracts the behavior of programs. Thanks to the previous type system, we can focus on the behavioral types in order to count the upper bound of the consumed memory cells soundly.
 \end{abstract}
 
 \section{Introduction}
@@ -107,7 +107,6 @@ $$
                 \langle H\coma R\coma   s , n \rangle }
      \Rtab \mbox{(E-Skip)}
 $$
-
 % Assignment
 $$
      \frac{R(x) \in dom(H), n \in \mathbb{N}}
@@ -116,7 +115,6 @@ $$
              \langle H \Lfc R(x) \rightarrow R(y) \Rfc \coma R \coma   \SKIP , n  \rangle }
      \Rtab \mbox{(E-Assign)}
 $$
-
 % Free Command
 $$
      \frac{R(x) \in dom(H) , n \in \mathbb{N}}
@@ -125,7 +123,6 @@ $$
             \langle H\backslash \Lfc R(x) \Rfc \coma R \coma   \SKIP , n+1  \rangle }
      \Rtab \mbox{(E-Free)}
 $$
-
 % Let Null Command
 $$
      \frac{x' \notin dom(R)}
@@ -134,7 +131,6 @@ $$
              \langle H\coma R\Lfc x' \rightarrow \NULL \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
      \Rtab \mbox{(E-LetNull)}
 $$
-
 % Let Eq Command
 $$
      \frac{x' \notin dom(R)}
@@ -143,7 +139,6 @@ $$
               \langle H\coma R\Lfc x' \rightarrow R(y) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
 \Rtab \mbox{(E-LetEq)}
 $$
-
 % Reference Command
 $$
      \frac{x' \notin dom(R)}
@@ -152,7 +147,6 @@ $$
               \langle H\coma R\Lfc x' \rightarrow H(R(y)) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
      \Rtab \mbox{(E-LetDref)}
 $$
-
 % Malloc (allocate) Command
 $$
      \frac{h \notin dom(H)}
@@ -161,7 +155,6 @@ $$
               \langle H \Lfc h \rightarrow v\Rfc \coma R\Lfc x' \rightarrow h \Rfc \coma   \Lb x'/x \Rb s , n-1  \rangle }
 \Rtab \mbox{(E-Malloc)}
 $$
-
 % IFNULL T
 $$
     \frac{R(x) = \NULL}
@@ -170,7 +163,6 @@ $$
            \langle H\coma R\coma s_{1} \coma n \rangle}
     \Rtab \mbox{(E-IfNullT)}
 $$
-
 % IFNULL F
 $$
     \frac{R(x) \neq \NULL}
@@ -179,7 +171,6 @@ $$
            \langle H\coma R\coma s_{2} \coma  n, \rangle}
     \Rtab \mbox{(E-IfNullF)}
 $$
-
 % Function Call
 $$
      \frac{f(\vec{y}) = s \in D}
@@ -188,7 +179,6 @@ $$
                \langle H\coma R\coma  \Lb \vec{x}/\vec{y} \Rb s , n \rangle}
       \Rtab \mbox{(E-Call)}
 $$
-
 % Error : access the null memory cell
 $$
       \frac{R(x) = null}
@@ -197,7 +187,6 @@ $$
               NullEx }
       \Rtab \mbox{(E-AssignNullError)}
 $$
-
 % ERROR : access the null memory cell
 $$
       \frac{R(y) = null}
@@ -206,7 +195,6 @@ $$
                NullEx }
              \Rtab \mbox{(E-DrefNullError)}
 $$
-
 % ERROR :
 $$
      \frac{R(x) \notin dom(H) \cup \Lfc null \Rfc}
@@ -215,7 +203,6 @@ $$
              Error }
     \Rtab \mbox{(E-AssignError)}
 $$
-
 % ERROR
 $$
       \frac{R(y) \notin dom(H) \cup \Lfc null \Rfc}
@@ -224,7 +211,6 @@ $$
                   Error }
       \Rtab \mbox{(E-DrefError)}
 $$
-
 %
 $$
       \frac{R(x) \notin dom(H) \cup \Lfc null \Rfc}
@@ -233,7 +219,6 @@ $$
               Error }
      \Rtab \mbox{(E-FreeError)}
 $$
-
 %
 $$
      \frac{R(x) =  null }
@@ -241,7 +226,6 @@ $$
              \xlongrightarrow{\Free}_{D} NullEx  }
       \Rtab \mbox{(E-FreeNullError)}
 $$
-
 % ERROR: no enough space
 $$
       \langle H\coma R\coma \LET x = \Malloc() \ \IN s ,  0  \rangle
@@ -252,7 +236,6 @@ $$
 %\caption{Operational Semantics.}
 %\label{example:os}
 %\end{figure}
-
 
 \section{Type System}
 This section elaborate the behavioral type system to prevent leaking memory in non-terminating programs. We define behavioral types, CCS-like processes that abstract the behavior of programs, as follows.
@@ -300,86 +283,75 @@ The notation $\rightarrow$ denotes that a behavioral type can be reduced by the 
 % Type Judgments
 \subsection{Typing Rules}
 The type judgement of our type system is given by the form $\Theta ; \Gamma \vdash s : P$, where $\Theta$ is a mapping from function varibles to function types, $\Gamma$ is a type environment that denotes a mapping from variables to value types.
-
+It reads ``the behavior of $s$ is abstracted as $P$ under $\Theta$ and $\Gamma$ environments''. We design the type system so that this type judgement implies the property: when $s$ executes $\Malloc$(resp.$\Free$), then $P$ is equivalent to $\Malloc;P'$(resp.$\Free;P'$) for a type $P'$ such that $\Theta; \Gamma \vdash s': P'$, where $s'$ is the continuation of $s$. This property guarantees that the behavioral type soundly abstracts the upper bound of the consumed memory cells.
+The typing rules are shown as follows.
 % Skip type
 $$
          \Theta ; \Gamma \vdash \SKIP : \mathbf{0}
       \Rtab \mbox{(T-Skip)}
 $$
-
 % Sequence type
 $$
       \frac{\Theta ; \Gamma \vdash s_{1} : P_{1} \Rtab \Theta ; \Gamma \vdash s_{2} : P_{2}}
           {\Theta ; \Gamma \vdash s_{1} ; s_{2} : P_{1};P_{2} }
      \Rtab \mbox{(T-Seq)}
 $$
-
 % Assignment type
 $$
      \frac{\Theta ; \Gamma \vdash y :  \mathbf{Ref} \Rtab \Theta ; \Gamma \vdash x : \mathbf{Ref} }
           {\Theta ; \Gamma \vdash *x \leftarrow y : \mathbf{0} }
      \Rtab \mbox{(T-Assign)}
 $$
-
 % Free(deallocate) type
 $$
      \frac{\Theta ; \Gamma \vdash x : \mathbf{Ref} }
            {\Theta ; \Gamma \vdash \Free(x) : \Free;0}
      \Rtab \mbox{(T-Free)}
 $$
-
 % Malloc type
 $$
-     \frac{\Theta ; \Gamma,x \vdash s : P}
+     \frac{\Theta ; \Gamma,x : \mathbf{Ref} \vdash s : P}
            {\Theta ; \Gamma \vdash \LET x = \MALLOC \; \IN s  : \Malloc;P}
            \Rtab \mbox{(T-Malloc)}
 $$
-
 % Let eq type
 $$
-     \frac{\Theta ; \Gamma \vdash y : \mathbf{Ref}  \Rtab \Theta ; \Gamma , x  \vdash s : P}
+     \frac{\Theta ; \Gamma \vdash y : \mathbf{Ref}  \Rtab \Theta ; \Gamma , x : \mathbf{Ref} \vdash s : P}
            {\Theta ; \Gamma \vdash \LET x = y \; \IN s : P}
      \Rtab \mbox{(T-LetEq)}
 $$
-
 % Dereference type
 $$
-     \frac{\Theta ; \Gamma \vdash y : \mathbf{Ref}  \Rtab \Theta ; \Gamma , x  \vdash s : P}
+     \frac{\Theta ; \Gamma \vdash y : \mathbf{Ref}  \Rtab \Theta ; \Gamma , x : \mathbf{Ref} \vdash s : P}
            {\Theta ; \Gamma \vdash \LET x = *y \; \IN s : P}
      \Rtab \mbox{(T-LetDref)}
 $$
-
 % Let NULL type
 $$
-     \frac{\Theta ; \Gamma, x \vdash s : P}
+     \frac{\Theta ; \Gamma, x : \mathbf{Ref} \vdash s : P}
            {\Theta ; \Gamma \vdash \LET x = \mathbf{null} \; \IN s : P}
      \Rtab \mbox{(T-LetNull)}
 $$
-
 % ifnull s then s type
 $$
      \frac{\Theta ; \Gamma \vdash x : \mathbf{Ref}   \ \ \ \  \Theta ; \Gamma \vdash s_{1} : P \ \ \ \ \Theta ; \Gamma \vdash s_{1} : P}
            {\Theta ; \Gamma \vdash \IFNULL(x) \; \THEN s_{1}\; \ELSE s_{2} : P}
      \Rtab \mbox{(T-IfNull)}
 $$
-
 % Function call type
 $$ \frac{ \Theta(f) = P}
 {\Theta; \Gamma, \vec{x} : \vec{\tau} \vdash f(\vec{x}) : P}
 \Rtab \mbox{(T-Call)} $$
-
 % Program
 $$\frac{\vdash D : \Theta \;\;\;\; \Theta; \emptyset\vdash s : P \Rtab OK_{n}(P)}
 {\vdash (D, s)}
 \Rtab \mbox{(T-Program)} $$
-
 % Subtyping
 $$
      \frac{\Theta ; \Gamma \vdash s : P_{1} \Rtab P_{1} \le P_{2}}
             {\Theta ; \Gamma \vdash s : P_{2}}
      \Rtab \mbox{(T-Sub)}
 $$
-
 \section{Type Soundness}
 \begin{theorem}\label{thm1}
 If $\vdash (D, s)$ then $(D, s)$ does not lead to $memory\;leak$.\\
