@@ -373,8 +373,7 @@ Memory leak freedom: $\exists n \in \mathbb{N}$ s.t.
 $\langle \emptyset, \emptyset, s, n \rangle \nrightarrow^{*}Error$
 \end{theorem}
 \noindent
-This theorem
-
+This theorem says that a well typed program guarantees memory leak freedom.
 % Lemma Preservation %
 \begin{lemma}[Preservation $\mathbf{I}$]%\label{preser}
 If $OK_{n}(P)$, $\Theta; \Gamma \vdash s : P$ and $\langle H\coma R\coma s\coma n \rangle
@@ -394,8 +393,7 @@ If $OK_{n}(P)$, $\Theta ; \Gamma \vdash s : P$ and $\langle H\coma R\coma s\coma
 \end{lemma}
 
 \begin{lemma}%\label{error}
-$when \  partial \  correctness \  is \  guaranteed \  \vdash \langle H,R,s \rangle and \  if \ \vdash \langle H,R,s,n \rangle, \  then \  \vdash \langle
-H',R',s',n' \rangle \nrightarrow Error$
+If the partial correctness is guaranteed $\vdash \langle H,R,s \rangle$ and $\vdash \langle H,R,s,n \rangle$, then $\vdash \langle H',R',s',n' \rangle \nrightarrow Error$
 \end{lemma}
 
 \section{Syntax Directed Typing Rules}
