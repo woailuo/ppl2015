@@ -292,7 +292,7 @@ In the rule for subtyping, $P_{1} \le P_{2}$ represents that $P_{1}$ is the subt
 (2) if $P_{1} \rightarrow P_{1}'$ then $\exists P_{2}'$ s.t. $P_{2} \rightarrow^{*} P_{2}'$ and  $P_{1}' \le P_{2}'$\\
 where $\overset{\text{$\alpha$}}{\Longrightarrow}$ means that: $\rightarrow^{*} \xlongrightarrow{\alpha} \rightarrow^{*}$.
 
-In the rule for program, the main statement $s$ is executed under $\Theta$ and $\Gamma$ environments without free variables. At the end of $s$, memory leak freedom is guaranteed by $OK_{n}(P)$ ,where $P$ is the behavior of $s$. $OK_{n}(P)$ is defined as $\mathbf{Definition\; 1}$ in which $\sharp_{malloc}(\alpha)$ and $\sharp_{free}(\alpha)$ are funcitons to count the number of $\Malloc$ and $\Free$ actions in $\alpha$ respectively. The $\mathbf{Definition \; 1}$ means
+In the rule for program, the main statement $s$ is executed under $\Theta$ and $\Gamma$ environments without free variables. At the end of $s$, memory leak freedom is guaranteed by $OK_{n}(P)$ ,where $P$ is the behavior of $s$. $OK_{n}(P)$ is defined as $\mathbf{Definition\; 1}$ in which $\sharp_{malloc}(\alpha)$ and $\sharp_{free}(\alpha)$ are funcitons to count the number of $\Malloc$ and $\Free$ actions in $\alpha$ respectively. This definition means at every running step,
 \begin{myDef}
  $OK_{n}(P) \iff \forall P',\; P \xlongrightarrow{\alpha}^{*}P'$ then $\sharp_{malloc}(\alpha)-\sharp_{free}(\alpha)\le n$.
 \end{myDef}
