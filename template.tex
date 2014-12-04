@@ -285,14 +285,14 @@ The notation $\rightarrow$ denotes that a behavioral type can be reduced by the 
 The type judgement of our type system is given by the form $\Theta ; \Gamma \vdash s : P$, where $\Theta$ is a mapping from function varibles to function types, $\Gamma$ is a type environment that denotes a mapping from variables to value types.
 It reads ``the behavior of $s$ is abstracted as $P$ under $\Theta$ and $\Gamma$ environments''. We design the type system so that this type judgement implies the property: when $s$ executes $\Malloc$(resp.$\Free$), then $P$ is equivalent to $\Malloc;P'$(resp.$\Free;P'$) for a type $P'$ such that $\Theta; \Gamma \vdash s': P'$, where $s'$ is the continuation of $s$. This property guarantees the behavioral type soundly abstracts the upper bound of the consumed memory cells.
 
-Typing rules are presented in Figure. In the rule for assignment, the behavior of  $*x \leftarrow y$ is $\bf 0$. The rule for $\Free$ represents that the behavior of $\Free \Cirx$ is $\Free$. The rule T-Malloc represents that $\LET x = \MALLOC \; \IN s$ has the behavior $\Malloc;P$, where $P$ is the behavior of statement $s$.
+Typing rules are presented in Figure. In the rule for assignment, the behavior of  $*x \leftarrow y$ is $\bf 0$. The rule for $\Free$ represents that the behavior of $\Free \Cirx$ is $\Free$. The rule T-Malloc represents that $\LET x = \MALLOC \; \IN s$ has the behavior $\Malloc;P$, where $P$ is the behavior of statement $s$. The rule for function call represents that function $f$ has the behavior $P$ which is the behavior of the body of this function .
 
 In the rule for subtyping, $P_{1} \le P_{2}$ represents that $P_{1}$ is the subtype of $P_{2}$ and  means that: \\
 (1) if $P_{1} \xlongrightarrow{\alpha}  P_{1}'$ then $\exists P_{2}' $ s.t. $P_{2} \overset{\text{$\alpha$}}{\Longrightarrow} P_{2}'$ and $ P_{1}' \le P_{2}' $\\
 (2) if $P_{1} \rightarrow P_{1}'$ then $\exists P_{2}'$ s.t. $P_{2} \rightarrow^{*} P_{2}'$ and  $P_{1}' \le P_{2}'$\\
 where $\overset{\text{$\alpha$}}{\Longrightarrow}$ means that: $\rightarrow^{*} \xlongrightarrow{\alpha} \rightarrow^{*}$.
 
-In the rule for program, the main statement $s$ is executed under $\Theta$ and $\Gamma$ environments without free variables. At the end of $s$, memory leak freedom is guaranteed by $OK_{n}(P)$ ,where $P$ is the behavior of $s$. $OK_{n}(P)$ is defined as $\mathbf{Definition\; 1}$ in which $\sharp_{malloc}(\alpha)$ and $\sharp_{free}(\alpha)$ are funcitons to count the number of $\Malloc$ and $\Free$ actions in $\alpha$ respectively. This definition means at every running step,
+In the rule for program, the main statement $s$ is executed under $\Theta$ and $\Gamma$ environments without free variables. At the end of $s$, memory leak freedom is guaranteed by $OK_{n}(P)$ ,where $P$ is the behavior of $s$. $OK_{n}(P)$ is defined as $\mathbf{Definition\; 1}$ in which $\sharp_{malloc}(\alpha)$ and $\sharp_{free}(\alpha)$ are funcitons to count the number of $\Malloc$ and $\Free$ actions in $\alpha$ respectively. This definition, intuitively, means at every running step the number of allocated memory cells will never go out of memory scope.
 \begin{myDef}
  $OK_{n}(P) \iff \forall P',\; P \xlongrightarrow{\alpha}^{*}P'$ then $\sharp_{malloc}(\alpha)-\sharp_{free}(\alpha)\le n$.
 \end{myDef}
@@ -366,12 +366,14 @@ $$\frac{\vdash D : \Theta \;\;\;\; \Theta; \emptyset\vdash s : P \Rtab OK_{n}(P)
 \Rtab \mbox{(T-Program)} $$
 
 \section{Type Soundness}
+This section describe some theorems and lemmas for type safe.
 \begin{theorem}\label{thm1}
 If $\vdash (D, s)$ then $(D, s)$ does not lead to $memory\;leak$.\\
 Memory leak freedom: $\exists n \in \mathbb{N}$ s.t.
 $\langle \emptyset, \emptyset, s, n \rangle \nrightarrow^{*}Error$
 \end{theorem}
 \noindent
+This theorem
 
 % Lemma Preservation %
 \begin{lemma}[Preservation $\mathbf{I}$]%\label{preser}
