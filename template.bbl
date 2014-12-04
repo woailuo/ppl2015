@@ -57,4 +57,8 @@ K.~Honda, V.~T. Vasconcelos, and M.~Kubo, ``Language primitives and type
   ser. Lecture Notes in Computer Science, C.~Hankin, Ed., vol. 1381.\hskip 1em
   plus 0.5em minus 0.4em\relax Springer, 1998, pp. 122--138.
 
+\bibitem{plain:book1}
+B.~C. Pierce, \emph{Types and Programming Languages}.\hskip 1em plus 0.5em
+  minus 0.4em\relax The MIT Press, 2002.
+
 \end{thebibliography}

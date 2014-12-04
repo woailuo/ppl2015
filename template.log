@@ -1,9 +1,13 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  4 DEC 2014 17:13
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.6)  4 DEC 2014 18:12
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
-**\nonstopmode\input template.tex
-(./template.tex (./jssst_ppl.cls
+**template.tex
+(./template.tex
+LaTeX2e <2011/06/27>
+Babel <3.9f> and hyphenation patterns for 78 languages loaded.
+(./jssst_ppl.cls
 Document Class: jssst_ppl 2010/11/19 Kiminori MATSUZAKI
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
@@ -243,12 +247,12 @@ bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML/cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 401--402
+Underfull \hbox (badness 10000) in paragraph at lines 401--403
 
  []
 
 [7]
-Overfull \hbox (69.46808pt too wide) detected at line 442
+Overfull \hbox (69.46808pt too wide) detected at line 443
 []  []
  []
 
@@ -260,13 +264,13 @@ ak de-tec-tion,'' in
 
 ) [10] (./template.aux) ) 
 Here is how much of TeX's memory you used:
- 1866 strings out of 493315
- 23384 string characters out of 6137910
- 92428 words of memory out of 5000000
- 5313 multiletter control sequences out of 15000+600000
+ 1867 strings out of 493315
+ 23397 string characters out of 6137905
+ 93431 words of memory out of 5000000
+ 5314 multiletter control sequences out of 15000+600000
  13856 words of font info for 51 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 27i,12n,26p,1570b,254s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,12n,26p,1551b,258s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2013/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmbx10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmbx12.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/a
@@ -282,7 +286,7 @@ sy6.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 .pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.
 pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/symbols/msb
 m10.pfb>
-Output written on template.pdf (10 pages, 187487 bytes).
+Output written on template.pdf (10 pages, 187750 bytes).
 PDF statistics:
  93 PDF objects out of 1000 (max. 8388607)
  66 compressed objects within 1 object stream
