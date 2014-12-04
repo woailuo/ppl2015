@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  4 DEC 2014 11:19
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  4 DEC 2014 13:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -220,7 +220,7 @@ Overfull \hbox (53.57794pt too wide) detected at line 157
  []
 
 [4] [5] [6]
-Overfull \hbox (37.94627pt too wide) in paragraph at lines 399--401
+Overfull \hbox (37.94627pt too wide) in paragraph at lines 395--397
 \OT1/cmr/bx/n/10.95 Lemma 4.4. $\OML/cmm/m/it/10.95 when partial correctness is
  guaranteed  \OMS/cmsy/m/n/10.95 ` h\OML/cmm/m/it/10.95 H; R; s\OMS/cmsy/m/n/10
 .95 i\OML/cmm/m/it/10.95 and if  \OMS/cmsy/m/n/10.95 ` h\OML/cmm/m/it/10.95 H; 
@@ -228,12 +228,12 @@ R; s; n\OMS/cmsy/m/n/10.95 i\OML/cmm/m/it/10.95 ;  then  \OMS/cmsy/m/n/10.95 `
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 405--406
+Underfull \hbox (badness 10000) in paragraph at lines 401--402
 
  []
 
 [7]
-Overfull \hbox (75.5513pt too wide) detected at line 455
+Overfull \hbox (75.5513pt too wide) detected at line 451
 []    []
  []
 
@@ -267,7 +267,7 @@ sy6.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 .pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.
 pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/symbols/msb
 m10.pfb>
-Output written on template.pdf (10 pages, 187429 bytes).
+Output written on template.pdf (10 pages, 187661 bytes).
 PDF statistics:
  93 PDF objects out of 1000 (max. 8388607)
  66 compressed objects within 1 object stream

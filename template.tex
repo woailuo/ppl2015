@@ -287,16 +287,12 @@ It reads ``the behavior of $s$ is abstracted as $P$ under $\Theta$ and $\Gamma$ 
 
 Typing rules are presented in Figure. In the rule for assignment, the behavior of  $*x \leftarrow y$ is $\bf 0$. The rule for $\Free$ represents that the behavior of $\Free \Cirx$ is $\Free$. The rule T-Malloc represents that $\LET x = \MALLOC \; \IN s$ has the behavior $\Malloc;P$, where $P$ is the behavior of statement $s$.
 
-    $P_{1}$ is a subtype of $P_{2}$, which is written as $P_{1} \le P_{2}$, means that: \\
-   (1) if $P_{1} \xlongrightarrow{\alpha}  P_{1}'$ then $\exists P_{2}' $ s.t. $P_{2} \overset{\text{$\alpha$}}{\Longrightarrow} P_{2}'$ and $ P_{1}' \le P_{2}' $ \\
-   (2) if $P_{1} \rightarrow P_{1}'$ then $\exists P_{2}'$ s.t. $P_{2} \xlongrightarrow{\tau}^{*} P_{2}'$ and  $P_{1}' \le P_{2}'$\\
-    where $\overset{\text{$\alpha$}}{\Longrightarrow}$ means that: $\rightarrow^{*} \xlongrightarrow{\alpha} \rightarrow^{*}$ and $\tau$ means internal action.
-$$
-       \frac{\Gamma \vdash s : P \Rtab OK_{n}(P)}{\vdash \langle H,R,s,n
-       \rangle .}
-$$
-  where $dom(H) \cup dom(R) = dom(\Gamma).$
+In the rule for subtyping, $P_{1} \le P_{2}$ represents that $P_{1}$ is the subtype of $P_{2}$ and  means that: \\
+(1) if $P_{1} \xlongrightarrow{\alpha}  P_{1}'$ then $\exists P_{2}' $ s.t. $P_{2} \overset{\text{$\alpha$}}{\Longrightarrow} P_{2}'$ and $ P_{1}' \le P_{2}' $\\
+(2) if $P_{1} \rightarrow P_{1}'$ then $\exists P_{2}'$ s.t. $P_{2} \rightarrow^{*} P_{2}'$ and  $P_{1}' \le P_{2}'$\\
+where $\overset{\text{$\alpha$}}{\Longrightarrow}$ means that: $\rightarrow^{*} \xlongrightarrow{\alpha} \rightarrow^{*}$.
 
+In the rule for program, the main statement $s$ is executed under $\Theta$ and $\Gamma$ environments without free variables. At the end of $s$, memory leak freedom is guaranteed by $OK_{n}(P)$ ,where $P$ is the behavior of $s$. $OK_{n}(P)$ is defined as $\mathbf{Definition\; 1}$ in which $\sharp_{malloc}(\alpha)$ and $\sharp_{free}(\alpha)$ are funcitons to count the number of $\Malloc$ and $\Free$ actions in $\alpha$ respectively. The $\mathbf{Definition \; 1}$ means
 \begin{myDef}
  $OK_{n}(P) \iff \forall P',\; P \xlongrightarrow{\alpha}^{*}P'$ then $\sharp_{malloc}(\alpha)-\sharp_{free}(\alpha)\le n$.
 \end{myDef}
