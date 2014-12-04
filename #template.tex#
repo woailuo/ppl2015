@@ -1,4 +1,4 @@
-%\documentclass[japanese]{jssst_ppl} %% $BF|K\8l(B (default)
+%\documentclass[japanese]{jssst_ppl} %% 日本語 (default)
  \documentclass[english]{jssst_ppl} %% English
 % \documentclass[japanese,draft]{jssst_ppl} %% You can use the draft option
 \usepackage{amsmath,amsthm,amssymb,amsfonts,extarrows,geometry,amsopn}
@@ -398,7 +398,7 @@ If $OK_{n}(P)$, $\Theta ; \Gamma \vdash s : P$ and $\langle H,R,s,n \rangle
 \section{Type Inference Algorithm}
 This section describes how to construct syntax directed typing rules according to the typing rules of above section ,and it provides an algorithm which inputs statements and returns a pair containing constraints and behavior types.
 \subsection{Syntax Directed Typing Rules}
-Typing rules showed in Figure x are not immediately suitable for type inference. The reason is the subtyping rule which can be applied to every terms
+Typing rules showed in Figure x are not immediately suitable for type inference. The reason is that the subtyping rule can be applied to any kind of  statement. This means that, any kind of statement $s$ can be applied by either subtyping rule or the other rule whose conclusion mathes the shape of the $s$
 $C$ is contraint for subtype. \\
 $$
      \frac{ C = \emptyset}
