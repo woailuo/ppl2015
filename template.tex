@@ -365,8 +365,8 @@ $$\frac{\vdash D : \Theta \;\;\;\; \Theta; \emptyset\vdash s : P \Rtab OK_{n}(P)
 {\vdash (D, s)}
 \Rtab \mbox{(T-Program)} $$
 
-\section{Type Soundness}
-This section describe some theorems and lemmas for type safety.
+\subsection{Type Soundness}
+This subsection describes some theorems and lemmas for type safety.
 \begin{theorem}\label{thm1}
 If $\vdash (D, s)$ then $(D, s)$ does not lead to $memory\;leak$.\\
 Memory leak freedom: $\exists n \in \mathbb{N}$ s.t.
@@ -395,7 +395,10 @@ If $OK_{n}(P)$, $\Theta ; \Gamma \vdash s : P$ and $\langle H,R,s,n \rangle
  The partial correctness is guaranteed $\vdash \langle H,R,s \rangle$ , so that if $\vdash \langle H,R,s,n \rangle$, then $\vdash \langle H',R',s',n' \rangle \nrightarrow Error$
 \end{lemma}
 
-\section{Type Inference}
+\section{Type Inference Algorithm}
+This section describes how to construct syntax directed typing rules according to the typing rules of above section ,and it provides an algorithm which inputs statements and returns a pair containing constraints and behavior types.
+\subsection{Syntax Directed Typing Rules}
+
 $C$ is contraint for subtype. \\
 $$
      \frac{ C = \emptyset}
@@ -448,7 +451,7 @@ $$
      {C \vdash (D , s) }
      \Rtab \mbox{(ST-Prog)}
 $$
-
+\subsection{Algorithm}
 $PT_{v}(x) = (\emptyset,\emptyset)$, where $x$ maybe a value or reference.\\
 $PT_{\Theta}$ is a mapping from statements to a pair of constraints and types with function $\Theta$ from function names to function types, like $\Theta(f) = P$.
 \begin{flalign*}
