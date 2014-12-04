@@ -366,7 +366,7 @@ $$\frac{\vdash D : \Theta \;\;\;\; \Theta; \emptyset\vdash s : P \Rtab OK_{n}(P)
 \Rtab \mbox{(T-Program)} $$
 
 \section{Type Soundness}
-This section describe some theorems and lemmas for type safe.
+This section describe some theorems and lemmas for type safety.
 \begin{theorem}\label{thm1}
 If $\vdash (D, s)$ then $(D, s)$ does not lead to $memory\;leak$.\\
 Memory leak freedom: $\exists n \in \mathbb{N}$ s.t.
@@ -376,86 +376,73 @@ $\langle \emptyset, \emptyset, s, n \rangle \nrightarrow^{*}Error$
 This theorem says that a well typed program guarantees memory leak freedom.
 % Lemma Preservation %
 \begin{lemma}[Preservation $\mathbf{I}$]%\label{preser}
-If $OK_{n}(P)$, $\Theta; \Gamma \vdash s : P$ and $\langle H\coma R\coma s\coma n \rangle
-\xlongrightarrow{\alpha}\langle H'\coma R'\coma s'\coma n'
+If $OK_{n}(P)$, $\Theta; \Gamma \vdash s : P$ and $\langle H,R,s, n \rangle
+\xlongrightarrow{\alpha}\langle H',R',s', n'
 \rangle$, then $\exists P'$ s.t. \\
 (1) $ \Theta; \Gamma \vdash s' : P' $ \\
 (2) $ P \overset{\text{$\alpha$}}{\Longrightarrow} P'$\\
 (3) $ OK_{n'}(P') $
 \end{lemma}
 \begin{lemma}[Preservation $\mathbf{II}$]%\label{preser}
-If $OK_{n}(P)$, $\Theta ; \Gamma \vdash s : P$ and $\langle H\coma R\coma s\coma n \rangle
-\rightarrow \langle H'\coma R'\coma s'\coma n'
+If $OK_{n}(P)$, $\Theta ; \Gamma \vdash s : P$ and $\langle H,R,s,n \rangle
+\rightarrow \langle H',R',s', n'
 \rangle$, then $\exists P'$ s.t. \\
 (1) $\Theta; \Gamma \vdash s' : P'$\\
-(2) $ P \xlongrightarrow{\tau}^{*} P'  $\\
+(2) $ P \rightarrow^{*} P'  $\\
 (3) $OK_{n'}(P')$
 \end{lemma}
-
 \begin{lemma}%\label{error}
-If the partial correctness is guaranteed $\vdash \langle H,R,s \rangle$ and $\vdash \langle H,R,s,n \rangle$, then $\vdash \langle H',R',s',n' \rangle \nrightarrow Error$
+ The partial correctness is guaranteed $\vdash \langle H,R,s \rangle$ , so that if $\vdash \langle H,R,s,n \rangle$, then $\vdash \langle H',R',s',n' \rangle \nrightarrow Error$
 \end{lemma}
 
 \section{Syntax Directed Typing Rules}
-
 $C$ is contraint for subtype. \\
-
 $$
      \frac{ C = \emptyset}
            {\Theta; \Gamma; C \vdash \SKIP : \mathbf{0}
              }
       \Rtab \mbox{(ST-Skip)}
 $$
-
 $$
       \frac{\Theta;\Gamma ; C_{1} \vdash s_{1} : P_{1} \Rtab \Theta; \Gamma ; C_{2} \vdash s_{2} : P_{2} \Rtab C = C_{1}\cup C_{2} \cup \{ P_{1};P_{2} \le P\}}
       {\Theta;\Gamma; C \vdash s_{1};s_{2} : P}
       \Rtab \mbox{(ST-Seq)}
 $$
-
 $$
       \frac{\Theta;\Gamma;C_{1} \vdash y \Rtab \Theta;\Gamma; C_{2} \vdash x : \mathbf{Ref} \Rtab C = C_{1}\cup C_{2}}
       {\Theta;\Gamma; C \vdash *x \leftarrow y : \mathbf{0}}
       \Rtab \mbox{(ST-Assign)}
 $$
-
 $$
       \frac{C = \emptyset}
       {\Gamma ; C \vdash \Free() : \Free;\mathbf{0}}
      \Rtab \mbox{(ST-Free)}
 $$
-
 $$
      \frac{\Theta;\Gamma, x ; C_{1} \vdash s : P_{1} \Rtab C = C_{1} \cup\{P_{1}\le P\}}
      {\Theta;\Gamma; C \vdash \LET x = \Malloc() \; \IN s : \Malloc ; P}
      \Rtab \mbox{(ST-Malloc)}
 $$
-
 $$
      \frac{\Theta;\Gamma; C_{1} \vdash y \Rtab \Theta;\Gamma, x ; C_{2} \vdash s : P_{1} \Rtab C = C_{1}\cup C_{2} \cup \{P_{1} \le P \}}
      {\Theta;\Gamma ; C \vdash \LET x = y \;  \IN s : P}
      \Rtab \mbox{(ST-LetEq)}
 $$
-
 $$
      \frac{\Theta;\Gamma ; C_{1} \vdash y: \mathbf{Ref} \Rtab \Theta;\Gamma, x ; C_{2} \vdash s : P_{1} \Rtab C = C_{1}\cup C_{2}\cup\{P_{1} \le P\}}
      {\Theta;\Gamma ; C \vdash \LET x = *y \; \IN s : P}
      \Rtab \mbox{(ST-LetDref)}
 $$
-
-
 $$
      \frac{\Theta;\Gamma; C_{1} \vdash x \Rtab \Theta;\Gamma; C_{2} \vdash s_{1} : P_{1} \Rtab \Theta;\Gamma; C_{3} \vdash s_{2} : P_{2}  \Rtab  C = C_{1} \cup C_{2} \cup C_{3} \{P_{1}\le P, P_{2}\le P \}}
      {\Theta;\Gamma; C \vdash \IFNULL\Cirx \THEN s_{1} \ELSE s_{2} : P }
-     \Rtab \mbox{(ST-IfNull)}
+    \; \;  \mbox{(ST-IfNull)}
 $$
-
 $$
      \frac{\Theta(f) = P_{1} \Rtab C = P_{1} \le P}
      {\Gamma,\vec{x}:\vec{\tau} \vdash f(\vec{x}) : P }
      \Rtab \mbox{(ST-Call)}
 $$
-
 $$
      \frac{\Theta \vdash D : \Theta \Rtab \Theta ; \emptyset ; C_{1} \vdash s : P \Rtab C = C_{1}\cup\{OK_{n}(P)\}}
      {C \vdash (D , s) }
@@ -468,67 +455,58 @@ $PT_{\Theta}$ is a mapping from statements to a pair of constraints and types wi
 \begin{flalign*}
    PT_{\Theta}(f) &  =  &\\
   \LET & \alpha = \Theta(f) & \\
-  \IN  & (C = \{\alpha \le \beta \}, \beta) &
-\end{flalign*}
-
+  \IN   & (C = \{\alpha \le \beta \}, \beta) &
+\end{flalign*} \noindent
 \begin{flalign*}
    PT_{\Theta}(\SKIP) &  =  (\emptyset, 0)&
 \end{flalign*}
-
 \begin{flalign*}
-   PT_{\Theta}(s_{1};s_{2}) &  =  &\\
+   PT_{\Theta}(s_{1}&;s_{2})  =  &\\
    \LET & (C_{1}, P_{1}) = PT_{\Theta}(s_{1}) & \\
-        & (C_{2}, P_{2}) = PT_{\Theta}(s_{2}) & \\
+          & (C_{2}, P_{2}) = PT_{\Theta}(s_{2}) & \\
    \IN   &(C_{1} \cup C_{2}\cup \{P_{1}; P_{2} \le \beta \}, \beta) &
 \end{flalign*}
-
 \begin{flalign*}
    PT_{\Theta}(*x \leftarrow y) &  =  &\\
    \LET & (C_{1}, \emptyset) = PT_{v}(*x) & \\
-        & (C_{2}, \emptyset) = PT_{v}(y) & \\
-  \IN &(C_{1} \cup C_{2},  0) &
+          & (C_{2}, \emptyset) = PT_{v}(y) & \\
+   \IN    &(C_{1} \cup C_{2},  0) &
 \end{flalign*}
-
 \begin{flalign*}
    PT_{\Theta}(\Free(x)) &  = (\emptyset, \Free; 0)  &
 \end{flalign*}
-
 \begin{flalign*}
-   PT_{\Theta}(\LET x = \Malloc() \  \IN s) &  =  &\\
-   \LET  (C_{1}, P_{1})& = PT_{v}(s) & \\
-   \IN (C_{1} \cup \{P_{1}& \le \beta \} ,  \Malloc; \beta) &
+   PT_{\Theta}(\LET x& = \Malloc() \  \IN s)  =  &\\
+   \LET & (C_{1}, P_{1}) = PT_{v}(s) & \\
+   \IN   & (C_{1} \cup \{P_{1} \le \beta \} ,  \Malloc; \beta) &
 \end{flalign*}
-
 \begin{flalign*}
-   PT_{\Theta}(\LET x = y \  \IN s ) &  =  &\\
+   PT_{\Theta}(\LET x& = y \  \IN s )  =  &\\
    \LET & (C_{1}, \emptyset) = PT_{v}(y) & \\
-  & (C_{2}, P_{1}) = PT_{\Theta}(s) & \\
-  \IN &(C_{1} \cup C_{2}\cup \{P_{1} \le \beta \},  \beta) &
+          & (C_{2}, P_{1}) = PT_{\Theta}(s) & \\
+   \IN   &(C_{1} \cup C_{2}\cup \{P_{1} \le \beta \},  \beta) &
 \end{flalign*}
-
 \begin{flalign*}
-   PT_{\Theta}(\LET x = *y \  \IN s ) &  =  &\\
+   PT_{\Theta}(\LET x& = *y \  \IN s )  =  &\\
    \LET & (C_{1}, \emptyset) = PT_{v}(y) & \\
-        & (C_{2}, P_{1}) = PT_{\Theta}(s) & \\
-  \IN &(C_{1} \cup C_{2}\cup \{P_{1} \le \beta \},  \beta) &
+          & (C_{2}, P_{1}) = PT_{\Theta}(s) & \\
+   \IN   &(C_{1} \cup C_{2}\cup \{P_{1} \le \beta \},  \beta) &
 \end{flalign*}
-
 \begin{flalign*}
-   PT_{\Theta}(\IFNULL(x) \  \THEN  s_{1} \  \ELSE \ s_{2} ) &  =  &\\
+   PT_{\Theta}(\IFNULL(x)& \  \THEN  s_{1} \  \ELSE \ s_{2} )  =  &\\
    \LET & (C_{1}, P_{1}) = PT_{\Theta}(s_{1}) & \\
-        & (C_{2}, P_{2}) = PT_{\Theta}(s_{2}) & \\
-        & (C_{3}, \emptyset) = PT_{v}(x) & \\
-  \IN &(C_{1} \cup C_{2}\cup C_{3}\cup \{P_{1} \le \beta, P_{2} \le \beta \},  \beta) &
+          & (C_{2}, P_{2}) = PT_{\Theta}(s_{2}) & \\
+          & (C_{3}, \emptyset) = PT_{v}(x) & \\
+   \IN   &(C_{1} \cup C_{2}\cup C_{3}\cup \{P_{1} \le \beta, P_{2} \le \beta \},  \beta) &
 \end{flalign*}
-
 \begin{flalign*}
    PT(<D, s>) &  =  &\\
    \LET & \Theta = \{ f_{1}:\alpha_{1}, \dots, f_{n}:\alpha_{n}  \} &\\
-        & where \ \{ f_{1},\dots, f_{n} \} = dom(D) \ and \ \alpha_{1}, \dots, \alpha_{n} \  are \ fresh  & \\
+          & where \ \{ f_{1},\dots, f_{n} \} = dom(D) \ and \ \alpha_{1}, \dots, \alpha_{n} \  are \ fresh  & \\
   \IN   & \LET  (C_{i}, P_{i}) = PT_{\Theta}(D(f_{i})) \  for \  each \ i & \\
   \IN   & \LET  C_{i}^{'} = \{ \alpha_{i} \le P_{i} \} \ for \  each \ i & \\
   \IN   & \LET  (C, P) = PT_{\Theta}(s)  & \\
-  \IN  &(C_{i} \cup C_{i}^{'} ) \cup C \cup  \{OK(P)\},  P) &
+  \IN   &(C_{i} \cup C_{i}^{'} ) \cup C \cup  \{OK(P)\},  P) &
 \end{flalign*}
 
 \bibliographystyle{IEEEtran}

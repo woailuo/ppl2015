@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  4 DEC 2014 15:46
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  4 DEC 2014 16:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -220,46 +220,69 @@ Overfull \hbox (53.57794pt too wide) detected at line 157
  []
 
 [4] [5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 401--402
+Overfull \hbox (7.01558pt too wide) in paragraph at lines 379--385
+\OT1/cmr/bx/n/10.95 Lemma 4.2 \OT1/cmr/m/n/10.95 (Preser-va-tion $\OT1/cmr/bx/n
+/10.95 I$\OT1/cmr/m/n/10.95 )\OT1/cmr/bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML
+/cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95
+ )$\OT1/cmr/m/it/10.95 , $\OT1/cmr/m/n/10.95 ^^B; ^^@ \OMS/cmsy/m/n/10.95 ` \OM
+L/cmm/m/it/10.95 s \OT1/cmr/m/n/10.95 : \OML/cmm/m/it/10.95 P$ \OT1/cmr/m/it/10
+.95 and $\OMS/cmsy/m/n/10.95 h\OML/cmm/m/it/10.95 H; R; s; n\OMS/cmsy/m/n/10.95
+ i [] h\OML/cmm/m/it/10.95 H[]; R[]; s[]; n[]\OMS/cmsy/m/n/10.95 i$\OT1/cmr/m/i
+t/10.95 ,
+ []
+
+
+Overfull \hbox (5.44884pt too wide) in paragraph at lines 387--393
+\OT1/cmr/bx/n/10.95 Lemma 4.3 \OT1/cmr/m/n/10.95 (Preser-va-tion $[]$)\OT1/cmr/
+bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML/cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95
+ (\OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95 )$\OT1/cmr/m/it/10.95 , $\OT1/cmr/m/n
+/10.95 ^^B; ^^@ \OMS/cmsy/m/n/10.95 ` \OML/cmm/m/it/10.95 s \OT1/cmr/m/n/10.95 
+: \OML/cmm/m/it/10.95 P$ \OT1/cmr/m/it/10.95 and $\OMS/cmsy/m/n/10.95 h\OML/cmm
+/m/it/10.95 H; R; s; n\OMS/cmsy/m/n/10.95 i ! h\OML/cmm/m/it/10.95 H[]; R[]; s[
+]; n[]\OMS/cmsy/m/n/10.95 i$\OT1/cmr/m/it/10.95 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 399--400
 
  []
 
 [7]
-Overfull \hbox (75.5513pt too wide) detected at line 451
-[]    []
+Overfull \hbox (69.46808pt too wide) detected at line 440
+[]  []
  []
 
-[8] [9] (./template.bbl
+[8] (./template.bbl
 Underfull \hbox (badness 2717) in paragraph at lines 36--39
 []\OT1/cmr/m/n/10 Y. Xie and A. Aiken, ``Context- and path-sensitive mem-ory le
 ak de-tec-tion,'' in
  []
 
-) [10] (./template.aux) ) 
+[9]) [10] (./template.aux) ) 
 Here is how much of TeX's memory you used:
  1866 strings out of 493315
  23384 string characters out of 6137910
- 92428 words of memory out of 5000000
+ 91428 words of memory out of 5000000
  5313 multiletter control sequences out of 15000+600000
  13856 words of font info for 51 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 27i,12n,26p,1570b,200s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2013/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmbx12.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmbx8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmmi10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr12.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/c
-msy10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-sy6.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
-8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10
-.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.
-pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/symbols/msb
-m10.pfb>
-Output written on template.pdf (10 pages, 187950 bytes).
+ 27i,12n,26p,1570b,256s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2013/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmmi10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmi8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr12.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy6.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/c
+msy8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
+i10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt
+10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/symbols/
+msbm10.pfb>
+Output written on template.pdf (10 pages, 187729 bytes).
 PDF statistics:
  93 PDF objects out of 1000 (max. 8388607)
  66 compressed objects within 1 object stream
