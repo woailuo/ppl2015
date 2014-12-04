@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  4 DEC 2014 21:16
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  4 DEC 2014 22:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -204,23 +204,23 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [1
 
 {/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \vbox (badness 2435) has occurred while \output is active []
+Underfull \vbox (badness 1708) has occurred while \output is active []
 
  [2]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 93.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 95.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 93.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 95.
  [3]
-Overfull \hbox (53.57794pt too wide) detected at line 155
+Overfull \hbox (53.57794pt too wide) detected at line 157
 []    []
  []
 
 [4] [5] [6]
-Overfull \hbox (7.01558pt too wide) in paragraph at lines 377--383
+Overfull \hbox (7.01558pt too wide) in paragraph at lines 378--384
 \OT1/cmr/bx/n/10.95 Lemma 3.2 \OT1/cmr/m/n/10.95 (Preser-va-tion $\OT1/cmr/bx/n
 /10.95 I$\OT1/cmr/m/n/10.95 )\OT1/cmr/bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML
 /cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95
@@ -232,7 +232,7 @@ t/10.95 ,
  []
 
 
-Overfull \hbox (5.44884pt too wide) in paragraph at lines 385--391
+Overfull \hbox (5.44884pt too wide) in paragraph at lines 386--392
 \OT1/cmr/bx/n/10.95 Lemma 3.3 \OT1/cmr/m/n/10.95 (Preser-va-tion $[]$)\OT1/cmr/
 bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML/cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95
  (\OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95 )$\OT1/cmr/m/it/10.95 , $\OT1/cmr/m/n
@@ -261,7 +261,7 @@ Here is how much of TeX's memory you used:
  5314 multiletter control sequences out of 15000+600000
  13856 words of font info for 51 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 27i,12n,26p,1570b,200s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,12n,26p,1582b,200s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2013/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmbx10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmbx12.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/a
@@ -277,7 +277,7 @@ sy6.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 .pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.
 pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/symbols/msb
 m10.pfb>
-Output written on template.pdf (10 pages, 189366 bytes).
+Output written on template.pdf (10 pages, 189463 bytes).
 PDF statistics:
  93 PDF objects out of 1000 (max. 8388607)
  66 compressed objects within 1 object stream
