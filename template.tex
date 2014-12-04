@@ -45,7 +45,7 @@ $^2$ \\
 \begin{document}
 \maketitle
 \begin{abstract}
-We propose a type system to prevent programs infinitely consuming memory cells. The main idea is based on the previous type system that augments pointer types with fractional ownerships~\cite{DBLP:conf/aplas/SuenagaK09} and behavioral type system that abstracts the behavior of programs. Thanks to the previous type system, we can focus on the behavioral types in order to count the upper bound of the consumed memory cells soundly.
+We propose a type system to prevent programs infinitely consuming memory cells. The main idea is based on the previous type system that augments pointer types with fractional ownerships~\cite{DBLP:conf/aplas/SuenagaK09} and behavioral type system that abstracts the behavior of programs. Thanks to the previous type system, we can focus on the behavioral types to count the upper bound of the consumed memory cells soundly.
 \end{abstract}
 
 \section{Introduction}
@@ -283,8 +283,24 @@ The notation $\rightarrow$ denotes that a behavioral type can be reduced by the 
 % Type Judgments
 \subsection{Typing Rules}
 The type judgement of our type system is given by the form $\Theta ; \Gamma \vdash s : P$, where $\Theta$ is a mapping from function varibles to function types, $\Gamma$ is a type environment that denotes a mapping from variables to value types.
-It reads ``the behavior of $s$ is abstracted as $P$ under $\Theta$ and $\Gamma$ environments''. We design the type system so that this type judgement implies the property: when $s$ executes $\Malloc$(resp.$\Free$), then $P$ is equivalent to $\Malloc;P'$(resp.$\Free;P'$) for a type $P'$ such that $\Theta; \Gamma \vdash s': P'$, where $s'$ is the continuation of $s$. This property guarantees that the behavioral type soundly abstracts the upper bound of the consumed memory cells.
-The typing rules are shown as follows.
+It reads ``the behavior of $s$ is abstracted as $P$ under $\Theta$ and $\Gamma$ environments''. We design the type system so that this type judgement implies the property: when $s$ executes $\Malloc$(resp.$\Free$), then $P$ is equivalent to $\Malloc;P'$(resp.$\Free;P'$) for a type $P'$ such that $\Theta; \Gamma \vdash s': P'$, where $s'$ is the continuation of $s$. This property guarantees the behavioral type soundly abstracts the upper bound of the consumed memory cells.
+
+Typing rules are presented in Figure. In the rule for assignment, the behavior of  $*x \leftarrow y$ is $\bf 0$. The rule for $\Free$ represents that the behavior of $\Free \Cirx$ is $\Free$. The rule T-Malloc represents that $\LET x = \MALLOC \; \IN s$ has the behavior $\Malloc;P$, where $P$ is the behavior of statement $s$.
+
+    $P_{1}$ is a subtype of $P_{2}$, which is written as $P_{1} \le P_{2}$, means that: \\
+   (1) if $P_{1} \xlongrightarrow{\alpha}  P_{1}'$ then $\exists P_{2}' $ s.t. $P_{2} \overset{\text{$\alpha$}}{\Longrightarrow} P_{2}'$ and $ P_{1}' \le P_{2}' $ \\
+   (2) if $P_{1} \rightarrow P_{1}'$ then $\exists P_{2}'$ s.t. $P_{2} \xlongrightarrow{\tau}^{*} P_{2}'$ and  $P_{1}' \le P_{2}'$\\
+    where $\overset{\text{$\alpha$}}{\Longrightarrow}$ means that: $\rightarrow^{*} \xlongrightarrow{\alpha} \rightarrow^{*}$ and $\tau$ means internal action.
+$$
+       \frac{\Gamma \vdash s : P \Rtab OK_{n}(P)}{\vdash \langle H,R,s,n
+       \rangle .}
+$$
+  where $dom(H) \cup dom(R) = dom(\Gamma).$
+
+\begin{myDef}
+ $OK_{n}(P) \iff \forall P',\; P \xlongrightarrow{\alpha}^{*}P'$ then $\sharp_{malloc}(\alpha)-\sharp_{free}(\alpha)\le n$.
+\end{myDef}
+
 % Skip type
 $$
          \Theta ; \Gamma \vdash \SKIP : \mathbf{0}
@@ -305,7 +321,7 @@ $$
 % Free(deallocate) type
 $$
      \frac{\Theta ; \Gamma \vdash x : \mathbf{Ref} }
-           {\Theta ; \Gamma \vdash \Free(x) : \Free;0}
+           {\Theta ; \Gamma \vdash \Free(x) : \Free}
      \Rtab \mbox{(T-Free)}
 $$
 % Malloc type
@@ -332,7 +348,13 @@ $$
            {\Theta ; \Gamma \vdash \LET x = \mathbf{null} \; \IN s : P}
      \Rtab \mbox{(T-LetNull)}
 $$
-% ifnull s then s type
+% Subtyping
+$$
+     \frac{\Theta ; \Gamma \vdash s : P_{1} \Rtab P_{1} \le P_{2}}
+            {\Theta ; \Gamma \vdash s : P_{2}}
+     \Rtab \mbox{(T-Sub)}
+$$
+ % ifnull s then s type
 $$
      \frac{\Theta ; \Gamma \vdash x : \mathbf{Ref}   \ \ \ \  \Theta ; \Gamma \vdash s_{1} : P \ \ \ \ \Theta ; \Gamma \vdash s_{1} : P}
            {\Theta ; \Gamma \vdash \IFNULL(x) \; \THEN s_{1}\; \ELSE s_{2} : P}
@@ -346,12 +368,7 @@ $$ \frac{ \Theta(f) = P}
 $$\frac{\vdash D : \Theta \;\;\;\; \Theta; \emptyset\vdash s : P \Rtab OK_{n}(P)}
 {\vdash (D, s)}
 \Rtab \mbox{(T-Program)} $$
-% Subtyping
-$$
-     \frac{\Theta ; \Gamma \vdash s : P_{1} \Rtab P_{1} \le P_{2}}
-            {\Theta ; \Gamma \vdash s : P_{2}}
-     \Rtab \mbox{(T-Sub)}
-$$
+
 \section{Type Soundness}
 \begin{theorem}\label{thm1}
 If $\vdash (D, s)$ then $(D, s)$ does not lead to $memory\;leak$.\\
