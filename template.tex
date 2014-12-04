@@ -395,7 +395,7 @@ If $OK_{n}(P)$, $\Theta ; \Gamma \vdash s : P$ and $\langle H,R,s,n \rangle
  The partial correctness is guaranteed $\vdash \langle H,R,s \rangle$ , so that if $\vdash \langle H,R,s,n \rangle$, then $\vdash \langle H',R',s',n' \rangle \nrightarrow Error$
 \end{lemma}
 
-\section{Syntax Directed Typing Rules}
+\section{Type Inference}
 $C$ is contraint for subtype. \\
 $$
      \frac{ C = \emptyset}
@@ -449,7 +449,6 @@ $$
      \Rtab \mbox{(ST-Prog)}
 $$
 
-\section{Type Inference}
 $PT_{v}(x) = (\emptyset,\emptyset)$, where $x$ maybe a value or reference.\\
 $PT_{\Theta}$ is a mapping from statements to a pair of constraints and types with function $\Theta$ from function names to function types, like $\Theta(f) = P$.
 \begin{flalign*}
