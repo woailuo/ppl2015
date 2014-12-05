@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  5 DEC 2014 11:02
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  5 DEC 2014 17:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -204,23 +204,29 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [1
 
 {/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \vbox (badness 1708) has occurred while \output is active []
-
- [2]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 95.
-
-(/usr/local/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd
+[2]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 93.
+ (/usr/local/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 95.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 93.
  [3]
-Overfull \hbox (53.57794pt too wide) detected at line 157
+Overfull \hbox (53.57794pt too wide) detected at line 155
 []    []
  []
 
+! Extra }, or forgotten $.
+l.234 ... 3.} \;\;  \mbox{ Operational Semantics}}
+                                                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
 [4] [5] [6]
-Overfull \hbox (7.01558pt too wide) in paragraph at lines 378--384
+Overfull \hbox (7.01558pt too wide) in paragraph at lines 383--389
 \OT1/cmr/bx/n/10.95 Lemma 3.2 \OT1/cmr/m/n/10.95 (Preser-va-tion $\OT1/cmr/bx/n
 /10.95 I$\OT1/cmr/m/n/10.95 )\OT1/cmr/bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML
 /cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95
@@ -232,7 +238,7 @@ t/10.95 ,
  []
 
 
-Overfull \hbox (5.44884pt too wide) in paragraph at lines 386--392
+Overfull \hbox (5.44884pt too wide) in paragraph at lines 391--397
 \OT1/cmr/bx/n/10.95 Lemma 3.3 \OT1/cmr/m/n/10.95 (Preser-va-tion $[]$)\OT1/cmr/
 bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML/cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95
  (\OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95 )$\OT1/cmr/m/it/10.95 , $\OT1/cmr/m/n
@@ -243,12 +249,12 @@ bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML/cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95
  []
 
 [7]
-Overfull \hbox (69.46808pt too wide) detected at line 444
+Overfull \hbox (69.46808pt too wide) detected at line 449
 []  []
  []
 
 [8] [9] (./ppl2015-tanki.bbl
-Overfull \hbox (4.87306pt too wide) in paragraph at lines 519--2
+Overfull \hbox (4.87306pt too wide) in paragraph at lines 528--2
 \OT1/cmr/m/n/10.95 We have de-scribed a type-based ap-proach to safe mem-ory de
 al-lo-ca-tion for non-terminating
  []
@@ -263,11 +269,11 @@ ak de-tec-tion,'' in
 Here is how much of TeX's memory you used:
  1867 strings out of 493315
  23452 string characters out of 6137910
- 95431 words of memory out of 5000000
+ 92431 words of memory out of 5000000
  5314 multiletter control sequences out of 15000+600000
  13856 words of font info for 51 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 27i,12n,26p,1587b,258s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,12n,26p,1593b,256s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2013/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1
@@ -283,7 +289,7 @@ s/cm/cmsy8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmti10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmtt10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/sy
 mbols/msbm10.pfb>
-Output written on ppl2015-tanki.pdf (11 pages, 190688 bytes).
+Output written on ppl2015-tanki.pdf (11 pages, 191095 bytes).
 PDF statistics:
  96 PDF objects out of 1000 (max. 8388607)
  68 compressed objects within 1 object stream
