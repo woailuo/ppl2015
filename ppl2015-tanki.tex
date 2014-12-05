@@ -453,9 +453,11 @@ $$
      \Rtab \mbox{(ST-Program)}
 $$
 \subsection{Algorithm}
-By syntax directed typing rules, the type inference algorithm is presented as follows.
-$PT_{v}(x) = (\emptyset,\emptyset)$, where $x$ maybe a value or reference.\\
-$PT_{\Theta}$ is a mapping from statements to a pair of constraints and types with function $\Theta$ from function names to function types, like $\Theta(f) = P$.
+By syntax directed typing rules, the type inference algorithm has been designed as follows.
+
+Function $PT_{v}(x) = (\emptyset,\emptyset)$ denotes that it receives a pointer variable $x$ and outputs a pair consisting of empty set only. $PT_{\Theta}(s) = (C, P)$ is a mapping from statements to a pair of constraints set $C$ and behavioral types $P$, where $\Theta$ is mapping from function names to function types. $PT(<D,s>) = (C, P)$ denotes that it receives a program and returns a pair $(C, P)$.
+
+
 \begin{flalign*}
    PT_{\Theta}(f) &  =  &\\
   \LET & \alpha = \Theta(f) & \\

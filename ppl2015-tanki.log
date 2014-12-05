@@ -1,13 +1,9 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.6)  5 DEC 2014 09:49
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  5 DEC 2014 10:33
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
-**ppl2015-tanki.tex
-(./ppl2015-tanki.tex
-LaTeX2e <2011/06/27>
-Babel <3.9f> and hyphenation patterns for 78 languages loaded.
-(./jssst_ppl.cls
+**\nonstopmode\input ppl2015-tanki.tex
+(./ppl2015-tanki.tex (./jssst_ppl.cls
 Document Class: jssst_ppl 2010/11/19 Kiminori MATSUZAKI
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
@@ -252,7 +248,7 @@ Overfull \hbox (69.46808pt too wide) detected at line 444
  []
 
 [8] [9] (./ppl2015-tanki.bbl
-Overfull \hbox (4.87306pt too wide) in paragraph at lines 516--2
+Overfull \hbox (4.87306pt too wide) in paragraph at lines 518--2
 \OT1/cmr/m/n/10.95 We have de-scribed a type-based ap-proach to safe mem-ory de
 al-lo-ca-tion for non-terminating
  []
@@ -266,12 +262,12 @@ ak de-tec-tion,'' in
 ) [10] (./ppl2015-tanki.aux) ) 
 Here is how much of TeX's memory you used:
  1867 strings out of 493315
- 23452 string characters out of 6137905
- 93431 words of memory out of 5000000
+ 23452 string characters out of 6137910
+ 94431 words of memory out of 5000000
  5314 multiletter control sequences out of 15000+600000
  13856 words of font info for 51 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 27i,12n,26p,1568b,200s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,12n,26p,1587b,200s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2013/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/pub
@@ -287,7 +283,7 @@ cm/cmsy6.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm
 mti10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 tt10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/symbol
 s/msbm10.pfb>
-Output written on ppl2015-tanki.pdf (10 pages, 189963 bytes).
+Output written on ppl2015-tanki.pdf (10 pages, 190075 bytes).
 PDF statistics:
  93 PDF objects out of 1000 (max. 8388607)
  66 compressed objects within 1 object stream
