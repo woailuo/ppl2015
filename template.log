@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  4 DEC 2014 22:15
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  5 DEC 2014 09:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -248,6 +248,12 @@ Overfull \hbox (69.46808pt too wide) detected at line 445
  []
 
 [8] [9] (./template.bbl
+Overfull \hbox (4.87306pt too wide) in paragraph at lines 517--2
+\OT1/cmr/m/n/10.95 We have de-scribed a type-based ap-proach to safe mem-ory de
+al-lo-ca-tion for non-terminating
+ []
+
+
 Underfull \hbox (badness 2717) in paragraph at lines 36--39
 []\OT1/cmr/m/n/10 Y. Xie and A. Aiken, ``Context- and path-sensitive mem-ory le
 ak de-tec-tion,'' in
@@ -277,7 +283,7 @@ sy6.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 .pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.
 pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/symbols/msb
 m10.pfb>
-Output written on template.pdf (10 pages, 189463 bytes).
+Output written on template.pdf (10 pages, 189963 bytes).
 PDF statistics:
  93 PDF objects out of 1000 (max. 8388607)
  66 compressed objects within 1 object stream

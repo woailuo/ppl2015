@@ -406,7 +406,7 @@ $$
      \frac{ C = \emptyset}
            {\Theta; \Gamma; C \vdash \SKIP : \mathbf{0}
              }
-      \Rtab \mbox{(ST-Skip)}
+      \rtab \mbox{(ST-Skip)}
 $$
 $$
       \frac{\Theta;\Gamma ; C_{1} \vdash s_{1} : P_{1} \Rtab \Theta; \Gamma ; C_{2} \vdash s_{2} : P_{2} \Rtab C = C_{1}\cup C_{2} \cup \{ P_{1};P_{2} \le P\}}
@@ -514,7 +514,7 @@ $PT_{\Theta}$ is a mapping from statements to a pair of constraints and types wi
   \IN   &(C_{i} \cup C_{i}^{'} ) \cup C \cup  \{OK(P)\},  P) &
 \end{flalign*}
 \section{Future Work}
-
+We have described a type-based approach to safe memory deallocation for non-terminating programs. The approach is based on the idea of decomposing safe memory memory deallocation into partial correctness, which is verified by previous type system, and behavioral correctness. We designed a behavioral type system in our paper for verification of behavioral correctness. Currently, we are looking for a model checker to estimate an upper bound of cousumption given a behavioral type and planning to implement a verifer and conduct experiment to see whether our approach is feasible.
 \bibliographystyle{IEEEtran}
 \bibliography{tan}
 
