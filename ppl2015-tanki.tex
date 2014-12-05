@@ -404,9 +404,8 @@ Syntax directed typing rules are listed in Figure.
 
 $$
      \frac{ C = \emptyset}
-           {\Theta; \Gamma; C \vdash \SKIP : \mathbf{0}
-             }
-      \rtab \mbox{(ST-Skip)}
+           {\Theta; \Gamma; C \vdash \SKIP : \mathbf{0}}
+      \Rtab \mbox{(ST-Skip)}
 $$
 $$
       \frac{\Theta;\Gamma ; C_{1} \vdash s_{1} : P_{1} \Rtab \Theta; \Gamma ; C_{2} \vdash s_{2} : P_{2} \Rtab C = C_{1}\cup C_{2} \cup \{ P_{1};P_{2} \le P\}}
