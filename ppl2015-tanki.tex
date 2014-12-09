@@ -51,19 +51,23 @@ We propose an approach to guarantee safe memory deallocation for non-terminating
 \section{Introduction}
 Manual memory management primitives (e.g., {\tt malloc} and {\tt free} in C) often cause serious problems such as double frees, memory leaks, and illegal read/write to a deallocated memory cell. Verifying \emph{safe memory deallocation} -- a program not leading to such an unsafe state -- is an important problem.
 
-Most of safe memory deallocation verification techniques proposed so far \cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06} focus on the \emph{partial correctness}: if a program terminates, the program satisfies safe memory dealloction. For example, the type system by Suenaga and Kobayashi \cite{DBLP:conf/aplas/SuenagaK09}, which is called previous type system in our paper, guarrantees that (1) a well-typed program does not perform read/write/free operations to any deallocated memory cell and that (2) after execution of a well-typed program, all the memory cells are deallocated. We do not want to describe the previous type system in details, but we should notice that it guarantees partial correctness and does not say anything about non-terminationg programs. The function $g$ shown in Figure 1 describe this situation. It executes like that allocating a memory cell, calling it self again and then deallocating the allocated memory cell. By previous type system, funcition $g$ has been guaranteed partial correctness, because after execution of function $g$ the allocated memory cell is deallocated and no double frees. However, It is a non-terminating program that
+Most of safe memory deallocation verification techniques proposed so far \cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06} focus on the \emph{partial correctness}: if a program terminates, the program satisfies safe memory dealloction. For example, the type system by Suenaga and Kobayashi \cite{DBLP:conf/aplas/SuenagaK09}, which is called previous type system in our paper, guarrantees that (1) a well-typed program does not perform read/write/free operations to any deallocated memory cell and that (2) after execution of a well-typed program, all the memory cells are deallocated. We do not want to describe the previous type system in details, but we should notice that it guarantees partial correctness and does not say anything about non-terminationg programs. The function $g$ shown in Figure 1 describe this situation. It executes like that allocating a memory cell, calling it self again and then deallocating the allocated memory cell. By previous type system, funcition $g$ has been guaranteed partial correctness, because at the end of function $g$ the allocated memory cell is deallocated and there is no double frees. However, It is a non-terminating program and infinitely allocates a memory cell, which causes a dangerous situation -- memory leaks.
 
-Currently, we are investigating safe memory deallocation for non-terminating programs, because the safe memory deallocation is very important in real world programs such as Web servers and operating systems.
+A program \emph{leaks} memory if the program consumes unbounded number of memory cells. For example, function $g$ in Figure \ref{example:pam} leaks memory, whereas funcition $f$does; the former consumes unbounded number of memory cells but the latter consumes at most one memory cell at once. Notice that these two programs are all partially corrected by the previous type system, because they do not terminate.
 
-The main idea of our approach is to decompose this problem into two subproblems: (1) partial correctness and (2) \emph{behavioral correctness}. Partial correctness means that if a program termintates, the program satisfies safe memory deallocation. Behavioral correctness means a program does not \emph{leak} memory . The former is verified based on the previous type system \cite{DBLP:conf/aplas/SuenagaK09}, whereas the latter based on the behavioral type system that is mainly used to abstact the behavior of a program. Behavioral types are heavily used in the context of concurrent program verification \cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}.
 \begin{figure}[h]
-1 \;\; $f(x)$= \dtb\dtb \dtb \dtb$g(x)$= \\
-2 \;\; $\LET \; x = \MALLOC  \; \IN$ \dtb \dtb\;$\LET \; x = \MALLOC  \; \IN$\\
-3 \;\; $\Free\Cirx$; \; $f(x)$\dtb\dtb\dtb\;$g(x)$; \; $\Free\Cirx$
-\caption{Explanation for memory leak.}
-\label{example:memoryLeak}
+1 \;\; $g(x)$= \dtb\dtb\Rtab$f(x)$=  \\
+2 \;\; $\LET \; x = \MALLOC  \; \IN$  \dtb\dtb\Rtab$\LET \; x = \MALLOC  \; \IN$\\
+3 \;\; $g(x)$ ; \; $\Free\Cirx$ \dtb\dtb\Rtab$\Free\Cirx$; \; $f(x)$
+\caption{Explanation for partial correctness and memory leak}
+\label{example:pam}
 \end{figure}
-A program \emph{leaks} memory if the program consumes unbounded number of memory cells. For example, the left-hand side program in Figure \ref{example:memoryLeak} does not leak memory, whereas the right-hand side does; the former consumes at most one memory cell at once but the latter consumes unbounded number of memory cells. Notice that these two programs are all partially corrected by the previous type system, because they do not terminate.
+
+In the real world programs, non-terminating programs such as Web servers and opertating systems are very important. To guarantee safe memory deallocation for non-terminating programs has great practical significance.
+
+The key idea of our approach is to decompose this problem into two subproblems: (1) partial correctness and (2) \emph{behavioral correctness}. The behavioral correctness means a program does not \emph{leak} memory. It is verified by behavioral type system which is mainly used to abstact the behavior of a program. Behavioral types are heavily used in the context of concurrent program verification \cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}. The main procedure to guarantee safe memory deallocation for non-terminating programs is that first checking the partial correctness by previous type system and then verifing memory-leak freedom by behavioral type system.
+
+
 \begin{figure}[h]
 1\dtb \dtb \;\; $h(x)$=\\
 2\dtb \dtb\;\; $\LET \; x = \MALLOC  \; \IN$\\
