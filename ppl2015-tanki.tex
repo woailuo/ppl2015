@@ -51,11 +51,19 @@ We propose an approach to guarantee safe memory deallocation for non-terminating
 \section{Introduction}
 Manual memory management primitives (e.g., {\tt malloc} and {\tt free} in C) often cause serious problems such as double frees, memory leaks, and illegal read/write to a deallocated memory cell. Verifying \emph{safe memory deallocation} -- a program not leading to such an unsafe state -- is an important problem.
 
-Most of safe memory deallocation verification techniques proposed so far \cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06} focus on the memory leak for \emph{terminating} programs: if a program terminates, the program satisfies safe memory dealloction. For example, the type system by Suenaga and Kobayashi \cite{DBLP:conf/aplas/SuenagaK09} guarrantees that (1) a well-typed program does not perform read/write/free operations to any deallocated memory cell and that (2) after execution of a well-typed program, all the memory cells are deallocated.
+Most of safe memory deallocation verification techniques proposed so far \cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06} focus on the \emph{partial correctness}: if a program terminates, the program satisfies safe memory dealloction. For example, the type system by Suenaga and Kobayashi \cite{DBLP:conf/aplas/SuenagaK09} guarrantees that (1) a well-typed program does not perform read/write/free operations to any deallocated memory cell and that (2) after execution of a well-typed program, all the memory cells are deallocated. The function $g$ shown in Figure 1 describe this situation.
+\begin{figure}[h]
+1\dtb $g(x)$= \\
+2\dtb \Rtab $\LET \; x = \MALLOC  \; \IN$\\
+3\dtb  \Rtab $g(x)$; \\
+4\dtb   \Rtab $\Free\Cirx$
+\caption{}
+\label{example:parital}
+\end{figure}
 
 Currently, we are investigating safe memory deallocation for non-terminating programs, because the safe memory deallocation is very important in real world programs such as Web servers and operating systems.
 
-The main idea of our approach is to decompose this problem into two subproblems: (1) partial correctness and (2) \emph{behavioral correctness}. Partial correctness means that if a program termintates, the program satisfies safe memory deallocation. Behavioral correctness means a program does not \emph{leak} memory . The former is verified based on the previous type system \cite{DBLP:conf/aplas/SuenagaK09}, whereas the latter based on the behavioral type system that is mainly used to abstact the behavior of a program. Behavioral types are heavily used in the contex of concurrent program verification \cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}.
+The main idea of our approach is to decompose this problem into two subproblems: (1) partial correctness and (2) \emph{behavioral correctness}. Partial correctness means that if a program termintates, the program satisfies safe memory deallocation. Behavioral correctness means a program does not \emph{leak} memory . The former is verified based on the previous type system \cite{DBLP:conf/aplas/SuenagaK09}, whereas the latter based on the behavioral type system that is mainly used to abstact the behavior of a program. Behavioral types are heavily used in the context of concurrent program verification \cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}.
 \begin{figure}[h]
 1 \;\; $f(x)$= \dtb\dtb \dtb \dtb$g(x)$= \\
 2 \;\; $\LET \; x = \MALLOC  \; \IN$ \dtb \dtb\;$\LET \; x = \MALLOC  \; \IN$\\
@@ -528,5 +536,10 @@ $$
 We have described a type-based approach to safe memory deallocation for non-terminating programs. The approach is based on the idea of decomposing safe memory memory deallocation into partial correctness, which is verified by previous type system, and behavioral correctness. We designed a behavioral type system in our paper for verification of behavioral correctness. Currently, we are looking for a model checker to estimate an upper bound of cousumption given a behavioral type and planning to implement a verifer and conduct experiment to see whether our approach is feasible.
 \bibliographystyle{IEEEtran}
 \bibliography{tan}
+
+
+\appendix
+\section{Appendix}
+
 
 \end{document}
