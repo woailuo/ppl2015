@@ -51,15 +51,17 @@ We propose an approach to guarantee safe memory deallocation for non-terminating
 \section{Introduction}
 Manual memory management primitives (e.g., {\tt malloc} and {\tt free} in C) often cause serious problems such as double frees, memory leaks, and illegal read/write to a deallocated memory cell. Verifying \emph{safe memory deallocation} -- a program not leading to such an unsafe state -- is an important problem.
 
-Most of safe memory deallocation verification techniques proposed so far \cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06} focus on the \emph{partial correctness}: if a program terminates, the program satisfies safe memory dealloction. For example, the type system by Suenaga and Kobayashi \cite{DBLP:conf/aplas/SuenagaK09} guarrantees that (1) a well-typed program does not perform read/write/free operations to any deallocated memory cell and that (2) after execution of a well-typed program, all the memory cells are deallocated. The function $g$ shown in Figure 1 describe this situation.
+Most of safe memory deallocation verification techniques proposed so far \cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06} focus on the \emph{partial correctness}: if a program terminates, the program satisfies safe memory dealloction. For example, the type system by Suenaga and Kobayashi \cite{DBLP:conf/aplas/SuenagaK09}, which is called previous type system in our paper, guarrantees that (1) a well-typed program does not perform read/write/free operations to any deallocated memory cell and that (2) after execution of a well-typed program, all the memory cells are deallocated. But, it does not say anything about the non-terminating programs. The function $g$ shown in Figure 1 describe this situation. We do not want to describe the previous type system in details, though we should know that it augments the pointer type constructor with fractional ownships, which range over rational numbers [0, 1] and denotes permission/obligation to pointers.
 \begin{figure}[h]
-1\dtb $g(x)$= \\
-2\dtb \Rtab $\LET \; x = \MALLOC  \; \IN$\\
-3\dtb  \Rtab $g(x)$; \\
-4\dtb   \Rtab $\Free\Cirx$
-\caption{}
+1\dtb $g(x_{1})$= \dtb\dtb\dtb\dtb\;\; $g(x)$: \mathbf{Ref}_{f}\rightarrow \mathbf{Ref}_{f}\\
+2\dtb \Rtab $\LET \; x = \MALLOC  \; \IN$\dtb\dtb\;x_{1}:\mathbf{Ref}_{f},\; x: \mathbf{Ref}_{1}\\
+3\dtb  \Rtab $g(x)$; \dtb\dtb\dtb\dtb\;\; y:\mathbf{Ref}_{f}, \; x: \mathbf{Ref}_{1}   \\
+4\dtb   \Rtab $\Free\Cirx$ %\dtb\dtb\dtb\dtb y: \mathbf{Ref}_{f}, \;x : \mathbf{Ref}_{0}
+\caption{Explanation for parital correctness}
 \label{example:parital}
 \end{figure}
+
+
 
 Currently, we are investigating safe memory deallocation for non-terminating programs, because the safe memory deallocation is very important in real world programs such as Web servers and operating systems.
 
