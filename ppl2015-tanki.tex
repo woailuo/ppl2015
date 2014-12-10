@@ -535,9 +535,350 @@ We have described a type-based approach to safe memory deallocation for non-term
 \bibliographystyle{IEEEtran}
 \bibliography{tan}
 
-
 \appendix
 \section{Appendix}
+\section{Proof of Lemma Preservation}
+By induction on the derivation of evaluation rules.\\
+ \begin{enumerate}
+
+\item case $\langle H, R, \FREE, n \rangle \xlongrightarrow{\Free} \langle H', R', \SKIP, n + 1 \rangle $. \\
+From the assumption, we have known that:
+\setcounter{equation}{0}
+\begin{align}
+  &OK_{n}(P) \label{eq2.1} \\
+  &\Theta; \Gamma \vdash \FREE: P \label{eq2.2}
+\end{align}
+
+By the inversion lemma on \eqref{eq2.2}, we have:
+\begin{align}
+   &\Free \le P& \label{eq2.3}
+\end{align}
+From the definition of subtyping, the \eqref{eq2.3} and $\Free \xlongrightarrow{\Free} 0$, we get:\\
+$\exists P''$ s.t.
+\begin{align}
+  &P \overset{\text{$\Free$}}{\Longrightarrow} P'', \ and & \label{eq2.4}\\
+  &0 \le P''& \label{eq2.5}
+\end{align}
+We need to prove there exists $P'$ and $\Gamma'$ such that: \\
+\begin{align}
+  &\Theta; \Gamma' \vdash \SKIP: P',\  and & \label{eq2.4.5}\\
+  &P \overset{\text{$\Free$}}{\Longrightarrow} P'& \label{eq2.4.6}
+\end{align}
+Take $P''$ as $P'$. \\
+Then \eqref{eq2.4.6} holds. \\
+And by the typing rule T-Skip and \eqref{eq2.5}, we get:
+$$
+   \frac{\Theta; \Gamma' \vdash \SKIP : 0 \ \ \ \  0 \le P''}
+   {\Theta; \Gamma' \vdash \SKIP : P''}
+   \Rtab \mbox{(T-Sub)}
+$$
+Therefore, \eqref{eq2.4.5} holds.
+
+
+\item case $\langle H, R, \LET x = \MALLOC \IN s_{1}, n \rangle \xlongrightarrow{\Malloc} \langle H', R', [x'/x]s_{1}, n - 1  \rangle $. \\
+From the assumption, we already have\\
+\setcounter{equation}{0}
+\begin{align}
+  &\Theta; \Gamma \vdash \LET x = \MALLOC \IN s_{1} : P& \label{eq3.1}\\
+  &OK_{n}(P)& \label{eq3.2}
+\end{align}
+By the inversion lemma and \eqref{eq3.1}, we have
+\begin{align}
+   &\Malloc;P_{1} \le P& \label{eq3.2}\\
+  &\Theta; \Gamma \vdash s_{1} : P_{1}& \label{eq3.3}
+\end{align}
+We need to find $P'$ and $\Gamma'$ such that \\
+\begin{align}
+  &\Theta; \Gamma' \vdash s_{1} : P'& \  and \label{eq3.3.1} \\
+  & P \overset{\text{$\Malloc$}}{\Longrightarrow} P'\label{eq3.3.2}&
+\end{align}
+Because of the following derivation:
+$$
+  \frac{ \Malloc \xlongrightarrow{\Malloc} 0}
+  {\Malloc;P_{1} \xlongrightarrow{\Malloc} 0;P_{1}}
+$$
+and $0;P_{1} \Rightarrow P_{1}$. Therefore $\Malloc;P_{1} \xlongrightarrow{\Malloc} P_{1}$
+
+By the definition of subtyping and $\Malloc;P_{1} \xlongrightarrow{\Malloc} P_{1}$, we have that there $\exists P''$ s.t. \\
+\begin{align}
+  &P \overset{\text{$\Malloc$}}{\Longrightarrow} P''\,\  and& \label{eq3.4}\\
+  &P_{1} \le P''& \label{eq3.5}
+\end{align}
+Take $P''$ as $P'$. \\
+Then we get \eqref{eq3.3.2} holds.\\
+And by using subtyping rule T-Sub with premises \eqref{eq3.3} and \eqref{eq3.5}
+$$
+    \frac{\Gamma \vdash s_{1} : P_{1} \ \ \ \ P_{1} \le P''}
+     {\Gamma \vdash s_{1} : P''}
+     \Rtab \mbox{(T-Sub)}
+$$
+Therefore we prove that $\Gamma \vdash s_{1} : P'$, \eqref{eq3.3.1} holds.
+
+\setcounter{equation}{0}
+\item case $\langle H, R, \SKIP;s_{1}, n \rangle \rightarrow \langle H', R', s_{1}, n \rangle $. \\
+From the assumption, we have
+\begin{align}
+     &\Theta; \Gamma \vdash \SKIP;s_{1} : P   \label{eq1.1}\\
+     &OK_{n}(P)  \label{eq1.2}
+\end{align}
+By the inversion lemma on \eqref{eq1.1}, we have
+\begin{align}
+   &\Theta; \Gamma \vdash s_{1} : P_{1} & \label{eq1.3.1}\\
+   &0;P_{1} \le P & \label{eq1.3}
+\end{align}
+We need to prove that there exists $P'$ and $\Gamma'$ such that
+\begin{align}
+  &\Theta; \Gamma' \vdash s_{1} : P' \  and &\\
+  &P \xlongrightarrow{\tau}^{*} P'&
+\end{align}
+By the definition of subtyping and $0;P_{1} \rightarrow P_{1}$, then we get that $\exists P''$
+\begin{align}
+  &P \xlongrightarrow{\tau}^{*} P''& \label{eq1.4} \\
+  &P_{1} \le P''& \label{eq1.5}
+\end{align}
+Take $P''$ as  $P'$, we get $P \xlongrightarrow{\tau}^{*} P'$\\
+And by using rule T-Sub with premises $\Gamma \vdash s_{1} : P_{1}$ and $P_{1} \le P''$, then we have \\
+$$
+    \frac{\Theta; \Gamma \vdash s_{1} : P_{1} \  \  P_{1} \le P''}
+    {\Gamma \vdash s_{1} : P''}
+    \Rtab \mbox{(T-Sub)}
+$$
+Therefore, we prove that $\Gamma \vdash s_{1} : P'$
+
+\item case $\langle H, R, *x \leftarrow y , n \rangle \rightarrow  \langle H', R', \SKIP, n  \rangle $. \\
+From the assumption, we already have\\
+\setcounter{equation}{0}
+\begin{align}
+  &\Theta; \Gamma \vdash *x \leftarrow y : P& \label{eq4.1} \\
+  &OK_{n}(P)& \label{eq4.2}
+\end{align}
+From the inversion lemma on \eqref{eq4.1}, we have \\
+\begin{align}
+  & 0 \le P&  \label{eq4.3}
+\end{align}
+We need to find $P'$ and $\Gamma'$ such that
+\begin{align}
+  &\Theta; \Gamma' \vdash \SKIP: P' \ \ and& \label{eq4.3.1} \\
+  &P \xlongrightarrow{\tau}^{*} P'& \label{eq4.3.2}
+\end{align}
+Take $P$ as $P'$, then \eqref{eq4.3.2} holds.\\
+And because of the following derivation:
+$$
+  \frac{\Theta; \Gamma' \vdash \SKIP: 0 \ \ \ 0 \le P}
+   {\Theta;\Gamma' \vdash \SKIP : P}
+  \Rtab \mbox{(T-Sub)}
+$$
+\eqref{eq4.3.1} holds.
+
+
+\item case $\langle H, R, \LET x = y\  \IN s_{1} , n \rangle \rightarrow  \langle H', R', [x'/x]s_{1}, n  \rangle $. \\
+From assumption, we have \\
+\setcounter{equation}{0}
+\begin{align}
+    &\Theta; \Gamma \vdash \LET x = y\  \IN \  s_{1} : P& \label{eq5.1}\\
+    &OK_{n}(P)& \label{eq5.2}
+\end{align}
+From the inversion lemma and \eqref{eq5.1}, we have \\
+\begin{align}
+   &\Theta; \Gamma \vdash s_{1} : P_{1}& \label{eq5.3} \\
+   &P_{1} \le P& \label{eq5.4}
+\end{align}
+We need to find $P'$ and $\Gamma'$ such that:
+\begin{align}
+  &\Theta; \Gamma' \vdash s_{1} : P' \ \ and& \label{eq5.4.1}\\
+  &P \xlongrightarrow{\tau}^{*} P'& \label{eq5.4.2}
+\end{align}
+Take P as P'.
+Therefore \eqref{eq5.4.2} holds, because of the definition of $\xlongrightarrow{\tau}^{*}$.\\
+And because of the following derivation, \eqref{5.4.1} holds.
+$$
+  \frac{\Theta; \Gamma' \vdash s_{1} : P_{1} \ \ \ P_{1} \le P}
+  {\Theta; \Gamma' \vdash s_{1} : P}
+  \Rtab \mbox{(T-Sub)}
+$$
+
+\item case $\langle H, R, \LET x = \NULL \  \IN \  s_{1}, n \rangle \rightarrow \langle H', R', [x'/x]s_{1}, n \rangle $\\
+From the assumption, we know that
+\setcounter{equation}{0}
+\begin{align}
+  &\Theta; \Gamma \vdash \LET x = \NULL \  \IN \ s_{1} : P &  \label{eqa.1}\\
+  &OK_{n}(P)& \label{eqa.2}
+\end{align}
+By inversion lemma on \eqref{eqa.1}, we get:
+\begin{align}
+  &\Theta; \Gamma \vdash s_{1} : P_{1}& \label{eqa.3}\\
+  & P_{1} \le P& \label{eqa.4}
+\end{align}
+We need to prove that there exists $P'$ and $\Gamma'$ such that
+\begin{align}
+  &\Theta; \Gamma' \vdash s_{1} : P' \  and& \label{eqa.5}\\
+  &P \xlongrightarrow{\tau}^{*} P'& \label{eqa.6}
+\end{align}
+Take P as P'.\\
+Because of the following derivation, the \eqref{eqa.5} holds.
+$$
+  \frac{\Theta; \Gamma' \vdash s_{1} : P_{1} \ \ \ \ P_{1} \le P}
+  {\Theta; \Gamma' \vdash s_{1} : P}
+  \Rtab \mbox{(T-Sub)}
+$$
+And because of the definition of $\xlongrightarrow{\tau}^{*}$, the \eqref{eqa.6} holds.
+
+\item case $\langle H, R, \LET x = *y \  \IN \  s_{1}, n \rangle \rightarrow \langle H', R', [x'/x]s_{1}, n \rangle $\\
+From the assumption, we know that
+\setcounter{equation}{0}
+\begin{align}
+  &\Theta; \Gamma \vdash \LET x = *y \  \IN \  s_{1} : P& \label{eqb.1}\\
+  &OK_{n}(P)& \label{eqb.2}
+\end{align}
+By the inversion lemma on \eqref{eqb.1}, we get:
+\begin{align}
+  &\Theta; \Gamma \vdash s_{1} : P_{1} ,\ and& \label{eqb.3}\\
+  &P_{1} \le P& \label{eqb.4}
+\end{align}
+We need to prove there exists $P'$ and $\Gamma'$ such that:
+\begin{align}
+  &\Theta; \Gamma' \vdash s_{1} : P', \ and& \label{eqb.5}\\
+  &P \xlongrightarrow{\tau}^{*} P'& \label{eqb.6}
+\end{align}
+Take P as P'.\\
+Because of  following derivation, the \eqref{eqb.5} holds.
+$$
+   \frac{\Theta; \Gamma' \vdash s_{1} : P_{1} \ \ \ P_{1} \le P}
+   {\Theta; \Gamma' \vdash s_{1} : P}
+   \Rtab \mbox{(T-Sub)}
+$$
+And because of the definition of $\xlongrightarrow{\tau}^{*}$, \eqref{eqb.6} holds.
+
+
+\item case $\langle H, R, \IFNULL \Cirx \  \THEN s_{1} \  \ELSE \  s_{2}, n \rangle \rightarrow \langle H', R',s_{1}, n \rangle $\\
+From the assumption, we have that:
+\setcounter{equation}{0}
+\begin{align}
+  &\Theta; \Gamma \vdash \IFNULL \Cirx \  \THEN \  s_{1} \ \ELSE \ s_{2} : P& \label{eqc.1}\\
+  &OK_{n}(P)& \label{eqc.2}
+\end{align}
+By the inversion leamma on \eqref{eqc.1}, we get:
+\begin{align}
+  &\Theta; \Gamma \vdash s_{1} : P_{1},\  and & \label{eqc.3}\\
+  & p_{1} \le P'& \label{eqc.4}
+\end{align}
+We need to prove that there exists $P'$ and $\Gamma'$ such that:
+\begin{align}
+  &\Theta; \Gamma' \vdash s_{1} : P_{1},\  and & \label{eqc.5}\\
+  &P \xlongrightarrow{\tau}^{*} P'& \label{eqc.6}
+\end{align}
+Take P as P'.
+Because of the following derivation, \eqref{eqc.5} holds.
+$$
+  \frac{\Theta; \Gamma' \vdash s_{1} : P_{1} \ \ \ \ P_{1} \le P}
+  {\Theta; \Gamma' \vdash s_{1} : P}
+  \Rtab \mbox{(T-Sub)}
+$$
+And by the definition of $\xlongrightarrow{\tau}^{*}$, \eqref{eqc.6} holds.
+
+\item case $\langle H, R, f(x) , n \rangle \rightarrow  \langle H', R', [x'/x]s_{1}, n  \rangle $ where the body of function $f(x)$ is $s_{1}$. we can see $f(x)$ and $s_{1}$ as $s$ and $s'$ respectivelly. \\
+From the assumption, we already have
+\setcounter{equation}{0}
+\begin{align}
+  &\Gamma \vdash f(x) : P& \label{eq6.1} \\
+  &OK_{n}(P)& \label{eq6.2}
+\end{align}
+By the inversion lemma and \eqref{eq6.1}, we have
+\begin{align}
+  &P_{1} \le P& \label{eq6.3} \\
+  &\Gamma \vdash s_{1} : P_{1}& \label{eq6.4}
+\end{align}
+From the definition of subtyping and $P_{1} \xlongrightarrow{0} P_{1}$, we get $\exists P''$ s.t.
+\begin{align}
+  &P \xlongrightarrow{0} P''&   \label{eq6.5} \\
+  &P_{1} \le P''&  \label{eq6.6}
+\end{align}
+Take the $P''$ to be $P'$, then we get $P \xlongrightarrow{0} P'$.\\
+And by using the subtyping rule wiht premises \eqref{eq6.4} and  \eqref{eq6.6}, we have
+$$
+\frac{\Gamma \vdash s_{1} : P_{1} \ \ \ \ P_{1} \le P'}{\Gamma \vdash s_{1} : P'}
+$$
+Therefore we prove that $\Gamma \vdash s' : P'$ where $s'$ is the command $s_{1}$.
+ \end{enumerate}
+
+\noindent Finally to prove $OK_{n'}P'$ that is, $\sharp_{m}(P')-\sharp_{f}(P') \le n'$. And  proceed by case analysis.\\
+\begin{enumerate}
+
+\item  case $P =  \SKIP;P'$\\
+According to rule E-Skip, we should prove  $\sharp_{m}(P')-\sharp_{f}(P') \le n'$ where $n'$ is $n$.
+Because we have\\
+\begin{eqnarray*}
+  OK_{n}(P)  & & =  OK_{n}(\SKIP;P')\\
+  & & \Rightarrow \sharp_{m}(\SKIP;P') - \sharp_{f}(\SKIP;P') \le n \\
+  & & \Rightarrow \sharp_{m}(P') - \sharp_{f}(P') \le n \
+\end{eqnarray*}
+Then it is proved.
+
+\item case $P = \Malloc;P'$ \\
+Here according to rule E-Malloc, we know the $n'$ is $n-1$. \\
+Therefore we should prove $\sharp_{m}(P') - \sharp_{f}(P') \le n-1$ \\
+\begin{eqnarray*}
+  OK_{n}(P)&& =  OK_{n}(\Malloc;P')\\
+  &&\Rightarrow \sharp_{m}(\Malloc;P') - \sharp_{f}(\Malloc;P') \le n \\
+  &&\Rightarrow  \sharp_{m}(P') + 1 - \sharp_{f}(P') \le n\\
+  &&\Rightarrow  \sharp_{m}(P')  - \sharp_{f}(P') \le n-1\\
+\end{eqnarray*}
+Then it is proved.
+
+\item case $P = \Free;P'$ \\
+ According to rule E-Free, we should prove $\sharp_{m}(P') - \sharp_{f}(P') \le n+1$.
+\begin{eqnarray*}
+  OK_{n}(P)  & & =  OK_{n}(\Free;P')\\
+  & &\Rightarrow  \sharp_{m}(\Free;P') - \sharp_{f}(\Free;P') \le n \\
+  & & \Rightarrow \sharp_{m}(P')  - \sharp_{f}(P') - 1  \le n\\
+  & & \Rightarrow \sharp_{m}(P')  - \sharp_{f}(P') \le n+1\\
+\end{eqnarray*}
+Then it is proved.
+
+\item case $P = P_{1};P_{2}$\\
+To prove it by contradiction.\\
+Suppose that $OK_{n'}(P_{1}';P_{2})$ does not hold. Then we have \\
+$P_{1};P_{2} \xlongrightarrow{\alpha} P_{1}';P_{2} \xlongrightarrow{\exists \sigma} Q$, $s.t.$ $\sharp_{m}(\sigma) - \sharp_{f}(\sigma) > n'$\\
+From the premise $OK_{n}(P) = OK_{n}(P_{1};P_{2})$, we get \\
+\setcounter{equation}{0}
+\begin{align}
+  &  \sharp_{m}(\alpha \cdot \sigma) - \sharp_{f}(\alpha \cdot \sigma) \le n \label{eqok1.1}
+\end{align}
+
+From \eqref{eqok1.1}, we get
+\begin{align}
+\sharp_{m}(\alpha) + \sharp_{m}(\sigma) - \sharp_{f}(\alpha) - \sharp_{f}(\sigma) \  \label{eqok1.2}
+\end{align}
+and with
+$$
+   n'=\left\{
+   \begin{aligned}
+     n + 1, && \alpha = \Free \\
+     n - 1,  && \alpha = \Malloc  \\
+     n ,      && otherwise
+   \end{aligned}
+   \right.
+$$
+Therefore, we get \\
+$n' + \sharp_{m}(\alpha) - \sharp_{f}(\alpha) < \sharp_{m}(\alpha) + \sharp_{m}(\sigma) - \sharp_{f}(\alpha) - \sharp_{f}(\sigma) \le n $ \\
+When $\alpha = \Free$, we get that $n + 1 - 1 < n$\\
+When $\alpha = \Malloc$, we get that $ n - 1 + 1 < n $ \\
+When $ \alpha = other$,  we  get that $ n < n $ \\
+ All of the three cases are equal to $n$. Therefore we get the contradiction.
+
+ \item case $ P = \mu\alpha.P_{1}$ \\
+From the assumption, we have known that
+\setcounter{equation}{0}
+\begin{align}
+OK_{n}(P) \label{eqok2.1}
+\end{align}
+
+And we also have
+\begin{align}
+  \mu\alpha.P_{1} \equiv [\mu\alpha.P_{1}/\alpha]P_{1},\text{ that is $ P \equiv P'$} \label{eqok2.2}
+\end{align}
+By the lemma 4.3 with \eqref{eqok2.1} and \eqref{eqok2.2}, we get $OK_{n'}(P')$\\
+ \end{enumerate}
 
 
 \end{document}
