@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  9 DEC 2014 17:08
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  10 DEC 2014 11:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -204,21 +204,28 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [1
 
 {/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (51.37369pt too wide) in paragraph at lines 83--84
+\OT1/cmr/m/n/10.95 stracted as $\OML/cmm/m/it/10.95 ^^V:[]\OT1/cmr/m/n/10.95 ;
+ \OML/cmm/m/it/10.95 \OT1/cmr/m/n/10.95 ; []$; the be-haviour of $\OML/cmm/m/i
+t/10.95 h$ \OT1/cmr/m/n/10.95 is ab-stracted as $\OML/cmm/m/it/10.95 ^^V:[]\OT
+1/cmr/m/n/10.95 ; []; []; []; \OML/cmm/m/it/10.95 $\OT1/cmr/m/n/10.95 .
+ []
+
 [2]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 97.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 99.
  (/usr/local/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 97.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 99.
  [3]
-Overfull \hbox (53.57794pt too wide) detected at line 159
+Overfull \hbox (53.57794pt too wide) detected at line 161
 []    []
  []
 
 [4]
 ! Extra }, or forgotten $.
-l.238 ... 3.} \;\;  \mbox{ Operational Semantics}}
+l.240 ... 3.} \;\;  \mbox{ Operational Semantics}}
                                                   
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -227,7 +234,7 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 [5] [6]
-Overfull \hbox (7.01558pt too wide) in paragraph at lines 387--393
+Overfull \hbox (7.01558pt too wide) in paragraph at lines 389--395
 \OT1/cmr/bx/n/10.95 Lemma 3.2 \OT1/cmr/m/n/10.95 (Preser-va-tion $\OT1/cmr/bx/n
 /10.95 I$\OT1/cmr/m/n/10.95 )\OT1/cmr/bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML
 /cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95
@@ -239,7 +246,7 @@ t/10.95 ,
  []
 
 
-Overfull \hbox (5.44884pt too wide) in paragraph at lines 395--401
+Overfull \hbox (5.44884pt too wide) in paragraph at lines 397--403
 \OT1/cmr/bx/n/10.95 Lemma 3.3 \OT1/cmr/m/n/10.95 (Preser-va-tion $[]$)\OT1/cmr/
 bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML/cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95
  (\OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95 )$\OT1/cmr/m/it/10.95 , $\OT1/cmr/m/n
@@ -250,12 +257,12 @@ bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML/cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95
  []
 
 [7]
-Overfull \hbox (69.46808pt too wide) detected at line 453
+Overfull \hbox (69.46808pt too wide) detected at line 455
 []  []
  []
 
 [8] [9] (./ppl2015-tanki.bbl
-Overfull \hbox (4.87306pt too wide) in paragraph at lines 532--2
+Overfull \hbox (4.87306pt too wide) in paragraph at lines 534--2
 \OT1/cmr/m/n/10.95 We have de-scribed a type-based ap-proach to safe mem-ory de
 al-lo-ca-tion for non-terminating
  []
@@ -290,7 +297,7 @@ s/cm/cmsy8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmti10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmtt10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/sy
 mbols/msbm10.pfb>
-Output written on ppl2015-tanki.pdf (11 pages, 191997 bytes).
+Output written on ppl2015-tanki.pdf (11 pages, 192203 bytes).
 PDF statistics:
  96 PDF objects out of 1000 (max. 8388607)
  68 compressed objects within 1 object stream
