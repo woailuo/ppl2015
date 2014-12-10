@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  10 DEC 2014 12:13
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  10 DEC 2014 12:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -277,85 +277,86 @@ Underfull \hbox (badness 2717) in paragraph at lines 36--39
 ak de-tec-tion,'' in
  []
 
-[10])
-Underfull \hbox (badness 10000) in paragraph at lines 541--542
+[10]) [11]
+Underfull \hbox (badness 10000) in paragraph at lines 543--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 561--563
+Underfull \hbox (badness 10000) in paragraph at lines 563--565
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 578--581
-
- []
-
-[11]
-Underfull \hbox (badness 10000) in paragraph at lines 589--591
+Underfull \hbox (badness 10000) in paragraph at lines 580--583
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 602--603
+Underfull \hbox (badness 10000) in paragraph at lines 591--593
 
  []
 
 [12]
-Underfull \hbox (badness 10000) in paragraph at lines 638--641
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 648--651
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 654--656
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 674--677
+Underfull \hbox (badness 10000) in paragraph at lines 604--605
 
  []
 
 [13]
-Underfull \hbox (badness 10000) in paragraph at lines 680--682
+Underfull \hbox (badness 10000) in paragraph at lines 640--643
 
  []
 
 
-LaTeX Warning: Reference `5.4.1' on page 14 undefined on input line 693.
-
-[14] [15]
-Underfull \hbox (badness 10000) in paragraph at lines 804--805
+Underfull \hbox (badness 10000) in paragraph at lines 650--653
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 807--810
+Underfull \hbox (badness 10000) in paragraph at lines 656--658
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 817--820
-
- []
-
-[16]
-Underfull \hbox (badness 10000) in paragraph at lines 838--844
+Underfull \hbox (badness 10000) in paragraph at lines 676--679
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 879--881
+Underfull \hbox (badness 10000) in paragraph at lines 682--684
 
  []
 
-[17] (./ppl2015-tanki.aux)
+[14]
+
+LaTeX Warning: Reference `5.4.1' on page 15 undefined on input line 695.
+
+[15] [16]
+Underfull \hbox (badness 10000) in paragraph at lines 806--807
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 809--812
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 819--822
+
+ []
+
+[17]
+Underfull \hbox (badness 10000) in paragraph at lines 840--846
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 881--883
+
+ []
+
+[18] (./ppl2015-tanki.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -386,10 +387,10 @@ ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texliv
 e/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive
 /2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/
 2013/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on ppl2015-tanki.pdf (17 pages, 213676 bytes).
+Output written on ppl2015-tanki.pdf (18 pages, 213811 bytes).
 PDF statistics:
- 119 PDF objects out of 1000 (max. 8388607)
- 84 compressed objects within 1 object stream
+ 122 PDF objects out of 1000 (max. 8388607)
+ 86 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
