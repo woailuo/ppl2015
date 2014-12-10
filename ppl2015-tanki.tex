@@ -673,8 +673,9 @@ We need to find $P'$ and $\Gamma'$ such that:
   &\Theta; \Gamma' \vdash s_{1} : P' \ \ and& \label{eq5.4.1}\\
   &P \xlongrightarrow{\tau}^{*} P'& \label{eq5.4.2}
 \end{align}
-Take P as P'.
-Therefore \eqref{eq5.4.2} holds, because of the definition of $\xlongrightarrow{\tau}^{*}$.\\
+
+Taking P as P'. Therefore \eqref{eq5.4.2} holds, because of the definition of $\rightarrow^{*}$.
+
 And because of the following derivation, \eqref{5.4.1} holds.
 $$
   \frac{\Theta; \Gamma' \vdash s_{1} : P_{1} \ \ \ P_{1} \le P}
@@ -682,109 +683,108 @@ $$
   \Rtab \mbox{(T-Sub)}
 $$
 
-\item case $\langle H, R, \LET x = \NULL \  \IN \  s_{1}, n \rangle \rightarrow \langle H', R', [x'/x]s_{1}, n \rangle $\\
-From the assumption, we know that
-\setcounter{equation}{0}
-\begin{align}
-  &\Theta; \Gamma \vdash \LET x = \NULL \  \IN \ s_{1} : P &  \label{eqa.1}\\
-  &OK_{n}(P)& \label{eqa.2}
-\end{align}
+\item Case: $\langle H, R, \LET x = \NULL \  \IN \  s_{1}, n \rangle \rightarrow \langle H', R', [x'/x]s_{1}, n \rangle $\\
+
+  From the assumption, we know that
+\begin{center}
+\textcircled{1}$\Theta; \Gamma \vdash \LET x = \NULL \  \IN \ s_{1} : P$, and \textcircled{2} $OK_{n}(P)$.
+\end{center}
+
 By inversion lemma on \eqref{eqa.1}, we get:
-\begin{align}
-  &\Theta; \Gamma \vdash s_{1} : P_{1}& \label{eqa.3}\\
-  & P_{1} \le P& \label{eqa.4}
-\end{align}
+\begin{center}
+$\Theta; \Gamma \vdash s_{1} : P_{1}$, and $ P_{1} \le P$.
+\end{center}
+
 We need to prove that there exists $P'$ and $\Gamma'$ such that
-\begin{align}
-  &\Theta; \Gamma' \vdash s_{1} : P' \  and& \label{eqa.5}\\
-  &P \xlongrightarrow{\tau}^{*} P'& \label{eqa.6}
-\end{align}
-Take P as P'.\\
-Because of the following derivation, the \eqref{eqa.5} holds.
+\begin{center}
+$\Theta; \Gamma' \vdash s_{1} : P'$, and $P \rightarrow^{*} P'$.
+\end{center}
+
+Taking P as P'. Because of the following derivation, the \eqref{eqa.5} holds.
 $$
   \frac{\Theta; \Gamma' \vdash s_{1} : P_{1} \ \ \ \ P_{1} \le P}
   {\Theta; \Gamma' \vdash s_{1} : P}
   \Rtab \mbox{(T-Sub)}
 $$
+
 And because of the definition of $\xlongrightarrow{\tau}^{*}$, the \eqref{eqa.6} holds.
 
-\item case $\langle H, R, \LET x = *y \  \IN \  s_{1}, n \rangle \rightarrow \langle H', R', [x'/x]s_{1}, n \rangle $\\
+\item Case: $\langle H, R, \LET x = *y \  \IN \  s_{1}, n \rangle \rightarrow \langle H', R', [x'/x]s_{1}, n \rangle $\\
+
 From the assumption, we know that
-\setcounter{equation}{0}
-\begin{align}
-  &\Theta; \Gamma \vdash \LET x = *y \  \IN \  s_{1} : P& \label{eqb.1}\\
-  &OK_{n}(P)& \label{eqb.2}
-\end{align}
+\begin{center}
+$\Theta; \Gamma \vdash \LET x = *y \  \IN \  s_{1} : P$, and $OK_{n}(P)$.
+\end{center}
+
 By the inversion lemma on \eqref{eqb.1}, we get:
-\begin{align}
-  &\Theta; \Gamma \vdash s_{1} : P_{1} ,\ and& \label{eqb.3}\\
-  &P_{1} \le P& \label{eqb.4}
-\end{align}
+\begin{center}
+$\Theta; \Gamma \vdash s_{1} : P_{1}$, and $P_{1} \le P$.
+\end{center}
+
 We need to prove there exists $P'$ and $\Gamma'$ such that:
-\begin{align}
-  &\Theta; \Gamma' \vdash s_{1} : P', \ and& \label{eqb.5}\\
-  &P \xlongrightarrow{\tau}^{*} P'& \label{eqb.6}
+\begin{center}
+$\Theta; \Gamma' \vdash s_{1} : P'$, and $P \rightarrow^{*} P'$.
 \end{align}
-Take P as P'.\\
-Because of  following derivation, the \eqref{eqb.5} holds.
+
+Taking P as P'. Because of  following derivation, the \eqref{eqb.5} holds.
 $$
    \frac{\Theta; \Gamma' \vdash s_{1} : P_{1} \ \ \ P_{1} \le P}
    {\Theta; \Gamma' \vdash s_{1} : P}
    \Rtab \mbox{(T-Sub)}
 $$
+
 And because of the definition of $\xlongrightarrow{\tau}^{*}$, \eqref{eqb.6} holds.
 
+\item Case $\langle H, R, \IFNULL \Cirx \  \THEN s_{1} \  \ELSE \  s_{2}, n \rangle \rightarrow \langle H', R',s_{1}, n \rangle $\\
 
-\item case $\langle H, R, \IFNULL \Cirx \  \THEN s_{1} \  \ELSE \  s_{2}, n \rangle \rightarrow \langle H', R',s_{1}, n \rangle $\\
 From the assumption, we have that:
-\setcounter{equation}{0}
-\begin{align}
-  &\Theta; \Gamma \vdash \IFNULL \Cirx \  \THEN \  s_{1} \ \ELSE \ s_{2} : P& \label{eqc.1}\\
-  &OK_{n}(P)& \label{eqc.2}
-\end{align}
+\begin{center}
+$\Theta; \Gamma \vdash \IFNULL \Cirx \  \THEN \  s_{1} \ \ELSE \ s_{2} : P$, and $OK_{n}(P)$.
+\end{center}
+
 By the inversion leamma on \eqref{eqc.1}, we get:
-\begin{align}
-  &\Theta; \Gamma \vdash s_{1} : P_{1},\  and & \label{eqc.3}\\
-  & p_{1} \le P'& \label{eqc.4}
-\end{align}
+\begin{center}
+$\Theta; \Gamma \vdash s_{1} : P_{1}$, and $ p_{1} \le P'$.
+\end{center}
+
 We need to prove that there exists $P'$ and $\Gamma'$ such that:
-\begin{align}
-  &\Theta; \Gamma' \vdash s_{1} : P_{1},\  and & \label{eqc.5}\\
-  &P \xlongrightarrow{\tau}^{*} P'& \label{eqc.6}
-\end{align}
-Take P as P'.
-Because of the following derivation, \eqref{eqc.5} holds.
+\begin{center}
+  &\Theta; \Gamma' \vdash s_{1} : P_{1}$, and $P \rightarrow^{*} P'$.
+\end{center}
+
+Taking P as P'. Because of the following derivation, \eqref{eqc.5} holds.
 $$
   \frac{\Theta; \Gamma' \vdash s_{1} : P_{1} \ \ \ \ P_{1} \le P}
   {\Theta; \Gamma' \vdash s_{1} : P}
   \Rtab \mbox{(T-Sub)}
 $$
+
 And by the definition of $\xlongrightarrow{\tau}^{*}$, \eqref{eqc.6} holds.
 
-\item case $\langle H, R, f(x) , n \rangle \rightarrow  \langle H', R', [x'/x]s_{1}, n  \rangle $ where the body of function $f(x)$ is $s_{1}$. we can see $f(x)$ and $s_{1}$ as $s$ and $s'$ respectivelly. \\
-From the assumption, we already have
-\setcounter{equation}{0}
-\begin{align}
-  &\Gamma \vdash f(x) : P& \label{eq6.1} \\
-  &OK_{n}(P)& \label{eq6.2}
-\end{align}
+\item Case: $\langle H, R, f(x) , n \rangle \rightarrow  \langle H', R', [x'/x]s_{1}, n  \rangle $ where the body of function $f(x)$ is $s_{1}$. we can see $f(x)$ and $s_{1}$ as $s$ and $s'$ respectivelly. \\
+
+  From the assumption, we already have
+\begin{center}
+$\Gamma \vdash f(x) : P$, and $OK_{n}(P)$.
+\end{center}
+
 By the inversion lemma and \eqref{eq6.1}, we have
-\begin{align}
-  &P_{1} \le P& \label{eq6.3} \\
-  &\Gamma \vdash s_{1} : P_{1}& \label{eq6.4}
+\begin{center}
+$P_{1} \le P$, and $\Gamma \vdash s_{1} : P_{1}$.
 \end{align}
+
 From the definition of subtyping and $P_{1} \xlongrightarrow{0} P_{1}$, we get $\exists P''$ s.t.
-\begin{align}
-  &P \xlongrightarrow{0} P''&   \label{eq6.5} \\
-  &P_{1} \le P''&  \label{eq6.6}
-\end{align}
-Take the $P''$ to be $P'$, then we get $P \xlongrightarrow{0} P'$.\\
+\begin{center}
+$P \xlongrightarrow{0} P''$, and $P_{1} \le P''$.
+\end{center}
+
+Taking the $P''$ to be $P'$, then we get $P \xlongrightarrow{0} P'$.\\
 And by using the subtyping rule wiht premises \eqref{eq6.4} and  \eqref{eq6.6}, we have
 $$
 \frac{\Gamma \vdash s_{1} : P_{1} \ \ \ \ P_{1} \le P'}{\Gamma \vdash s_{1} : P'}
 $$
+
 Therefore we prove that $\Gamma \vdash s' : P'$ where $s'$ is the command $s_{1}$.
- \end{enumerate}
 
 \noindent Finally to prove $OK_{n'}P'$ that is, $\sharp_{m}(P')-\sharp_{f}(P') \le n'$. And  proceed by case analysis.\\
 \begin{enumerate}
@@ -851,19 +851,19 @@ When $\alpha = \Malloc$, we get that $ n - 1 + 1 < n $ \\
 When $ \alpha = other$,  we  get that $ n < n $ \\
  All of the three cases are equal to $n$. Therefore we get the contradiction.
 
- \item case $ P = \mu\alpha.P_{1}$ \\
-From the assumption, we have known that
-\setcounter{equation}{0}
-\begin{align}
-OK_{n}(P) \label{eqok2.1}
-\end{align}
+%%  \item case $ P = \mu\alpha.P_{1}$ \\
+%% From the assumption, we have known that
+%% \setcounter{equation}{0}
+%% \begin{align}
+%% OK_{n}(P) \label{eqok2.1}
+%% \end{align}
 
-And we also have
-\begin{align}
-  \mu\alpha.P_{1} \equiv [\mu\alpha.P_{1}/\alpha]P_{1},\text{ that is $ P \equiv P'$} \label{eqok2.2}
-\end{align}
-By the lemma 4.3 with \eqref{eqok2.1} and \eqref{eqok2.2}, we get $OK_{n'}(P')$\\
- \end{enumerate}
+%% And we also have
+%% \begin{align}
+%%   \mu\alpha.P_{1} \equiv [\mu\alpha.P_{1}/\alpha]P_{1},\text{ that is $ P \equiv P'$} \label{eqok2.2}
+%% \end{align}
+%% By the lemma 4.3 with \eqref{eqok2.1} and \eqref{eqok2.2}, we get $OK_{n'}(P')$\\
+%%  \end{enumerate}
 
 
 \end{document}
