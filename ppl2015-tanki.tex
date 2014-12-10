@@ -537,43 +537,28 @@ We have described a type-based approach to safe memory deallocation for non-term
 
 \newpage
 \appendix
-\section{Appendix}
-\subsection{Proof for Lemma Preservation}
+\section*{Appendix}
+\subsection*{1. Proof for Lemma Preservation}
+
 By induction on the derivation of evaluation rules.\\
- \begin{enumerate}
+\item Case:  $\langle H, R, \FREE, n \rangle \xlongrightarrow{\Free} \langle H', R', \SKIP, n + 1 \rangle $. \\
 
-\item case $\langle H, R, \FREE, n \rangle \xlongrightarrow{\Free} \langle H', R', \SKIP, n + 1 \rangle $. \\
-From the assumption, we have known that:
-\setcounter{equation}{0}
-\begin{align}
-  &OK_{n}(P) \label{eq2.1} \\
-  &\Theta; \Gamma \vdash \FREE: P \label{eq2.2}
-\end{align}
-
-By the inversion lemma on \eqref{eq2.2}, we have:
-\begin{align}
-   &\Free \le P& \label{eq2.3}
-\end{align}
-From the definition of subtyping, the \eqref{eq2.3} and $\Free \xlongrightarrow{\Free} 0$, we get:\\
+From the assumption, we have known that:\textcircled{\small{1}} $OK_{n}(P)$, and \textcircled{2} $\Theta; \Gamma \vdash \FREE:P$.
+By the inversion lemma on \textcircled{2}, we have: \textcircled{3}$\Free \le P$. From the definition of subtyping, the (3) and $\Free \xlongrightarrow{\Free} 0$, we get:\\
 $\exists P''$ s.t.
-\begin{align}
-  &P \overset{\text{$\Free$}}{\Longrightarrow} P'', \ and & \label{eq2.4}\\
-  &0 \le P''& \label{eq2.5}
-\end{align}
+$ \overset{\text{$\Free$}}{\Longrightarrow} P'' (4),  and (5) 0 \le P''& \label{eq2.5}
+
 We need to prove there exists $P'$ and $\Gamma'$ such that: \\
-\begin{align}
-  &\Theta; \Gamma' \vdash \SKIP: P',\  and & \label{eq2.4.5}\\
-  &P \overset{\text{$\Free$}}{\Longrightarrow} P'& \label{eq2.4.6}
-\end{align}
-Take $P''$ as $P'$. \\
-Then \eqref{eq2.4.6} holds. \\
+$\Theta; \Gamma' \vdash \SKIP: P'$,  and $P \overset{\text{$\Free$}}{\Longrightarrow} P'$
+Take $P''$ as $P'$.
+Then (?) holds.
 And by the typing rule T-Skip and \eqref{eq2.5}, we get:
 $$
    \frac{\Theta; \Gamma' \vdash \SKIP : 0 \ \ \ \  0 \le P''}
    {\Theta; \Gamma' \vdash \SKIP : P''}
    \Rtab \mbox{(T-Sub)}
 $$
-Therefore, \eqref{eq2.4.5} holds.
+Therefore, (?) holds.
 
 
 \item case $\langle H, R, \LET x = \MALLOC \IN s_{1}, n \rangle \xlongrightarrow{\Malloc} \langle H', R', [x'/x]s_{1}, n - 1  \rangle $. \\

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  10 DEC 2014 12:22
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  10 DEC 2014 12:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -283,76 +283,236 @@ Underfull \hbox (badness 10000) in paragraph at lines 543--544
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 563--565
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.544 \item C
+             ase:  $\langle H, R, \FREE, n \rangle \xlongrightarrow{\Free} \...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 544--545
+
+ []
+
+! Misplaced alignment tab character &.
+<recently read> &
+                 
+l.549 ...grightarrow} P'' (4),  and (5) 0 \le P''&
+                                                   \label{eq2.5}
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.550 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.564 \item c
+             ase $\langle H, R, \LET x = \MALLOC \IN s_{1}, n \rangle \xlong...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 564--567
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 580--583
+Underfull \hbox (badness 10000) in paragraph at lines 575--577
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 591--593
+Underfull \hbox (badness 10000) in paragraph at lines 588--589
 
  []
 
 [12]
-Underfull \hbox (badness 10000) in paragraph at lines 604--605
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.604 \item c
+             ase $\langle H, R, \SKIP;s_{1}, n \rangle \rightarrow \langle H...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 624--627
+
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.634 \item c
+             ase $\langle H, R, *x \leftarrow y , n \rangle \rightarrow  \la...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 634--637
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 640--642
 
  []
 
 [13]
-Underfull \hbox (badness 10000) in paragraph at lines 640--643
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.660 \item c
+             ase $\langle H, R, \LET x = y\  \IN s_{1} , n \rangle \rightarr...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 660--663
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 650--653
+Underfull \hbox (badness 10000) in paragraph at lines 666--668
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 656--658
-
- []
+LaTeX Warning: Reference `5.4.1' on page 14 undefined on input line 679.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 676--679
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
 
- []
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.686 \item c
+             ase $\langle H, R, \LET x = \NULL \  \IN \  s_{1}, n \rangle \r...
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 682--684
-
- []
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
 [14]
 
-LaTeX Warning: Reference `5.4.1' on page 15 undefined on input line 695.
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
 
-[15] [16]
-Underfull \hbox (badness 10000) in paragraph at lines 806--807
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.712 \item c
+             ase $\langle H, R, \LET x = *y \  \IN \  s_{1}, n \rangle \righ...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.739 \item c
+             ase $\langle H, R, \IFNULL \Cirx \  \THEN s_{1} \  \ELSE \  s_{...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[15]
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.765 \item c
+             ase $\langle H, R, f(x) , n \rangle \rightarrow  \langle H', R'...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: \begin{document} ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.788  \end{enumerate}
+                      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.788  \end{enumerate}
+                      
+Things are pretty mixed up, but I think the worst is over.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 790--791
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 809--812
+Underfull \hbox (badness 10000) in paragraph at lines 793--796
+
+ []
+
+[16]
+Underfull \hbox (badness 10000) in paragraph at lines 803--806
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--822
+Underfull \hbox (badness 10000) in paragraph at lines 824--830
 
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 840--846
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 881--883
+Underfull \hbox (badness 10000) in paragraph at lines 865--867
 
  []
 
@@ -365,10 +525,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 1927 strings out of 493315
- 23891 string characters out of 6137910
- 93001 words of memory out of 5000000
- 5374 multiletter control sequences out of 15000+600000
+ 1923 strings out of 493315
+ 23865 string characters out of 6137910
+ 92947 words of memory out of 5000000
+ 5370 multiletter control sequences out of 15000+600000
  13856 words of font info for 51 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  27i,18n,26p,1593b,256s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -387,7 +547,7 @@ ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texliv
 e/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive
 /2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/
 2013/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on ppl2015-tanki.pdf (18 pages, 213811 bytes).
+Output written on ppl2015-tanki.pdf (18 pages, 214164 bytes).
 PDF statistics:
  122 PDF objects out of 1000 (max. 8388607)
  86 compressed objects within 1 object stream
