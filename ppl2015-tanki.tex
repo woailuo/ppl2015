@@ -32,6 +32,7 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{myDef}{Definition}
 
+\newcommand\kohei[1]{{\bf KS: {#1}}}
 
 \title{Safe Memory Deallocation for Non-Terminating Programs}
 \author{Author Name}
@@ -45,13 +46,66 @@ $^2$ \\
 \begin{document}
 \maketitle
 \begin{abstract}
-We propose an approach to guarantee safe memory deallocation for non-terminating programs. The main idea is based on two type systems: previous type system~\cite{DBLP:conf/aplas/SuenagaK09} and behavioral type system. The former guarantees partial correctness, and the latter abstracts the behavior of a program. Thanks to the previous type system, we can focus on the behavioral type system to count the upper bound of the consumed memory cells soundly.
+We propose an approach to guarantee safe memory deallocation for
+non-terminating programs.  \todo{The next sentence is not clear.
+  ``The main idea is to guarantee the property using two type
+  systems.''} The main idea is based on two type systems: previous
+type system~\cite{DBLP:conf/aplas/SuenagaK09} \todo{Don't cite another
+  paper in an abstract.  ``The type system for partial
+  memory-leak-freedom (i.e., not leaking memory if a program
+  terminates)'' by Suenaga and Kobayashi'' would be better.} and
+behavioral type system. \todo{``Behaviroal type system'' is not a word
+  everyone knows.  You should change the word.  ``a type system
+  proposed in this paper.}  \todo{If you rewrite as I suggest, ``the
+  former..'' can be omitted.  You should explain that the latter is
+  for inferring ``behavior on memory allocation and deallocation''.
+  You should also mention how behavior is expressed in the type
+  system.  (By CCS-like processes.)} The former guarantees partial
+correctness, and the latter abstracts the behavior of a
+program. \todo{``Thanks to the previous type system'' is not clear.
+  You should instead explain how the inferred behavior is used to
+  guarantee memory-leak freedom for non-terminating program.} Thanks
+to the previous type system, we can focus on the behavioral type
+system to count the upper bound of the consumed memory cells soundly.
 \end{abstract}
 
 \section{Introduction}
-Manual memory management primitives (e.g., {\tt malloc} and {\tt free} in C) often cause serious problems such as double frees, memory leaks, and illegal read/write to a deallocated memory cell. Verifying \emph{safe memory deallocation} -- a program not leading to such an unsafe state -- is an important problem.
+Manual memory management primitives (e.g., {\tt malloc} and {\tt free}
+in C) often cause serious problems such as double frees, memory leaks,
+and illegal read/write to a deallocated memory cell. Verifying
+\emph{safe memory deallocation} -- a program not leading to such an
+unsafe state -- is an important problem.
 
-Most of safe memory deallocation verification techniques proposed so far \cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06} focus on the \emph{partial correctness}: if a program terminates, the program satisfies safe memory dealloction. For example, the type system by Suenaga and Kobayashi \cite{DBLP:conf/aplas/SuenagaK09}, which is called previous type system in our paper, guarrantees that (1) a well-typed program does not perform read/write/free operations to any deallocated memory cell and that (2) after execution of a well-typed program, all the memory cells are deallocated. We do not want to describe the previous type system in details, but we should notice that it guarantees partial correctness and does not say anything about non-terminationg programs. The function $g$ shown in Figure \ref{example:pam} describe this situation. It executes like allocating a memory cell, calling it self again and then deallocating the allocated memory cell. That is, at end of this function the allocated memory cell is deallocated and there is no double frees. Because this function is a non-terminating program, partial correctness of it is guaranteed by previours type system. However, it infinitely allocates a memory cell, which causes a dangerous situation -- memory leaks.
+Most of safe memory deallocation verification techniques proposed so
+far
+\cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06}
+focus on the \emph{partial correctness}: \todo{``Partial correctness''
+  is a little different from what we want to say.  Let's say ``partial
+  memory-leak freedom''.} if a program terminates, the program
+satisfies safe memory dealloction. For example, the type system by
+Suenaga and Kobayashi \cite{DBLP:conf/aplas/SuenagaK09}, which is
+called previous type system in our paper, \todo{``The previous type
+  system'' is vague.  Let's call the type system ``SK type system''.}
+guarrantees that \todo{Mention that the following properties are
+  guaranteed if a well-typed program terminates and the type system
+  does not guarantee anything for non-terminating programs.} (1) a
+well-typed program does not perform read/write/free operations to any
+deallocated memory cell and that (2) after execution of a well-typed
+program, all the memory cells are deallocated. \todo{You don't need
+  the following sentence.} We do not want to describe the previous
+type system in details, but we should notice that it guarantees
+partial correctness and does not say anything about non-terminationg
+programs. 
+
+\todo{Should be in the different paragraph because you are explaining
+  an example.}  The function $g$ shown in Figure \ref{example:pam}
+describe this situation. It executes like allocating a memory cell,
+calling it self again and then deallocating the allocated memory
+cell. That is, at end of this function the allocated memory cell is
+deallocated and there is no double frees. Because this function is a
+non-terminating program, partial correctness of it is guaranteed by
+previours type system. However, it infinitely allocates a memory cell,
+which causes a dangerous situation -- memory leaks.
 
 A program \emph{leaks} memory if the program consumes unbounded number of memory cells. For example, function $g$ in Figure \ref{example:pam} leaks memory, whereas funcition $f$ does not; the former consumes unbounded number of memory cells but the latter consumes at most one memory cell at once. Notice that these two programs are all partially corrected by the previous type system, because they do not terminate.
 
@@ -237,7 +291,7 @@ $$
       \Rtab \mbox{(E-MallocError)}
 $$
 $$
-     \mathbf{Figure \; 3.} \;\;  \mbox{ Operational Semantics}}
+     \mathbf{Figure \; 3.} \;\;  \mbox{ Operational Semantics}
 $$
 %
 %\caption{Operational Semantics.}
