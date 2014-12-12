@@ -44,7 +44,7 @@ $^2$ \\
 \begin{document}
 \maketitle
 \begin{abstract}
-We propose an approach to guarantee safe memory deallocation for non-terminating programs. The main idea is to guarantee the property using two type systems: the type system for partial memory-leak freedom (i.e., not leaking memory if a program terminates) by Suenaga and Kobayashi and a type system proposed in this paper which abstracts the behavior of memory allocation and deallocation by CCS-like processes.     we can focus on the behavioral type system to count the upper bound of the consumed memory cells soundly.
+We propose an approach to guarantee safe memory deallocation for non-terminating programs. The main idea is to guarantee the property using two type systems: the type system for partial memory-leak freedom (i.e., not leaking memory if a program terminates) by Suenaga and Kobayashi and a type system proposed in this paper which abstracts the behavior of memory allocation and deallocation by CCS-like processes. First leveraging the former type system to ensure memory safety(no use after deallocation and no memory leaks) for terminating programs, and then by latter type system we can estimate the upper bound of the consumed memory cells soundly.
 \end{abstract}
 
 \section{Introduction}
