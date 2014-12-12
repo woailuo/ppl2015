@@ -32,7 +32,6 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{myDef}{Definition}
 
-
 \title{Safe Memory Deallocation for Non-Terminating Programs}
 \author{Author Name}
 \inst{%
@@ -45,7 +44,7 @@ $^2$ \\
 \begin{document}
 \maketitle
 \begin{abstract}
-We propose an approach to guarantee safe memory deallocation for non-terminating programs. The main idea is based on two type systems: previous type system~\cite{DBLP:conf/aplas/SuenagaK09} and behavioral type system. The former guarantees partial correctness, and the latter abstracts the behavior of a program. Thanks to the previous type system, we can focus on the behavioral type system to count the upper bound of the consumed memory cells soundly.
+We propose an approach to guarantee safe memory deallocation for non-terminating programs. The main idea is to guarantee the property using two type systems: previous type system~\cite{DBLP:conf/aplas/SuenagaK09} and behavioral type system. The former guarantees partial correctness, and the latter abstracts the behavior of a program. Thanks to the previous type system, we can focus on the behavioral type system to count the upper bound of the consumed memory cells soundly.
 \end{abstract}
 
 \section{Introduction}
