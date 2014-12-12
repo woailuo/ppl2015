@@ -1,7 +1,7 @@
 %\documentclass[japanese]{jssst_ppl} %% 
  \documentclass[english]{jssst_ppl} %% English
 % \documentclass[japanese,draft]{jssst_ppl} %% You can use the draft option
-\usepackage{amsmath,amsthm,amssymb,amsfonts,extarrows,geometry,amsopn}
+\usepackage{amsmath,amsthm,amssymb,amsfonts,extarrows,geometry,amsopn,enumerate}
 
 % set some new commands %
 \newcommand\tB{\;|\;}
@@ -32,11 +32,8 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{myDef}{Definition}
 
-<<<<<<< HEAD
 \newcommand\todo[1]{{\bf KS: {#1}}}
 
-=======
->>>>>>> r2-tan
 \title{Safe Memory Deallocation for Non-Terminating Programs}
 \author{Author Name}
 \inst{%
@@ -49,68 +46,6 @@ $^2$ \\
 \begin{document}
 \maketitle
 \begin{abstract}
-<<<<<<< HEAD
-We propose an approach to guarantee safe memory deallocation for
-non-terminating programs.  \todo{The next sentence is not clear.
-  ``The main idea is to guarantee the property using two type
-  systems.''} The main idea is based on two type systems: previous
-type system~\cite{DBLP:conf/aplas/SuenagaK09} \todo{Don't cite another
-  paper in an abstract.  ``The type system for partial
-  memory-leak-freedom (i.e., not leaking memory if a program
-  terminates)'' by Suenaga and Kobayashi'' would be better.} and
-behavioral type system. \todo{``Behaviroal type system'' is not a word
-  everyone knows.  You should change the word.  ``a type system
-  proposed in this paper.}  \todo{If you rewrite as I suggest, ``the
-  former..'' can be omitted.  You should explain that the latter is
-  for inferring ``behavior on memory allocation and deallocation''.
-  You should also mention how behavior is expressed in the type
-  system.  (By CCS-like processes.)} The former guarantees partial
-correctness, and the latter abstracts the behavior of a
-program. \todo{``Thanks to the previous type system'' is not clear.
-  You should instead explain how the inferred behavior is used to
-  guarantee memory-leak freedom for non-terminating program.} Thanks
-to the previous type system, we can focus on the behavioral type
-system to count the upper bound of the consumed memory cells soundly.
-\end{abstract}
-
-\section{Introduction}
-Manual memory management primitives (e.g., {\tt malloc} and {\tt free}
-in C) often cause serious problems such as double frees, memory leaks,
-and illegal read/write to a deallocated memory cell. Verifying
-\emph{safe memory deallocation} -- a program not leading to such an
-unsafe state -- is an important problem.
-
-Most of safe memory deallocation verification techniques proposed so
-far
-\cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06}
-focus on the \emph{partial correctness}: \todo{``Partial correctness''
-  is a little different from what we want to say.  Let's say ``partial
-  memory-leak freedom''.} if a program terminates, the program
-satisfies safe memory dealloction. For example, the type system by
-Suenaga and Kobayashi \cite{DBLP:conf/aplas/SuenagaK09}, which is
-called previous type system in our paper, \todo{``The previous type
-  system'' is vague.  Let's call the type system ``SK type system''.}
-guarrantees that \todo{Mention that the following properties are
-  guaranteed if a well-typed program terminates and the type system
-  does not guarantee anything for non-terminating programs.} (1) a
-well-typed program does not perform read/write/free operations to any
-deallocated memory cell and that (2) after execution of a well-typed
-program, all the memory cells are deallocated. \todo{You don't need
-  the following sentence.} We do not want to describe the previous
-type system in details, but we should notice that it guarantees
-partial correctness and does not say anything about non-terminationg
-programs. 
-
-\todo{Should be in the different paragraph because you are explaining
-  an example.}  The function $g$ shown in Figure \ref{example:pam}
-describe this situation. It executes like allocating a memory cell,
-calling it self again and then deallocating the allocated memory
-cell. That is, at end of this function the allocated memory cell is
-deallocated and there is no double frees. Because this function is a
-non-terminating program, partial correctness of it is guaranteed by
-previours type system. However, it infinitely allocates a memory cell,
-which causes a dangerous situation -- memory leaks.
-=======
 We propose an approach to guarantee safe memory deallocation for non-terminating programs. The main idea is to guarantee the property using two type systems: the type system for partial memory-leak freedom (i.e., not leaking memory if a program terminates) by Suenaga and Kobayashi and a type system proposed in this paper which abstracts the behavior of memory allocation and deallocation by CCS-like processes. First leveraging the former type system to ensure memory safety(no use after deallocation and no memory leaks) for terminating programs, and then by latter type system we can estimate the upper bound of the consumed memory cells soundly.
 \end{abstract}
 
@@ -120,10 +55,8 @@ Manual memory management primitives (e.g., \texttt{malloc} and \texttt{free} in 
 Most of safe memory deallocation verification techniques proposed so far \cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06} focus on the \emph{partial memory-leak freedom}: if a program terminates, the program satisfies safe memory dealloction. For example, the type system by Suenaga and Kobayashi \cite{DBLP:conf/aplas/SuenagaK09}, which is called \textbf{SK} type system in our paper, guarantees that (1) a well-typed program does not perform read/write/free operations to any deallocated memory cell and that (2) after execution of a well-typed program, all the memory cells are deallocated. We should notice that these two properties are guaranteed if a well-typed program terminates and the type system does not guarantee anything for non-terminating programs.
 
 The function $g$ shown in Figure \ref{example:pam} describe this situation. It executes like allocating a memory cell, calling it self again and then deallocating the allocated memory cell. That is, at end of this function the allocated memory cell is deallocated and there is no double frees. Because this function is a non-terminating program, partial correctness of it is guaranteed by previous type system. However, it infinitely allocates a memory cell, which causes a dangerous situation -- memory leaks.
->>>>>>> r2-tan
 
 A program \emph{leaks} memory if the program consumes unbounded number of memory cells. For example, function $g$ in Figure \ref{example:pam} leaks memory, whereas function $f$ does not; the former consumes unbounded number of memory cells but the latter consumes at most one memory cell at once. Notice that these two programs are all partially corrected by the previous type system, because they do not terminate.
-
 \begin{figure}[h]
 1 \;\; $g(x)$= \dtb\dtb\dtb\Rtab\;\;$f(x)$=  \\
 2 \;\; $\LET \; x = \MALLOC  \; \IN$\dtb\dtb$\LET \; x = \MALLOC  \; \IN$\\
@@ -610,7 +543,8 @@ We have described a type-based approach to safe memory deallocation for non-term
 \subsection*{1. Proof for Lemma Preservation}
 
 By induction on the derivation of evaluation rules.\\
-\item Case:  $\langle H, R, \FREE, n \rangle \xlongrightarrow{\Free} \langle H', R', \SKIP, n + 1 \rangle $. \\
+
+\noindent Case: $\langle H, R, \FREE, n \rangle \xlongrightarrow{\Free} \langle H', R', \SKIP, n + 1 \rangle $. \\
 
 From the assumption, we have known that: \textcircled{1} $OK_{n}(P)$, and \textcircled{2} $\Theta; \Gamma \vdash \Free\Cirx:P$.
 
@@ -633,9 +567,9 @@ $$
    \Rtab \mbox{(T-Sub)}
 $$
 
-Therefore, \textcircled{6} holds.
+Therefore, \textcircled{6} holds. \\
 
-\item Case: $\langle H, R, \LET x = \MALLOC \IN s_{1}, n \rangle \xlongrightarrow{\Malloc} \langle H', R', [x'/x]s_{1}, n - 1  \rangle $.\\
+\noindent Case: $\langle H, R, \LET x = \MALLOC \IN s_{1}, n \rangle \xlongrightarrow{\Malloc} \langle H', R', [x'/x]s_{1}, n - 1  \rangle $.\\
 
 From the assumption, we already have \textcircled{1}$\Theta; \Gamma \vdash \LET x = \MALLOC \IN s_{1} : P$,
 
@@ -667,9 +601,9 @@ $$
      \Rtab \mbox{(T-Sub)}
 $$
 
-Therefore we prove that $\Gamma \vdash s_{1} : P'$, \textcircled{5} holds.
+Therefore we prove that $\Gamma \vdash s_{1} : P'$, \textcircled{5} holds.\\
 
-\item Case: $\langle H, R, \SKIP;s_{1}, n \rangle \rightarrow \langle H', R', s_{1}, n \rangle $. \\
+\noindent Case: $\langle H, R, \SKIP;s_{1}, n \rangle \rightarrow \langle H', R', s_{1}, n \rangle $. \\
 
 From the assumption, we have
 \begin{center}
@@ -691,18 +625,18 @@ By the definition of subtyping and $0;P_{1} \rightarrow P_{1}$, then we get that
  \textcircled{7} $P \rightarrow^{*} P''$, and \textcircled{8} $P_{1} \le P''$
 \end{center}
 
-Taking $P''$ as  $P'$, we get $P \rightarrow^{*} P'$\\
+Taking $P''$ as  $P'$, we get $P \rightarrow^{*} P'$
 
-And by using rule T-Sub with premises $\Gamma \vdash s_{1} : P_{1}$ and $P_{1} \le P''$, then we have \\
+And by using rule T-Sub with premises $\Gamma \vdash s_{1} : P_{1}$ and $P_{1} \le P''$, then we have 
 $$
     \frac{\Theta; \Gamma \vdash s_{1} : P_{1} \  \  P_{1} \le P''}
     {\Gamma \vdash s_{1} : P''}
     \Rtab \mbox{(T-Sub)}
 $$
 
-Therefore, we prove that $\Gamma \vdash s_{1} : P'$
+Therefore, we prove that $\Gamma \vdash s_{1} : P'$ \\
 
-\item Case: $\langle H, R, *x \leftarrow y , n \rangle \rightarrow  \langle H', R', \SKIP, n  \rangle $. \\
+\noindent Case: $\langle H, R, *x \leftarrow y , n \rangle \rightarrow  \langle H', R', \SKIP, n  \rangle $. \\
 
 From the assumption, we already have
 \begin{center}
@@ -713,26 +647,27 @@ From the inversion lemma on \textcircled{1}, we have \textcircled{3} $0 \le P$.
 
 We need to find $P'$ and $\Gamma'$ such that
 \begin{center}
- \textcircled{4} $\Theta; \Gamma' \vdash \SKIP: P'$, and \textcircled{5} &P \rightarrow^{*} P'$
+ \textcircled{4} $\Theta; \Gamma' \vdash \SKIP: P'$, and \textcircled{5} $P \rightarrow^{*} P'$
 \end{center}
 
-Taking $P$ as $P'$, then \textcircled{5} holds.\\
+Taking $P$ as $P'$, then \textcircled{5} holds.
+
 And because of the following derivation:
 $$
   \frac{\Theta; \Gamma' \vdash \SKIP: 0 \ \ \ 0 \le P}
    {\Theta;\Gamma' \vdash \SKIP : P}
   \Rtab \mbox{(T-Sub)}
 $$
-therefore \textcircled{4} holds.
+therefore \textcircled{4} holds. \\
 
-\item Case: $\langle H, R, \LET x = y\  \IN s_{1} , n \rangle \rightarrow  \langle H', R', [x'/x]s_{1}, n  \rangle $. \\
+\noindent Case: $\langle H, R, \LET x = y\  \IN s_{1} , n \rangle \rightarrow  \langle H', R', [x'/x]s_{1}, n  \rangle $. \\
 
-From assumption, we have \\
+From assumption, we have 
 \begin{center}
 \textcircled{1} $\Theta; \Gamma \vdash \LET x = y\  \IN \  s_{1} : P$, and \textcircled{2} $OK_{n}(P)$.
 \end{center}
 
-From the inversion lemma and \textcircled{1}, we have \\
+From the inversion lemma and \textcircled{1}, we have 
 \begin{center}
 \textcircled{3} $\Theta; \Gamma \vdash s_{1} : P_{1}$, and $P_{1} \le P$.
 \end{center}
@@ -752,9 +687,9 @@ $$
   \Rtab \mbox{(T-Sub)}
 $$
 
-\item Case: $\langle H, R, \LET x = \NULL \  \IN \  s_{1}, n \rangle \rightarrow \langle H', R', [x'/x]s_{1}, n \rangle $\\
+\noindent Case: $\langle H, R, \LET x = \NULL \  \IN \  s_{1}, n \rangle \rightarrow \langle H', R', [x'/x]s_{1}, n \rangle $\\
 
-  From the assumption, we know that
+From the assumption, we know that
 \begin{center}
 \textcircled{1}$\Theta; \Gamma \vdash \LET x = \NULL \  \IN \ s_{1} : P$, and \textcircled{2} $OK_{n}(P)$.
 \end{center}
@@ -776,9 +711,9 @@ $$
   \Rtab \mbox{(T-Sub)}
 $$
 
-And because of the definition of $\xlongrightarrow{\tau}^{*}$, the \eqref{eqa.6} holds.
+And because of the definition of $\xlongrightarrow{\tau}^{*}$, the \eqref{eqa.6} holds. \\
 
-\item Case: $\langle H, R, \LET x = *y \  \IN \  s_{1}, n \rangle \rightarrow \langle H', R', [x'/x]s_{1}, n \rangle $\\
+\noindent Case: $\langle H, R, \LET x = *y \  \IN \  s_{1}, n \rangle \rightarrow \langle H', R', [x'/x]s_{1}, n \rangle $\\
 
 From the assumption, we know that
 \begin{center}
@@ -793,7 +728,7 @@ $\Theta; \Gamma \vdash s_{1} : P_{1}$, and $P_{1} \le P$.
 We need to prove there exists $P'$ and $\Gamma'$ such that:
 \begin{center}
 $\Theta; \Gamma' \vdash s_{1} : P'$, and $P \rightarrow^{*} P'$.
-\end{align}
+\end{center}
 
 Taking P as P'. Because of  following derivation, the \eqref{eqb.5} holds.
 $$
@@ -802,9 +737,9 @@ $$
    \Rtab \mbox{(T-Sub)}
 $$
 
-And because of the definition of $\xlongrightarrow{\tau}^{*}$, \eqref{eqb.6} holds.
+And because of the definition of $\xlongrightarrow{\tau}^{*}$, \eqref{eqb.6} holds. \\
 
-\item Case $\langle H, R, \IFNULL \Cirx \  \THEN s_{1} \  \ELSE \  s_{2}, n \rangle \rightarrow \langle H', R',s_{1}, n \rangle $\\
+\noindent Case $\langle H, R, \IFNULL \Cirx \  \THEN s_{1} \  \ELSE \  s_{2}, n \rangle \rightarrow \langle H', R',s_{1}, n \rangle $\\
 
 From the assumption, we have that:
 \begin{center}
@@ -818,7 +753,7 @@ $\Theta; \Gamma \vdash s_{1} : P_{1}$, and $ p_{1} \le P'$.
 
 We need to prove that there exists $P'$ and $\Gamma'$ such that:
 \begin{center}
-  &\Theta; \Gamma' \vdash s_{1} : P_{1}$, and $P \rightarrow^{*} P'$.
+ $\Theta; \Gamma' \vdash s_{1} : P_{1}$, and $P \rightarrow^{*} P'$.
 \end{center}
 
 Taking P as P'. Because of the following derivation, \eqref{eqc.5} holds.
@@ -828,11 +763,11 @@ $$
   \Rtab \mbox{(T-Sub)}
 $$
 
-And by the definition of $\xlongrightarrow{\tau}^{*}$, \eqref{eqc.6} holds.
+And by the definition of $\xlongrightarrow{\tau}^{*}$, \eqref{eqc.6} holds. \\
 
-\item Case: $\langle H, R, f(x) , n \rangle \rightarrow  \langle H', R', [x'/x]s_{1}, n  \rangle $ where the body of function $f(x)$ is $s_{1}$. we can see $f(x)$ and $s_{1}$ as $s$ and $s'$ respectively. \\
+\noindent Case: $\langle H, R, f(x) , n \rangle \rightarrow  \langle H', R', [x'/x]s_{1}, n  \rangle $ where the body of function $f(x)$ is $s_{1}$. we can see $f(x)$ and $s_{1}$ as $s$ and $s'$ respectively. \\
 
-  From the assumption, we already have
+From the assumption, we already have
 \begin{center}
 $\Gamma \vdash f(x) : P$, and $OK_{n}(P)$.
 \end{center}
@@ -840,7 +775,7 @@ $\Gamma \vdash f(x) : P$, and $OK_{n}(P)$.
 By the inversion lemma and \eqref{eq6.1}, we have
 \begin{center}
 $P_{1} \le P$, and $\Gamma \vdash s_{1} : P_{1}$.
-\end{align}
+\end{center}
 
 From the definition of subtyping and $P_{1} \xlongrightarrow{0} P_{1}$, we get $\exists P''$ s.t.
 \begin{center}
@@ -856,44 +791,54 @@ $$
 Therefore we prove that $\Gamma \vdash s' : P'$ where $s'$ is the command $s_{1}$.
 
 \noindent Finally to prove $OK_{n'}P'$ that is, $\sharp_{m}(P')-\sharp_{f}(P') \le n'$. And  proceed by case analysis.\\
-\begin{enumerate}
 
-\item  case $P =  \SKIP;P'$\\
+\noindent Case $P =  \SKIP;P'$\\
+
 According to rule E-Skip, we should prove  $\sharp_{m}(P')-\sharp_{f}(P') \le n'$ where $n'$ is $n$.
-Because we have\\
+
+Because we have
 \begin{eqnarray*}
   OK_{n}(P)  & & =  OK_{n}(\SKIP;P')\\
   & & \Rightarrow \sharp_{m}(\SKIP;P') - \sharp_{f}(\SKIP;P') \le n \\
   & & \Rightarrow \sharp_{m}(P') - \sharp_{f}(P') \le n \
 \end{eqnarray*}
-Then it is proved.
+Then it is proved. \\
 
-\item case $P = \Malloc;P'$ \\
-Here according to rule E-Malloc, we know the $n'$ is $n-1$. \\
-Therefore we should prove $\sharp_{m}(P') - \sharp_{f}(P') \le n-1$ \\
+\noindent Case $P = \Malloc;P'$ \\
+
+Here according to rule E-Malloc, we know the $n'$ is $n-1$.
+
+Therefore we should prove $\sharp_{m}(P') - \sharp_{f}(P') \le n-1$
 \begin{eqnarray*}
   OK_{n}(P)&& =  OK_{n}(\Malloc;P')\\
   &&\Rightarrow \sharp_{m}(\Malloc;P') - \sharp_{f}(\Malloc;P') \le n \\
   &&\Rightarrow  \sharp_{m}(P') + 1 - \sharp_{f}(P') \le n\\
   &&\Rightarrow  \sharp_{m}(P')  - \sharp_{f}(P') \le n-1\\
 \end{eqnarray*}
-Then it is proved.
 
-\item case $P = \Free;P'$ \\
- According to rule E-Free, we should prove $\sharp_{m}(P') - \sharp_{f}(P') \le n+1$.
+Then it is proved.\\
+
+\noindent Case $P = \Free;P'$ \\
+
+According to rule E-Free, we should prove $\sharp_{m}(P') - \sharp_{f}(P') \le n+1$.
+
 \begin{eqnarray*}
   OK_{n}(P)  & & =  OK_{n}(\Free;P')\\
   & &\Rightarrow  \sharp_{m}(\Free;P') - \sharp_{f}(\Free;P') \le n \\
   & & \Rightarrow \sharp_{m}(P')  - \sharp_{f}(P') - 1  \le n\\
   & & \Rightarrow \sharp_{m}(P')  - \sharp_{f}(P') \le n+1\\
 \end{eqnarray*}
-Then it is proved.
 
-\item case $P = P_{1};P_{2}$\\
-To prove it by contradiction.\\
-Suppose that $OK_{n'}(P_{1}';P_{2})$ does not hold. Then we have \\
+Then it is proved. \\
+
+\noindent Case $P = P_{1};P_{2}$\\
+
+To prove it by contradiction.
+
+Suppose that $OK_{n'}(P_{1}';P_{2})$ does not hold. Then we have 
 $P_{1};P_{2} \xlongrightarrow{\alpha} P_{1}';P_{2} \xlongrightarrow{\exists \sigma} Q$, $s.t.$ $\sharp_{m}(\sigma) - \sharp_{f}(\sigma) > n'$\\
-From the premise $OK_{n}(P) = OK_{n}(P_{1};P_{2})$, we get \\
+
+From the premise $OK_{n}(P) = OK_{n}(P_{1};P_{2})$, we get 
 \setcounter{equation}{0}
 \begin{align}
   &  \sharp_{m}(\alpha \cdot \sigma) - \sharp_{f}(\alpha \cdot \sigma) \le n \label{eqok1.1}
