@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  16 DEC 2014 16:52
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  16 DEC 2014 17:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -211,16 +211,9 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [2]
-Overfull \hbox (51.37369pt too wide) in paragraph at lines 86--87
-\OT1/cmr/m/n/10.95 stracted as $\OML/cmm/m/it/10.95 ^^V:[]\OT1/cmr/m/n/10.95 ;
- \OML/cmm/m/it/10.95 \OT1/cmr/m/n/10.95 ; []$; the be-haviour of $\OML/cmm/m/i
-t/10.95 h$ \OT1/cmr/m/n/10.95 is ab-stracted as $\OML/cmm/m/it/10.95 ^^V:[]\OT
-1/cmr/m/n/10.95 ; []; []; []; \OML/cmm/m/it/10.95 $\OT1/cmr/m/n/10.95 .
- []
-
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 102.
 
-(/usr/local/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd
+ (/usr/local/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
@@ -468,7 +461,7 @@ ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texliv
 e/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive
 /2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/
 2013/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on ppl2015-tanki.pdf (17 pages, 213835 bytes).
+Output written on ppl2015-tanki.pdf (17 pages, 213750 bytes).
 PDF statistics:
  119 PDF objects out of 1000 (max. 8388607)
  84 compressed objects within 1 object stream
