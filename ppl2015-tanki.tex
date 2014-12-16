@@ -64,7 +64,7 @@ What will happen if a program does not terminate. The function $g$ shown in Figu
 \label{example:pam}
 \end{figure}
 
-A program \emph{leaks} memory if the program consumes unbounded number of memory cells. For example, function $g$ in Figure\ref{example:pam} leaks memory, whereas function $f$ does not; the former consumes unbounded number of memory cells but the latter consumes at most one memory cell at once. Notice that these two programs are all partially corrected by the \textbf{SK}type system because they do not terminate.
+A program \emph{leaks} memory if the program consumes unbounded number of memory cells. For example, function $g$ in Figure\ref{example:pam} leaks memory, whereas function $f$ does not; the former consumes unbounded number of memory cells but the latter consumes at most one memory cell at once. Notice that these two programs are all partially corrected by the \textbf{SK} type system because they do not terminate.
 
 In the real-world programs, non-terminating programs such as Web servers and operating systems are very important. To guarantee memory-leak freedom for non-terminating programs has great practical significance.
 \subsection{Approach}
