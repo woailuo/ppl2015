@@ -85,6 +85,9 @@ The behavior of a program is abstracted as CCS-like processes~\cite{DBLP:journal
 
 %In our paper, a program $s$ is first passed to a type inference algorithm $PT()$ described in section 4; the algorithm $PT()$ will produce a subtype constraints on behavioral types and constraints of the form% $OK_{n}{P}$, then further reduce to $OK_{n}(P')$ , where $P$ denotes behavior (type); and then the $OK_{n}(P)$ guarantees that the program consumes upper bound of memory cells.
 
+\subsection{Overview of the algorithm}
+A program is first checked by $\mathbf{SK}$ type system; it is passed to the behavioral type system proposed in our paper if its partial correctness is guaranteed, otherwise returns ``it is not safe''; the behavioral type system will check it and produce a behavioral type $P$ which abstracts the behavior of the program; and then by model checkers like $SPIN$ or $CPAChecker$ to verify whether the program consumes unbound number of memory cells using  behavior type $P$. 
+
 The rest of this paper is structured as follows. Section 2 introduces a simple imperative language, as well as its syntax and operational semantics. Section 3 introduces the behavioral type system, which describes how to guarantee memory-leak freedom for non-terminating programs. Section 4 proposes an inference algorithm, and talks about syntax directed typing rules. Section 5 describes current status and future work.
 
 \section{Language}
