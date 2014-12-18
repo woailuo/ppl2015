@@ -46,7 +46,7 @@ $^2$ \\
 \begin{document}
 \maketitle
 \begin{abstract}
-We propose an approach to guarantee safe memory deallocation for nonterminating programs. The main idea is to guarantee the property using two type systems: one existed type system, proposed by Suenaga and Kobayashi,  which can verify a program so that no double frees and no illegal read/write operations to a deallocated memory cell, but partial memory-freedom (i.e., not leaking memory if a program terminates); and the other type sytem proposed in our paper which abstracts the behavior of memory allocation and deallocation by CCS-like processes. The latter one, a behavioral type system, mainly guarantees memory-leak freedom for nonterminating programs by estimating the upper bound of consumed memory cells. By combining these two type system, we can guarantee safe memory deallocation for nonterminating programs.
+We propose an approach to guarantee safe memory deallocation for nonterminating programs. The main idea is to guarantee the property using two type systems: one existed type system, proposed by Suenaga and Kobayashi,  which can guarantee programs no double frees and no illegal read/write operations to a deallocated memory cell, but partial memory-leak freedom (i.e., not leaking memory if a program terminates); and the other type sytem proposed in our paper which abstracts the behavior of memory allocation and deallocation by CCS-like processes. The latter one, a behavioral type system, mainly guarantees memory-leak freedom for nonterminating programs by estimating the upper bound of consumed memory cells. A nonterminating  program can be guaranteed safe memory deallocation if it is verified by these two type systems.
 \end{abstract}
 
 \section{Introduction}
