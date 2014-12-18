@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.6)  18 DEC 2014 11:15
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.6)  18 DEC 2014 13:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -206,22 +206,31 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 47.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 102.
+{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (4.55882pt too wide) in paragraph at lines 69--70
+\OT1/cmr/m/n/10.95 at-ing sys-tems are very im-por-tant. To guar-an-tee memory-
+leak free-dom for non-terminating
+ []
+
+
+Underfull \vbox (badness 1596) has occurred while \output is active []
+
+ [2]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 106.
 
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 102.
- [3]
-Overfull \hbox (53.57794pt too wide) detected at line 164
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 106.
+ [3] [4]
+Overfull \hbox (53.57794pt too wide) detected at line 168
 []    []
  []
 
-[4] [5] [6]
-Overfull \hbox (7.01558pt too wide) in paragraph at lines 392--398
+[5] [6] [7]
+Overfull \hbox (7.01558pt too wide) in paragraph at lines 396--402
 \OT1/cmr/bx/n/10.95 Lemma 3.2 \OT1/cmr/m/n/10.95 (Preser-va-tion $\OT1/cmr/bx/n
 /10.95 I$\OT1/cmr/m/n/10.95 )\OT1/cmr/bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML
 /cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95
@@ -232,8 +241,8 @@ L/cmm/m/it/10.95 s \OT1/cmr/m/n/10.95 : \OML/cmm/m/it/10.95 P$ \OT1/cmr/m/it/10
 t/10.95 ,
  []
 
-[7]
-Overfull \hbox (5.44884pt too wide) in paragraph at lines 400--406
+
+Overfull \hbox (5.44884pt too wide) in paragraph at lines 404--410
 \OT1/cmr/bx/n/10.95 Lemma 3.3 \OT1/cmr/m/n/10.95 (Preser-va-tion $[]$)\OT1/cmr/
 bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML/cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95
  (\OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95 )$\OT1/cmr/m/it/10.95 , $\OT1/cmr/m/n
@@ -244,189 +253,189 @@ bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML/cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95
  []
 
 [8]
-Overfull \hbox (69.46808pt too wide) detected at line 458
+Overfull \hbox (69.46808pt too wide) detected at line 462
 []  []
  []
 
-[9] (./ppl2015-tanki.bbl
-Overfull \hbox (4.87306pt too wide) in paragraph at lines 539--2
+[9] [10] (./ppl2015-tanki.bbl
+Overfull \hbox (4.87306pt too wide) in paragraph at lines 543--2
 \OT1/cmr/m/n/10.95 We have de-scribed a type-based ap-proach to safe mem-ory de
 al-lo-ca-tion for non-terminating
  []
 
-[10]
+
 Underfull \hbox (badness 2717) in paragraph at lines 36--39
 []\OT1/cmr/m/n/10 Y. Xie and A. Aiken, ``Context- and path-sensitive mem-ory le
 ak de-tec-tion,'' in
  []
 
 ) [11]
-Underfull \hbox (badness 10000) in paragraph at lines 548--549
+Underfull \hbox (badness 10000) in paragraph at lines 552--553
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 550--551
+Underfull \hbox (badness 10000) in paragraph at lines 554--555
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 573--574
+Underfull \hbox (badness 10000) in paragraph at lines 577--578
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 575--576
+Underfull \hbox (badness 10000) in paragraph at lines 579--580
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 607--608
+Underfull \hbox (badness 10000) in paragraph at lines 611--612
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 609--610
+Underfull \hbox (badness 10000) in paragraph at lines 613--614
 
  []
 
 [12]
-Underfull \hbox (badness 10000) in paragraph at lines 640--641
+Underfull \hbox (badness 10000) in paragraph at lines 644--645
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 642--643
+Underfull \hbox (badness 10000) in paragraph at lines 646--647
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 663--665
+Underfull \hbox (badness 10000) in paragraph at lines 667--669
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 666--667
+Underfull \hbox (badness 10000) in paragraph at lines 670--671
 
  []
 
 [13]
 
-LaTeX Warning: Reference `5.4.1' on page 14 undefined on input line 686.
+LaTeX Warning: Reference `5.4.1' on page 14 undefined on input line 690.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 693--694
-
- []
-
-
-LaTeX Warning: Reference `eqa.1' on page 14 undefined on input line 700.
-
-
-LaTeX Warning: Reference `eqa.5' on page 14 undefined on input line 710.
-
-
-LaTeX Warning: Reference `eqa.6' on page 14 undefined on input line 717.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 717--718
+Underfull \hbox (badness 10000) in paragraph at lines 697--698
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 719--720
+LaTeX Warning: Reference `eqa.1' on page 14 undefined on input line 704.
+
+
+LaTeX Warning: Reference `eqa.5' on page 14 undefined on input line 714.
+
+
+LaTeX Warning: Reference `eqa.6' on page 14 undefined on input line 721.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 721--722
 
  []
 
 
-LaTeX Warning: Reference `eqb.1' on page 14 undefined on input line 726.
+Underfull \hbox (badness 10000) in paragraph at lines 723--724
+
+ []
 
 
-LaTeX Warning: Reference `eqb.5' on page 14 undefined on input line 736.
+LaTeX Warning: Reference `eqb.1' on page 14 undefined on input line 730.
 
 
-LaTeX Warning: Reference `eqb.6' on page 14 undefined on input line 743.
+LaTeX Warning: Reference `eqb.5' on page 14 undefined on input line 740.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 743--744
+LaTeX Warning: Reference `eqb.6' on page 14 undefined on input line 747.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 747--748
 
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 745--746
+Underfull \hbox (badness 10000) in paragraph at lines 749--750
 
  []
 
 
-LaTeX Warning: Reference `eqc.1' on page 15 undefined on input line 752.
+LaTeX Warning: Reference `eqc.1' on page 15 undefined on input line 756.
 
 
-LaTeX Warning: Reference `eqc.5' on page 15 undefined on input line 762.
+LaTeX Warning: Reference `eqc.5' on page 15 undefined on input line 766.
 
 
-LaTeX Warning: Reference `eqc.6' on page 15 undefined on input line 769.
+LaTeX Warning: Reference `eqc.6' on page 15 undefined on input line 773.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 769--770
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 771--772
+Underfull \hbox (badness 10000) in paragraph at lines 773--774
 
  []
 
 
-LaTeX Warning: Reference `eq6.1' on page 15 undefined on input line 778.
-
-
-LaTeX Warning: Reference `eq6.4' on page 15 undefined on input line 789.
-
-
-LaTeX Warning: Reference `eq6.6' on page 15 undefined on input line 789.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 796--797
+Underfull \hbox (badness 10000) in paragraph at lines 775--776
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 798--799
+LaTeX Warning: Reference `eq6.1' on page 15 undefined on input line 782.
+
+
+LaTeX Warning: Reference `eq6.4' on page 15 undefined on input line 793.
+
+
+LaTeX Warning: Reference `eq6.6' on page 15 undefined on input line 793.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 800--801
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 802--803
 
  []
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 807--809
+Underfull \hbox (badness 10000) in paragraph at lines 811--813
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 810--811
+Underfull \hbox (badness 10000) in paragraph at lines 814--815
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 822--823
+Underfull \hbox (badness 10000) in paragraph at lines 826--827
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 824--825
+Underfull \hbox (badness 10000) in paragraph at lines 828--829
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 835--836
+Underfull \hbox (badness 10000) in paragraph at lines 839--840
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 837--838
+Underfull \hbox (badness 10000) in paragraph at lines 841--842
 
  []
 
 [16]
-Underfull \hbox (badness 10000) in paragraph at lines 841--843
+Underfull \hbox (badness 10000) in paragraph at lines 845--847
 
  []
 
@@ -438,7 +447,7 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  1908 strings out of 493315
  23971 string characters out of 6137905
- 92854 words of memory out of 5000000
+ 93854 words of memory out of 5000000
  5352 multiletter control sequences out of 15000+600000
  14205 words of font info for 52 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -458,7 +467,7 @@ ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texliv
 e/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive
 /2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/
 2013/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on ppl2015-tanki.pdf (17 pages, 214606 bytes).
+Output written on ppl2015-tanki.pdf (17 pages, 214928 bytes).
 PDF statistics:
  119 PDF objects out of 1000 (max. 8388607)
  84 compressed objects within 1 object stream
