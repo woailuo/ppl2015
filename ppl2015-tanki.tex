@@ -68,6 +68,7 @@ A program \emph{leaks} memory if the program consumes unbounded number of memory
 
 In the real-world programs, nonterminating programs such as Web servers and operating systems are very important. To guarantee memory-leak freedom for non-terminating programs has great practical significance.
 \subsection{Main Observation}
+\label{sec: maino}
 We notice that once partial correctness is guaranteed, we can guarantee memory-leak freedom for nonterminating by estimating the upper bound of memory consumption ignoring the relationship between variables and pointers to memory cells. For demonstrating this observation, we use an example in Figure~\ref{example:observation}. The function $h$ is partially corrected. The behavior of $h$ is that it consumes two memory cells at once. That is, it is safe if the difference between the allocations and deallocations does not exceed the number of available memory cells, and the number of available memory cells is at least 2. In order to verify this behavior, we ignore the variables $x$ and $y$ in $h$ to focus on the fact that $h$ executes $\Malloc$ twice, $\Free$ twice, and then calls $h$. This abstraction is sound because the correspondence between allocations and deal locations is guaranteed by the partial correctness verification. Now We can focus on abstraction of bevavior of allocation and deallocaion.
 \begin{figure}[h]
 1\dtb \dtb \dtb $h(x)$=\\
@@ -78,7 +79,7 @@ We notice that once partial correctness is guaranteed, we can guarantee memory-l
 \label{example:observation}
 \end{figure}
 \subsection{Approach}
-To guarantee safe memory deallocation for nonterminating programs, our key idea is to decompose this problem into two subproblems: (1) partial correctness and (2) \emph{behavioral correctness}. The partial correctness has been described above: no double frees and no use after deallocation, but partial memory-leak freedom. The behavioral correctness means a program does not leak memory and uses the method described in above subsection math\{1.2} to guarantee memory leak freedom for nonterminating programs. It is verified by behavioral type system which is mainly used to abstract the behavior of a program. Behavioral types are heavily used in the context of concurrent program verification\cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}.
+To guarantee safe memory deallocation for nonterminating programs, our key idea is to decompose this problem into two subproblems: (1) partial correctness and (2) \emph{behavioral correctness}. The partial correctness has been described above: no double frees and no use after deallocation, but partial memory-leak freedom. The behavioral correctness means a program does not leak memory and uses the method described in above subsection~\ref{sec:maino} to guarantee memory leak freedom for nonterminating programs. It is verified by behavioral type system which is mainly used to abstract the behavior of a program. Behavioral types are heavily used in the context of concurrent program verification~\cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}.
 
 The behavior of a program is abstracted as CCS-like processes~\cite{DBLP:journals/iandc/MilnerPW92a}. For example, the behavior of $f$ is abstracted as $\mu \alpha. \Malloc;\Free;\alpha$; the behavior of $g$ is abstracted as $\mu \alpha. \Malloc;\alpha;\Free$; the behavior of $h$ is abstracted as $\mu \alpha. \Malloc;\Malloc;$ \\ $\Free;\Free;\alpha$.
 
@@ -532,7 +533,7 @@ Function $PT_{v}(x) = (C,\emptyset)$ denotes that it receives a pointer variable
 $$
 \mathbf{Figure\; 6.}\;\; \mbox{Type Inference Algorithm}
 $$
-\section{Prliminary Experiment}
+\section{Preliminary Experiment}
 \section{Related Work}
 \section{Conclusion}
 We have described a type-based approach to safe memory deallocation for non-terminating programs. The approach is based on the idea of decomposing safe memory memory deallocation into partial correctness, which is verified by previous type system, and behavioral correctness. We designed a behavioral type system in our paper for verification of behavioral correctness. Currently, we are looking for a model checker to estimate an upper bound of consumption given a behavioral type and planning to implement a verifier and conduct experiment to see whether our approach is feasible.
