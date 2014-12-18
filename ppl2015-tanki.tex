@@ -46,16 +46,16 @@ $^2$ \\
 \begin{document}
 \maketitle
 \begin{abstract}
-We propose an approach to guarantee safe memory deallocation for nonterminating programs. The main idea is to guarantee the property using two type systems: the type system for partial memory-leak freedom (i.e., not leaking memory if a program terminates) by Suenaga and Kobayashi and a type system proposed in this paper which abstracts the behavior of memory allocation and deallocation by CCS-like processes. The former type system also ensures that no double frees and no illegal operations on a deallocated memory cell for nonterminating programs; the latter type system, a behavioral type system, guarantees memory-leak freedom for nonterminating programs by estimating the upper bound of consumed memory cells, that is, it simply rejects a program that allocates a memory cell before recursive calls, which consumes unbounded number of memory cells. By combining these two type system, we can guarantee safe memory deallocation for nonterminating programs.
+We propose an approach to guarantee safe memory deallocation for nonterminating programs. The main idea is to guarantee the property using two type systems: one existed type system, proposed by Suenaga and Kobayashi,  which can verify a program so that no double frees and no illegal read/write operations to a deallocated memory cell, but partial memory-freedom (i.e., not leaking memory if a program terminates); and the other type sytem proposed in our paper which abstracts the behavior of memory allocation and deallocation by CCS-like processes. The latter one, a behavioral type system, mainly guarantees memory-leak freedom for nonterminating programs by estimating the upper bound of consumed memory cells. By combining these two type system, we can guarantee safe memory deallocation for nonterminating programs.
 \end{abstract}
 
 \section{Introduction}
 \subsection{Motivation and Problems}
 Manual memory management primitives (e.g., \texttt{malloc} and \texttt{free} in C) often cause serious problems such as double frees, memory leaks, and illegal read/write to a deallocated memory cell. Verifying \emph{safe memory deallocation} -- a program not leading to such an unsafe state -- is an important problem.
 
-Most of safe memory deallocation verification techniques proposed so far\cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06} refer to \emph{partial memory-leak freedom}: if a program terminates, already allocated memory cells are all deallocated. For example, the type system by Suenaga and Kobayashi\cite{DBLP:conf/aplas/SuenagaK09}, which is called \textbf{SK} type system in our paper, guarantees that (1) a well-typed program does not perform read/write/free operations to any deallocated memory cell and that (2) after execution of a well-typed program, all the memory cells are deallocated. That is, it guarantees \emph{partial correctness}: no double frees, no illegal accesses to a deallocated memory cell, but partial memory-leak freedom. We should notice that the first property, no double frees and no use after deallocation can be ensured for nonterminating programs, while the second is guaranteed if a well-typed program terminates.
+Most of safe memory deallocation verification techniques proposed so far~\cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06} refer to \emph{partial memory-leak freedom}: if a program terminates, already allocated memory cells are all deallocated. For example, the type system by Suenaga and Kobayashi\cite{DBLP:conf/aplas/SuenagaK09}, which is called \textbf{SK} type system in our paper, guarantees that (1) a well-typed program does not perform read/write/free operations to any deallocated memory cell and that (2) after execution of a well-typed program, all the memory cells are deallocated. That is, it guarantees \emph{partial correctness}: no double frees, no illegal accesses to a deallocated memory cell, but partial memory-leak freedom. We should notice that the first property, no double frees and no use after deallocation can be ensured for nonterminating programs, while the second is guaranteed if a well-typed program terminates.
 
-What will happen if a program does not terminate. The function $g$ shown in Figure \ref{example:pam} describe this situation. It executes like allocating a memory cell, calling it self again and then deallocating the allocated memory cell. By the \textbf{SK} type system, the first property is guaranteed because of no double frees and no illegal accesses to a deallocated memory cell, and the second property also is guaranteed because it does not terminate. However, it infinitely allocates a memory cell, which causes a dangerous situation -- memory leaks.
+What will happen if a program does not terminate. The function $g$ shown in Figure~\ref{example:pam} describe this situation. It executes like allocating a memory cell, calling it self again and then deallocating the allocated memory cell. By the \textbf{SK} type system, the first property is guaranteed because of no double frees and no illegal accesses to a deallocated memory cell, and the second property also is guaranteed because it does not terminate. However, it infinitely allocates a memory cell, which causes a dangerous situation -- memory leaks.
 \begin{figure}[h]
 1 \;\; $g(x)$= \dtb\dtb\dtb\Rtab\;\;$f(x)$=  \\
 2 \;\; $\LET \; x = \MALLOC  \; \IN$\dtb\dtb$\LET \; x = \MALLOC  \; \IN$\\
@@ -92,11 +92,11 @@ This section introduces a sublanguage of Suenaga and Kobayashi~\cite{DBLP:conf/a
 The syntax of language is as follows.
 \subsection{Syntax}
 \begin{eqnarray*}
-  s \ (statements)& &::=  \SKIP \tB s_{1};s_{2} \tB *x \leftarrow y \tB \Free \Cirx \\
+  s \ (\mathit{statements})& &::=  \SKIP \tB s_{1};s_{2} \tB *x \leftarrow y \tB \Free \Cirx \\
   & & \tB \LET x = \MALLOC \IN s \tB \LET x = \NULL \IN s  \\
   & & \tB \LET x = y \; \IN s \tB   \LET x = *y \; \IN s \\
   & &\tB \IFNULL(x) \; \THEN s_{1}\; \ELSE s_{2} \tB f(\vec{x})\\
-  d \ (definition)& &::= f(x_{1},\dots,x_{n}) = s
+  d \ (\mathit{definition})& &::= f(x_{1},\dots,x_{n}) = s
 \end{eqnarray*}
 A program is a pair $(D,s)$, where $D$ is the set of definition.\\
 The command $\SKIP$ does nothing. The command $s_{1};s_{2}$ is executed as a sequence, first executing $s_{1}$ and then $s_{2}$. The command $*x \leftarrow y$ updates the content of the memory cell which is pointed by pointer $x$ with value $y$. The command $\Free \Cirx$ deallocates the memory cell which is pointed by a pointer $x$. Then command $\LET x = e \; \IN s$ first evaluates the expression $e$ and binds the return value of $e$ to $x$ and then executes statement $s$. The command $\LET x = \Malloc \; \IN s$ first allocates a memory cell to a pointer $x$ and then executes the statement $s$. The command $\LET x = \NULL  \IN s$ first allocates a null pointer to $x$ and then executes $s$. The command $\LET x = y \; \IN s$ assign the pointer $y$ to $x$, so the pointer $x$ and $y$ are said aliases for the same memory cell, and then executes statement $s$. The command $\LET x = *y \; \IN s$ transfers a part of memory cells pointed by $y$ and then executes statement $s$. The command $\IFNULL(x) \; \THEN s_{1} \; \ELSE s_{2}$ denotes that  executing statement $s_{1}$ if pointer $x$ is a null pointer, otherwise executing statement $s_{2}$. The command $f(\vec{x})$ is a function call in which $\vec{x}$ denotes mutually distinct variables like \{$x_{1}, \dots, x_{n}$\}. The notation $d$ denotes the definition of function $f(\vec{x})$ which has a body of statement $s$. And examples are described by this syntax you can see in Figure 1 and  Figure 2.
@@ -251,10 +251,10 @@ $$
 This section elaborate the behavioral type system to prevent leaking memory in non-terminating programs. We define behavioral types, CCS-like processes that abstract the behavior of programs, as follows.
 \subsection{Syntax of Types}
      \begin{eqnarray*}
-       P (behavioral \ types)::=&& {\bf 0} \tB P_{1};P_{2} \tB P_{1}+P_{2} \tB \Malloc\\
+       P (\mathit{behavioral\ types})::=&& {\bf 0} \tB P_{1};P_{2} \tB P_{1}+P_{2} \tB \Malloc\\
        &&\tB \Free \tB \alpha \tB \mu\alpha.P \\
-       \tau (value \ types)::=&&    \mathbf{Ref}  \\ %
-       \sigma (function \ types)::=&& (\tau_{1},\dots, \tau_{n}) P
+       \tau (\mathit{value\ types})::=&&    \mathbf{Ref}  \\ %
+       \sigma (\mathit{function\ types})::=&& (\tau_{1},\dots, \tau_{n}) P
      \end{eqnarray*}
 
 The type $\bf 0$ abstracts the behavior of $\SKIP$ and means "does nothing". $P_{1};P_{2}$ is for sequential execution. $P_{1} + P_{2}$ is abstracted as conditional. $\Malloc$ is the behavior of a statement that allocates a memory cell exactly once. $\Free$ is for deallocating memory cell exactly once. $\mu \alpha. P$ is a recursive type. For example, the behavior of  the body of function $h$ in Figure 2 is abstracted as $\mu \alpha. \Malloc;\Malloc;\Free;\Free;\alpha$. $\alpha$ is a type variable and bounded to the recursive constructor $\mu \alpha$.
@@ -472,7 +472,7 @@ $$
 \subsection{Algorithm}
 By syntax directed typing rules, the type inference algorithm has been designed as in Figure 6.
 
-Function $PT_{v}(x) = (C,\emptyset)$ denotes that it receives a pointer variable $x$ and outputs a pair consisting of constraints set $C$ and an empty set. $PT_{\Theta}(s) = (C, P)$ is a mapping from statements to a pair --  constraints set $C$ and behavioral types $P$, where $\Theta$ is mapping from function names to function types. $PT(<D,s>) = (C, P)$ denotes that it receives a program and produces a pair $(C, P)$. $\alpha_{i}$ and $\beta$ are fresh type variables.
+Function $PT_{v}(x) = (C,\emptyset)$ denotes that it receives a pointer variable $x$ and outputs a pair consisting of constraints set $C$ and an empty set. $PT_{\Theta}(s) = (C, P)$ is a mapping from statements to a pair --  constraints set $C$ and behavioral types $P$, where $\Theta$ is mapping from function names to function types. $PT(\langle D,s \rangle) = (C, P)$ denotes that it receives a program and produces a pair $(C, P)$. $\alpha_{i}$ and $\beta$ are fresh type variables.
 
 \begin{flalign*}
    PT_{\Theta}(f) &  =  &\\
@@ -522,7 +522,7 @@ Function $PT_{v}(x) = (C,\emptyset)$ denotes that it receives a pointer variable
    \IN   &(C_{1} \cup C_{2}\cup C_{3}\cup \{P_{1} \le \beta, P_{2} \le \beta \},  \beta) &
 \end{flalign*}
 \begin{flalign*}
-   PT(<D, s>) &  =  &\\
+   PT(\langle D, s \rangle) &  =  &\\
    \LET & \Theta = \{ f_{1}:\alpha_{1}, \dots, f_{n}:\alpha_{n}  \} &\\
           & where \ \{ f_{1},\dots, f_{n} \} = dom(D) \ and \ \alpha_{1}, \dots, \alpha_{n} \  are \ fresh  & \\
   \IN   & \LET  (C_{i}, P_{i}) = PT_{\Theta}(D(f_{i})) \  for \  each \ i & \\
@@ -533,7 +533,9 @@ Function $PT_{v}(x) = (C,\emptyset)$ denotes that it receives a pointer variable
 $$
 \mathbf{Figure\; 6.}\;\; \mbox{Type Inference Algorithm}
 $$
-\section{Future Work}
+\section{Prliminary Experiment}
+\section{Related Work}
+\section{Conclusion}
 We have described a type-based approach to safe memory deallocation for non-terminating programs. The approach is based on the idea of decomposing safe memory memory deallocation into partial correctness, which is verified by previous type system, and behavioral correctness. We designed a behavioral type system in our paper for verification of behavioral correctness. Currently, we are looking for a model checker to estimate an upper bound of consumption given a behavioral type and planning to implement a verifier and conduct experiment to see whether our approach is feasible.
 \bibliographystyle{IEEEtran}
 \bibliography{tan}
