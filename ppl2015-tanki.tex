@@ -37,8 +37,8 @@
 
 \newcommand\todo[1]{{\bf KS: {#1}}}
 
-\title{A Behavioral Type System for Memory-Leak Freedom}
-\author{Author Name}
+\title{A Behavioral Type System \\ for Memory-Leak Freedom}
+\author{Qi Tan, Kohei Suenaga, Atsushi Igarashi}
 \inst{%
 $^1$ \\
 \texttt{sample@example.ac.jp}
@@ -49,7 +49,7 @@ $^2$ \\
 \begin{document}
 \maketitle
 \begin{abstract}
-We propose an approach to guarantee safe memory deallocation for nonterminating programs. The main idea is to guarantee the property using two type systems. One is the type system proposed by Suenaga and Kobayashi,  which ensures that a program does not conduct double frees and read/write operations to a deallocated memory cell, but guarantees only partial memory-leak freedom (i.e., not leaking memory if a program terminates). The other type system proposed in this paper abstracts the behavior of a program with CCS-like processes. Each action conducted by a process correspondence to an allocation and a deallocation of memory cell. We prove that a program that is well-typed in these two type system consumes only finitely many memory cells even if its execution does not terminate.
+We propose an approach to formal verification of safe memory deallocation for nonterminating programs. The main idea is to guarantee the property using two type systems. One is the type system proposed by Suenaga and Kobayashi, which ensures that a program does not conduct double frees and read/write operations to a deallocated memory cell, but guarantees only partial memory-leak freedom (i.e., not leaking memory if a program terminates). The other type system, proposed in this paper, abstracts the behavior of a program with CCS-like processes. Each action conducted by a process correspondence to an allocation and a deallocation of memory cell. By using the abstraction obtained by the latter type system, we can prove an upper bound of memory consumption of a program even if it does not terminate. We prove soundness of the latter type system.
 \end{abstract}
 
 \section{Introduction}
