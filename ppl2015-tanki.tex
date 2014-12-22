@@ -61,8 +61,8 @@ Most of the static verification of safe memory deallocation proposed so far~\cit
 
 We tackle the problem of verifying \emph{total memory-leak freedom} in this paper.\footnote{we often write memory-leak freedom for \emph{total} memory-leak freedom.} By a program being totally memory-leak free, we mean that the program requires only a bounded amount of memory even if it does not terminate. In the real-world programs, nonterminating programs such as Web servers and operating systems are very important.
 
-\begin{exmp}
-The functions $g$ and $f$ shown in Figure~\ref{example:pam} describe the motives so far. Both are well-typed in \textbf{SK} type system, hence do not conduct illegal accesses to memory cells. However, function $g$ requires unbounded number of memory cells to be executed, whereas function $f$ requires only one cell. , the function $g$ is not totally memory-leak free whereas $f$ is.
+
+%% The functions $g$ and $f$ shown in Figure~\ref{example:pam} describe the motives so far. Both are well-typed in \textbf{SK} type system, hence do not conduct illegal accesses to memory cells. However, function $g$ requires unbounded number of memory cells to be executed, whereas function $f$ requires only one cell. , the function $g$ is not totally memory-leak free whereas $f$ is.
 
 %% \begin{figure}[h]
 %% 1 \dtb $g(x)$= \dtb\dtb\dtb\Rtab\;\;$f(x)$=  \\
