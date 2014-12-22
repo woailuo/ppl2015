@@ -49,7 +49,38 @@ $^2$ \\
 \begin{document}
 \maketitle
 \begin{abstract}
-We propose an approach to formal verification of safe memory deallocation for nonterminating programs. The main idea is to guarantee the property using two type systems. One is the type system proposed by Suenaga and Kobayashi, which ensures that a program does not conduct double frees and read/write operations to a deallocated memory cell, but guarantees only partial memory-leak freedom (i.e., not leaking memory if a program terminates). The other type system, proposed in this paper, abstracts the behavior of a program with CCS-like processes. Each action conducted by a process correspondence to an allocation and a deallocation of memory cell. By using the abstraction obtained by the latter type system, we can prove an upper bound of memory consumption of a program even if it does not terminate. We prove soundness of the latter type system.
+ 
+We propose a type system to abstract the behavior of a program under
+manual memory management.  Our type system uses CCS-like processes as types where each action corresponds to an allocation and a
+deallocation of a fixed-size memory block.  The abstraction obtained
+by our type system makes it possible to estimate an upper bound of
+memory consumption of a program.
+%% Hence, by using our type system in
+%% combination with another analysis for verifying that a program does
+%% not perform double frees and does not read or write to a deallocated
+%% memory cell, we can verify memory-leak freedom even for
+%% non-terminating programs.
+Hence, by using our type system with another safe-memory-deallocation
+analysis proposed by Suenaga and Kobayashi, we can verify memory-leak
+freedom even for nonterminating programs.  We define the type system,
+prove type soundness, and show a type reconstruction procedure that
+estimates an upper bound of memory consumption using an off-the-shelf
+model checker.
+
+% We prove soundness of the latter type system.
+
+%%
+
+%% We propose an approach to formal verification of safe memory
+%% deallocation for nonterminating programs. The main idea is to
+%% guarantee the property by using two type systems. One is the type
+%% system proposed by Suenaga and Kobayashi, which ensures that a program
+%% does not conduct double frees and read/write operations to a
+%% deallocated memory cell, but guarantees only partial memory-leak
+%% freedom . The other type system, proposed in this paper, abstracts the
+%% allocation behavior of a program 
+%% %% Each action conducted by a process corresponds to an allocation and a
+%% %% deallocation of memory cell.
 \end{abstract}
 
 \section{Introduction}
