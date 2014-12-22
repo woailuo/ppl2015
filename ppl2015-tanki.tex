@@ -2,6 +2,7 @@
  \documentclass[english]{jssst_ppl} %% English
 % \documentclass[japanese,draft]{jssst_ppl} %% You can use the draft option
 \usepackage{amsmath,amsthm,amssymb,amsfonts,extarrows,geometry,amsopn,enumerate}
+\usepackage{graphicx}
 
 % set some new commands %
 \newcommand\tB{\;|\;}
@@ -48,7 +49,7 @@ $^2$ \\
 }
 \begin{document}
 \maketitle
-\begin{abstract} 
+\begin{abstract}
 We propose a type system to abstract the behavior of a program under
 manual memory management.  Our type system uses CCS-like processes as types where each action corresponds to an allocation and a
 deallocation of a fixed-size memory block. The abstraction obtained
@@ -67,14 +68,15 @@ We tackle the problem of verifying \emph{total memory-leak freedom} in this pape
 
 \begin{exmp}
 The functions $g$ and $f$ shown in Figure~\ref{example:pam} describe the motives so far. Both are well-typed in \textbf{SK} type system, hence do not conduct illegal accesses to memory cells. However, function $g$ requires unbounded number of memory cells to be executed, whereas function $f$ requires only one cell. , the function $g$ is not totally memory-leak free whereas $f$ is.
-\begin{figure}[h]
-1 \dtb $g(x)$= \dtb\dtb\dtb\Rtab\;\;$f(x)$=  \\
-2 \dtb $\LET \; x = \MALLOC  \; \IN$\dtb\dtb$\LET \; x = \MALLOC  \; \IN$\\
-3 \dtb $g(x)$ ; \; $\Free\Cirx$ \dtb\dtb\Rtab\;\;$\Free\Cirx$; \; $f(x)$
-\caption{Explanation for partial correctness and memory leak}
-\label{example:pam}
-\end{figure}
-\end{exmp}
+
+%% \begin{figure}[h]
+%% 1 \dtb $g(x)$= \dtb\dtb\dtb\Rtab\;\;$f(x)$=  \\
+%% 2 \dtb $\LET \; x = \MALLOC  \; \IN$\dtb\dtb$\LET \; x = \MALLOC  \; \IN$\\
+%% 3 \dtb $g(x)$ ; \; $\Free\Cirx$ \dtb\dtb\Rtab\;\;$\Free\Cirx$; \; $f(x)$
+%% \caption{Explanation for partial correctness and memory leak}
+%% \label{example:pam}
+%% \end{figure}
+%% \end{exmp}
 
 \subsection{Main Idea}
 \label{sec: maino}
@@ -88,12 +90,20 @@ We notice that once partial correctness is guaranteed, we can guarantee memory-l
 \label{ex:observation}
 \end{figure}
 
-Thanks for ignoring the relationship between variables and pointers, we can focus on the abstraction of bevavior of allocation and deallocaion. The behavior of a program is abstracted as CCS-like processes~\cite{DBLP:journals/iandc/MilnerPW92a}. For example, the behavior of function $h$ is as $\mu \alpha. \Malloc;\Malloc;\Free;\Free;\alpha$ which denotes it executes $\Malloc$ twice, $\Free$ twice and calls itself. Similarly, the behavior of $f$ is abstracted as $\mu \alpha. \Malloc;\Free;\alpha$; the behavior of $g$ is abstracted as $\mu \alpha. \Malloc;\alpha;\Free$. 
-
+Thanks for ignoring the relationship between variables and pointers, we can focus on the abstraction of bevavior of allocation and deallocaion. The behavior of a program is abstracted as CCS-like processes~\cite{DBLP:journals/iandc/MilnerPW92a}. For example, the behavior of function $h$ is as $\mu \alpha. \Malloc;\Malloc;\Free;\Free;\alpha$ which denotes it executes $\Malloc$ twice, $\Free$ twice and calls itself. Similarly, the behavior of $f$ is abstracted as $\mu \alpha. \Malloc;\Free;\alpha$; the behavior of $g$ is abstracted as $\mu \alpha. \Malloc;\alpha;\Free$.
 
 \subsection{Approach}
 To guarantee safe memory deallocation for nonterminating programs, our key idea is to decompose this problem into two subproblems: (1) partial correctness and (2) \emph{behavioral correctness}. The partial correctness has been described above: no double frees and no use after deallocation, but partial memory-leak freedom. The behavioral correctness means a program does not leak memory and uses the method described in above Subsection~\ref{sec:maino} to guarantee memory leak freedom for nonterminating programs. It is verified by behavioral type system which is mainly used to abstract the behavior of a program. Behavioral types are heavily used in the context of concurrent program verification~\cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}.
+
 \subsection{Overview of the algorithm}
+
+\begin{figure}
+ \centering
+\includegraphics[width=10cm]{overview.jpg}
+\caption{Overview of the algorithm}
+\label{fig:ov}
+\end{figure}
+
 A program is first checked by $\mathbf{SK}$ type system; it is passed to the behavioral type system proposed in our paper if its partial correctness is guaranteed, otherwise returns ``it is not safe''; the behavioral type system will check it and produce a behavioral type $P$ which abstracts the behavior of the program; and then by modeling the behavioral type $P$ using model checkers like \texttt{SPIN} or \texttt{CPAChecker} to verify whether the behavioral correctness of the program is guaranteed. If its behavioral correctness is verified by model checker, the safe memory deallocation for this program is ensured, otherwise return ``it is not safe''.
 
 The rest of this paper is structured as follows. Section 2 introduces a simple imperative language, as well as its syntax and operational semantics. Section 3 introduces the behavioral type system, which describes how to guarantee memory-leak freedom for non-terminating programs. Section 4 proposes an inference algorithm, and talks about syntax directed typing rules. Section 5 describes current status and future work.
