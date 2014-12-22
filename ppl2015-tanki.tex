@@ -54,12 +54,14 @@ We propose an approach to formal verification of safe memory deallocation for no
 
 \section{Introduction}
 \subsection{Motivation and Problems}
-Manual memory management primitives (e.g., \texttt{malloc} and \texttt{free} in C) often cause serious problems such as double frees, memory leaks, and illegal read/write operations to a deallocated memory cell. Verifying \emph{safe memory deallocation} -- a program not leading to such an unsafe state -- is an important problem.
+Manual memory management primitives (e.g., \texttt{malloc} and \texttt{free} in C) often cause serious problems such as double frees, memory leaks, and read/write operations to a deallocated memory cell; we call such operations \emph{illegal accesses}. Verifying \emph{safe memory deallocation} -- a program not leading to such an unsafe state -- is an important problem.
 
-Most of the static verification of safe memory deallocation proposed so far~\cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06} deal with only \emph{partial memory-leak freedom}: if a program terminates, allocated memory cells are all deallocated. For example, the type system by Suenaga and Kobayashi~\cite{DBLP:conf/aplas/SuenagaK09}, which is called \textbf{SK} type system in our paper, guarantees that (1) a well-typed program does not perform read/write/free operations to any deallocated memory cells and that (2) after execution of a well-typed program, all the memory cells are deallocated. That is, it guarantees \emph{partial correctness}: a well-typed program does not perform double frees, accesses to a deallocated memory cell, but memory-leak freedom is guaranteed only if the program terminates.
+Most of the static verification of safe memory deallocation proposed so far~\cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06} deal with only \emph{partial memory-leak freedom}: if a program terminates, allocated memory cells are all deallocated at the end. For example, the type system by Suenaga and Kobayashi~\cite{DBLP:conf/aplas/SuenagaK09}, which is called \textbf{SK} type system in our paper, guarantees that (1) a well-typed program does not conduct illegal accesses and that (2) after execution of a well-typed program, all the memory cells are deallocated.
+
+We tackle the problem of verifying \emph{total memory-leak freedom} in this paper.\footnote{we often write memory-leak freedom for \emph{total} memory-leak freedom.} By a program being totally memory-leak free, we mean that the program requires only a bounded amount of memory even if it does not terminate. In the real-world programs, nonterminating programs such as Web servers and operating systems are very important.
 
 \begin{exmp}
-The functions $g$ and $f$ shown in Figure~\ref{example:pam} describe the motives so far. Both are well-typed in \textbf{SK} type system, hence do not conduct illegal accesses to memory cells. However, function $g$ requires unbounded number of memory cells to be executed, whereas function $f$ requires only one cell.
+The functions $g$ and $f$ shown in Figure~\ref{example:pam} describe the motives so far. Both are well-typed in \textbf{SK} type system, hence do not conduct illegal accesses to memory cells. However, function $g$ requires unbounded number of memory cells to be executed, whereas function $f$ requires only one cell. , the function $g$ is not totally memory-leak free whereas $f$ is.
 \begin{figure}[h]
 1 \dtb $g(x)$= \dtb\dtb\dtb\Rtab\;\;$f(x)$=  \\
 2 \dtb $\LET \; x = \MALLOC  \; \IN$\dtb\dtb$\LET \; x = \MALLOC  \; \IN$\\
@@ -69,7 +71,6 @@ The functions $g$ and $f$ shown in Figure~\ref{example:pam} describe the motives
 \end{figure}
 \end{exmp}
 
-In the real-world programs, nonterminating programs such as Web servers and operating systems are very important. 
 \subsection{Main Idea}
 \label{sec: maino}
 We notice that once partial correctness is guaranteed, we can guarantee memory-leak freedom for nonterminating programs by estimating the upper bound of memory consumption ignoring the relationship between variables and pointers to memory cells. For demonstrating this observation, we use an example in Figure~\ref{ex:observation}. The function $h$ is partially corrected. The behavior of $h$ is that it consumes two memory cells at once. In order to verify this behavior, we ignore the variables $x$ and $y$ in $h$ to focus on the fact that $h$ executes $\Malloc$ twice, $\Free$ twice, and then calls $h$. This abstraction is sound because the correspondence between allocations and deallocations is guaranteed by the partial correctness verification.
