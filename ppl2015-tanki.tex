@@ -50,17 +50,21 @@ $^2$ \\
 \begin{document}
 \maketitle
 \begin{abstract}
+<<<<<<< HEAD
 We propose a type system to abstract the behavior of a program under
 manual memory management.  Our type system uses CCS-like processes as types where each action corresponds to an allocation and a
 deallocation of a fixed-size memory block. The abstraction obtained
 by our type system makes it possible to estimate an upper bound of
 memory consumption of a program.
 Hence, by using our type system with another safe-memory-deallocation analysis proposed by Suenaga and Kobayashi, we can verify memory-leak freedom even for nonterminating programs.  We define the type system, prove type soundness, and show a type reconstruction procedure that estimates an upper bound of memory consumption using an off-the-shelf model checker.
+=======
+We propose a type system to abstract the behavior of a program under manual memory management. Our type system uses CCS-like processes as types where each action corresponds to an allocation and a deallocation of a fixed-size memory block. The abstraction obtained by our type system makes it possible to estimate an upper bound of memory consumption of a program. Hence, by using our type system with another safe-memory-deallocation analysis proposed by Suenaga and Kobayashi, we can verify memory-leak freedom even for nonterminating programs.  We define the type system, prove type soundness, and show a type reconstruction procedure that estimates an upper bound of memory consumption using an off-the-shelf model checker.
+>>>>>>> 7be6e8c49c3b5aed36d02306456d8fec7dd8c68a
 \end{abstract}
 
 \section{Introduction}
 \subsection{Motivation and Problems}
-Manual memory management primitives (e.g., \texttt{malloc} and \texttt{free} in C) often cause serious problems such as double frees, memory leaks, and read/write operations to a deallocated memory cell; we call such operations \emph{illegal accesses}. Verifying \emph{safe memory deallocation} a program not leading to such an unsafe state \texttt{--} is an important problem.
+Manual memory management primitives (e.g., \texttt{malloc} and \texttt{free} in C) often cause serious problems such as double frees, memory leaks, and read/write operations to a deallocated memory cell; we call such operations \emph{illegal accesses}. Verifying \emph{safe memory deallocation}\textendash a program not leading to such an unsafe state\textendash is an important problem.
 
 Most of the static verification of safe memory deallocation proposed so far~\cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06} deal with only \emph{partial memory-leak freedom}: if a program terminates, allocated memory cells are all deallocated at the end. For example, the type system by Suenaga and Kobayashi~\cite{DBLP:conf/aplas/SuenagaK09}, which is called \textbf{SK} type system in our paper, guarantees that (1) a well-typed program does not conduct illegal accesses and that (2) after execution of a well-typed program, all the memory cells are deallocated.
 
