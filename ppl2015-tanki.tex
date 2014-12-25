@@ -4,6 +4,7 @@
 \usepackage{amsmath,amsthm,amssymb,amsfonts,extarrows,geometry,amsopn,enumerate}
 \usepackage{graphicx}
 \usepackage{boxedminipage}
+\usepackage{url}
 
 % set some new commands %
 \newcommand\tB{\;|\;}
@@ -58,21 +59,26 @@ We propose a type system to abstract the behavior of a program under manual memo
 
 \section{Introduction}
 \subsection{Motivation and Problems}
+Manual memory management primitives (e.g., \texttt{malloc} and \texttt{free} in C) often cause that forgetting to deallocate memory cells after use, which we call \emph{memory leaks}. It can diminish the performance of the computer by reducing the amount of available memory cells. Memory leaks may not be serious or even detectable by normal means. Normal memory used by an application is released when application terminates. This means that a memory leak in a program that only runs for a short time may not be noticed and is rarely serious. However, in the real-world programs, nonterminating programs such as Web servers and operating systems are very important. If a nonterminating program causes memory leaks, eventually, too much of the available memory cells may become allocated and all or part of the system stops working correctly~\cite{wiki:xxx}.
 
-%% Manual memory management primitives (e.g., \texttt{malloc} and \texttt{free} in C) often cause serious problems such as double frees, memory leaks, and read/write operations to a deallocated memory cell; we call such operations \emph{illegal accesses}. Verifying \emph{safe memory deallocation}\textendash a program not leading to such an unsafe state\textendash is an important problem.
+\begin{exmp}\label{ex:ex1}
+The functions $h$ and $h'$ shown in Figure~\ref{ex:np} describe memory leaks for nonterminating programs. Function $h$ requires two memory cells at most, whereas function $h'$ requires unbounded number of memory cells to be executed.
+\begin{figure}[h]
+1  \Rtab $h(x)$= \dtb \dtb\dtb\Rtab$h'(x)$= \\
+2  \dtb $\LET \; x = \MALLOC  \; \IN$ \dtb \Rtab$\LET \; x = \MALLOC  \; \IN$\\
+3  \dtb $\LET \; y = \MALLOC  \; \IN$ \dtb \Rtab$\LET \; y = \MALLOC  \; \IN$\\
+4  \dtb $\Free\Cirx$; $\Free(y) $;\;$h(x)$ \dtb \Rtab$h'(x)$; $\Free\Cirx$; \ $\Free(y)$
+\caption{memory leaks in nonterminating programs.}
+\label{ex:np}
+\end{figure}
+\end{exmp}
+
+%% Currently, we conduct the research on memory-leak freedom for nonterminating programs. In the real-world programs, nonterminating programs such as Web servers and operating systems are very important.
 
 %% Most of the static verification of safe memory deallocation proposed so far~\cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06} deal with only \emph{partial memory-leak freedom}: if a program terminates, allocated memory cells are all deallocated at the end. For example, the type system by Suenaga and Kobayashi~\cite{DBLP:conf/aplas/SuenagaK09}, which is called \textbf{SK} type system in our paper, guarantees that (1) a well-typed program does not conduct illegal accesses and that (2) after execution of a well-typed program, all the memory cells are deallocated.
 
 %% We tackle the problem of verifying \emph{total memory-leak freedom} in this paper.\footnote{we often write memory-leak freedom for \emph{total} memory-leak freedom.} By a program being totally memory-leak free, we mean that the program requires only a bounded amount of memory even if it does not terminate. In the real-world programs, nonterminating programs such as Web servers and operating systems are very important.
 
-%% \begin{figure}[h]
-%% 1  \Rtab $h(x)$= \dtb \dtb\dtb\Rtab$h'(x)$= \\
-%% 2  \dtb $\LET \; x = \MALLOC  \; \IN$ \dtb \Rtab$\LET \; x = \MALLOC  \; \IN$\\
-%% 3  \dtb $\LET \; y = \MALLOC  \; \IN$ \dtb \Rtab$\LET \; y = \MALLOC  \; \IN$\\
-%% 4  \dtb $\Free\Cirx$; $\Free(y) $;\;$h(x)$ \dtb \Rtab$h'(x)$; $\Free\Cirx$; \ $\Free(y)$
-%% \caption{Example for demonstrating the main observation.}
-%% \label{ex:ob}
-%% \end{figure}
 
 %% %% The functions $g$ and $f$ shown in Figure~\ref{example:pam} describe the motives so far. Both are well-typed in \textbf{SK} type system, hence do not conduct illegal accesses to memory cells. However, function $g$ requires unbounded number of memory cells to be executed, whereas function $f$ requires only one cell. , the function $g$ is not totally memory-leak free whereas $f$ is.
 
