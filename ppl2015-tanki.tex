@@ -48,6 +48,9 @@
 \title{A Behavioral Type System for \\ Memory-Leak Freedom}
 \author{Qi Tan, Kohei Suenaga, Atsushi Igarashi}
 \inst{
+    Department of Communications and Computer Engineering\\
+    Graduate School of Informatics\\
+    Kyoto University\\
 \texttt{\{tanki,ksuenaga,igarashi\}@fos.kuis.kyoto-u.ac.jp}
 %\medskip\par%
 }
@@ -59,10 +62,10 @@ We propose a type system to abstract the behavior of a program under manual memo
 
 \section{Introduction}
 \subsection{Motivation and Problems}
-Manual memory management primitives (e.g., \texttt{malloc} and \texttt{free} in C) often cause that forgetting to deallocate memory cells after use, which we call \emph{memory leaks}. It can diminish the performance of the computer by reducing the amount of available memory cells. Memory leaks may not be serious or even detectable by normal means. Normal memory used by an application is released when application terminates. This means that a memory leak in a program that only runs for a short time may not be noticed and is rarely serious. However, in the real-world programs, nonterminating programs such as Web servers and operating systems are very important. If a nonterminating program causes memory leaks, eventually, too much of the available memory cells may become allocated and all or part of the system stops working correctly~\cite{wiki:xxx}.
+Manual memory management primitives (e.g., \texttt{malloc} and \texttt{free} in C) often cause that forgetting to deallocate memory cells after use, which we call \emph{memory leaks}. It can diminish the performance of the computer by reducing the amount of available memory cells. Memory leaks may not be serious or even detectable by normal means. Normal memory used by an application is released when application terminates. This means that a memory leak in a program that only runs for a short time may not be noticed and is rarely serious. However, in the real-world programs, nonterminating programs such as Web servers and operating systems are very important. If memory leaks in such nonterminating programs, eventually, too much of the available memory cells may become allocated and all or part of the system stops working correctly~\cite{wiki:xxx}.
 
 \begin{exmp}\label{ex:ex1}
-The functions $h$ and $h'$ shown in Figure~\ref{ex:np} describe memory leaks for nonterminating programs. Function $h$ requires two memory cells at most, whereas function $h'$ requires unbounded number of memory cells to be executed.
+The functions $h$ and $h'$ shown in Figure~\ref{ex:np} describe memory-leak freedom and memory leaks in nonterminating programs. Function $h$ requires two memory cells at most, whereas function $h'$ requires unbounded number of memory cells to be executed.
 \begin{figure}[h]
 1  \Rtab $h(x)$= \dtb \dtb\dtb\Rtab$h'(x)$= \\
 2  \dtb $\LET \; x = \MALLOC  \; \IN$ \dtb \Rtab$\LET \; x = \MALLOC  \; \IN$\\
@@ -72,6 +75,8 @@ The functions $h$ and $h'$ shown in Figure~\ref{ex:np} describe memory leaks for
 \label{ex:np}
 \end{figure}
 \end{exmp}
+
+
 
 %% Currently, we conduct the research on memory-leak freedom for nonterminating programs. In the real-world programs, nonterminating programs such as Web servers and operating systems are very important.
 
