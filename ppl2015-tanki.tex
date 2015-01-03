@@ -1,7 +1,7 @@
 %\documentclass[japanese]{jssst_ppl} %%
  \documentclass[english]{jssst_ppl} %% English
 % \documentclass[japanese,draft]{jssst_ppl} %% You can use the draft option
-\usepackage{amsmath,amsthm,amssymb,amsfonts,extarrows,geometry,amsopn,enumerate}
+\usepackage{bcprules,amsmath,amsthm,amssymb,amsfonts,extarrows,geometry,amsopn,enumerate}
 \usepackage{graphicx}
 \usepackage{boxedminipage}
 \usepackage{url}
@@ -61,7 +61,17 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-We propose a type system to abstract the behavior of a program under manual memory management. Our type system uses CCS-like processes as types where each action corresponds to an allocation and a deallocation of a fixed-size memory block. The abstraction obtained by our type system makes it possible to estimate an upper bound of memory consumption of a program. Hence, by using our type system with another safe-memory-deallocation analysis proposed by Suenaga and Kobayashi, we can verify memory-leak freedom even for nonterminating programs.  We define the type system, prove type soundness, and show a type reconstruction procedure that estimates an upper bound of memory consumption using an off-the-shelf model checker.
+We propose a type system to abstract the behavior of a program under
+manual memory management. Our type system uses CCS-like processes as
+types where each action corresponds to an allocation and a
+deallocation of a fixed-size memory block. The abstraction obtained by
+our type system makes it possible to estimate an upper bound of memory
+consumption of a program. Hence, by using our type system with another
+safe-memory-deallocation analysis proposed by Suenaga and Kobayashi,
+we can verify memory-leak freedom even for nonterminating programs.
+We define the type system, prove type soundness, and show a type
+reconstruction procedure that estimates an upper bound of memory
+consumption using an off-the-shelf model checker.
 \end{abstract}
 
 \section{Introduction}
@@ -127,7 +137,7 @@ context or does not matter.
 
 \todo{Revised}
 
-The following BNF defines our language \mathcal{L}.
+The following BNF defines our language \(\mathcal{L}\).
 
 \begin{eqnarray*}
   s \mbox{ (statements)} & ::= &  \SKIP \mid s_{1};s_{2} \mid *x \leftarrow y \mid \Free(x) \\
@@ -141,24 +151,25 @@ The following BNF defines our language \mathcal{L}.
 The language is equipped with procedure calls, dynamic memory
 allocation and deallocation, and memory accesses with pointers.
 \(\mathbf{Var}\) is a countably infinite set of \emph{variables}
-ranged over by \(x, y, \dots\).  The statement \(\SKIP\) does nothing.
-The statement \(s_1;s_2\) executes \(s_1\) and \(s_2\) sequentially.
-The statement \(*x \leftarrow y\) writes \(y\) to the memory cell that
-\(x\) points to.  The statement \(\LET x = e\ \IN s\) evaluates the
-expression \(e\), binds \(x\) to the result, and executes \(s\).  The
-expression \(\Malloc()\) allocates a new memory cell and evaluates to
-the pointer to the cell.  The expression \(\NULL\) evaluates to the
-null pointer.  The expression \(y\) evaluates to its value.  The
-expression \(*y\) evaluates to the value in the memory cell that \(y\)
-points to.  The statement \(\IFNULL(x)\ \THEN\ s_1\ \ELSE\ s_2\)
-executes \(s_1\) if \(x\) is \(\NULL\) and executes \(s_2\) otherwise.
-The statement \(f(\vec{x})\) calls procedure \(f\) with arguments
-\(\vec{x}\).
+ranged over by \(w, x, y\), and \(z\).  The statement \(\SKIP\) does
+nothing.  The statement \(s_1;s_2\) executes \(s_1\) and \(s_2\)
+sequentially.  The statement \(*x \leftarrow y\) writes \(y\) to the
+memory cell that \(x\) points to.  The statement \(\LET x = e\ \IN s\)
+evaluates the expression \(e\), binds \(x\) to the result, and
+executes \(s\).  The expression \(\Malloc()\) allocates a new memory
+cell and evaluates to the pointer to the cell.  The expression
+\(\NULL\) evaluates to the null pointer.  The expression \(y\)
+evaluates to its value.  The expression \(*y\) evaluates to the value
+in the memory cell that \(y\) points to.  The statement
+\(\IFNULL(x)\ \THEN\ s_1\ \ELSE\ s_2\) executes \(s_1\) if \(x\) is
+\(\NULL\) and executes \(s_2\) otherwise.  The statement
+\(f(\vec{x})\) calls procedure \(f\) with arguments \(\vec{x}\).
 
 A procedure definition ranged over by \(d\) is a map from a procedure
-name to an abstraction of the form \((\vec{x})s\).  A program is a
-pair of the union of several procedure definitions \(d_1 \cup \dots
-\cup d_n\) and a main statement \(s\).
+name to an abstraction of the form \((\vec{x})s\).  We use a
+metavariable \(D\) for a set of function definitions \(d_1 \cup \dots
+\cup d_n\).  A program is a pair of function definitions \(D\) and a
+main statement \(s\).
 
 %% A program is a pair $(D,s)$, where $D$ is the set of definition.\\ The
 %% command $\SKIP$ does nothing. The command $s_{1};s_{2}$ is executed as
@@ -206,7 +217,20 @@ labeled transition on \emph{configurations} \(\langle H, R, s, n
 \(n\) in a configuration is later used to formalize memory leak caused
 by nonterminating program.
 
-\todo{KOKOMADE.}
+The operational semantics is given by a labeled translation relation
+\(\langle H, R, s, n \rangle \xlongrightarrow{\rho}_D \langle H', R',
+s', n' \rangle\) where \(\rho\), an \emph{action}, is \(\Malloc\),
+\(\Free\), or \(\tau\).  The action \(\Malloc\) expresses an
+allocation of a memory cell; \(\Free\) expresses a deallocation;
+\(\tau\) expresses the other actions.  We often omit \(\tau\) in
+\(\xlongrightarrow{\tau}_D\).  We use a metavariable \(\sigma\) for a
+finite sequence of actions \(\rho_1\dots\rho_n\).  We write
+\(\xlongrightarrow{\rho_1\dots\rho_n}_D\) for
+\(\xlongrightarrow{\rho_1}_D\xlongrightarrow{\rho_2}_D\dots\xlongrightarrow{\rho_n}_D\).
+We write \(\xLongrightarrow{\rho}_D\) for
+\(\xlongrightarrow{}_D^*\xlongrightarrow{\rho}_D\xlongrightarrow{}_D^*\).
+We write \(\xLongrightarrow{\rho_1\dots\rho_n}_D\) for
+\(\xLongrightarrow{\rho_1}_D\dots\xLongrightarrow{\rho_n}_D\).
 
 %% Because we want to estimate the number of available memory cells at
 %% every operation step, we extend the triple $\langle H\coma R\coma s
@@ -223,159 +247,180 @@ by nonterminating program.
 %% which models registers, is a mapping from finite set of variables to
 %% $\mathcal{H}$ $\cup$ \{$null$\}.
 
-Transition rules are listed in Figure 3. In these rules, $f\{x\to v\}$
-is defined as a function $f'$ such that $f'(y) = v$ if $x = y$,
-otherwise $f'(y) = f(y)$ and $y \in dom(f)$. There are three rules
-about $\mathbf{NullEx}$ which denotes accessing a null pointer, three
-rules about $\mathbf{Error}$ for accessing a deallocated memory cell,
-and one rule about $\mathbf{Error}$ which denotes allocating a memory
-cell when there is no memory space.
-%\begin{figure}[h]
-% Skip Command
-Runtime state is represented by $\langle H, R, s, n \rangle$, where
-Operational semantics is defined by the relations\\
-$\rightarrow_{D}, \xlongrightarrow{\Malloc}_{D}, and \xlongrightarrow{\Free}_{D} $ defined by the rules in ....\\
-Here, $\rightarrow_{D}$ expresses; ....\\
+Figure~\ref{fig:transitionRules} defines the relation
+\(\xlongrightarrow{\rho}_D\).
 
-$$
-    \frac{n \in \mathbb{N}}
-            {\langle H\coma R\coma  \SKIP;s , n \rangle
-              \longrightarrow_{D}
-                \langle H\coma R\coma   s , n \rangle }
-     \Rtab \mbox{(E-Skip)}
-$$
-% Assignment
-$$
-     \frac{R(x) \in dom(H), n \in \mathbb{N}}
-           {\langle H\coma R\coma  *x \leftarrow y , n \rangle
-             \longrightarrow_{D}
-             \langle H \Lfc R(x) \rightarrow R(y) \Rfc \coma R \coma   \SKIP , n  \rangle }
-     \Rtab \mbox{(E-Assign)}
-$$
-% Free Command
-$$
-     \frac{R(x) \in dom(H) , n \in \mathbb{N}}
-          {\langle H\coma R\coma  \FREE , n \rangle
-            \xlongrightarrow{\Free}_{D}
-            \langle H\backslash \Lfc R(x) \Rfc \coma R \coma   \SKIP , n+1  \rangle }
-     \Rtab \mbox{(E-Free)}
-$$
-% Let Null Command
-$$
-     \frac{x' \notin dom(R)}
-           {\langle H\coma R\coma  \LET x = \NULL \IN s , n \rangle
-             \longrightarrow_{D}
-             \langle H\coma R\Lfc x' \rightarrow \NULL \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
-     \Rtab \mbox{(E-LetNull)}
-$$
-% Let Eq Command
-$$
-     \frac{x' \notin dom(R)}
-            {\langle H\coma R\coma \LET x = y \; \IN s , n \rangle
-              \longrightarrow_{D}
-              \langle H\coma R\Lfc x' \rightarrow R(y) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
-\Rtab \mbox{(E-LetEq)}
-$$
-% Reference Command
-$$
-     \frac{x' \notin dom(R)}
-            {\langle H\coma R\coma  \LET x = *y \; \IN s , n \rangle
-              \longrightarrow_{D}
-              \langle H\coma R\Lfc x' \rightarrow H(R(y)) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
-     \Rtab \mbox{(E-LetDref)}
-$$
-% Malloc (allocate) Command
-$$
-     \frac{h \notin dom(H)}
-            {\langle H\coma R\coma  \LET x = \Malloc() \; \IN s , n \rangle
-              \xlongrightarrow{\Malloc}_{D}
-              \langle H \Lfc h \rightarrow v\Rfc \coma R\Lfc x' \rightarrow h \Rfc \coma   \Lb x'/x \Rb s , n-1  \rangle }
-\Rtab \mbox{(E-Malloc)}
-$$
-% IFNULL T
-$$
-    \frac{R(x) = \NULL}
-           {\langle H \coma R \coma \IFNULL\Cirx   \THEN   s_{1} \ELSE\  s_{2} \coma  n \rangle
-           \longrightarrow_{D}
-           \langle H\coma R\coma s_{1} \coma n \rangle}
-    \Rtab \mbox{(E-IfNullT)}
-$$
-% IFNULL F
-$$
-    \frac{R(x) \neq \NULL}
-           {\langle H \coma R \coma \IFNULL\Cirx \THEN  s_{1} \ELSE  s_{2} \coma  n \rangle
-           \longrightarrow_{D}
-           \langle H\coma R\coma s_{2} \coma  n, \rangle}
-    \Rtab \mbox{(E-IfNullF)}
-$$
-% Function Call
-$$
-     \frac{f(\vec{y}) = s \in D}
-            { \langle H\coma R\coma  f(\vec{x}) , n \rangle
-               \longrightarrow_{D}
-               \langle H\coma R\coma  \Lb \vec{x}/\vec{y} \Rb s , n \rangle}
-      \Rtab \mbox{(E-Call)}
-$$
-% Error : access the null memory cell
-$$
-      \frac{R(x) = null}
-            {\langle H\coma R\coma  *x \leftarrow y , n \rangle
-              \longrightarrow_{D}
-             \bf NullEx }
-      \Rtab \mbox{(E-AssignNullError)}
-$$
-% ERROR : access the null memory cell
-$$
-      \frac{R(y) = null}
-             {\langle H\coma R\coma  x = *y, n \rangle
-               \longrightarrow_{D}
-              \bf NullEx }
-             \Rtab \mbox{(E-DrefNullError)}
-$$
-$$
-     \frac{R(x) =  null }
-           {\langle H\coma R\coma  \FREE , n \rangle
-             \xlongrightarrow{\Free}_{D} \bf NullEx  }
-      \Rtab \mbox{(E-FreeNullError)}
-$$
-% ERROR :
-$$
-     \frac{R(x) \notin dom(H) \cup \Lfc null \Rfc}
-           {\langle H\coma R\coma   *x \leftarrow y,  n \rangle
-             \longrightarrow_{D}
-           \bf  Error }
-    \Rtab \mbox{(E-AssignError)}
-$$
-% ERROR
-$$
-      \frac{R(y) \notin dom(H) \cup \Lfc null \Rfc}
-           {\langle H\coma R\coma  \LET x  = *y \; \IN s, n \rangle
-              \longrightarrow_{D}
-                \bf  Error }
-      \Rtab \mbox{(E-DrefError)}
-$$
-%
-$$
-      \frac{R(x) \notin dom(H) \cup \Lfc null \Rfc}
-            {\langle H\coma R\coma  \FREE , n \rangle
-              \xlongrightarrow{\Free}_{D}
-              \bf Error }
-     \Rtab \mbox{(E-FreeError)}
-$$
- % ERROR: no enough space
-$$
-      \langle H\coma R\coma \LET x = \Malloc() \ \IN s ,  0  \rangle
-      \xlongrightarrow{\Malloc}_{D}
-      \mathbf{Error}
-      \Rtab \mbox{(E-MallocError)}
-$$
-$$
-     \mathbf{Figure \; 3.} \;\;  \mbox{ Operational Semantics}
-$$
+\begin{figure}
+\begin{minipage}{\textwidth}
+
+\infax[Tr-Skip]
+{\langle H, R, \SKIP;s, n \rangle
+\longrightarrow_{D}
+\langle H, R, s, n \rangle}
+
+\todo{Complete this figure.  Read the header of bcprules.sty for the
+  usage of infax and infrule macros.}
+
+\end{minipage}
+\label{fig:transitionRules}
+\caption{Definition of the labeled transition \(\langle H, R, s, n
+  \rangle \xlongrightarrow{\rho}_D \langle H', R', s', n' \rangle\).}
+\end{figure}
+
+%% Transition rules are listed in Figure 3. In these rules, $f\{x\to v\}$
+%% is defined as a function $f'$ such that $f'(y) = v$ if $x = y$,
+%% otherwise $f'(y) = f(y)$ and $y \in dom(f)$. There are three rules
+%% about $\mathbf{NullEx}$ which denotes accessing a null pointer, three
+%% rules about $\mathbf{Error}$ for accessing a deallocated memory cell,
+%% and one rule about $\mathbf{Error}$ which denotes allocating a memory
+%% cell when there is no memory space.
+%% %\begin{figure}[h]
+%% % Skip Command
+%% Runtime state is represented by $\langle H, R, s, n \rangle$, where
+%% Operational semantics is defined by the relations\\
+%% $\rightarrow_{D}, \xlongrightarrow{\Malloc}_{D}, and \xlongrightarrow{\Free}_{D} $ defined by the rules in ....\\
+%% Here, $\rightarrow_{D}$ expresses; ....\\
+
+%% $$
+%%     \frac{n \in \mathbb{N}}
+%%             {\langle H\coma R\coma  \SKIP;s , n \rangle
+%%               \longrightarrow_{D}
+%%                 \langle H\coma R\coma   s , n \rangle }
+%%      \Rtab \mbox{(E-Skip)}
+%% $$
+%% % Assignment
+%% $$
+%%      \frac{R(x) \in dom(H), n \in \mathbb{N}}
+%%            {\langle H\coma R\coma  *x \leftarrow y , n \rangle
+%%              \longrightarrow_{D}
+%%              \langle H \Lfc R(x) \rightarrow R(y) \Rfc \coma R \coma   \SKIP , n  \rangle }
+%%      \Rtab \mbox{(E-Assign)}
+%% $$
+%% % Free Command
+%% $$
+%%      \frac{R(x) \in dom(H) , n \in \mathbb{N}}
+%%           {\langle H\coma R\coma  \FREE , n \rangle
+%%             \xlongrightarrow{\Free}_{D}
+%%             \langle H\backslash \Lfc R(x) \Rfc \coma R \coma   \SKIP , n+1  \rangle }
+%%      \Rtab \mbox{(E-Free)}
+%% $$
+%% % Let Null Command
+%% $$
+%%      \frac{x' \notin dom(R)}
+%%            {\langle H\coma R\coma  \LET x = \NULL \IN s , n \rangle
+%%              \longrightarrow_{D}
+%%              \langle H\coma R\Lfc x' \rightarrow \NULL \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
+%%      \Rtab \mbox{(E-LetNull)}
+%% $$
+%% % Let Eq Command
+%% $$
+%%      \frac{x' \notin dom(R)}
+%%             {\langle H\coma R\coma \LET x = y \; \IN s , n \rangle
+%%               \longrightarrow_{D}
+%%               \langle H\coma R\Lfc x' \rightarrow R(y) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
+%% \Rtab \mbox{(E-LetEq)}
+%% $$
+%% % Reference Command
+%% $$
+%%      \frac{x' \notin dom(R)}
+%%             {\langle H\coma R\coma  \LET x = *y \; \IN s , n \rangle
+%%               \longrightarrow_{D}
+%%               \langle H\coma R\Lfc x' \rightarrow H(R(y)) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
+%%      \Rtab \mbox{(E-LetDref)}
+%% $$
+%% % Malloc (allocate) Command
+%% $$
+%%      \frac{h \notin dom(H)}
+%%             {\langle H\coma R\coma  \LET x = \Malloc() \; \IN s , n \rangle
+%%               \xlongrightarrow{\Malloc}_{D}
+%%               \langle H \Lfc h \rightarrow v\Rfc \coma R\Lfc x' \rightarrow h \Rfc \coma   \Lb x'/x \Rb s , n-1  \rangle }
+%% \Rtab \mbox{(E-Malloc)}
+%% $$
+%% % IFNULL T
+%% $$
+%%     \frac{R(x) = \NULL}
+%%            {\langle H \coma R \coma \IFNULL\Cirx   \THEN   s_{1} \ELSE\  s_{2} \coma  n \rangle
+%%            \longrightarrow_{D}
+%%            \langle H\coma R\coma s_{1} \coma n \rangle}
+%%     \Rtab \mbox{(E-IfNullT)}
+%% $$
+%% % IFNULL F
+%% $$
+%%     \frac{R(x) \neq \NULL}
+%%            {\langle H \coma R \coma \IFNULL\Cirx \THEN  s_{1} \ELSE  s_{2} \coma  n \rangle
+%%            \longrightarrow_{D}
+%%            \langle H\coma R\coma s_{2} \coma  n, \rangle}
+%%     \Rtab \mbox{(E-IfNullF)}
+%% $$
+%% % Function Call
+%% $$
+%%      \frac{f(\vec{y}) = s \in D}
+%%             { \langle H\coma R\coma  f(\vec{x}) , n \rangle
+%%                \longrightarrow_{D}
+%%                \langle H\coma R\coma  \Lb \vec{x}/\vec{y} \Rb s , n \rangle}
+%%       \Rtab \mbox{(E-Call)}
+%% $$
+%% % Error : access the null memory cell
+%% $$
+%%       \frac{R(x) = null}
+%%             {\langle H\coma R\coma  *x \leftarrow y , n \rangle
+%%               \longrightarrow_{D}
+%%              \bf NullEx }
+%%       \Rtab \mbox{(E-AssignNullError)}
+%% $$
+%% % ERROR : access the null memory cell
+%% $$
+%%       \frac{R(y) = null}
+%%              {\langle H\coma R\coma  x = *y, n \rangle
+%%                \longrightarrow_{D}
+%%               \bf NullEx }
+%%              \Rtab \mbox{(E-DrefNullError)}
+%% $$
+%% $$
+%%      \frac{R(x) =  null }
+%%            {\langle H\coma R\coma  \FREE , n \rangle
+%%              \xlongrightarrow{\Free}_{D} \bf NullEx  }
+%%       \Rtab \mbox{(E-FreeNullError)}
+%% $$
+%% % ERROR :
+%% $$
+%%      \frac{R(x) \notin dom(H) \cup \Lfc null \Rfc}
+%%            {\langle H\coma R\coma   *x \leftarrow y,  n \rangle
+%%              \longrightarrow_{D}
+%%            \bf  Error }
+%%     \Rtab \mbox{(E-AssignError)}
+%% $$
+%% % ERROR
+%% $$
+%%       \frac{R(y) \notin dom(H) \cup \Lfc null \Rfc}
+%%            {\langle H\coma R\coma  \LET x  = *y \; \IN s, n \rangle
+%%               \longrightarrow_{D}
+%%                 \bf  Error }
+%%       \Rtab \mbox{(E-DrefError)}
+%% $$
+%% %
+%% $$
+%%       \frac{R(x) \notin dom(H) \cup \Lfc null \Rfc}
+%%             {\langle H\coma R\coma  \FREE , n \rangle
+%%               \xlongrightarrow{\Free}_{D}
+%%               \bf Error }
+%%      \Rtab \mbox{(E-FreeError)}
+%% $$
+%%  % ERROR: no enough space
+%% $$
+%%       \langle H\coma R\coma \LET x = \Malloc() \ \IN s ,  0  \rangle
+%%       \xlongrightarrow{\Malloc}_{D}
+%%       \mathbf{Error}
+%%       \Rtab \mbox{(E-MallocError)}
+%% $$
+%% $$
+%%      \mathbf{Figure \; 3.} \;\;  \mbox{ Operational Semantics}
+%% $$
 %
 %\caption{Operational Semantics.}
 %\label{example:os}
 %\end{figure}
+
 Definition of memory leak
 
 \section{Type System}
