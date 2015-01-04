@@ -81,10 +81,21 @@ Most of the static analysis of memory-leak freedom proposed so far~\cite{DBLP:co
 We tackle the problem of verifying \emph{total memory-leak freedom} in this paper.\footnote{we often write memory-leak freedom for \emph{total} memory-leak freedom.} By a program being totally memory-leak free, we mean that the program requires only a bounded amount of memory even if it does not terminate.
 
 \subsection{Approach}
-From examples in Figure~\ref{ex:np}, we notice that a possible way to guarantee memory-leak freedom for nonterminating programs is to check whether the number of allocations and deallocations is balanced before recursive call. If balanced, the program consumes bounded number of memory cells, say function $h$ allocates two memory cells and deallocates them before recursive call, it consumes two memory cells at most once; if not balanced, as function $h'$ shows, it allocates two memory cells but does not deallocate them before recursive call, which consumes unbounded number of memory cells as time goes by.
+From examples in Figure~\ref{ex:np}, we notice that a simple way to guarantee memory-leak freedom for nonterminating programs is to check whether the number of allocations and deallocations is balanced before recursive call. If balanced, the program consumes bounded number of memory cells, say function $h$ allocates two memory cells and deallocates them before recursive call, it consumes two memory cells at most once; if not balanced, as function $h'$ shows, it allocates two memory cells but does not deallocate them before recursive call, which consumes unbounded number of memory cells as time goes by.
 
 To estimate the upper bound of memory consumption, we count the number of allocations and deallocations by a behavioral type system. The behavioral type system is mainly used to abstract the behavior of a program and heavily used in the context of concurrent program verification~\cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}. The behavior of a program in our paper is abstracted as CCS-like processes~\cite{DBLP:journals/iandc/MilnerPW92a}. For example, the behavior of function $h$ is as $\mu \alpha. \Malloc;\Malloc;\Free;\Free;\alpha$ which denotes it executes $\Malloc$ twice, $\Free$ twice and calls itself. Similarly, the behavior of $h'$ is abstracted as $\mu \alpha. \Malloc;\Malloc;\alpha;\Free;\Free$.
 
+One thing we should consider is like the function $f$ shown in Figure~\ref{ex:bbd}. The behavior of function $f$ is that $\Malloc$ twice, $\Free$ twice and calling itself. The abstracted behavior is $\mu \alpha. \Malloc;\Malloc;\Free;\Free;\alpha$. The number of allocation and deallocation is balanced before recursive call; the function is safe in our behavior type system, but it causes double frees: the variable $x$ is deallocated twice.
+\begin{figure}[h]
+1  \Rtab\dtb\dtb $f(x)$= \\
+2  \dtb \dtb\dtb$\LET \; x = \MALLOC  \; \IN$ \\
+3  \dtb \dtb\dtb$\LET \; y = \MALLOC  \; \IN$ \\
+4  \dtb \dtb\dtb$\Free(y)$; $\Free(y) $;\;$f(x)$
+\caption{balanced but double free}
+\label{ex:bbd}
+\end{figure}
+
+Thanks to the \textbf{SK} type system, proposed by Suenaga and Kobayashi, it guarantees no double frees or illegal access to a deallocated memory cell. By combining the \textbf{SK} type system, our behavior type system can ignore the relationship between variables and pointers, so to estimate the upper bound of consumption memory cells according to the abstraction of the behavior of programs is sound.
 
 \subsection{Overview of the algorithm}
 
@@ -95,7 +106,9 @@ To estimate the upper bound of memory consumption, we count the number of alloca
 \label{fig:ov}
 \end{figure}
 
-A program is first checked by $\mathbf{SK}$ type system; it is passed to the behavioral type system proposed in our paper if its partial correctness is guaranteed, otherwise returns ``it is not safe''; the behavioral type system will check it and produce a behavioral type $P$ which abstracts the behavior of the program; and then by modeling the behavioral type $P$ using model checkers like \texttt{SPIN} or \texttt{CPAChecker} to verify whether the behavioral correctness of the program is guaranteed. If its behavioral correctness is verified by model checker, the safe memory deallocation for this program is ensured, otherwise return ``it is not safe''.
+As represented in Figure~\ref{fig:ov}, a program is first checked by \textbf{SK} type system; if the properties about no double frees or illegal read/write operations to a deallocated memory cell is guaranteed, then it returns ``OK'' and the program is passed to our behavior type system, and it returns ``NG'' otherwise; our behavior type system will produce a behavioral type, and this behavioral type is passed to a model checker like \texttt{SPIN} or \texttt{CPAChecker} to verify whether it is consumed upper bound of memory cells.
+
+Hence, by using our type system with \textbf{SK} type system, we can verify memory-leak freedom even for nonterminating programs.
 
 The rest of this paper is structured as follows. Section 2 introduces a simple imperative language, as well as its syntax and operational semantics. Section 3 introduces the behavioral type system, which describes how to guarantee memory-leak freedom for non-terminating programs. Section 4 proposes an inference algorithm, and talks about syntax directed typing rules. Section 5 describes current status and future work.
 
@@ -103,9 +116,7 @@ The rest of this paper is structured as follows. Section 2 introduces a simple i
 This section introduces a sublanguage of Suenaga and Kobayashi~\cite{DBLP:conf/aplas/SuenagaK09} with primitives for memory allocation/deallocation. The values in our paper are only pointers. \\
 The syntax of language is as follows.
 
-\paragraph{Notation.} we write $\vec{x}$ for a sequence $x_{1} \dots x_{n}$.\\
-$f\{x\rightarrow v \}$ denotes \\
-$[v/x]s$ denotes 
+\paragraph{Notation.} we write $\vec{x}$ for a sequence $x_{1} \dots x_{n}$, and $x_{1} \dots x_{n}$ are pairwise-distinct; $f\{x\rightarrow v \}$ denotes a function $f'$ such that $f'(y) = v$ if $x = y$, otherwise $f'(y) = f(y)$ and $y \in dom(f)$; $[v/x]s$ denotes that substituting $v$ for $x$ in $s$.
 
   \begin{flalign*}
   s \ (\mathit{statements}) &::=  \SKIP \tB s_{1};s_{2} \tB *x \leftarrow y \tB \Free \Cirx\\
@@ -123,10 +134,9 @@ The command $\SKIP$ does nothing. The command $s_{1};s_{2}$ is executed as a seq
 %% Transition rules are listed in Figure 3. In these rules, $f\{x\to v\}$ is defined as a function $f'$ such that $f'(y) = v$ if $x = y$, otherwise $f'(y) = f(y)$ and $y \in dom(f)$. There are three rules about $\mathbf{NullEx}$ which denotes accessing a null pointer, three rules about $\mathbf{Error}$ for accessing a deallocated memory cell, and one rule about $\mathbf{Error}$ which denotes allocating a memory cell when there is no memory space.
 %\begin{figure}[h]
 % Skip Command
-Runtime state is represented by $\langle H, R, s, n \rangle$, where
-Operational semantics is defined by the relations\\
-$\rightarrow_{D}, \xlongrightarrow{\Malloc}_{D}, and \xlongrightarrow{\Free}_{D} $ defined by the rules in ....\\
-Here, $\rightarrow_{D}$ expresses; ....\\
+Runtime state is represented by $\langle H, R, s, n \rangle$, where $H$ is a mapping from finite subset of $\mathcal{H}$ to $\mathcal{H}$ $\cup$ \{$null$\}, in which $\mathcal{H}$ represents the set of \emph{heap addresses}, intuitively, the $H$ models a heap memory; $R$, which models registers, is a mapping from finite set of variables to $\mathcal{H}$ $\cup$ \{$null$\}.
+
+Operational semantics are defined by the relations: $\rightarrow_{D}, \xlongrightarrow{\Malloc}_{D}, and \xlongrightarrow{\Free}_{D} $, in which $\xlongrightarrow{\Malloc}_{D}, and \xlongrightarrow{\Free}_{D} $ denote performing a allocation and deallocation operation respectively, and $\rightarrow_{D}$ expresses that performing an internal action like $\SKIP$ or assignment.
 
 $$
     \frac{n \in \mathbb{N}}
@@ -266,8 +276,12 @@ $$
 %
 %\caption{Operational Semantics.}
 %\label{example:os}
-%\end{figure}
-Definition of memory leak
+     %\end{figure}
+\begin{myDef}
+memory leaks: if a program consumes unbounded number of memory cells.\\
+memory-leak \ freedom: $\exists n \in \mathbb{N}$ s.t. $\langle \emptyset, \emptyset, s, n \rangle \nrightarrow^{*}Error$
+\label{df:ml}
+\end{myDef}
 
 \section{Type System}
 
@@ -323,9 +337,10 @@ In the rule for subtyping, $P_{1} \le P_{2}$ represents that $P_{1}$ is the subt
 (2) if $P_{1} \rightarrow P_{1}'$ then $\exists P_{2}'$ s.t. $P_{2} \rightarrow^{*} P_{2}'$ and  $P_{1}' \le P_{2}'$\\
 where $\overset{\text{$\alpha$}}{\Longrightarrow}$ means that: $\rightarrow^{*} \xlongrightarrow{\alpha} \rightarrow^{*}$.
 
-At the end of $s$, memory leak freedom is guaranteed by $OK_{n}(P)$ ,where $P$ is the behavior of $s$. $OK_{n}(P)$ is defined as $\mathbf{Definition\; 1}$ in which $\sharp_{malloc}(\alpha)$ and $\sharp_{free}(\alpha)$ are functions to count the number of $\Malloc$ and $\Free$ actions in $\alpha$ respectively. This definition, intuitively, means at every running step the number of allocated memory cells will never go out of memory scope.
+At the end of $s$, memory leak freedom is guaranteed by $OK_{n}(P)$ ,where $P$ is the behavior of $s$. $OK_{n}(P)$ is defined as Definition~\ref{df:okn} in which $\sharp_{malloc}(\alpha)$ and $\sharp_{free}(\alpha)$ are functions to count the number of $\Malloc$ and $\Free$ actions in $\alpha$ respectively. This definition, intuitively, means at every running step the number of allocated memory cells will never go out of memory scope.
 \begin{myDef}
- $OK_{n}(P) \iff \forall P',\; P \xlongrightarrow{\alpha}^{*}P'$ then $\sharp_{malloc}(\alpha)-\sharp_{free}(\alpha)\le n$.
+  $OK_{n}(P) \iff \forall P',\; P \xlongrightarrow{\alpha}^{*}P'$ then $\sharp_{malloc}(\alpha)-\sharp_{free}(\alpha)\le n$.
+\label{df:okn}
 \end{myDef}
 
 % Skip type
@@ -503,11 +518,7 @@ Function $PT_{v}(x) = (C,\emptyset)$ denotes that it receives a pointer variable
 \section{Preliminary Experiment}
 
 \section{Related Work}
-\cite{DBLP:conf/sas/OrlovichR06}.. \\
-\cite{DBLP:conf/aplas/SuenagaK09}..\\
-\cite{DBLP:journals/iandc/MilnerPW92a}..\\
-\cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}...\\
-\cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06}..\\
+
 \section{Conclusion}
 We have described a type-based approach to safe memory deallocation for non-terminating programs. The approach is based on the idea of decomposing safe memory memory deallocation into partial correctness, which is verified by previous type system, and behavioral correctness. We designed a behavioral type system in our paper for verification of behavioral correctness. Currently, we are looking for a model checker to estimate an upper bound of consumption given a behavioral type and planning to implement a verifier and conduct experiment to see whether our approach is feasible.
 
