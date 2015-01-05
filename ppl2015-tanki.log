@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.6)  5 JAN 2015 15:32
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  5 JAN 2015 16:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -381,12 +381,30 @@ LaTeX Warning: Citation `DBLP:journals/lmcs/KobayashiSW06' on page 8 undefined
 on input line 912.
 
 
-Overfull \hbox (4.87306pt too wide) in paragraph at lines 920--929
-\OT1/cmr/m/n/10.95 We have de-scribed a type-based ap-proach to safe mem-ory de
-al-lo-ca-tion for non-terminating
- []
+LaTeX Warning: Citation `DBLP:conf/aplas/SuenagaK09' on page 8 undefined on inp
+ut line 920.
 
-[8] [9]
+
+LaTeX Warning: Citation `DBLP:conf/pldi/HeineL03' on page 8 undefined on input 
+line 920.
+
+
+LaTeX Warning: Citation `DBLP:conf/sigsoft/XieA05' on page 8 undefined on input
+ line 920.
+
+
+LaTeX Warning: Citation `DBLP:journals/scp/SwamyHMGJ06' on page 8 undefined on 
+input line 920.
+
+
+LaTeX Warning: Citation `DBLP:conf/sas/OrlovichR06' on page 8 undefined on inpu
+t line 920.
+
+
+LaTeX Warning: Citation `DBLP:conf/issta/SuiYX12' on page 8 undefined on input 
+line 920.
+
+(./conclusion.tex [8] [9])
 No file ppl2015-tanki.bbl.
 [10] (./proof.tex
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10.95> not available
@@ -566,10 +584,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 3296 strings out of 493315
- 44211 string characters out of 6137905
+ 3305 strings out of 493315
+ 44413 string characters out of 6137910
  128972 words of memory out of 5000000
- 6663 multiletter control sequences out of 15000+600000
+ 6669 multiletter control sequences out of 15000+600000
  17377 words of font info for 65 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  37i,21n,26p,851b,299s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -596,7 +614,7 @@ ist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2013/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2013/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2013/texmf-dist/
 fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on ppl2015-tanki.pdf (18 pages, 302302 bytes).
+Output written on ppl2015-tanki.pdf (18 pages, 302749 bytes).
 PDF statistics:
  155 PDF objects out of 1000 (max. 8388607)
  110 compressed objects within 2 object streams

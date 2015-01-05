@@ -911,9 +911,19 @@ $$
 $$
 Here, we can assume that $\alpha_{1}, \dots, \alpha_{n}$ are pairwise-distinct, since $\alpha \ge A_{1}$ and $\alpha \ge A_{2}$ can be replaced with $\alpha \ge A_{1}+A_{2}$ by lemma 3.8 in paper~\cite{DBLP:journals/lmcs/KobayashiSW06}. we can also assume that $\{ \alpha_{1}, \dots, \alpha_{n} \}$ contains all the type variables in the constraints, since otherwise we can always add the tautology $\alpha \ge \alpha$. Each subtype constraints $\alpha \ge A$ can be replaced by $\alpha \ge \mu \alpha. A$, by lemma 3.8(4)~\cite{DBLP:journals/lmcs/KobayashiSW06} ( substituting $\alpha$ for $B$ in this lemma). Therefore the above constraints can be further reduced to $OK_{n}([\vec{A} \backslash \vec{\alpha}])$. Here, $A'_{1}, \dots, A'_{n}$ are the least solutions for the subtype constraints.
 
-\section{Preliminary Experiment}
+%% \section{Preliminary Experiment}
+
+
 
 \section{Related Work}
+Many methods for static memory-leak freedom verification have been
+proposed~\cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06,DBLP:conf/sas/OrlovichR06,DBLP:conf/issta/SuiYX12}. These
+methods guarantee partial memory-leak freedom and lack of illegal
+accesses, whereas our type system guarantees total memory-leak
+freedom. By using both their methods and our type system, we can
+guarantee safe memory deallocation for nonterminating programs.
+
+Behavioral type systems.
 
 \input{conclusion}
 
