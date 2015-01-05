@@ -1,0 +1,31 @@
+\section{Conclusion}
+
+We have described a type system to verify memory-leak freedom for
+(possibly) nonterminating programs with manual memory-management
+primitives where every memory cell is fixed size.  Our type system
+abstracts the memory allocation/deallocation behavior of a program
+with a CCS-like process with actions corresponding to memory
+allocation and deallocation.  We have described a type reconstruction
+algorithm for the type system.
+
+Our current type system excludes many features of the real-world
+programs for simplification.  We are currently investigating the C
+programs in the real world to investigate what extension we need to
+make to the type system.  One feature we have already noticed is
+variable-sized memory blocks.  The current behavioral types ignores
+the size of the allocated block, counting only the number of
+\(\Malloc\) and \(\Free\), which makes the abstraction unsound for
+actual programs.
+
+Flow sensitivity is another issue we are pursuing.  \todo{Complete
+  this paragraph.}
+
+%% type-based approach to safe memory deallocation
+%% for non-terminating programs. The approach is based on the idea of
+%% decomposing safe memory memory deallocation into partial correctness,
+%% which is verified by previous type system, and behavioral
+%% correctness. We designed a behavioral type system in our paper for
+%% verification of behavioral correctness. Currently, we are looking for
+%% a model checker to estimate an upper bound of consumption given a
+%% behavioral type and planning to implement a verifier and conduct
+%% experiment to see whether our approach is feasible.
