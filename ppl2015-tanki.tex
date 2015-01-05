@@ -490,9 +490,10 @@ Figure~\ref{fig:transitionRules} defines the relation
      \mathbf{Overflow}}
 
 \end{minipage}
-\label{fig:transitionRules}
+
 \caption{Definition of the labeled transition \(\langle H, R, s, n
   \rangle \xlongrightarrow{\rho}_D \langle H', R', s', n' \rangle\).}
+\label{fig:transitionRules}
 \end{figure}
 
 %% Transition rules are listed in Figure 3. In these rules, $f\{x\to v\}$
@@ -649,9 +650,9 @@ Figure~\ref{fig:transitionRules} defines the relation
 %\label{example:os}
      %\end{figure}
 \begin{myDef}
-\todo{Formally state this definition.}
-memory leaks: if a program consumes unbounded number of memory cells.\\
-memory-leak \ freedom: $\exists n \in \mathbb{N}$ s.t. $\langle \emptyset, \emptyset, s, n \rangle \nrightarrow^{*}Error$
+memory leaks:\\
+if $\vdash \langle D, s \rangle : n$, then $\langle \emptyset, \emptyset, s, n \rangle \xlongrightarrow{\rho_{1}, \dots, \rho_{n}}_{D} \langle H, R, s', 0 \rangle \xlongrightarrow{\Malloc}_{D} Overflow $\\
+memory-leak \ freedom: $\exists n \in \mathbb{N}$ s.t. $\langle \emptyset, \emptyset, s, n \rangle \nrightarrow^{*}Overflow$
 \label{df:ml}
 \end{myDef}
 
