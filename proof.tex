@@ -109,8 +109,6 @@ we stated above.  We also have \(\Theta; \Gamma \vdash \SKIP \COL
 P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
 \(\OK_{n+1}(P'')\) follows from Lemma~\ref{lem:okPreserved}.
 
-\todo{Rewrite the other cases imitating this case.}
-
 %% From the assumption, we have known that: \textcircled{1} $OK_{n}(P)$, and \textcircled{2} $\Theta; \Gamma \vdash \Free\Cirx:P$.
 
 %% By the inversion lemma on \textcircled{2}, we have: \textcircled{3} $\Free \le P$.
@@ -134,32 +132,26 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
 
 %% Therefore, \textcircled{6} holds. \\
 
-\item Case: $\langle H, R, \LET x = \MALLOC \IN s_{1}, n \rangle \xlongrightarrow{\Malloc} \langle H', R', [x'/x]s_{1}, n - 1  \rangle $.\\
+\item Case: $\langle H, R, \LET x = \MALLOC \IN s_{1}, n \rangle
+  \xlongrightarrow{\Malloc} \langle H', R', [x'/x]s_{1}, n - 1 \rangle
+  $.
 
-From the assumption, we already have \textcircled{1}$\Theta; \Gamma \vdash \LET x = \MALLOC \IN s_{1} : P$,
+  From the assumption, we have \(\Theta; \Gamma \vdash \LET x =
+  \MALLOC \IN s_{1} \COL P\) and \(\OK_{n}(P)\). By the inversion of
+  typing rules, we have \(\Malloc;P_1 \le P\) and \(\Theta; \Gamma
+  \vdash s_{1} : P_{1}\) for some \(P_1\). We have the following
+  derivation: \infrule{ \Malloc \xlongrightarrow{\Malloc} 0}
+  {\Malloc;P_1 \xlongrightarrow{\Malloc} 0;P_{1}} and \(0;P_1
+  \rightarrow P_{1}\), then we have \(\Malloc;P_{1}
+  \xLongrightarrow{\Malloc} P_{1}\). Hence, By the definition of
+  subtyping, we have \(P \xLongrightarrow{\Malloc}P''\) and \(P_{1}
+  \le P''\) for some \(P''\)
 
-and \textcircled{2} $OK_{n}(P)$.
-
-By the inversion lemma and \textcircled{1}, we have \textcircled{3} $\Malloc;P_{1} \le P$, and \textcircled{4} $\Theta; \Gamma \vdash s_{1} : P_{1}$
-
-We need to find $P'$ and $\Gamma'$ such that \textcircled{5} $\Theta; \Gamma' \vdash s_{1} : P'$, and \textcircled{6}$P \overset{\text{$\Malloc$}}{\Longrightarrow} P'$
-
-Because of the following derivation:
-$$
-  \frac{ \Malloc \xlongrightarrow{\Malloc} 0}
-  {\Malloc;P_{1} \xlongrightarrow{\Malloc} 0;P_{1}}
-$$
-
-and $0;P_{1} \Rightarrow P_{1}$. Therefore $\Malloc;P_{1} \xlongrightarrow{\Malloc} P_{1}$.
-
-By the definition of subtyping and $\Malloc;P_{1} \xlongrightarrow{\Malloc} P_{1}$, we have that:
-\begin{center}
-$\exists P''$ s.t. \textcircled{7} $P \overset{\text{$\Malloc$}}{\Longrightarrow} P''$, and \textcircled{8} $P_{1} \le P''$
- \end{center}
-
-Taking $P''$ as $P'$, then \textcircled{6} holds.
-
-And by using subtyping rule T-Sub with premises \textcircled{4} and \textcircled{8}
+  We need to find \(P'\) such that \(\Theta; \Gamma' \vdash s_{1} :
+  P'\), and \(P \overset{\text{$\Malloc$}}{\Longrightarrow} P'\). Take
+  \(P''\) as \(P'\). Then \(P \xLongrightarrow{\Malloc}\) as we state
+  above. We also have by using subtyping rule T-Sub with premises
+  \textcircled{4} and \textcircled{8}
 $$
     \frac{\Gamma \vdash s_{1} : P_{1} \ \ \ \ P_{1} \le P''}
      {\Gamma \vdash s_{1} : P''}
