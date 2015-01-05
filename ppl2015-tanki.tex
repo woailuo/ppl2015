@@ -85,8 +85,6 @@ consumption using an off-the-shelf model checker.
 
 \section{Introduction}
 
-\todo{Revise from here.}
-
 Dynamic memory management is a crucial function of programming
 languages.  Correct allocation and disposal of memory regions are
 fundamental for software to be reliable.
@@ -134,7 +132,38 @@ cells at most\footnote{We assume that every memory cell allocated by
   \(\Malloc\) is fixed size.}; hence it is totally memory-leak free.
 \end{exmp}
 
-\todo{kokomade.}
+As the first step to the verification of total memory-leak freedom,
+this paper proposes a \emph{behavioral type system}~\cite{} for a
+programming language with manual memory-management primitives.  Our
+type system captures an abstract behavior related to memory allocation
+and deallocation as a CCS-like process.  For example, our type system
+can assign a type \(
+\mu\alpha.\Malloc\TSEQ\Malloc\TSEQ\Free\TSEQ\Free\TSEQ\alpha\) to the
+function \(h\) above.  This type expresses that \(h\) can allocate a
+memory cell twice, deallocate a memory cell twice, and then iterate
+this behavior.  On the other hand, the type assigned to \(h'\) is
+\(\mu\alpha.\Malloc\TSEQ\Malloc\TSEQ\alpha\TSEQ\Free\TSEQ\Free\),
+which expresses that \(h'\) can allocate a memory cell twice, call
+itself recursively, and then deallocate a memory cell twice.  Hence,
+by inspecting the inferred types (by using off-the-shelf model
+checkers, for example), one can estimate the upper bound required to
+execute \(h\) and \(h'\).
+
+Notice that our type system alone does not prevent correct usage of
+\(\Malloc\) and \(\Free\).  Indeed, as observed from the type assigned
+to \(h\) and \(h'\) above, our types do not include information only
+about the number and the order of allocations, deallocations, and
+recursive function calls; hence, the type system does not guarantee,
+for example, there is no accesses to deallocated cells.  For such
+properties, we expect a program to be verified by other
+no-illegal-access verifiers~\cite{}.
+
+\todo{USE LABEL to refer to other sections, lemmas, and so on.}  The
+rest of this paper is structured as follows. Section 2 introduces a
+simple imperative language and the operational semantics of the
+language. Section 3 introduces the behavioral type system. Section 4
+describes a type reconstruction algorithm.  Section 5 describes
+current status and future work.  \todo{To be revised.}
 
 %% \subsection{Motivation and Problems}
 
@@ -169,80 +198,72 @@ cells at most\footnote{We assume that every memory cell allocated by
 %% memory-leak free, we mean that the program requires only a bounded
 %% amount of memory even if it does not terminate.
 
-\subsection{Approach}
-%% <<<<<<< HEAD
-%% =======
-From examples in Figure~\ref{ex:np}, we notice that a simple way to guarantee memory-leak freedom for nonterminating programs is to check whether the number of allocations and deallocations is balanced before recursive call. If balanced, the program consumes bounded number of memory cells, say function $h$ allocates two memory cells and deallocates them before recursive call, it consumes two memory cells at most once; if not balanced, as function $h'$ shows, it allocates two memory cells but does not deallocate them before recursive call, which consumes unbounded number of memory cells as time goes by.
-%% >>>>>>> 9a92815042ab957eb9b2d406af7a45d4abb729b3
+%% \subsection{Approach}
+%% %% <<<<<<< HEAD
+%% %% =======
+%% From examples in Figure~\ref{ex:np}, we notice that a simple way to guarantee memory-leak freedom for nonterminating programs is to check whether the number of allocations and deallocations is balanced before recursive call. If balanced, the program consumes bounded number of memory cells, say function $h$ allocates two memory cells and deallocates them before recursive call, it consumes two memory cells at most once; if not balanced, as function $h'$ shows, it allocates two memory cells but does not deallocate them before recursive call, which consumes unbounded number of memory cells as time goes by.
+%% %% >>>>>>> 9a92815042ab957eb9b2d406af7a45d4abb729b3
 
-From examples in Figure~\ref{ex:np}, we notice that a possible way to
-guarantee memory-leak freedom for nonterminating programs is to check
-whether the number of allocations and deallocations is balanced before
-recursive call. If balanced, the program consumes bounded number of
-memory cells, say function $h$ allocates two memory cells and
-deallocates them before recursive call, it consumes two memory cells
-at most once; if not balanced, as function $h'$ shows, it allocates
-two memory cells but does not deallocate them before recursive call,
-which consumes unbounded number of memory cells as time goes by.
+%% From examples in Figure~\ref{ex:np}, we notice that a possible way to
+%% guarantee memory-leak freedom for nonterminating programs is to check
+%% whether the number of allocations and deallocations is balanced before
+%% recursive call. If balanced, the program consumes bounded number of
+%% memory cells, say function $h$ allocates two memory cells and
+%% deallocates them before recursive call, it consumes two memory cells
+%% at most once; if not balanced, as function $h'$ shows, it allocates
+%% two memory cells but does not deallocate them before recursive call,
+%% which consumes unbounded number of memory cells as time goes by.
 
-To estimate the upper bound of memory consumption, we count the number
-of allocations and deallocations by a behavioral type system. The
-behavioral type system is mainly used to abstract the behavior of a
-program and heavily used in the context of concurrent program
-verification~\cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}. The
-behavior of a program in our paper is abstracted as CCS-like
-processes~\cite{DBLP:journals/iandc/MilnerPW92a}. For example, the
-behavior of function $h$ is as $\mu
-\alpha. \Malloc;\Malloc;\Free;\Free;\alpha$ which denotes it executes
-$\Malloc$ twice, $\Free$ twice and calls itself. Similarly, the
-behavior of $h'$ is abstracted as $\mu
-\alpha. \Malloc;\Malloc;\alpha;\Free;\Free$.
+%% To estimate the upper bound of memory consumption, we count the number
+%% of allocations and deallocations by a behavioral type system. The
+%% behavioral type system is mainly used to abstract the behavior of a
+%% program and heavily used in the context of concurrent program
+%% verification~\cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}. The
+%% behavior of a program in our paper is abstracted as CCS-like
+%% processes~\cite{DBLP:journals/iandc/MilnerPW92a}. For example, the
+%% behavior of function $h$ is as $\mu
+%% \alpha. \Malloc;\Malloc;\Free;\Free;\alpha$ which denotes it executes
+%% $\Malloc$ twice, $\Free$ twice and calls itself. Similarly, the
+%% behavior of $h'$ is abstracted as $\mu
+%% \alpha. \Malloc;\Malloc;\alpha;\Free;\Free$.
 
-One thing we should consider is like the function $f$ shown in Figure~\ref{ex:bbd}. The behavior of function $f$ is that $\Malloc$ twice, $\Free$ twice and calling itself. The abstracted behavior is $\mu \alpha. \Malloc;\Malloc;\Free;\Free;\alpha$. The number of allocation and deallocation is balanced before recursive call; the function is safe in our behavior type system, but it causes double frees: the variable $x$ is deallocated twice.
-\begin{figure}[h]
-1  \Rtab\dtb\dtb $f(x)$= \\
-2  \dtb \dtb\dtb$\LET \; x = \MALLOC  \; \IN$ \\
-3  \dtb \dtb\dtb$\LET \; y = \MALLOC  \; \IN$ \\
-4  \dtb \dtb\dtb$\Free(y)$; $\Free(y) $;\;$f(x)$
-\caption{balanced but double free}
-\label{ex:bbd}
-\end{figure}
+%% One thing we should consider is like the function $f$ shown in Figure~\ref{ex:bbd}. The behavior of function $f$ is that $\Malloc$ twice, $\Free$ twice and calling itself. The abstracted behavior is $\mu \alpha. \Malloc;\Malloc;\Free;\Free;\alpha$. The number of allocation and deallocation is balanced before recursive call; the function is safe in our behavior type system, but it causes double frees: the variable $x$ is deallocated twice.
+%% \begin{figure}[h]
+%% 1  \Rtab\dtb\dtb $f(x)$= \\
+%% 2  \dtb \dtb\dtb$\LET \; x = \MALLOC  \; \IN$ \\
+%% 3  \dtb \dtb\dtb$\LET \; y = \MALLOC  \; \IN$ \\
+%% 4  \dtb \dtb\dtb$\Free(y)$; $\Free(y) $;\;$f(x)$
+%% \caption{balanced but double free}
+%% \label{ex:bbd}
+%% \end{figure}
 
-Thanks to the \textbf{SK} type system, proposed by Suenaga and Kobayashi, it guarantees no double frees or illegal access to a deallocated memory cell. By combining the \textbf{SK} type system, our behavior type system can ignore the relationship between variables and pointers, so to estimate the upper bound of consumption memory cells according to the abstraction of the behavior of programs is sound.
+%% Thanks to the \textbf{SK} type system, proposed by Suenaga and Kobayashi, it guarantees no double frees or illegal access to a deallocated memory cell. By combining the \textbf{SK} type system, our behavior type system can ignore the relationship between variables and pointers, so to estimate the upper bound of consumption memory cells according to the abstraction of the behavior of programs is sound.
 
-\subsection{Overview of the algorithm}
+%% \subsection{Overview of the algorithm}
 
-\begin{figure}
- \centering
-\includegraphics[width=10cm]{overview.jpg}
-\caption{Overview of the algorithm}
-\label{fig:ov}
-\end{figure}
+%% \begin{figure}
+%%  \centering
+%% \includegraphics[width=10cm]{overview.jpg}
+%% \caption{Overview of the algorithm}
+%% \label{fig:ov}
+%% \end{figure}
 
-%% <<<<<<< HEAD
-%% A program is first checked by $\mathbf{SK}$ type system; it is passed
-%% to the behavioral type system proposed in our paper if its partial
-%% correctness is guaranteed, otherwise returns ``it is not safe''; the
-%% behavioral type system will check it and produce a behavioral type $P$
-%% which abstracts the behavior of the program; and then by modeling the
-%% behavioral type $P$ using model checkers like \texttt{SPIN} or
-%% \texttt{CPAChecker} to verify whether the behavioral correctness of
-%% the program is guaranteed. If its behavioral correctness is verified
-%% by model checker, the safe memory deallocation for this program is
-%% ensured, otherwise return ``it is not safe''.
-%% =======
-As represented in Figure~\ref{fig:ov}, a program is first checked by \textbf{SK} type system; if the properties about no double frees or illegal read/write operations to a deallocated memory cell is guaranteed, then it returns ``OK'' and the program is passed to our behavior type system, and it returns ``NG'' otherwise; our behavior type system will produce a behavioral type, and this behavioral type is passed to a model checker like \texttt{SPIN} or \texttt{CPAChecker} to verify whether it is consumed upper bound of memory cells.
+%% %% <<<<<<< HEAD
+%% %% A program is first checked by $\mathbf{SK}$ type system; it is passed
+%% %% to the behavioral type system proposed in our paper if its partial
+%% %% correctness is guaranteed, otherwise returns ``it is not safe''; the
+%% %% behavioral type system will check it and produce a behavioral type $P$
+%% %% which abstracts the behavior of the program; and then by modeling the
+%% %% behavioral type $P$ using model checkers like \texttt{SPIN} or
+%% %% \texttt{CPAChecker} to verify whether the behavioral correctness of
+%% %% the program is guaranteed. If its behavioral correctness is verified
+%% %% by model checker, the safe memory deallocation for this program is
+%% %% ensured, otherwise return ``it is not safe''.
+%% %% =======
+%% As represented in Figure~\ref{fig:ov}, a program is first checked by \textbf{SK} type system; if the properties about no double frees or illegal read/write operations to a deallocated memory cell is guaranteed, then it returns ``OK'' and the program is passed to our behavior type system, and it returns ``NG'' otherwise; our behavior type system will produce a behavioral type, and this behavioral type is passed to a model checker like \texttt{SPIN} or \texttt{CPAChecker} to verify whether it is consumed upper bound of memory cells.
 
-Hence, by using our type system with \textbf{SK} type system, we can verify memory-leak freedom even for nonterminating programs.
-%% >>>>>>> 9a92815042ab957eb9b2d406af7a45d4abb729b3
-
-The rest of this paper is structured as follows. Section 2 introduces
-a simple imperative language, as well as its syntax and operational
-semantics. Section 3 introduces the behavioral type system, which
-describes how to guarantee memory-leak freedom for non-terminating
-programs. Section 4 proposes an inference algorithm, and talks about
-syntax directed typing rules. Section 5 describes current status and
-future work.
+%% Hence, by using our type system with \textbf{SK} type system, we can verify memory-leak freedom even for nonterminating programs.
+%% %% >>>>>>> 9a92815042ab957eb9b2d406af7a45d4abb729b3
 
 \paragraph{Notation} We write \(\vec{X}\) for a finite sequence of
 \(X\); its length, if we do not explicitly mention, is clear from the
