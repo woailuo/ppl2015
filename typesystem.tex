@@ -1,0 +1,180 @@
+
+\section{Type system}
+\label{sec:typesystem}
+
+\subsection{Syntax of types}
+     \begin{eqnarray*}
+       P (\mathit{behavioral\ types})::=&& {\bf 0} \tB P_{1};P_{2} \tB P_{1}+P_{2} \tB \Malloc\\
+       &&\tB \Free \tB \alpha \tB \mu\alpha.P \\
+      \sigma (\mathit{function\ types})::=&& (\tau_{1},\dots, \tau_{n}) P
+     \end{eqnarray*}
+
+The type $\bf 0$ abstracts the behavior of $\SKIP$ and means "does nothing". $P_{1};P_{2}$ is for sequential execution. $P_{1} + P_{2}$ is abstracted as conditional. $\Malloc$ is the behavior of a statement that allocates a memory cell exactly once. $\Free$ is for deallocating memory cell exactly once. $\mu \alpha. P$ is a recursive type. For example, the behavior of  the body of function $h$ in Figure 2 is abstracted as $\mu \alpha. \Malloc;\Malloc;\Free;\Free;\alpha$. $\alpha$ is a type variable and bounded to the recursive constructor $\mu \alpha$.
+
+The only value in our paper is reference, and its type is $\mathbf{Ref}$.
+
+The function type is described as $(\tau_{1}, \dots, \tau_{n})P$, which means a function receives some pointers as arguments and its body is abstracted as a behavioral type $P$.
+
+% Semantics of Behavioral Types %
+\subsection{Semantics of behavioral types}
+The semantics of behavioral type are given by labeled transition system, and listed as follows:
+    $$
+        \mathbf{0};P \rightarrow P
+    $$
+    $$
+          \Malloc \xlongrightarrow{\Malloc} 0
+    $$
+    $$
+           \Free \xlongrightarrow{\Free} 0
+    $$
+    $$
+          \mu \alpha.P \rightarrow  [\mu \alpha . P/\alpha]  P
+    $$
+   $$
+          P_{1} + P_{2} \longrightarrow P_{1}
+   $$
+   $$
+          P_{1} + P_{2} \longrightarrow P_{2}
+   $$
+   $$
+           \frac{P_{1} \xlongrightarrow{\alpha} P_{1}' }
+                 {P_{1};P_{2} \xlongrightarrow{\alpha} P_{1}';P_{2}}
+   $$
+The notation $\rightarrow$ denotes that a behavioral type can be reduced by the internal action. Notation $\xlongrightarrow{\alpha}$ means that a behavioral type can be reduced by executing $\alpha$ actions, and the $\alpha$ here is $\{\Malloc, \Free\}$.
+
+% Type Judgments
+\subsection{Typing rules}
+The type judgment of our type system is given by the form $\Theta ; \Gamma \vdash s : P$, where $\Theta$ is a mapping from function variables to function types, $\Gamma$ is a type environment that denotes a mapping from variables to value types.
+It reads ``the behavior of $s$ is abstracted as $P$ under $\Theta$ and $\Gamma$ environments''. We design the type system so that this type judgment implies the property: when $s$ executes $\Malloc$(resp.$\Free$), then $P$ is equivalent to $\Malloc;P'$(resp.$\Free;P'$) for a type $P'$ such that $\Theta; \Gamma \vdash s': P'$, where $s'$ is the continuation of $s$. This property guarantees the behavioral type soundly abstracts the upper bound of the consumed memory cells.
+
+Typing rules are presented in Figure~\ref{fig:typingrules}. In the rule for assignment, the behavior of  $*x \leftarrow y$ is $\bf 0$. The rule for $\Free$ represents that the behavior of $\Free \Cirx$ is $\Free$. The rule T-Malloc represents that $\LET x = \MALLOC \; \IN s$ has the behavior $\Malloc;P$, where $P$ is the behavior of statement $s$. The rule for function call represents that function $f$ has the behavior $P$ which is the behavior of the body of this function .
+
+In the rule for subtyping, $P_{1} \le P_{2}$ represents that $P_{1}$ is the subtype of $P_{2}$ and  means that: \\
+(1) if $P_{1} \xlongrightarrow{\alpha}  P_{1}'$ then $\exists P_{2}' $ s.t. $P_{2} \overset{\text{$\alpha$}}{\Longrightarrow} P_{2}'$ and $ P_{1}' \le P_{2}' $\\
+(2) if $P_{1} \rightarrow P_{1}'$ then $\exists P_{2}'$ s.t. $P_{2} \rightarrow^{*} P_{2}'$ and  $P_{1}' \le P_{2}'$\\
+where $\overset{\text{$\alpha$}}{\Longrightarrow}$ means that: $\rightarrow^{*} \xlongrightarrow{\alpha} \rightarrow^{*}$.
+
+At the end of $s$, memory leak freedom is guaranteed by $OK_{n}(P)$ ,where $P$ is the behavior of $s$. $OK_{n}(P)$ is defined as Definition~\ref{df:okn} in which $\sharp_{malloc}(\alpha)$ and $\sharp_{free}(\alpha)$ are functions to count the number of $\Malloc$ and $\Free$ actions in $\alpha$ respectively. This definition, intuitively, means at every running step the number of allocated memory cells will never go out of memory scope.
+\begin{myDef}
+  $OK_{n}(P) \iff \forall P',\; P \xlongrightarrow{\alpha}^{*}P'$ then $\sharp_{malloc}(\alpha)-\sharp_{free}(\alpha)\le n$.
+\label{df:okn}
+\end{myDef}
+
+\begin{figure}[tp]
+\begin{minipage}{\textwidth}
+
+% Skip type
+$$
+         \Theta ; \Gamma \vdash \SKIP : \mathbf{0}
+      \Rtab \mbox{(T-Skip)}
+$$
+% Sequence type
+$$
+      \frac{\Theta ; \Gamma \vdash s_{1} : P_{1} \Rtab \Theta ; \Gamma \vdash s_{2} : P_{2}}
+          {\Theta ; \Gamma \vdash s_{1} ; s_{2} : P_{1};P_{2} }
+     \Rtab \mbox{(T-Seq)}
+$$
+% Assignment type
+$$
+     \frac{\Theta ; \Gamma \vdash y  \Rtab \Theta ; \Gamma \vdash x }
+          {\Theta ; \Gamma \vdash *x \leftarrow y : \mathbf{0} }
+     \Rtab \mbox{(T-Assign)}
+$$
+% Free(deallocate) type
+$$
+     \frac{\Theta ; \Gamma \vdash x  }
+           {\Theta ; \Gamma \vdash \Free(x) : \Free}
+     \Rtab \mbox{(T-Free)}
+$$
+% Malloc type
+$$
+     \frac{\Theta ; \Gamma,x \vdash s : P}
+           {\Theta ; \Gamma \vdash \LET x = \MALLOC \; \IN s  : \Malloc;P}
+           \Rtab \mbox{(T-Malloc)}
+$$
+% Let eq type
+$$
+     \frac{\Theta ; \Gamma \vdash y   \Rtab \Theta ; \Gamma , x  \vdash s : P}
+           {\Theta ; \Gamma \vdash \LET x = y \; \IN s : P}
+     \Rtab \mbox{(T-LetEq)}
+$$
+% Dereference type
+$$
+     \frac{\Theta ; \Gamma \vdash y  \Rtab \Theta ; \Gamma , x  \vdash s : P}
+           {\Theta ; \Gamma \vdash \LET x = *y \; \IN s : P}
+     \Rtab \mbox{(T-LetDref)}
+$$
+% Let NULL type
+$$
+     \frac{\Theta ; \Gamma, x  \vdash s : P}
+           {\Theta ; \Gamma \vdash \LET x = \mathbf{null} \; \IN s : P}
+     \Rtab \mbox{(T-LetNull)}
+$$
+% Subtyping
+$$
+     \frac{\Theta ; \Gamma \vdash s : P_{1} \Rtab P_{1} \le P_{2}}
+            {\Theta ; \Gamma \vdash s : P_{2}}
+     \Rtab \mbox{(T-Sub)}
+$$
+ % ifnull s then s type
+$$
+     \frac{\Theta ; \Gamma \vdash x    \ \ \ \  \Theta ; \Gamma \vdash s_{1} : P \ \ \ \ \Theta ; \Gamma \vdash s_{1} : P}
+           {\Theta ; \Gamma \vdash \IFNULL(x) \; \THEN s_{1}\; \ELSE s_{2} : P}
+     \Rtab \mbox{(T-IfNull)}
+$$
+% Function call type
+$$ \frac{ \Theta(f) = P}
+{\Theta; \Gamma, \vec{x} : \vec{\tau} \vdash f(\vec{x}) : P}
+\Rtab \mbox{(T-Call)} $$
+% Program
+$$\frac{\vdash D : \Theta \;\;\;\; \Theta; \emptyset\vdash s : P \Rtab OK_{n}(P)}
+{\vdash (D, s) : n}
+\Rtab \mbox{(T-Program)} $$
+\end{minipage}
+\caption{Typing Rules.  \todo{Where is the definition of \(\vdash D
+    \COL \Theta\)?}}
+\label{fig:typingrules}
+\end{figure}
+
+
+\subsection{Type soundness}
+
+% This subsection describes some theorems and lemmas for type safety.
+
+The following theorem is the main result of the current paper.  The
+proof is in Appendix~\ref{sec:proof}.
+
+\begin{theorem}\label{thm1}
+If $\vdash \langle D, s \rangle : n$ for some \(n\), then \(\langle D,
+s \rangle\) is totally memory-leak free.
+\end{theorem}
+
+% This theorem says that a well typed program guarantees memory leak
+% freedom.
+
+The proof is based on the following lemmas: preservation and lack of
+immediate overflow.
+
+\begin{lemma}[Preservation]
+\label{lem:preservation}
+If $OK_{n}(P)$, $\Theta; \Gamma \vdash s : P$ and $\langle H,R,s,n
+\rangle \xlongrightarrow{\rho} \langle H',R',s', n' \rangle$, then
+there exists $P'$ such that (1) $ \Theta; \Gamma \vdash s' : P'$, (2)
+\(P \xLongrightarrow{\rho} P'\), and (3) \(OK_{n'}(P')\).
+\end{lemma}
+
+%% \begin{lemma}[Preservation $\mathbf{II}$]%\label{preser}
+%% If $OK_{n}(P)$, $\Theta ; \Gamma \vdash s : P$ and $\langle H,R,s,n \rangle
+%% \rightarrow \langle H',R',s', n'
+%% \rangle$, then $\exists P'$ s.t. \\
+%% (1) $\Theta; \Gamma \vdash s' : P'$\\
+%% (2) $ P \rightarrow^{*} P'  $\\
+%% (3) $OK_{n'}(P')$
+%% \end{lemma}
+
+\begin{lemma}[Lack of immediate overflow]
+\label
+If $\Theta; \Gamma \vdash s \COL P$, \(\vdash D \COL \Theta\), and
+\(\OK_n(P)\), then $\langle H, R, s, n \rangle
+\not\xlongrightarrow{\rho}$ for any \(\rho\).
+\end{lemma}

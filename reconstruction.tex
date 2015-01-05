@@ -1,0 +1,30 @@
+\section{Type reconstruction}
+\label{sec:reconstruction}
+
+%% This section describes how to construct syntax directed typing rules
+%% according to the typing rules of above section, and it provides an
+%% algorithm which inputs statements and returns a pair containing
+%% constraints and behavior types.
+
+This section describes a type reconstruction procedure for the type
+system in Section~\ref{sec:typesystem}.  Since the procedure is
+essentially the same as one in Kobayashi et
+al.~\cite{DBLP:journals/lmcs/KobayashiSW06}, we do not give a concrete
+definition here.
+
+\subsection{Constraint generation}
+
+By syntax directed typing rules, the type reconstruction algorithm has
+been designed as in Figure~\ref{fig:tyin}.
+
+Function $PT_{v}(x) = (C,\emptyset)$ denotes that it receives a pointer variable $x$ and outputs a pair consisting of constraints set $C$ and an empty set. $PT_{\Theta}(s) = (C, P)$ is a mapping from statements to a pair --  constraints set $C$ and behavioral types $P$, where $\Theta$ is mapping from function names to function types. $PT(\langle D,s \rangle) = (C, P)$ denotes that it receives a program and produces a pair $(C, P)$. $\alpha_{i}$ and $\beta$ are fresh type variables.
+
+
+\subsection{Constraints reduction}
+$PT\langle D, s \rangle$ receives a program as argument and produces a pair which consists of the subtype constraints on behavior types of the form $\alpha \ge A$, and constraints of the form $OK_{n}(P)$. Thus, we obtain the following constraints:\\
+$$
+\{ \alpha_{1} \ge A_{1}, \dots, \alpha_{n} \ge  A_{n}, OK_{n}(P)\}
+$$
+Here, we can assume that $\alpha_{1}, \dots, \alpha_{n}$ are pairwise-distinct, since $\alpha \ge A_{1}$ and $\alpha \ge A_{2}$ can be replaced with $\alpha \ge A_{1}+A_{2}$ by lemma 3.8 in paper~\cite{DBLP:journals/lmcs/KobayashiSW06}. we can also assume that $\{ \alpha_{1}, \dots, \alpha_{n} \}$ contains all the type variables in the constraints, since otherwise we can always add the tautology $\alpha \ge \alpha$. Each subtype constraints $\alpha \ge A$ can be replaced by $\alpha \ge \mu \alpha. A$, by lemma 3.8(4)~\cite{DBLP:journals/lmcs/KobayashiSW06} ( substituting $\alpha$ for $B$ in this lemma). Therefore the above constraints can be further reduced to $OK_{n}([\vec{A} \slash \vec{\alpha}]P)$. Here, $A'_{1}, \dots, A'_{n}$ are the least solutions for the subtype constraints.
+
+%% \section{Preliminary Experiment}
