@@ -35,7 +35,7 @@
 \newcommand\COL{\!:\!}
 \newcommand\TSEQ{;\!}
 \newcommand\TSKIP{\mathbf{0}}
-\newcommand\rn[1]{\textsc{{#1}}}
+\renewcommand\rn[1]{\textsc{{#1}}}
 
 \newenvironment{pfof}[1]{%
   {\it Proof of {#1}}:%
@@ -407,6 +407,97 @@ Figure~\ref{fig:transitionRules} defines the relation
 {\langle H, R, \SKIP;s, n \rangle
 \longrightarrow_{D}
 \langle H, R, s, n \rangle}
+
+\infrule[Tr-Assignment]
+    {  R(x) \in dom(H)}
+    {  \langle H, R, *x \leftarrow y , n \rangle
+              \longrightarrow_{D}
+              \langle H \Lfc R(x) \rightarrow R(y) \Rfc , R,   \SKIP , n  \rangle }
+\infrule[Tr-Free]
+{R(x) \in dom(H) , n \in \mathbb{N}}
+{\langle H\coma R\coma  \FREE , n \rangle
+             \xlongrightarrow{\Free}_{D}
+             \langle H\backslash \Lfc R(x) \Rfc \coma R \coma   \SKIP , n+1  \rangle }
+
+\infrule[Tr-LetNull]
+{x' \notin dom(R)}
+{\langle H\coma R\coma  \LET x = \NULL \IN s , n \rangle
+  \longrightarrow_{D}
+  \langle H\coma R\Lfc x' \rightarrow \NULL \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
+
+\infrule[Tr-LetEq]
+{x' \notin dom(R)}
+{\langle H\coma R\coma \LET x = y \; \IN s , n \rangle
+  \longrightarrow_{D}
+  \langle H\coma R\Lfc x' \rightarrow R(y) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
+
+\infrule[Tr-LetDref]
+{x' \notin dom(R)}
+{\langle H\coma R\coma  \LET x = *y \; \IN s , n \rangle
+  \longrightarrow_{D}
+  \langle H\coma R\Lfc x' \rightarrow H(R(y)) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
+
+\infrule[Tr-Malloc]
+{h \notin dom(H)}
+{\langle H\coma R\coma  \LET x = \Malloc() \; \IN s , n \rangle
+  \xlongrightarrow{\Malloc}_{D}
+  \langle H \Lfc h \rightarrow v\Rfc \coma R\Lfc x' \rightarrow h \Rfc \coma   \Lb x'/x \Rb s , n-1  \rangle }
+
+\infrule[Tr-IfNullT]
+{R(x) = \NULL}
+{\langle H \coma R \coma \IFNULL\Cirx   \THEN   s_{1} \ELSE\  s_{2} \coma  n \rangle
+  \longrightarrow_{D}
+  \langle H\coma R\coma s_{1} \coma n \rangle}
+
+\infrule[Tr-IfNullF]
+{R(x) \neq \NULL}
+{\langle H \coma R \coma \IFNULL\Cirx \THEN  s_{1} \ELSE  s_{2} \coma  n \rangle
+  \longrightarrow_{D}
+  \langle H\coma R\coma s_{2} \coma  n, \rangle}
+
+\infrule[Tr-Call]
+{f(\vec{y}) = s \in D}
+{ \langle H\coma R\coma  f(\vec{x}) , n \rangle
+  \longrightarrow_{D}
+  \langle H\coma R\coma  \Lb \vec{x}/\vec{y} \Rb s , n \rangle}
+
+\infrule[Tr-AssignNullError]
+{R(x) = null}
+{\langle H\coma R\coma  *x \leftarrow y , n \rangle
+  \longrightarrow_{D} \bf NullEx }
+
+\infrule[Tr-DrefNullError]
+{R(y) = null}
+  {\langle H\coma R\coma  x = *y, n \rangle
+    \longrightarrow_{D}
+    \bf NullEx }
+
+  \infrule[Tr-FreeNullError]
+  {R(x) =  null }
+  {\langle H\coma R\coma  \FREE , n \rangle
+    \xlongrightarrow{\Free}_{D} \bf NullEx  }
+\infrule[Tr-AssignError]
+{R(x) \notin dom(H) \cup \Lfc null \Rfc}
+{\langle H\coma R\coma   *x \leftarrow y,  n \rangle
+  \longrightarrow_{D}
+  \bf  Error }
+
+\infrule[Tr-DrefError]
+{R(y) \notin dom(H) \cup \Lfc null \Rfc}
+{\langle H\coma R\coma  \LET x  = *y \; \IN s, n \rangle
+  \longrightarrow_{D}
+  \bf  Error }
+
+\infrule[Tr-FreeError]
+{R(x) \notin dom(H) \cup \Lfc null \Rfc}
+{\langle H\coma R\coma  \FREE , n \rangle
+  \xlongrightarrow{\Free}_{D}
+  \bf Error }
+
+\infax[Tr-MallocError]
+{ \langle H\coma R\coma \LET x = \Malloc() \ \IN s ,  0  \rangle    \xlongrightarrow{\Malloc}_{D}
+      \mathbf{Error}}
+
 
 \todo{Complete this figure.  Read the header of bcprules.sty for the
   usage of infax and infrule macros.}
