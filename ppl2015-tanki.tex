@@ -151,7 +151,7 @@ execute \(h\) and \(h'\).
 
 Notice that our type system alone does not prevent correct usage of
 \(\Malloc\) and \(\Free\).  Indeed, as observed from the type assigned
-to \(h\) and \(h'\) above, our types do not include information only
+to \(h\) and \(h'\) above, our types include information only
 about the number and the order of allocations, deallocations, and
 recursive function calls; hence, the type system does not guarantee,
 for example, there is no accesses to deallocated cells.  For such
@@ -269,15 +269,6 @@ current status and future work.  \todo{To be revised.}
 \(X\); its length, if we do not explicitly mention, is clear from the
 context or does not matter.
 
-%% <<<<<<< HEAD
-%% \subsection{Syntax}
-%% \label{sec:languageSyntax}
-%% =======
-\paragraph{Notation.} we write $\vec{x}$ for a sequence $x_{1} \dots x_{n}$, and $x_{1} \dots x_{n}$ are pairwise-distinct; $f\{x\rightarrow v \}$ denotes a function $f'$ such that $f'(y) = v$ if $x = y$, otherwise $f'(y) = f(y)$ and $y \in dom(f)$; $[v/x]s$ denotes that substituting $v$ for $x$ in $s$.
-%% >>>>>>> 9a92815042ab957eb9b2d406af7a45d4abb729b3
-
-\todo{Revised}
-
 The following BNF defines our language \(\mathcal{L}\).
 
 \begin{eqnarray*}
@@ -391,7 +382,7 @@ We write \(\xLongrightarrow{\rho_1\dots\rho_n}_D\) for
 Figure~\ref{fig:transitionRules} defines the relation
 \(\xlongrightarrow{\rho}_D\).
 
-%% <<<<<<< HEAD
+
 \begin{figure}
 \begin{minipage}{\textwidth}
 %% =======
@@ -496,11 +487,7 @@ Figure~\ref{fig:transitionRules} defines the relation
 
 \infax[Tr-MallocError]
 { \langle H\coma R\coma \LET x = \Malloc() \ \IN s ,  0  \rangle    \xlongrightarrow{\Malloc}_{D}
-      \mathbf{Error}}
-
-
-\todo{Complete this figure.  Read the header of bcprules.sty for the
-  usage of infax and infrule macros.}
+     \mathbf{Overflow}}
 
 \end{minipage}
 \label{fig:transitionRules}
@@ -796,7 +783,7 @@ $$ \frac{ \Theta(f) = P}
 \Rtab \mbox{(T-Call)} $$
 % Program
 $$\frac{\vdash D : \Theta \;\;\;\; \Theta; \emptyset\vdash s : P \Rtab OK_{n}(P)}
-{\vdash (D, s)}
+{\vdash (D, s) : n}
 \Rtab \mbox{(T-Program)} $$
 \end{minipage}
 \caption{Typing Rules}
@@ -807,32 +794,31 @@ $$\frac{\vdash D : \Theta \;\;\;\; \Theta; \emptyset\vdash s : P \Rtab OK_{n}(P)
 \subsection{Type Soundness}
 This subsection describes some theorems and lemmas for type safety.
 \begin{theorem}\label{thm1}
-If $\vdash (D, s)$ then $(D, s)$ does not lead to $memory\;leak$.\\
-Memory leak freedom: $\exists n \in \mathbb{N}$ s.t.
-$\langle \emptyset, \emptyset, s, n \rangle \nrightarrow^{*}Error$
+If $\vdash (D, s):n$ then $\langle \emptyset, \emptyset, s, n \rangle \nrightarrow^{*}Overflow$
 \end{theorem}
 \noindent
 This theorem says that a well typed program guarantees memory leak freedom.
 % Lemma Preservation %
-\begin{lemma}[Preservation $\mathbf{I}$]%\label{preser}
+\begin{lemma}[Preservation]%\label{preser}
 If $OK_{n}(P)$, $\Theta; \Gamma \vdash s : P$ and $\langle H,R,s, n \rangle
-\xlongrightarrow{\alpha}\langle H',R',s', n'
+\xlongrightarrow{\rho}\langle H',R',s', n'
 \rangle$, then $\exists P'$ s.t. \\
 (1) $ \Theta; \Gamma \vdash s' : P' $ \\
-(2) $ P \overset{\text{$\alpha$}}{\Longrightarrow} P'$\\
+(2) $ P \overset{\text{$\rho$}}{\Longrightarrow} P'$\\
 (3) $ OK_{n'}(P') $
 \end{lemma}
-\begin{lemma}[Preservation $\mathbf{II}$]%\label{preser}
-If $OK_{n}(P)$, $\Theta ; \Gamma \vdash s : P$ and $\langle H,R,s,n \rangle
-\rightarrow \langle H',R',s', n'
-\rangle$, then $\exists P'$ s.t. \\
-(1) $\Theta; \Gamma \vdash s' : P'$\\
-(2) $ P \rightarrow^{*} P'  $\\
-(3) $OK_{n'}(P')$
+%% \begin{lemma}[Preservation $\mathbf{II}$]%\label{preser}
+%% If $OK_{n}(P)$, $\Theta ; \Gamma \vdash s : P$ and $\langle H,R,s,n \rangle
+%% \rightarrow \langle H',R',s', n'
+%% \rangle$, then $\exists P'$ s.t. \\
+%% (1) $\Theta; \Gamma \vdash s' : P'$\\
+%% (2) $ P \rightarrow^{*} P'  $\\
+%% (3) $OK_{n'}(P')$
+%% \end{lemma}
+\begin{lemma}
+If $\vdash (D, s)$ then $\langle \emptyset, \emptyset, s \rangle \nrightarrow^{*}Error$(illegal accesses)
 \end{lemma}
-\begin{lemma}%\label{error}
- The partial correctness is guaranteed $\vdash \langle H,R,s \rangle$ , so that if $\vdash \langle H,R,s,n \rangle$, then $\vdash \langle H',R',s',n' \rangle \nrightarrow Error$
-\end{lemma}
+
 \section{Type Inference Algorithm}
 This section describes how to construct syntax directed typing rules according to the typing rules of above section, and it provides an algorithm which inputs statements and returns a pair containing constraints and behavior types.
 \subsection{Constraints Generation}
@@ -840,80 +826,15 @@ By syntax directed typing rules, the type inference algorithm has been designed 
 
 Function $PT_{v}(x) = (C,\emptyset)$ denotes that it receives a pointer variable $x$ and outputs a pair consisting of constraints set $C$ and an empty set. $PT_{\Theta}(s) = (C, P)$ is a mapping from statements to a pair --  constraints set $C$ and behavioral types $P$, where $\Theta$ is mapping from function names to function types. $PT(\langle D,s \rangle) = (C, P)$ denotes that it receives a program and produces a pair $(C, P)$. $\alpha_{i}$ and $\beta$ are fresh type variables.
 
-\begin{figure}
-\begin{boxedminipage}{8cm}
-  \scriptsize
-\begin{nospaceflalign*}
-   PT_{\Theta}(f) &  =  &\\
-  & \ \  \LET  \alpha = \Theta(f) & \\
-  & \ \ \IN   (C = \{\alpha \le \beta \}, \beta) &
-\end{nospaceflalign*}
-\begin{nospaceflalign*}
-   PT_{\Theta}(\SKIP) &  =  (\emptyset, 0)&
-\end{nospaceflalign*}
-\begin{nospaceflalign*}
-   PT_{\Theta}(s_{1}&;s_{2})  =  &\\
-   & \ \ \ \LET (C_{1}, P_{1}) = PT_{\Theta}(s_{1}) & \\
-   &\ \ \ \ \ \ \  \ (C_{2}, P_{2}) = PT_{\Theta}(s_{2}) & \\
-   & \ \ \ \IN   (C_{1} \cup C_{2}\cup \{P_{1}; P_{2} \le \beta \}, \beta) &
-\end{nospaceflalign*}
-\begin{nospaceflalign*}
-   PT_{\Theta}(*x& \leftarrow y)   =  &\\
-  & \ \ \LET (C_{1}, \emptyset) = PT_{v}(*x) & \\
-  & \ \ \ \ \ \ (C_{2}, \emptyset) = PT_{v}(y) & \\
-  &\ \  \IN    (C_{1} \cup C_{2},  0) &
-\end{nospaceflalign*}
-\begin{nospaceflalign*}
-   PT_{\Theta}(\Free(x)) &  = (\emptyset, \Free)  &
-\end{nospaceflalign*}
-\begin{nospaceflalign*}
-   PT_{\Theta}(\LET &x = \Malloc() \  \IN s)  =  &\\
-   &\LET (C_{1}, P_{1}) = PT_{v}(s) & \\
-   &\IN  (C_{1} \cup \{P_{1} \le \beta \} ,  \Malloc; \beta) &
-\end{nospaceflalign*}
-\begin{nospaceflalign*}
-   PT_{\Theta}(\LET &x = y \  \IN s )  =  &\\
-   &  \LET (C_{1}, \emptyset) = PT_{v}(y) & \\
-   & \ \ \ \ \ (C_{2}, P_{1}) = PT_{\Theta}(s) & \\
-   &  \IN   (C_{1} \cup C_{2}\cup \{P_{1} \le \beta \},  \beta) &
-\end{nospaceflalign*}
-\begin{nospaceflalign*}
-   PT_{\Theta}(\LET &x = *y \  \IN s )  =  &\\
-   & \LET  (C_{1}, \emptyset) = PT_{v}(y) & \\
-   &\ \ \ \ \ \ (C_{2}, P_{1}) = PT_{\Theta}(s) & \\
-   & \IN   (C_{1} \cup C_{2}\cup \{P_{1} \le \beta \},  \beta) &
-\end{nospaceflalign*}
-\begin{nospaceflalign*}
-   PT_{\Theta}(&\IFNULL(x) \  \THEN  s_{1} \  \ELSE \ s_{2} )  =  &\\
-   & \ \ \ \ \ \LET  (C_{1}, P_{1}) = PT_{\Theta}(s_{1}) & \\
-   &\ \ \ \ \  \ \ \ \ \ (C_{2}, P_{2}) = PT_{\Theta}(s_{2}) & \\
-   &\ \ \ \ \  \ \ \ \ \ (C_{3}, \emptyset) = PT_{v}(x) & \\
-   & \ \ \ \ \ \ \IN   (C_{1} \cup C_{2}\cup C_{3}\cup \{P_{1} \le \beta, P_{2} \le \beta \},  \beta) &
-\end{nospaceflalign*}
-\begin{nospaceflalign*}
-   PT(\langle D, s \rangle&)   =  &\\
-   &\LET  \Theta = \{ f_{1}:\alpha_{1}, \dots, f_{n}:\alpha_{n}  \} &\\
-   & \ \ \ \ \  where \ \{ f_{1},\dots, f_{n} \} = dom(D) \ and \ \alpha_{1}, \dots, \alpha_{n} \  are \ fresh  & \\
-   & \IN    \LET  (C_{i}, P_{i}) = PT_{\Theta}(D(f_{i})) \  for \  each \ i & \\
-   & \IN    \LET  C_{i}^{'} = \{ \alpha_{i} \le P_{i} \} \ for \  each \ i & \\
-   & \IN    \LET  (C, P) = PT_{\Theta}(s)  & \\
-   & \IN   (C_{i} \cup C_{i}^{'} ) \cup C \cup  \{OK(P)\},  P) &
-\end{nospaceflalign*}
-\end{boxedminipage}
-\caption{Type Inference Algorithm}
-\label{fig:tyin}
-\end{figure}
 
 \subsection{Constraints Reduction}
 $PT\langle D, s \rangle$ receives a program as argument and produces a pair which consists of the subtype constraints on behavior types of the form $\alpha \ge A$, and constraints of the form $OK_{n}(P)$. Thus, we obtain the following constraints:\\
 $$
 \{ \alpha_{1} \ge A_{1}, \dots, \alpha_{n} \ge  A_{n}, OK_{n}(P)\}
 $$
-Here, we can assume that $\alpha_{1}, \dots, \alpha_{n}$ are pairwise-distinct, since $\alpha \ge A_{1}$ and $\alpha \ge A_{2}$ can be replaced with $\alpha \ge A_{1}+A_{2}$ by lemma 3.8 in paper~\cite{DBLP:journals/lmcs/KobayashiSW06}. we can also assume that $\{ \alpha_{1}, \dots, \alpha_{n} \}$ contains all the type variables in the constraints, since otherwise we can always add the tautology $\alpha \ge \alpha$. Each subtype constraints $\alpha \ge A$ can be replaced by $\alpha \ge \mu \alpha. A$, by lemma 3.8(4)~\cite{DBLP:journals/lmcs/KobayashiSW06} ( substituting $\alpha$ for $B$ in this lemma). Therefore the above constraints can be further reduced to $OK_{n}([\vec{A} \backslash \vec{\alpha}])$. Here, $A'_{1}, \dots, A'_{n}$ are the least solutions for the subtype constraints.
+Here, we can assume that $\alpha_{1}, \dots, \alpha_{n}$ are pairwise-distinct, since $\alpha \ge A_{1}$ and $\alpha \ge A_{2}$ can be replaced with $\alpha \ge A_{1}+A_{2}$ by lemma 3.8 in paper~\cite{DBLP:journals/lmcs/KobayashiSW06}. we can also assume that $\{ \alpha_{1}, \dots, \alpha_{n} \}$ contains all the type variables in the constraints, since otherwise we can always add the tautology $\alpha \ge \alpha$. Each subtype constraints $\alpha \ge A$ can be replaced by $\alpha \ge \mu \alpha. A$, by lemma 3.8(4)~\cite{DBLP:journals/lmcs/KobayashiSW06} ( substituting $\alpha$ for $B$ in this lemma). Therefore the above constraints can be further reduced to $OK_{n}([\vec{A} \slash \vec{\alpha}]P)$. Here, $A'_{1}, \dots, A'_{n}$ are the least solutions for the subtype constraints.
 
 %% \section{Preliminary Experiment}
-
-
 
 \section{Related Work}
 Many methods for static memory-leak freedom verification have been
@@ -936,5 +857,5 @@ Behavioral type systems.
 
 \input{proof}
 \input{sdtyping}
-
+\input{typeinference}
 \end{document}

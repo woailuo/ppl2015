@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.6)  5 JAN 2015 15:31
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  5 JAN 2015 18:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -13,7 +13,7 @@ l.1 \section
  
 Here is how much of TeX's memory you used:
  5 strings out of 493315
- 118 string characters out of 6137905
+ 118 string characters out of 6137910
  52158 words of memory out of 5000000
  3557 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000

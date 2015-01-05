@@ -1,0 +1,65 @@
+\section{Typing Inference Algorithm}
+
+\begin{figure}
+\begin{boxedminipage}{8cm}
+  \scriptsize
+\begin{nospaceflalign*}
+   PT_{\Theta}(f) &  =  &\\
+  & \ \  \LET  \alpha = \Theta(f) & \\
+  & \ \ \IN   (C = \{\alpha \le \beta \}, \beta) &
+\end{nospaceflalign*}
+\begin{nospaceflalign*}
+   PT_{\Theta}(\SKIP) &  =  (\emptyset, 0)&
+\end{nospaceflalign*}
+\begin{nospaceflalign*}
+   PT_{\Theta}(s_{1}&;s_{2})  =  &\\
+   & \ \ \ \LET (C_{1}, P_{1}) = PT_{\Theta}(s_{1}) & \\
+   &\ \ \ \ \ \ \  \ (C_{2}, P_{2}) = PT_{\Theta}(s_{2}) & \\
+   & \ \ \ \IN   (C_{1} \cup C_{2}\cup \{P_{1}; P_{2} \le \beta \}, \beta) &
+\end{nospaceflalign*}
+\begin{nospaceflalign*}
+   PT_{\Theta}(*x& \leftarrow y)   =  &\\
+  & \ \ \LET (C_{1}, \emptyset) = PT_{v}(*x) & \\
+  & \ \ \ \ \ \ (C_{2}, \emptyset) = PT_{v}(y) & \\
+  &\ \  \IN    (C_{1} \cup C_{2},  0) &
+\end{nospaceflalign*}
+\begin{nospaceflalign*}
+   PT_{\Theta}(\Free(x)) &  = (\emptyset, \Free)  &
+\end{nospaceflalign*}
+\begin{nospaceflalign*}
+   PT_{\Theta}(\LET &x = \Malloc() \  \IN s)  =  &\\
+   &\LET (C_{1}, P_{1}) = PT_{v}(s) & \\
+   &\IN  (C_{1} \cup \{P_{1} \le \beta \} ,  \Malloc; \beta) &
+\end{nospaceflalign*}
+\begin{nospaceflalign*}
+   PT_{\Theta}(\LET &x = y \  \IN s )  =  &\\
+   &  \LET (C_{1}, \emptyset) = PT_{v}(y) & \\
+   & \ \ \ \ \ (C_{2}, P_{1}) = PT_{\Theta}(s) & \\
+   &  \IN   (C_{1} \cup C_{2}\cup \{P_{1} \le \beta \},  \beta) &
+\end{nospaceflalign*}
+\begin{nospaceflalign*}
+   PT_{\Theta}(\LET &x = *y \  \IN s )  =  &\\
+   & \LET  (C_{1}, \emptyset) = PT_{v}(y) & \\
+   &\ \ \ \ \ \ (C_{2}, P_{1}) = PT_{\Theta}(s) & \\
+   & \IN   (C_{1} \cup C_{2}\cup \{P_{1} \le \beta \},  \beta) &
+\end{nospaceflalign*}
+\begin{nospaceflalign*}
+   PT_{\Theta}(&\IFNULL(x) \  \THEN  s_{1} \  \ELSE \ s_{2} )  =  &\\
+   & \ \ \ \ \ \LET  (C_{1}, P_{1}) = PT_{\Theta}(s_{1}) & \\
+   &\ \ \ \ \  \ \ \ \ \ (C_{2}, P_{2}) = PT_{\Theta}(s_{2}) & \\
+   &\ \ \ \ \  \ \ \ \ \ (C_{3}, \emptyset) = PT_{v}(x) & \\
+   & \ \ \ \ \ \ \IN   (C_{1} \cup C_{2}\cup C_{3}\cup \{P_{1} \le \beta, P_{2} \le \beta \},  \beta) &
+\end{nospaceflalign*}
+\begin{nospaceflalign*}
+   PT(\langle D, s \rangle&)   =  &\\
+   &\LET  \Theta = \{ f_{1}:\alpha_{1}, \dots, f_{n}:\alpha_{n}  \} &\\
+   & \ \ \ \ \  where \ \{ f_{1},\dots, f_{n} \} = dom(D) \ and \ \alpha_{1}, \dots, \alpha_{n} \  are \ fresh  & \\
+   & \IN    \LET  (C_{i}, P_{i}) = PT_{\Theta}(D(f_{i})) \  for \  each \ i & \\
+   & \IN    \LET  C_{i}^{'} = \{ \alpha_{i} \le P_{i} \} \ for \  each \ i & \\
+   & \IN    \LET  (C, P) = PT_{\Theta}(s)  & \\
+   & \IN   (C_{i} \cup C_{i}^{'} ) \cup C \cup  \{OK(P)\},  P) &
+\end{nospaceflalign*}
+\end{boxedminipage}
+\caption{Type Inference Algorithm}
+\label{fig:tyin}
+\end{figure}

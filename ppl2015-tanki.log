@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  5 JAN 2015 16:36
-=======
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.6)  5 JAN 2015 15:54
->>>>>>> 0bd465cc8928b8a615175cf6b2d6da6caa9ec171
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.18)  5 JAN 2015 19:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -330,87 +326,63 @@ V:[]\OT1/cmr/m/n/10.95 ;  [];  \OML/cmm/m/it/10.95 \OT1/cmr/m/n/10.95 ;  [];
  []$,
  []
 
-[2]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 350.
 
- (/usr/local/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd
+Underfull \vbox (badness 1769) has occurred while \output is active []
+
+ [2]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 341.
+
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 350.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 341.
  [3]
-Overfull \hbox (2.43333pt too wide) detected at line 444
+Overfull \hbox (2.43333pt too wide) detected at line 435
 []  
  []
 
-[4] [5]
-Overfull \hbox (7.01558pt too wide) in paragraph at lines 818--824
-\OT1/cmr/bx/n/10.95 Lemma 2.2 \OT1/cmr/m/n/10.95 (Preser-va-tion $\OT1/cmr/bx/n
-/10.95 I$\OT1/cmr/m/n/10.95 )\OT1/cmr/bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML
-/cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95
- )$\OT1/cmr/m/it/10.95 , $\OT1/cmr/m/n/10.95 ^^B; ^^@ \OMS/cmsy/m/n/10.95 ` \OM
-L/cmm/m/it/10.95 s \OT1/cmr/m/n/10.95 : \OML/cmm/m/it/10.95 P$ \OT1/cmr/m/it/10
-.95 and $\OMS/cmsy/m/n/10.95 h\OML/cmm/m/it/10.95 H; R; s; n\OMS/cmsy/m/n/10.95
- i [] h\OML/cmm/m/it/10.95 H[]; R[]; s[]; n[]\OMS/cmsy/m/n/10.95 i$\OT1/cmr/m/i
-t/10.95 ,
- []
-
-
-Overfull \hbox (5.44884pt too wide) in paragraph at lines 826--832
-\OT1/cmr/bx/n/10.95 Lemma 2.3 \OT1/cmr/m/n/10.95 (Preser-va-tion $[]$)\OT1/cmr/
-bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML/cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95
- (\OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95 )$\OT1/cmr/m/it/10.95 , $\OT1/cmr/m/n
-/10.95 ^^B; ^^@ \OMS/cmsy/m/n/10.95 ` \OML/cmm/m/it/10.95 s \OT1/cmr/m/n/10.95 
-: \OML/cmm/m/it/10.95 P$ \OT1/cmr/m/it/10.95 and $\OMS/cmsy/m/n/10.95 h\OML/cmm
-/m/it/10.95 H; R; s; n\OMS/cmsy/m/n/10.95 i ! h\OML/cmm/m/it/10.95 H[]; R[]; s[
-]; n[]\OMS/cmsy/m/n/10.95 i$\OT1/cmr/m/it/10.95 ,
- []
-
-[6] [7]
-Overfull \hbox (51.68929pt too wide) in paragraph at lines 901--901
-[] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 908--909
+[4] [5] [6] [7]
+Underfull \hbox (badness 10000) in paragraph at lines 831--832
 
  []
 
 
 LaTeX Warning: Citation `DBLP:journals/lmcs/KobayashiSW06' on page 8 undefined 
-on input line 912.
+on input line 835.
 
 
 LaTeX Warning: Citation `DBLP:journals/lmcs/KobayashiSW06' on page 8 undefined 
-on input line 912.
+on input line 835.
 
 
 LaTeX Warning: Citation `DBLP:conf/aplas/SuenagaK09' on page 8 undefined on inp
-ut line 920.
+ut line 841.
 
 
 LaTeX Warning: Citation `DBLP:conf/pldi/HeineL03' on page 8 undefined on input 
-line 920.
+line 841.
 
 
 LaTeX Warning: Citation `DBLP:conf/sigsoft/XieA05' on page 8 undefined on input
- line 920.
+ line 841.
 
 
 LaTeX Warning: Citation `DBLP:journals/scp/SwamyHMGJ06' on page 8 undefined on 
-input line 920.
+input line 841.
 
 
 LaTeX Warning: Citation `DBLP:conf/sas/OrlovichR06' on page 8 undefined on inpu
-t line 920.
+t line 841.
 
 
 LaTeX Warning: Citation `DBLP:conf/issta/SuiYX12' on page 8 undefined on input 
-line 920.
+line 841.
 
-(./conclusion.tex [8] [9])
+(./conclusion.tex [8])
 No file ppl2015-tanki.bbl.
-[10] (./proof.tex
+[9] (./proof.tex
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 7.
 
@@ -438,7 +410,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 45--46
 
  []
 
-[11]
+[10]
 Underfull \hbox (badness 10000) in paragraph at lines 56--57
 
  []
@@ -454,14 +426,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 62--64
  []
 
 
-LaTeX Warning: Reference `' on page 12 undefined on input line 93.
+LaTeX Warning: Reference `' on page 11 undefined on input line 93.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 93--95
 
  []
 
-[12]
+[11]
 Underfull \hbox (badness 10000) in paragraph at lines 137--138
 
  []
@@ -476,7 +448,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 171--172
 
  []
 
-[13]
+[12]
 Underfull \hbox (badness 10000) in paragraph at lines 202--203
 
  []
@@ -497,21 +469,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 228--229
  []
 
 
-LaTeX Warning: Reference `5.4.1' on page 14 undefined on input line 248.
+LaTeX Warning: Reference `5.4.1' on page 13 undefined on input line 248.
 
-[14]
+[13]
 Underfull \hbox (badness 10000) in paragraph at lines 255--256
 
  []
 
 
-LaTeX Warning: Reference `eqa.1' on page 15 undefined on input line 262.
+LaTeX Warning: Reference `eqa.1' on page 14 undefined on input line 262.
 
 
-LaTeX Warning: Reference `eqa.5' on page 15 undefined on input line 272.
+LaTeX Warning: Reference `eqa.5' on page 14 undefined on input line 272.
 
 
-LaTeX Warning: Reference `eqa.6' on page 15 undefined on input line 279.
+LaTeX Warning: Reference `eqa.6' on page 14 undefined on input line 279.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 279--280
@@ -524,32 +496,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 281--282
  []
 
 
-LaTeX Warning: Reference `eqb.1' on page 15 undefined on input line 288.
+LaTeX Warning: Reference `eqb.1' on page 14 undefined on input line 288.
 
 
-LaTeX Warning: Reference `eqb.5' on page 15 undefined on input line 298.
+LaTeX Warning: Reference `eqb.5' on page 14 undefined on input line 298.
 
 
-LaTeX Warning: Reference `eqb.6' on page 15 undefined on input line 305.
+LaTeX Warning: Reference `eqb.6' on page 14 undefined on input line 305.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 305--306
 
  []
 
-[15]
+[14]
 Underfull \hbox (badness 10000) in paragraph at lines 307--308
 
  []
 
 
-LaTeX Warning: Reference `eqc.1' on page 16 undefined on input line 314.
+LaTeX Warning: Reference `eqc.1' on page 15 undefined on input line 314.
 
 
-LaTeX Warning: Reference `eqc.5' on page 16 undefined on input line 324.
+LaTeX Warning: Reference `eqc.5' on page 15 undefined on input line 324.
 
 
-LaTeX Warning: Reference `eqc.6' on page 16 undefined on input line 331.
+LaTeX Warning: Reference `eqc.6' on page 15 undefined on input line 331.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 331--332
@@ -562,24 +534,29 @@ Underfull \hbox (badness 10000) in paragraph at lines 333--334
  []
 
 
-LaTeX Warning: Reference `eq6.1' on page 16 undefined on input line 340.
+LaTeX Warning: Reference `eq6.1' on page 15 undefined on input line 340.
 
 
-LaTeX Warning: Reference `eq6.4' on page 16 undefined on input line 351.
+LaTeX Warning: Reference `eq6.4' on page 15 undefined on input line 351.
 
 
-LaTeX Warning: Reference `eq6.6' on page 16 undefined on input line 351.
+LaTeX Warning: Reference `eq6.6' on page 15 undefined on input line 351.
 
-[16]) (./sdtyping.tex
+[15]) (./sdtyping.tex
 
-LaTeX Warning: Citation `plain:book1' on page 17 undefined on input line 7.
+LaTeX Warning: Citation `plain:book1' on page 16 undefined on input line 7.
 
 
 Overfull \hbox (69.46808pt too wide) detected at line 52
 []  []
  []
 
-[17]) [18] (./ppl2015-tanki.aux)
+[16]) (./typeinference.tex
+Overfull \hbox (51.68929pt too wide) in paragraph at lines 61--61
+[] 
+ []
+
+) [17] [18] (./ppl2015-tanki.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -588,13 +565,13 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 3305 strings out of 493315
- 44413 string characters out of 6137910
- 128972 words of memory out of 5000000
+ 3308 strings out of 493315
+ 44462 string characters out of 6137910
+ 128973 words of memory out of 5000000
  6669 multiletter control sequences out of 15000+600000
  17377 words of font info for 65 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 37i,21n,26p,851b,299s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,21n,26p,848b,302s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></
@@ -618,11 +595,7 @@ ist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2013/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2013/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2013/texmf-dist/
 fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-<<<<<<< HEAD
-Output written on ppl2015-tanki.pdf (18 pages, 302749 bytes).
-=======
-Output written on ppl2015-tanki.pdf (18 pages, 295952 bytes).
->>>>>>> 0bd465cc8928b8a615175cf6b2d6da6caa9ec171
+Output written on ppl2015-tanki.pdf (18 pages, 294860 bytes).
 PDF statistics:
  155 PDF objects out of 1000 (max. 8388607)
  110 compressed objects within 2 object streams
