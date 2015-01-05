@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.6)  5 JAN 2015 15:37
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.6)  5 JAN 2015 15:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -340,7 +340,7 @@ Overfull \hbox (2.43333pt too wide) detected at line 444
  []
 
 [4] [5]
-Overfull \hbox (7.01558pt too wide) in paragraph at lines 817--823
+Overfull \hbox (7.01558pt too wide) in paragraph at lines 818--824
 \OT1/cmr/bx/n/10.95 Lemma 2.2 \OT1/cmr/m/n/10.95 (Preser-va-tion $\OT1/cmr/bx/n
 /10.95 I$\OT1/cmr/m/n/10.95 )\OT1/cmr/bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML
 /cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95
@@ -352,7 +352,7 @@ t/10.95 ,
  []
 
 
-Overfull \hbox (5.44884pt too wide) in paragraph at lines 825--831
+Overfull \hbox (5.44884pt too wide) in paragraph at lines 826--832
 \OT1/cmr/bx/n/10.95 Lemma 2.3 \OT1/cmr/m/n/10.95 (Preser-va-tion $[]$)\OT1/cmr/
 bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML/cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95
  (\OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95 )$\OT1/cmr/m/it/10.95 , $\OT1/cmr/m/n
@@ -363,25 +363,25 @@ bx/n/10.95 . \OT1/cmr/m/it/10.95 If $\OML/cmm/m/it/10.95 OK[]\OT1/cmr/m/n/10.95
  []
 
 [6] [7]
-Overfull \hbox (51.68929pt too wide) in paragraph at lines 900--900
+Overfull \hbox (51.68929pt too wide) in paragraph at lines 901--901
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 907--908
+Underfull \hbox (badness 10000) in paragraph at lines 908--909
 
  []
 
 
 LaTeX Warning: Citation `DBLP:journals/lmcs/KobayashiSW06' on page 8 undefined 
-on input line 911.
+on input line 912.
 
 
 LaTeX Warning: Citation `DBLP:journals/lmcs/KobayashiSW06' on page 8 undefined 
-on input line 911.
+on input line 912.
 
 
-Overfull \hbox (4.87306pt too wide) in paragraph at lines 919--928
+Overfull \hbox (4.87306pt too wide) in paragraph at lines 920--929
 \OT1/cmr/m/n/10.95 We have de-scribed a type-based ap-proach to safe mem-ory de
 al-lo-ca-tion for non-terminating
  []
