@@ -46,7 +46,7 @@ The notation $\rightarrow$ denotes that a behavioral type can be reduced by the 
 \subsection{Typing rules}
 The type judgment of our type system is given by the form $\Theta ;
 \Gamma \vdash s : P$. It intuitively reads that the behavior of $s$ is
-$P$ under $\Theta$ and $\Gamma$, where \(\Theta\) is a mapping from function variables to function types and \(\Gamma\) is a type environment which includes variables.%%  We design the type system so that
+$P$ under $\Theta$ and $\Gamma$, where \(\Theta\) is a mapping from function variables to function types and \(\Gamma\) is an environment which includes variables.%%  We design the type system so that
 %% this type judgment implies the property: when $s$ executes
 %% $\Malloc$(resp.$\Free$), then $P$ is equivalent to
 %% $\Malloc;P'$(resp.$\Free;P'$) for a type $P'$ such that $\Theta;
@@ -55,11 +55,16 @@ $P$ under $\Theta$ and $\Gamma$, where \(\Theta\) is a mapping from function var
 %% bound of the consumed memory cells.
 
 %% Typing rules are presented in Figure~\ref{fig:typingrules}. In the rule for assignment, the behavior of  $*x \leftarrow y$ is $\bf 0$. The rule for $\Free$ represents that the behavior of $\Free \Cirx$ is $\Free$. The rule T-Malloc represents that $\LET x = \MALLOC \; \IN s$ has the behavior $\Malloc;P$, where $P$ is the behavior of statement $s$. The rule for function call represents that function $f$ has the behavior $P$ which is the behavior of the body of this function .
-\(\vdash D \COL \Theta\)
+\(\vdash D \COL \Theta\) denotes that the set \(D\) of definitions has a type \(\Theta\).
+\begin{myDef}[\(\sharp_{\rho}(\sigma)\)]
+ \(\sharp_{malloc}(\sigma)\) and \(\sharp_{free}(\sigma)\) are functions to count the number of \(\Malloc\) and \( \Free \) actions in a sequence \( \sigma\) respectively.
+ \label{df:sharf}
+ \end{myDef}
 
-\begin{myDef}[\(\sharp_{\rho}(\sigma)\), OK_{n}(P)]
-  \( \sharp_{\malloc}(\sigma), \sharp_{\free}\) are functions to count the number of \(\Malloc\) and \( \Free \)actions in a sequence \( \sigma\) respectively. Function \(OK_n(P)\) is a function to guarantee that if a program executes sequence actions \( \sigma\) for any \(P'\) such that \(P\xLongrightarrow{\sigma}P'\), then the difference of \( \sharp_{\malloc}(\sigma)\) and \( \sharp_{\free}(\sigma)\) does not exceed the number \(n\).
+\begin{myDef}
+ \(OK_n(P)\) is a function to guarantee that if a program executes sequence actions \( \sigma\) for any \(P'\) such that \(P\xLongrightarrow{\sigma}P'\), then the difference of \( \sharp_{malloc}(\sigma)\) and \( \sharp_{free}(\sigma)\) does not exceed the number \(n\).
 \label{df:okn}
+\end{myDef} 
 
  $P_{1} \le P_{2}$ represents that $P_{1}$ is the subtype of $P_{2}$ and  means that: \\
 (1) if $P_{1} \xlongrightarrow{\alpha}  P_{1}'$ then $\exists P_{2}' $ s.t. $P_{2} \overset{\text{$\alpha$}}{\Longrightarrow} P_{2}'$ and $ P_{1}' \le P_{2}' $\\
