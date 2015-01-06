@@ -64,9 +64,8 @@ which expresses that \(h'\) can allocate a memory cell twice, call
 itself recursively, and then deallocate a memory cell twice.  Hence,
 by inspecting the inferred types (by using off-the-shelf model
 checkers, for example), one can estimate the upper bound required to
-execute \(h\) and \(h'\).  \todo{Why do we extract an abstract
-  behavior and then pass it to a model checker, not directly
-  modelchecking the original program?}
+execute \(h\) and \(h'\). \todo{Why do we extract an abstract behavior and then pass it to
+  a model checker, not directly modelchecking the original program?}
 
 Notice that our type system alone does not prevent incorrect usage of
 \(\Malloc\) and \(\Free\).  Indeed, as observed from the type assigned
@@ -77,12 +76,14 @@ example, there is no accesses to deallocated cells.  For such
 properties, we expect a program to be verified by other
 no-illegal-access verifiers~\cite{}.
 
-\todo{USE LABEL to refer to other sections, lemmas, and so on.}  The
-rest of this paper is structured as follows. Section 2 introduces a
-simple imperative language and the operational semantics of the
-language. Section 3 introduces the behavioral type system. Section 4
-describes a type reconstruction algorithm.  Section 5 describes
-current status and future work.  \todo{To be revised.}
+The rest of this paper is structured as
+follows. Section~\ref{sec:language} introduces a simple imperative
+language and the operational semantics of the
+language. Section~\ref{sec:typesystem} introduces the behavioral type
+system and proves the type soundness. Section~\ref{sec:reconstruction}
+describes a type reconstruction algorithm.
+Section~\ref{sec:relatedwork} discusses the related
+work. Section~\ref{sec:conclusion} concludes the paper.
 
 %% \subsection{Motivation and Problems}
 
