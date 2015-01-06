@@ -64,7 +64,15 @@ which expresses that \(h'\) can allocate a memory cell twice, call
 itself recursively, and then deallocate a memory cell twice.  Hence,
 by inspecting the inferred types (by using off-the-shelf model
 checkers, for example), one can estimate the upper bound required to
-execute \(h\) and \(h'\). \todo{Why do we extract an abstract behavior and then pass it to
+execute \(h\) and \(h'\). This method is better than directly
+modelchecking the original program, because for directly modelchecking
+original one we should add assertions for guaranteeing it no overflow
+and calculation for memory consumption after each allocation and
+deallocation where they appear, whereas by the abstracted behavior we
+only use two functions, each one consists of an assertion and a
+calculation, to fulfill this task.
+
+\todo{Why do we extract an abstract behavior and then pass it to
   a model checker, not directly modelchecking the original program?}
 
 Notice that our type system alone does not prevent incorrect usage of
