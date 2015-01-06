@@ -143,9 +143,9 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
   P\). Hence, from the definition of subtyping, we have \(P
   \rightarrow^{*} P''\) and \(P_{1} \le P''\) for some \(P''\).
 
-  We need to find \(P'\) such that \(\Theta; \Gamma \vdash s : P'
+  We need to find \(P'\) such that \(\Theta; \Gamma \vdash s : P'\)
   and \(P \rightarrow^{*} P'\). Take \(P''\) as \(P'\). Then \(P
-  \(rightarrow^{*} P''\) as we stated above. We also have
+  \rightarrow^{*} P''\) as we stated above. We also have
   \(\Theta;\Gamma \vdash s\COL P''\) from \(T-Sub\), \(\Gamma \vdash
   s\COL P_{1}\) and \(P_{1} \le P''\). \(\OK_n(P'')\) follows from
   Lemma~\ref{lem:okPreserved}
@@ -172,10 +172,10 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
 
   We need to find $P'$ such that \(\Theta; \Gamma \vdash [x'/x]s : P'\) ,
   \(P \xlongrightarrow{\tau}^{*} P'\) and \(\OK_n(P'\)). Take \(P\) as
-  \(P'\). Then \( P \rightarrow^{*} P'\) and \(\OK\n(P')\) hold.  We
+  \(P'\). Then \( P \rightarrow^{*} P'\) and \(\OK_n(P')\) hold.  We
   also have \(\Theta; \Gamma \vdash [x'/x]s\COL P\) from \(T-Sub\),
   \(\Theta; \Gamma \vdash [x'/x]s\COL P_{1}\) and \( P_{1} \le
-  P}.
+  P\).
 
 \item Case: $\langle H, R, \LET x = \NULL \ \IN \ s, n \rangle
   \rightarrow \langle H', R', [x'/x]s, n \rangle $
@@ -204,7 +204,7 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
   also have \(\Theta; \Gamma' \vdash [x'/x]s\COL P\) from \(T-Sub\),
   \(\Theta; \Gamma' \vdash [x'/x]s\COL P_{1}\) and \(P_{1} \le P\).
         
-\item Case(\(Tr-IfNullT\)): \(langle H, R, \IFNULL \Cirx \ \THEN s_{1} \ \ELSE \ s_{2},
+\item Case(Tr-IfNullT): \(langle H, R, \IFNULL \Cirx \ \THEN s_{1} \ \ELSE \ s_{2},
   n \rangle \rightarrow \langle H, R, s_{1}, n \rangle\)
 
   We have \(\Theta; \Gamma \vdash \IFNULL \Cirx \ \THEN \ s_{1}
@@ -218,7 +218,7 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
   \Gamma' \vdash s_{1}\COL P\) from \(\Theta; \Gamma \vdash s_{1}\COL
   P_1\), \(P_{1} \le P\) and \(T-Sub\).
 
-\item Case(\(Tr-IfNullF\)): \(langle H, R, \IFNULL \Cirx \ \THEN s_{1} \ \ELSE \ s_{2},
+\item Case(Tr-IfNullF): \(langle H, R, \IFNULL \Cirx \ \THEN s_{1} \ \ELSE \ s_{2},
   n \rangle \rightarrow \langle H, R, s_{2}, n \rangle\).
 
  The proof is similar to case \(Tr-IfNullT\). 
@@ -238,5 +238,7 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
   also have \(\Theta;\Gamma \vdash [\vec{x}/\vec{y}]s\COL P \) from
   \(\Theta;\Gamma \vdash [\vec{x}/\vec{y}]s\COL P_1)\), \(P_1 \le P\) and
   \(T-Sub\).
+
+\end{itemize}
 
 \end{pfof}
