@@ -118,7 +118,6 @@ Figure~\ref{fig:transitionRules} defines the relation
 \(\xlongrightarrow{\rho}_D\). \([x'/x]s\) denotes that substituting \(x'\) for \(x\) in \(s\). In the rule \rn{Tr-Free}, we require that \(R(x) \in \DOM(H)\); the number n of available memory cells will increase one after deallocation. In the rules for let-expressions, we require \(x' \notin \DOM(R)\). In the \rn{Tr-Malloc} rule, the contents \(v\) of the allocated memory cell can be any value in \(\mathcal{H} \cup \set{\NULL}\); the number n decreases one after allocation. There are three kinds of run-time errors: \(\bf NullEx\) for accessing null pointers, \(\bf Error\) for illegal accesses to a deallocated memory cell, and \(\bf Overflow\) for performing allocation after running out of memory cells.
 
 
-
 \begin{figure}[p]
 \begin{minipage}{\textwidth}
 %% =======

@@ -51,9 +51,9 @@ transition system.
 \infax
 {\mathbf{0};P \xlongrightarrow{\tau} P}
 \infax
-{\Malloc \xlongrightarrow{\Malloc} 0}
+{\Malloc \xlongrightarrow{\Malloc} \bf 0}
 \infax
-{\Free \xlongrightarrow{\Free} 0}
+{\Free \xlongrightarrow{\Free} \bf 0}
 \infax
 {\mu \alpha.P \xlongrightarrow{\tau}  [\mu \alpha . P/\alpha]  P}
 \infax
@@ -70,8 +70,14 @@ transition system.
 %% actions, and the $\alpha$ here is $\{\Malloc, \Free\}$.
 
 \(P \xlongrightarrow{\rho} P'\) means that \(P\) can make an action
-\(\rho\) and, after \(P\)　make the action \(\rho\), \(P\) turns into
-\(P'\). \todo{Add explanation to several rules.}
+\(\rho\) and, after \(P\) make the action \(\rho\), \(P\) turns into
+\(P'\). The \(\bf{0}\)\(;P\) performs the internal action \(\tau\) and
+then behaves like \(P\); The \(\Malloc\) and \(\Free\) perform
+\(\Malloc\) and \(\Free\) actions respectively and then behaves like
+\(\bf 0\); The behavior type \(P_1 + P_2\) performs internal action
+and then behaves like either \(P_1\) or \(P_2\); The recursive type
+\(\mu \alpha.P\) performs internal action and then turns into
+\([\mu\alpha.P/\alpha]P\).
 
 % Type Judgments
 
