@@ -17,14 +17,14 @@ static verification methods have been proposed~\cite{}.
 This paper proposes a type-based approach to static verification of
 memory-leak freedom that works for nonterminating programs.  Although
 memory leaks are relatively more serious in nonterminating programs
-(e.g., operating systems and Web servers) than terminating
-ones\footnote{Memory leaks in nonterminating programs is that a
-  program consumes unbounded number of memory cells and goes
-  overflow}, the analyses proposed so far put less emphasis to
-nontermination; they rather verify \emph{partial} memory-leak freedom:
-if a program terminates, then all the allocated memory cells are
-deallocated.  We say a program is \emph{totally} memory-leak free if
-it does not consume unbounded amount of memory during execution.
+(e.g., operating systems and Web servers)\footnote{Memory leaks in
+  nonterminating programs is that a program consumes unbounded number
+  of memory cells and goes overflow.} than terminating ones, the
+analyses proposed so far put less emphasis to nontermination; they
+rather verify \emph{partial} memory-leak freedom: if a program
+terminates, then all the allocated memory cells are deallocated.  We
+say a program is \emph{totally} memory-leak free if it does not
+consume unbounded amount of memory during execution.
 
 \begin{exmp}\label{ex:ex1}
 %% Functions $h$ and $h'$ shown in Figure~\ref{ex:np} describe

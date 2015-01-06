@@ -115,8 +115,9 @@ We write \(\xLongrightarrow{\rho_1\dots\rho_n}_D\) for
 %% $\mathcal{H}$ $\cup$ \{$null$\}.
 
 Figure~\ref{fig:transitionRules} defines the relation
-\(\xlongrightarrow{\rho}_D\).
-\todo{Add explanation to important rules.}
+\(\xlongrightarrow{\rho}_D\). \([x'/x]s\) denotes that substituting \(x'\) for \(x\) in \(s\). In the rule \rn{Tr-Free}, we require that \(R(x) \in \DOM(H)\); the number n of available memory cells will increase one after deallocation. In the rules for let-expressions, we require \(x' \notin \DOM(R)\). In the \rn{Tr-Malloc} rule, the contents \(v\) of the allocated memory cell can be any value in \(\mathcal{H} \cup \set{\NULL}\); the number n decreases one after allocation. There are three kinds of run-time errors: \(\bf NullEx\) for accessing null pointers, \(\bf Error\) for illegal accesses to a deallocated memory cell, and \(\bf Overflow\) for performing allocation after running out of memory cells.
+
+
 
 \begin{figure}[p]
 \begin{minipage}{\textwidth}
@@ -134,40 +135,38 @@ Figure~\ref{fig:transitionRules} defines the relation
 \longrightarrow_{D}
 \langle H, R, s, n \rangle}
 
-\infrule[Tr-Assignment]
-    {  R(x) \in dom(H)}
-    {  \langle H, R, *x \leftarrow y , n \rangle
-              \longrightarrow_{D}
-              \langle H \Lfc R(x) \rightarrow R(y) \Rfc , R,   \SKIP , n  \rangle }
-\infrule[Tr-Free]
-{R(x) \in dom(H) , n \in \mathbb{N}}
-{\langle H\coma R\coma  \FREE , n \rangle
-             \xlongrightarrow{\Free}_{D}
-             \langle H\backslash \Lfc R(x) \Rfc \coma R \coma   \SKIP , n+1  \rangle }
+\infrule[Tr-Assignment] { R(x) \in \DOM(H)} { \langle H, R, *x
+  \leftarrow y , n \rangle \longrightarrow_{D} \langle H \Lfc R(x)
+  \rightarrow R(y) \Rfc , R, \SKIP , n \rangle }
+
+    \infrule[Tr-Free] {R(x) \in \DOM(H)} {\langle
+      H\coma R\coma \FREE , n \rangle \xlongrightarrow{\Free}_{D}
+      \langle H\backslash \Lfc R(x) \Rfc \coma R \coma \SKIP , n+1
+      \rangle }
 
 \infrule[Tr-LetNull]
-{x' \notin dom(R)}
-{\langle H\coma R\coma  \LET x = \NULL \IN s , n \rangle
+{x' \notin \DOM(R)}
+{\langle H\coma R\coma  \LET x = \NULL \ \IN s , n \rangle
   \longrightarrow_{D}
   \langle H\coma R\Lfc x' \rightarrow \NULL \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
 
 \infrule[Tr-LetEq]
-{x' \notin dom(R)}
+{x' \notin \DOM(R)}
 {\langle H\coma R\coma \LET x = y \; \IN s , n \rangle
   \longrightarrow_{D}
   \langle H\coma R\Lfc x' \rightarrow R(y) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
 
 \infrule[Tr-LetDref]
-{x' \notin dom(R)}
+{x' \notin \DOM(R)}
 {\langle H\coma R\coma  \LET x = *y \; \IN s , n \rangle
   \longrightarrow_{D}
   \langle H\coma R\Lfc x' \rightarrow H(R(y)) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
 
 \infrule[Tr-Malloc]
-{h \notin dom(H)}
+{l \notin \DOM(H)}
 {\langle H\coma R\coma  \LET x = \Malloc() \; \IN s , n \rangle
   \xlongrightarrow{\Malloc}_{D}
-  \langle H \Lfc h \rightarrow v\Rfc \coma R\Lfc x' \rightarrow h \Rfc \coma   \Lb x'/x \Rb s , n-1  \rangle }
+  \langle H \Lfc l \rightarrow v\Rfc \coma R\Lfc x' \rightarrow h \Rfc \coma   \Lb x'/x \Rb s , n-1  \rangle }
 
 \infrule[Tr-IfNullT]
 {R(x) = \NULL}
@@ -203,19 +202,19 @@ Figure~\ref{fig:transitionRules} defines the relation
   {\langle H\coma R\coma  \FREE , n \rangle
     \xlongrightarrow{\Free}_{D} \bf NullEx  }
 \infrule[Tr-AssignError]
-{R(x) \notin dom(H) \cup \Lfc null \Rfc}
+{R(x) \notin \DOM(H) \cup \Lfc null \Rfc}
 {\langle H\coma R\coma   *x \leftarrow y,  n \rangle
   \longrightarrow_{D}
   \bf  Error }
 
 \infrule[Tr-DrefError]
-{R(y) \notin dom(H) \cup \Lfc null \Rfc}
+{R(y) \notin \DOM(H) \cup \Lfc null \Rfc}
 {\langle H\coma R\coma  \LET x  = *y \; \IN s, n \rangle
   \longrightarrow_{D}
   \bf  Error }
 
 \infrule[Tr-FreeError]
-{R(x) \notin dom(H) \cup \Lfc null \Rfc}
+{R(x) \notin \DOM(H) \cup \Lfc null \Rfc}
 {\langle H\coma R\coma  \FREE , n \rangle
   \xlongrightarrow{\Free}_{D}
   \bf Error }
