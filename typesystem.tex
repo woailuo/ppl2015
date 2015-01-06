@@ -209,9 +209,15 @@ exists \(P_2'\) such that \(P_2 \xLongrightarrow{\rho} P_2'\) and
 \end{figure}
 
 Figure~\ref{fig:typingrules} shows the typing rules of our type
-system.
+system. In the rule for assignment, it behaves like \(\bf 0\). In the
+rule for \(\Free\), the deallocation command behaves like \(\Free\).
+In the rule for \(\Malloc\), this let-expression behaves like
+\(\Malloc;P\) in which \(\Malloc\) is the behavior type of
+\(\Malloc()\) command and \(P\) is the behavior type of statement
+\(s\). In the rule for other let-expressions like \rn{Tr-LetEq},
+\rn{Tr-LetDref} and \rn{Tr-LetNull}, these expressions behave like
+what the statement \(s\) behaves, for example, \(P\).
 
-\todo{Add explanation.}
 
 \subsection{Type soundness}
 
