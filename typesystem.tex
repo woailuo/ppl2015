@@ -61,16 +61,23 @@ $P$ under $\Theta$ and $\Gamma$, where \(\Theta\) is a mapping from function var
  \label{df:sharf}
  \end{myDef}
 
-\begin{myDef}
- \(OK_n(P)\) is a function to guarantee that if a program executes sequence actions \( \sigma\) for any \(P'\) such that \(P\xLongrightarrow{\sigma}P'\), then the difference of \( \sharp_{malloc}(\sigma)\) and \( \sharp_{free}(\sigma)\) does not exceed the number \(n\).
-\label{df:okn}
-\end{myDef} 
+%% begin{myDef}[OK(P)]
+%%  \(OK_n(P)\) holds if a program executes sequence actions \( \sigma\) for any \(P'\) such that \(P\xLongrightarrow{\sigma}P'\), then the difference of \( \sharp_{malloc}(\sigma)\) and \( \sharp_{free}(\sigma)\) does not exceed the number \(n\).
+%% \label{df:okn}
+%% \
+%%end{myDef}[OK_n(P)]
+ \begin{myDef}
+   \(OK_{n}(P) \iff \forall P',\; P \xlongrightarrow{\sigma}P'\) then \(\sharp_{malloc}(\sigma)-\sharp_{free}(\sigma)\le n\).
+ \label{df:okn}
+ \end{myDef}
 
- $P_{1} \le P_{2}$ represents that $P_{1}$ is the subtype of $P_{2}$ and  means that: \\
+ \begin{myDef}[Subtype]
+$P_{1} \le P_{2}$ represents that $P_{1}$ is the subtype of $P_{2}$ and  means that: \\
 (1) if $P_{1} \xlongrightarrow{\alpha}  P_{1}'$ then $\exists P_{2}' $ s.t. $P_{2} \overset{\text{$\alpha$}}{\Longrightarrow} P_{2}'$ and $ P_{1}' \le P_{2}' $\\
 (2) if $P_{1} \rightarrow P_{1}'$ then $\exists P_{2}'$ s.t. $P_{2} \rightarrow^{*} P_{2}'$ and  $P_{1}' \le P_{2}'$\\
 where $\overset{\text{$\alpha$}}{\Longrightarrow}$ means that: $\rightarrow^{*} \xlongrightarrow{\alpha} \rightarrow^{*}$.
-
+\label{df:subtype}
+\end{myDef}
 %% At the end of $s$, memory leak freedom is guaranteed by $OK_{n}(P)$ ,where $P$ is the behavior of $s$. $OK_{n}(P)$ is defined as Definition~\ref{df:okn} in which $\sharp_{malloc}(\alpha)$ and $\sharp_{free}(\alpha)$ are functions to count the number of $\Malloc$ and $\Free$ actions in $\alpha$ respectively. This definition, intuitively, means at every running step the number of allocated memory cells will never go out of memory scope.
 %% \begin{myDef}
 %%   $OK_{n}(P) \iff \forall P',\; P \xlongrightarrow{\alpha}^{*}P'$ then $\sharp_{malloc}(\alpha)-\sharp_{free}(\alpha)\le n$.
