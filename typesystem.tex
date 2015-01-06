@@ -22,9 +22,13 @@ sequential execution behavior as doing behavior \(P_1\) first and then
 \(P_2\) behavior.  The type \(P_1 + P_2\) represents conditional
 behavior which can proceed either \(P_1\) or \(P_2\) behavior.  The
 type \(\Malloc\) is the behavior of allocating a memory cell exactly
-once. \(\Free\) represents deallocation behavior.  The type \(\mu
-\alpha.P\) represents recursive behavior, where \(\alpha\) is a type
-variable and bounded to the recursive constructor \(\mu \alpha\).
+once.  The type \(\Free\) represents deallocation behavior.  \(\alpha\) is a
+type variable which is bounded to recursive constructor \(\mu
+\alpha\). The type \(\mu \alpha.P\) represents recursive behavior,
+which substitutes \(\mu\alpha.P\) itself for \(\alpha\) in behavior
+\(P\); for example, given \(\Malloc;\alpha;\Free\) as \(P\), a
+recursive type is of the form \(\mu \alpha. \Malloc;\alpha;\Free\) and
+can go further as \(\Malloc;(\mu\alpha.\Malloc;\alpha;\Free);\Free\).
 
 %%  $P_{1};P_{2}$ is for sequential execution. $P_{1} + P_{2}$
 %% is abstracted as conditional. $\Malloc$ is the behavior of a statement
