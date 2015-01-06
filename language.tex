@@ -31,10 +31,12 @@ in the memory cell that \(y\) points to.  The statement
 \(f(\vec{x})\) calls procedure \(f\) with arguments \(\vec{x}\).
 
 A procedure definition ranged over by \(d\) is a map from a procedure
-name to an abstraction of the form \((\vec{x})s\).  We use a
-metavariable \(D\) for a set of function definitions \(d_1 \cup \dots
-\cup d_n\).  A program is a pair of function definitions \(D\) and a
-main statement \(s\).
+name to an abstraction of the form \((\vec{x})s\).  We assume that
+there is no arity mismatch between function definitions and function
+calls.  We use a metavariable \(D\) for a set of function definitions
+\(d_1 \cup \dots \cup d_n\).  A program is a pair of function
+definitions \(D\) and a main statement \(s\).
+
 
 %% A program is a pair $(D,s)$, where $D$ is the set of definition.\\ The
 %% command $\SKIP$ does nothing. The command $s_{1};s_{2}$ is executed as

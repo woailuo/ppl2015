@@ -2,44 +2,60 @@
 \section{Type system}
 \label{sec:typesystem}
 
-\subsection{Syntax of types}
-     \begin{eqnarray*}
-       P (\mathit{behavioral\ types})::=&& {\bf 0} \tB P_{1};P_{2} \tB P_{1}+P_{2} \tB \Malloc\\
-       &&\tB \Free \tB \alpha \tB \mu\alpha.P \\
-      \sigma (\mathit{function\ types})::=&& (\tau_{1},\dots, \tau_{n}) P
-     \end{eqnarray*}
+\subsection{Types}
 
-The type $\bf 0$ abstracts the behavior of $\SKIP$ and means "does nothing". $P_{1};P_{2}$ is for sequential execution. $P_{1} + P_{2}$ is abstracted as conditional. $\Malloc$ is the behavior of a statement that allocates a memory cell exactly once. $\Free$ is for deallocating memory cell exactly once. $\mu \alpha. P$ is a recursive type. For example, the behavior of  the body of function $h$ in Figure 2 is abstracted as $\mu \alpha. \Malloc;\Malloc;\Free;\Free;\alpha$. $\alpha$ is a type variable and bounded to the recursive constructor $\mu \alpha$.
+Types are described as follows.
 
-The only value in our paper is reference, and its type is $\mathbf{Ref}$.
+\[
+\begin{array}{rlcl}
+  P & (\mbox{behavioral types})&::=& {\bf 0} \tB P_{1};P_{2} \tB P_{1}+P_{2} \tB \Malloc \tB \Free \tB \alpha \tB \mu\alpha.P \\
+  \FUNTYPE & (\mbox{function\ types}) &::=& P    \\
+  \Gamma &　(\mbox{variable type environments}) &::=& x_1, x_2, \dots, x_n\\
+  \Theta &　(\mbox{function type environments}) &::=& f_1\COL\FUNTYPE_1,\dots,f_n\COL\FUNTYPE_n.
+\end{array}
+\]
+
+We use a metavariable \(P\) for \emph{behavioral types} which are
+abstractions of the behavior of programs.  The type ${\bf 0}$
+represents do-nothing behavior.  The type \(P_1;P_2\) represents an
+sequential execution behavior as doing behavior \(P_1\) first and then
+\(P_2\) behavior.  The type \(P_1 + P_2\) represents conditional
+behavior which can proceed either \(P_1\) or \(P_2\) behavior.  The
+type \(\Malloc\) is the behavior of allocating a memory cell exactly
+once. \(\Free\) represents deallocation behavior.  The type \(\mu
+\alpha.P\) represents recursive behavior, where \(\alpha\) is a type
+variable and bounded to the recursive constructor \(\mu \alpha\).
+
+%%  $P_{1};P_{2}$ is for sequential execution. $P_{1} + P_{2}$
+%% is abstracted as conditional. $\Malloc$ is the behavior of a statement
+%% that allocates a memory cell exactly once. $\Free$ is for deallocating
+%% memory cell exactly once. $\mu \alpha. P$ is a recursive type. For
+%% example, the behavior of the body of function $h$ in Figure~\ref{ex:np} is
+%% abstracted as $\mu
+%% \alpha. \Malloc;\Malloc;\Free;\Free;\alpha$. $\alpha$ is a type
+%% variable and bounded to the recursive constructor $\mu \alpha$.
 
 The function type is described as $(\tau_{1}, \dots, \tau_{n})P$, which means a function receives some pointers as arguments and its body is abstracted as a behavioral type $P$.
 
 % Semantics of Behavioral Types %
 \subsection{Semantics of behavioral types}
 The semantics of behavioral type are given by labeled transition system, and listed as follows:
-    $$
-        \mathbf{0};P \rightarrow P
-    $$
-    $$
-          \Malloc \xlongrightarrow{\Malloc} 0
-    $$
-    $$
-           \Free \xlongrightarrow{\Free} 0
-    $$
-    $$
-          \mu \alpha.P \rightarrow  [\mu \alpha . P/\alpha]  P
-    $$
-   $$
-          P_{1} + P_{2} \longrightarrow P_{1}
-   $$
-   $$
-          P_{1} + P_{2} \longrightarrow P_{2}
-   $$
-   $$
-           \frac{P_{1} \xlongrightarrow{\alpha} P_{1}' }
-                 {P_{1};P_{2} \xlongrightarrow{\alpha} P_{1}';P_{2}}
-   $$
+\infax
+{\mathbf{0};P \xlongrightarrow{\tau} P}
+\infax
+{\Malloc \xlongrightarrow{\Malloc} 0}
+\infax
+{\Free \xlongrightarrow{\Free} 0}
+\infax
+{\mu \alpha.P \xlongrightarrow{\tau}  [\mu \alpha . P/\alpha]  P}
+\infax
+{P_{1} + P_{2} \xlongrightarrow{\tau} P_{1}}
+\infax
+{P_{1} + P_{2} \xlongrightarrow{\tau} P_{2}}
+\infrule
+{P_{1} \xlongrightarrow{\alpha} P_{1}' }
+{P_{1};P_{2} \xlongrightarrow{\alpha} P_{1}';P_{2}}
+
 The notation $\rightarrow$ denotes that a behavioral type can be reduced by the internal action. Notation $\xlongrightarrow{\alpha}$ means that a behavioral type can be reduced by executing $\alpha$ actions, and the $\alpha$ here is $\{\Malloc, \Free\}$.
 
 % Type Judgments
