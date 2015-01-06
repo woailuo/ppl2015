@@ -9,7 +9,8 @@ The following BNF defines our language \(\mathcal{L}\).
   & \mid & \LET x = y \; \IN s \mid   \LET x = *y \; \IN s \\
   & \mid & \IFNULL(x) \; \THEN s_{1}\; \ELSE s_{2} \mid f(\vec{x})\\
   d \mbox{ (proc. defs.)} & ::= & \set{f \mapsto (x_1,\dots,x_n)s}\\
-  P \mbox{ (programs)} &::=& \langle d_1 \cup \dots \cup d_n, s \rangle\\
+  D \mbox{(definitions) } &::=& \langle d_1 \cup \dots \cup d_n \rangle\\
+  P \mbox{ (programs)} &::=& \langle D, s \rangle\\
 \end{eqnarray*}
 
 The language is equipped with procedure calls, dynamic memory
