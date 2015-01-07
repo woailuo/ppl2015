@@ -10,21 +10,19 @@ This section describes a type reconstruction procedure for the type
 system in Section~\ref{sec:typesystem}.  Since the procedure is
 essentially the same as one in Kobayashi et
 al.~\cite{DBLP:journals/lmcs/KobayashiSW06}, we do not give a concrete
-definition here.
+definition here.  The procedure described here is not complete.  We
+could reject a program that is well-typed in the type system.
 
-The procedure described in this section is not complete.  We could
-reject a program that is well-typed in the type system.
-
-The reconstruction procedure is a constraint-based one.  Given a
-program, the reconstruction procedure generates constraints for the
-program to be well-typed following the rules in
+The reconstruction procedure is a constraint-based one.  It generates,
+given a program, constraints for the program to be well-typed by
+constructing a derivation tree based on the rules in
 Figure~\ref{fig:typingrules}.  A constraint is either a subtyping
 constraint \(\alpha \ge P\), or \(\OK_\nu(\alpha)\), where \(\nu\) is
 a symbol for an unknown natural number.  Since \rn{T-Prog} is the only
 place where the condition \(\OK_n(P)\) is involved, the constraint set
 includes exactly one constraint of the form \(\OK_\nu(\alpha)\).  The
 concrete definition of the constraint generation is in the full
-version~\cite{}.
+version~\cite{fullversion}.
 
 By using the result obtained by Kobayashi et al.~\cite[Lemma
   3.8]{DBLP:journals/lmcs/KobayashiSW06}, a subtyping constraint
