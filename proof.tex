@@ -130,7 +130,7 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
   We need to find \(P'\) such that \(\Theta; \Gamma' \vdash
   [x'/x]s\COL P'\),\(P\xLongrightarrow{\Malloc} P'\). Take \(P''\) as
   \(P'\). Then \(P \xLongrightarrow{\Malloc} P''\) as we state above. We
-  also have \(\Theta;\Gamma \vdash [x'/x]s \COL P''\) from \(T-Sub\),
+  also have \(\Theta;\Gamma \vdash [x'/x]s \COL P''\) from \rn{T-Sub},
   \(\Theta;\Gamma \vdash [x'/x]s \COL P_1\) and \(P_1 \le
   P''\). \(\OK_{n-1}(P'')\) follows from Lemma~\ref{lem:okPreserved}.
 
@@ -141,12 +141,12 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
   \(\OK_{n}(P)\). From the inversion of the typing rules, we have
   \(\Theta; \Gamma \vdash s\COL P_{1}\) and \(0;P_{1} \le
   P\). Hence, from the definition of subtyping, we have \(P
-  \rightarrow^{*} P''\) and \(P_{1} \le P''\) for some \(P''\).
+  \xLongrightarrow{\tau} P''\) and \(P_{1} \le P''\) for some \(P''\).
 
   We need to find \(P'\) such that \(\Theta; \Gamma \vdash s : P'\)
-  and \(P \rightarrow^{*} P'\). Take \(P''\) as \(P'\). Then \(P
-  \rightarrow^{*} P''\) as we stated above. We also have
-  \(\Theta;\Gamma \vdash s\COL P''\) from \(T-Sub\), \(\Gamma \vdash
+  and \(P \xLongrightarrow{\tau} P'\). Take \(P''\) as \(P'\). Then \(P
+  \xLongrightarrow{\tau} P''\) as we stated above. We also have
+  \(\Theta;\Gamma \vdash s\COL P''\) from \rn{T-Sub}, \(\Gamma \vdash
   s\COL P_{1}\) and \(P_{1} \le P''\). \(\OK_n(P'')\) follows from
   Lemma~\ref{lem:okPreserved}
 
@@ -158,10 +158,10 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
   P\).
 
   We need to find $P'$ such that \(\Theta; \Gamma \vdash \SKIP: P'\),
-  \(P \rightarrow^{*} P'\) and \(\OK_n(P')\). Take $P$ as $P'$. Then,
-  \(P \rightarrow^{*} P'\) and \(\OK_n(P')\) hold. We also have \(\Theta;
-  \Gamma \vdash \SKIP: P'\) from \(T-Skip\), \(0 \le P\) and
-  \(T-Sub\).
+  \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\). Take $P$ as $P'$. Then,
+  \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\) hold. We also have \(\Theta;
+  \Gamma \vdash \SKIP: P'\) from \rn{T-Skip}, \(0 \le P\) and
+  \rn{T-Sub}.
 
 \item Case: $\langle H, R, \LET x = y\ \IN s , n \rangle
   \rightarrow \langle H', R', [x'/x]s, n \rangle $.
@@ -171,9 +171,9 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
   \Gamma \vdash s\COL P_{1}\) and \(P_{1} \le P\).
 
   We need to find $P'$ such that \(\Theta; \Gamma \vdash [x'/x]s : P'\) ,
-  \(P \xlongrightarrow{\tau}^{*} P'\) and \(\OK_n(P'\)). Take \(P\) as
-  \(P'\). Then \( P \rightarrow^{*} P'\) and \(\OK_n(P')\) hold.  We
-  also have \(\Theta; \Gamma \vdash [x'/x]s\COL P\) from \(T-Sub\),
+  \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P'\)). Take \(P\) as
+  \(P'\). Then \( P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\) hold.  We
+  also have \(\Theta; \Gamma \vdash [x'/x]s\COL P\) from \rn{T-Sub},
   \(\Theta; \Gamma \vdash [x'/x]s\COL P_{1}\) and \( P_{1} \le
   P\).
 
@@ -185,9 +185,9 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
   \(\Theta; \Gamma \vdash s\COL P_{1}\) and \( P_{1} \le P\).
 
   We need to find $P'$ such that \(\Theta; \Gamma' \vdash [x'/x]s\COL P'\),
-  \(P \rightarrow^{*} P'\) and \(\OK_n(P')\).  Take \(P\) as
-  \(P'\).  Then, \(P \rightarrow^{*} P'\) and \(\OK_n(P')\) hold.  We
-  also have \(\Theta; \Gamma \vdash [x'/x]s\COL P\) from \(T-Sub\),
+  \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\).  Take \(P\) as
+  \(P'\).  Then, \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\) hold.  We
+  also have \(\Theta; \Gamma \vdash [x'/x]s\COL P\) from \rn{T-Sub},
   \(\Theta; \Gamma \vdash [x'/x]s\COL P_{1}\)\( P_{1} \le
   P\). 
 
@@ -199,12 +199,12 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
   \Gamma \vdash s\COL P_{1}\) and \(P_{1} \le P\).
 
   We need to find \(P'\) such that \(\Theta; \Gamma \vdash [x'/x]s\COL
-  P'\), \(P \rightarrow^{*} P'\) and \(\OK_n(P')\). Take \(P\) as
-  \(P'\). Then, \(P \rightarrow^{*} P'\) and \(\OK_n(P')\) hold.  We
-  also have \(\Theta; \Gamma' \vdash [x'/x]s\COL P\) from \(T-Sub\),
+  P'\), \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\). Take \(P\) as
+  \(P'\). Then, \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\) hold.  We
+  also have \(\Theta; \Gamma' \vdash [x'/x]s\COL P\) from \rn{T-Sub},
   \(\Theta; \Gamma' \vdash [x'/x]s\COL P_{1}\) and \(P_{1} \le P\).
         
-\item Case(Tr-IfNullT): \(langle H, R, \IFNULL \Cirx \ \THEN s_{1} \ \ELSE \ s_{2},
+\item Case(\rn{Tr-IfNullT}): \(\langle H, R, \IFNULL \Cirx \ \THEN s_{1} \ \ELSE \ s_{2},
   n \rangle \rightarrow \langle H, R, s_{1}, n \rangle\)
 
   We have \(\Theta; \Gamma \vdash \IFNULL \Cirx \ \THEN \ s_{1}
@@ -213,15 +213,15 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
   \le P\).
 
   We need to find $P'$ such that \(\Theta; \Gamma \vdash s_1\COL P'\)
-  , \(P \rightarrow^{*} P'\) and \(\OK_n(P'\)).  Take P as P'.  Then,
-  \(\OK_n(P')\) and \(P \rightarrow^{*} P'\). We also have \(\Theta;
+  , \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P'\)).  Take P as P'.  Then,
+  \(\OK_n(P')\) and \(P \xLongrightarrow{\tau} P'\) hold. We also have \(\Theta;
   \Gamma' \vdash s_{1}\COL P\) from \(\Theta; \Gamma \vdash s_{1}\COL
-  P_1\), \(P_{1} \le P\) and \(T-Sub\).
+  P_1\), \(P_{1} \le P\) and \rn{T-Sub}.
 
-\item Case(Tr-IfNullF): \(langle H, R, \IFNULL \Cirx \ \THEN s_{1} \ \ELSE \ s_{2},
+\item Case(\rn{Tr-IfNullF}): \(\langle H, R, \IFNULL \Cirx \ \THEN s_{1} \ \ELSE \ s_{2},
   n \rangle \rightarrow \langle H, R, s_{2}, n \rangle\).
 
- The proof is similar to case \(Tr-IfNullT\). 
+ The proof is similar to case \rn{Tr-IfNullT}. 
 
 \item Case: $\langle H, R, f(\vec{x}) , n \rangle \rightarrow  \langle H, R, [\vec{x}/\vec{y}]s, n  \rangle $
 
@@ -233,11 +233,11 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
   f(x)\COL P_1\) and \(P_1 \le P\).
 
   We need to find \(P'\) such that \(\Theta;\Gamma \vdash [\vec{x}/\vec{y}]s\COL
-  P'\), \(P \rightarrow P'\) and \(\OK_n(P')\). Take \(P\) as
-  \(P'\). Then \(P \rightarrow P'\) and \(\OK_n(P')\) are held. We
+  P'\), \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\). Take \(P\) as
+  \(P'\). Then \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\) hold. We
   also have \(\Theta;\Gamma \vdash [\vec{x}/\vec{y}]s\COL P \) from
-  \(\Theta;\Gamma \vdash [\vec{x}/\vec{y}]s\COL P_1)\), \(P_1 \le P\) and
-  \(T-Sub\).
+  \(\Theta;\Gamma \vdash [\vec{x}/\vec{y}]s\COL P_1\), \(P_1 \le P\) and
+  \rn{T-Sub}.
 
 \end{itemize}
 
