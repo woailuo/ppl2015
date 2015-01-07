@@ -95,32 +95,31 @@ around a variable and function environment.
 %% actions, and the $\alpha$ here is $\{\Malloc, \Free\}$.
 
 
-\todo{Rewrite this paragraph} The semantics of behavioral type are
-given by the labeled transition system in Figure~\ref{fig:semBTypes}.
-\(P \xlongrightarrow{\rho} P'\) means that \(P\) can make an action
-\(\rho\) and, after \(P\) make the action \(\rho\), \(P\) turns into
-\(P'\). The behavioral types \(\Malloc\) and \(\Free\), intuitively,
-just perform \(\Malloc\) and \(\Free\) actions respectively.  For the
-type \(P_1 + P_2\), it only makes a choice between \(P_1\) and
-\(P_2\), so it performs the internal action and then behave like
-either \(P_1\) or \(P_2\).  The type \(\mu \alpha.P\) performs nothing
-but substitution, so it makes an internal action and behaves like a
-substitution \([\mu\alpha.P/\alpha]P\). For the behavioral type
-\(P_1;P_2\), \(P_1\) make actions \(\rho\) until it turns into
-\(0\); The type \(\bf{0};P_2\) 
+The semantics of behavioral type are given by the labeled transition
+system in Figure~\ref{fig:semBTypes}.  \(P \xlongrightarrow{\rho} P'\)
+means that \(P\) can make an action \(\rho\) and, after \(P\) make the
+action \(\rho\), \(P\) turns into \(P'\).  We note that
 
-The type
-\(\bf 0\) represents do-nothing behavior, so the type \(\bf{0}\)\(;P\)
-should perform an internal action \(\tau\) and then behave like the
-following behavior \(P\). For the type \(\Malloc\) and \(\Free\), they
-should perform \(\Malloc\) and \(\Free\) actions respectively and,
-after performing actions they do nothing, so the following behaves
-like \(\bf 0\). For the type \(P_1 + P_2\), it only makes a choice
-between \(P_1\) and \(P_2\) and do nothing else, so it performs the
-internal action and then behave like either \(P_1\) or \(P_2\). The
-type \(\mu \alpha.P\) performs nothing but substitution, so it makes
-an internal action and behaves like a substitution
-\([\mu\alpha.P/\alpha]P\).
+%% The behavioral types \(\Malloc\) and \(\Free\), intuitively, just
+%% perform \(\Malloc\) and \(\Free\) actions respectively.  For the
+%% type \(P_1 + P_2\), it only makes a choice between \(P_1\) and
+%% \(P_2\), so it performs the internal action and then behave like
+%% either \(P_1\) or \(P_2\).  The type \(\mu \alpha.P\) performs
+%% nothing but substitution, so it makes an internal action and
+%% behaves like a substitution \([\mu\alpha.P/\alpha]P\). For the
+%% behavioral type \(P_1;P_2\), \(P_1\) make actions \(\rho\) until it
+%% turns into \(0\); The type \(\bf{0};P_2\) The type \(\bf 0\)
+%% represents do-nothing behavior, so the type \(\bf{0}\)\(;P\) should
+%% perform an internal action \(\tau\) and then behave like the
+%% following behavior \(P\). For the type \(\Malloc\) and \(\Free\),
+%% they should perform \(\Malloc\) and \(\Free\) actions respectively
+%% and, after performing actions they do nothing, so the following
+%% behaves like \(\bf 0\). For the type \(P_1 + P_2\), it only makes a
+%% choice between \(P_1\) and \(P_2\) and do nothing else, so it
+%% performs the internal action and then behave like either \(P_1\) or
+%% \(P_2\). The type \(\mu \alpha.P\) performs nothing but
+%% substitution, so it makes an internal action and behaves like a
+%% substitution \([\mu\alpha.P/\alpha]P\).
 
 % Type Judgments
 
