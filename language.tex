@@ -1,5 +1,5 @@
 
-\section{Language \(\mathcal{L}\)}
+\section{Language \(\mathcal{L}\)}\label{sec:language}
 
 The following BNF defines our language \(\mathcal{L}\).
 
@@ -81,10 +81,10 @@ labeled transition on \emph{configurations} \(\langle H, R, s, n
 \item \(n\) is a natural number that represents the number of
   available memory cells.
 \end{itemize}
-\(n\) in a configuration is later used to formalize memory leak caused
-by nonterminating program.
+\(n\) in a configuration is later used to formalize memory leaks
+caused by nonterminating program.
 
-The operational semantics is given by a labeled translation relation
+The operational semantics is given by a labeled transition relation
 \(\langle H, R, s, n \rangle \xlongrightarrow{\rho}_D \langle H', R',
 s', n' \rangle\) where \(\rho\), an \emph{action}, is \(\Malloc\),
 \(\Free\), or \(\tau\).  The action \(\Malloc\) expresses an
@@ -115,11 +115,25 @@ We write \(\xLongrightarrow{\rho_1\dots\rho_n}_D\) for
 %% $\mathcal{H}$ $\cup$ \{$null$\}.
 
 Figure~\ref{fig:transitionRules} defines the relation
-\(\xlongrightarrow{\rho}_D\).
-\todo{Add explanation to important rules.}
+\(\xlongrightarrow{\rho}_D\). In the \rn{Tr-Free} rule, before
+deallocating a memory cell, we require \(R(x) \in \DOM(H)\); we remove
+the pointer from the heap \(H\) and the number \(n\) of available
+memory cells should increase one after deallocation.  In the
+\rn{Tr-Malloc} rule, the \(\Malloc()\) command allocates a memory cell
+and returns a pointer to a variable; contents \(v\) of the allocated
+memory cell can be any value in \(\mathcal{H} \cup \set{\NULL}\); the
+number \(n\) should decrease one after allocation.  There are three
+kinds of run-time errors: \(\bf NullEx\) for accessing null pointers,
+\(\bf MemEx\) for illegal accesses to a deallocated memory cell, and
+\(\bf Overflow\) for performing allocation after running out of memory
+cells. In our paper, we only prevent the \(\bf Overflow\).
+
 
 \begin{figure}[p]
 \begin{minipage}{\textwidth}
+
+\todo{I'll check this later.}
+
 %% =======
 %% %% Transition rules are listed in Figure 3. In these rules, $f\{x\to v\}$ is defined as a function $f'$ such that $f'(y) = v$ if $x = y$, otherwise $f'(y) = f(y)$ and $y \in dom(f)$. There are three rules about $\mathbf{NullEx}$ which denotes accessing a null pointer, three rules about $\mathbf{Error}$ for accessing a deallocated memory cell, and one rule about $\mathbf{Error}$ which denotes allocating a memory cell when there is no memory space.
 %% %\begin{figure}[h]
@@ -134,40 +148,38 @@ Figure~\ref{fig:transitionRules} defines the relation
 \longrightarrow_{D}
 \langle H, R, s, n \rangle}
 
-\infrule[Tr-Assignment]
-    {  R(x) \in dom(H)}
-    {  \langle H, R, *x \leftarrow y , n \rangle
-              \longrightarrow_{D}
-              \langle H \Lfc R(x) \rightarrow R(y) \Rfc , R,   \SKIP , n  \rangle }
-\infrule[Tr-Free]
-{R(x) \in dom(H) , n \in \mathbb{N}}
-{\langle H\coma R\coma  \FREE , n \rangle
-             \xlongrightarrow{\Free}_{D}
-             \langle H\backslash \Lfc R(x) \Rfc \coma R \coma   \SKIP , n+1  \rangle }
+\infrule[Tr-Assignment] { R(x) \in \DOM(H)} { \langle H, R, *x
+  \leftarrow y , n \rangle \longrightarrow_{D} \langle H \Lfc R(x)
+  \rightarrow R(y) \Rfc , R, \SKIP , n \rangle }
+
+    \infrule[Tr-Free] {R(x) \in \DOM(H)} {\langle
+      H\coma R\coma \FREE , n \rangle \xlongrightarrow{\Free}_{D}
+      \langle H\backslash \Lfc R(x) \Rfc \coma R \coma \SKIP , n+1
+      \rangle }
 
 \infrule[Tr-LetNull]
-{x' \notin dom(R)}
-{\langle H\coma R\coma  \LET x = \NULL \IN s , n \rangle
+{x' \notin \DOM(R)}
+{\langle H\coma R\coma  \LET x = \NULL \ \IN s , n \rangle
   \longrightarrow_{D}
   \langle H\coma R\Lfc x' \rightarrow \NULL \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
 
 \infrule[Tr-LetEq]
-{x' \notin dom(R)}
+{x' \notin \DOM(R)}
 {\langle H\coma R\coma \LET x = y \; \IN s , n \rangle
   \longrightarrow_{D}
   \langle H\coma R\Lfc x' \rightarrow R(y) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
 
 \infrule[Tr-LetDref]
-{x' \notin dom(R)}
+{x' \notin \DOM(R)}
 {\langle H\coma R\coma  \LET x = *y \; \IN s , n \rangle
   \longrightarrow_{D}
   \langle H\coma R\Lfc x' \rightarrow H(R(y)) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
 
 \infrule[Tr-Malloc]
-{h \notin dom(H)}
+{l \notin \DOM(H)}
 {\langle H\coma R\coma  \LET x = \Malloc() \; \IN s , n \rangle
   \xlongrightarrow{\Malloc}_{D}
-  \langle H \Lfc h \rightarrow v\Rfc \coma R\Lfc x' \rightarrow h \Rfc \coma   \Lb x'/x \Rb s , n-1  \rangle }
+  \langle H \Lfc l \rightarrow v\Rfc \coma R\Lfc x' \rightarrow l \Rfc \coma   \Lb x'/x \Rb s , n-1  \rangle }
 
 \infrule[Tr-IfNullT]
 {R(x) = \NULL}
@@ -203,22 +215,22 @@ Figure~\ref{fig:transitionRules} defines the relation
   {\langle H\coma R\coma  \FREE , n \rangle
     \xlongrightarrow{\Free}_{D} \bf NullEx  }
 \infrule[Tr-AssignError]
-{R(x) \notin dom(H) \cup \Lfc null \Rfc}
+{R(x) \notin \DOM(H) \cup \Lfc null \Rfc}
 {\langle H\coma R\coma   *x \leftarrow y,  n \rangle
   \longrightarrow_{D}
-  \bf  Error }
+  \bf  MemEx }
 
 \infrule[Tr-DrefError]
-{R(y) \notin dom(H) \cup \Lfc null \Rfc}
+{R(y) \notin \DOM(H) \cup \Lfc null \Rfc}
 {\langle H\coma R\coma  \LET x  = *y \; \IN s, n \rangle
   \longrightarrow_{D}
-  \bf  Error }
+  \bf  MemEx }
 
 \infrule[Tr-FreeError]
-{R(x) \notin dom(H) \cup \Lfc null \Rfc}
+{R(x) \notin \DOM(H) \cup \Lfc null \Rfc}
 {\langle H\coma R\coma  \FREE , n \rangle
   \xlongrightarrow{\Free}_{D}
-  \bf Error }
+  \bf MemEx }
 
 \infax[Tr-MallocError]
 { \langle H\coma R\coma \LET x = \Malloc() \ \IN s ,  0  \rangle    \xlongrightarrow{\Malloc}_{D}
