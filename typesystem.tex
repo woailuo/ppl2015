@@ -4,18 +4,15 @@
 
 \subsection{Types}
 
-Types are described as follows.
-
+The syntax of the types is as follows.
 \[
 \begin{array}{rlcl}
   P & (\mbox{behavioral types})&::=& {\bf 0} \tB P_{1};P_{2} \tB P_{1}+P_{2} \tB \Malloc \tB \Free \tB \alpha \tB \mu\alpha.P \\
-  \FUNTYPE & (\mbox{function\ types}) &::=& P    \\
-  \Gamma &　(\mbox{variable type environments}) &::=& x_1, x_2, \dots, x_n\\
-  \Theta &　(\mbox{function type environments}) &::=& f_1\COL\FUNTYPE_1,\dots,f_n\COL\FUNTYPE_n.
+  \Gamma &　(\mbox{variable type environments}) &::=& \set{x_1, x_2, \dots, x_n}\\
+  \Theta &　(\mbox{function type environments}) &::=& \set{f_1\COL P_1,\dots,f_n\COL P_n}\\
 \end{array}
 \]
-
-We use a metavariable \(P\) for \emph{behavioral types} which are
+We use metavariable \(P\) for \emph{behavioral types} which are
 abstractions of the behavior of programs.  The type ${\bf 0}$
 represents do-nothing behavior.  The type \(P_1;P_2\) represents the
 sequential execution of \(P_1\) and \(P_2\).  The type \(P_1 + P_2\)
@@ -24,6 +21,15 @@ represents the choice between \(P_1\) and \(P_2\).  The type
 type \(\Free\) represents a deallocation.  \(\alpha\) is a type
 variable. The type \(\mu \alpha.P\) represents the behavior of
 \(\alpha\) defined by the recursive equation \(\alpha = P\).
+
+Type environments for variables, ranged over by \(\Gamma\), are set of
+variables.  Since our interest is the behavior of a program, not the
+types of values, a variable type environment does not carry
+information on the types of variables.  We also designate type
+environments for function names ranged over by \(\Theta\).  A function
+type environment carries information on the behavior of functions
+represented by behavioral types.  We often omit the curly braces
+around a variable and function environment.
 
 %% For example, given \(\Malloc;\alpha;\Free\) as \(P\), a recursive type
 %% is of the form \(\mu \alpha. \Malloc;\alpha;\Free\) and can go further
@@ -45,30 +51,52 @@ variable. The type \(\mu \alpha.P\) represents the behavior of
 % Semantics of Behavioral Types %
 % \subsection{Semantics of behavioral types}
 
-The semantics of behavioral type are given by the following labeled
-transition system.
 
-\infax
+\begin{figure}[t]
+
+\begin{minipage}[t]{0.25\textwidth}
+\infax[Tr-Skip]
 {\mathbf{0};P \xlongrightarrow{\tau} P}
-\infax
+\end{minipage}
+\begin{minipage}[t]{0.34\textwidth}
+\infax[Tr-Malloc]
 {\Malloc \xlongrightarrow{\Malloc} {\bf 0}}
-\infax
+\end{minipage}
+\begin{minipage}[t]{0.3\textwidth}
+\infax[Tr-Free]
 {\Free \xlongrightarrow{\Free} {\bf 0}}
-\infax
+\end{minipage}
+
+\vspace{2mm}
+
+\begin{minipage}{0.33\textwidth}
+\infax[Tr-Rec]
 {\mu \alpha.P \xlongrightarrow{\tau}  [\mu \alpha . P/\alpha]  P}
-\infax
+\end{minipage}
+\begin{minipage}{0.3\textwidth}
+\infax[Tr-ChoiceL]
 {P_{1} + P_{2} \xlongrightarrow{\tau} P_{1}}
-\infax
+\end{minipage}
+\begin{minipage}{0.33\textwidth}
+\infax[Tr-ChoiceR]
 {P_{1} + P_{2} \xlongrightarrow{\tau} P_{2}}
-\infrule
+\end{minipage}
+
+\infrule[Tr-Seq]
 {P_{1} \xlongrightarrow{\rho} P_{1}' }
 {P_{1};P_{2} \xlongrightarrow{\rho} P_{1}';P_{2}}
+\caption{Semantics of behavioral types.}
+\label{fig:semBTypes}
+\end{figure}
 
 %% The notation $\rightarrow$ denotes that a behavioral type can be
 %% reduced by the internal action. Notation $\xlongrightarrow{\alpha}$
 %% means that a behavioral type can be reduced by executing $\alpha$
 %% actions, and the $\alpha$ here is $\{\Malloc, \Free\}$.
 
+
+\todo{Rewrite this paragraph} The semantics of behavioral type are
+given by the labeled transition system in Figure~\ref{fig:semBTypes}.
 \(P \xlongrightarrow{\rho} P'\) means that \(P\) can make an action
 \(\rho\) and, after \(P\) make the action \(\rho\), \(P\) turns into
 \(P'\). The type \(\bf 0\) represents do-nothing behavior, so the type
@@ -87,11 +115,6 @@ so it makes an internal action and behaves like a substitution
 
 \subsection{Typing rules}
 
-The type judgment of our type system is of the form $\Theta ; \Gamma
-\vdash s : P$. It intuitively expresses that the behavior of $s$ is
-represented $P$ under variable and function environments $\Theta$ and
-$\Gamma$. 
-
 %%  We design the type system so that
 %% this type judgment implies the property: when $s$ executes
 %% $\Malloc$(resp.$\Free$), then $P$ is equivalent to
@@ -105,10 +128,9 @@ $\Gamma$.
 %% \(\vdash D \COL \Theta\) denotes that the set \(D\) of definitions
 %% has a type \(\Theta\).
 
-Before presenting typing rules, we need several auxiliary definitions.
-First, we define predicate \(\OK_n(P)\) that means that \(P\)
-describes the behavior of a program that uses at most \(n\) memory
-cells.
+We need several auxiliary definitions to present typing rules.  We
+first define predicate \(\OK_n(P)\) that means that \(P\) describes
+the behavior of a program that uses at most \(n\) memory cells.
 
 \begin{myDef}[\(\sharp_{\rho}(\sigma)\)]
  \label{df:sharf}
@@ -130,10 +152,10 @@ cells.
 \end{myDef}
 
 We also define subtyping.  Following the idea of Kobayashi et
-al.~\cite{}, we define subtyping by simulation between behavioral
-types.
+al.~\cite{DBLP:journals/tcs/IgarashiK04}, we define subtyping by
+simulation between behavioral types.
 
- \begin{myDef}[Subtype]
+ \begin{myDef}[Subtyping]
 % $P_{1} \le P_{2}$ represents that $P_{1}$ is the subtype of $P_{2}$ and  means that:
 
 \(P_1 \le P_2\) is the largest relation such that, for any \(P_1'\)
@@ -152,51 +174,71 @@ exists \(P_2'\) such that \(P_2 \xLongrightarrow{\rho} P_2'\) and
 \begin{figure}[tp]
 \begin{minipage}{\textwidth}
 
-\todo{I'll check this later.}
-
-% Skip type
+\begin{minipage}{0.5\textwidth}
 \infax[T-Skip]
 {\Theta ; \Gamma \vdash \SKIP : \mathbf{0}}
-% Sequence type
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
 \infrule[T-Seq]
 {\Theta ; \Gamma \vdash s_{1} : P_{1} \Rtab \Theta ; \Gamma \vdash s_{2} : P_{2}}
 {\Theta ; \Gamma \vdash s_{1} ; s_{2} : P_{1};P_{2} }
-% Assignment type
+\end{minipage}
+
+\vspace{2mm}
+
+\begin{minipage}{0.5\textwidth}
 \infax[T-Assign]
-% {\Theta ; \Gamma \vdash y  \Rtab \Theta ; \Gamma \vdash x }
 {\Theta ; \Gamma, x, y \vdash *x \leftarrow y : \mathbf{0} }
-% Free(deallocate) type
-\infrule[T-Free]
-{\Theta ; \Gamma \vdash x  }
-{\Theta ; \Gamma \vdash \Free(x) : \Free}
-% Malloc type
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\infax[T-Free]
+{\Theta ; \Gamma, x \vdash \Free(x) : \Free}
+\end{minipage}
+
+\vspace{2mm}
+
+\begin{minipage}{0.5\textwidth}
 \infrule[T-Malloc]
 {\Theta ; \Gamma,x \vdash s : P}
 {\Theta ; \Gamma \vdash \LET x = \MALLOC \; \IN s  : \Malloc;P}
-% Let eq type
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
 \infrule[T-LetEq]
-{\Theta ; \Gamma \vdash y   \Rtab \Theta ; \Gamma , x  \vdash s : P}
-{\Theta ; \Gamma \vdash \LET x = y \; \IN s : P}
-% Dereference type
-\infrule[T-LetDref]
-{\Theta ; \Gamma \vdash y  \Rtab \Theta ; \Gamma , x  \vdash s : P}
-{\Theta ; \Gamma \vdash \LET x = *y \; \IN s : P}
-% Let NULL type
+{\Theta ; \Gamma , x, y  \vdash s : P}
+{\Theta ; \Gamma, y \vdash \LET x = y \; \IN s : P}
+\end{minipage}
+
+\vspace{2mm}
+
+\begin{minipage}{0.5\textwidth}
+\infrule[T-LetDeref]
+{\Theta ; \Gamma , x, y  \vdash s : P}
+{\Theta ; \Gamma, y \vdash \LET x = *y \; \IN s : P}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
 \infrule[T-LetNull]
 {\Theta ; \Gamma, x  \vdash s : P}
 {\Theta ; \Gamma \vdash \LET x = \mathbf{null} \; \IN s : P}
-% Subtyping
-\infrule[T-Sub]
-{\Theta ; \Gamma \vdash s : P_{1} \Rtab P_{1} \le P_{2}}
-{\Theta ; \Gamma \vdash s : P_{2}}
- % ifnull s then s type
+\end{minipage}
+
+\vspace{2mm}
+
+\begin{minipage}{0.5\textwidth}
 \infrule[T-IfNull]
-{\Theta ; \Gamma \vdash x    \ \ \ \  \Theta ; \Gamma \vdash s_{1} : P \ \ \ \ \Theta ; \Gamma \vdash s_{2} : P}
-{\Theta ; \Gamma \vdash \IFNULL(x) \; \THEN s_{1}\; \ELSE s_{2} : P}
-% Function call type
-\infrule[T-Call]
-{ \Theta(f) = P}
-{\Theta; \Gamma, \vec{x} \vdash f(\vec{x}) : P}
+{\Theta ; \Gamma, x \vdash s_{1} : P \andalso \Theta ; \Gamma, x \vdash s_{2} : P}
+{\Theta ; \Gamma, x \vdash \IFNULL(x) \; \THEN s_{1}\; \ELSE s_{2} : P}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\infax[T-Call]
+{\Theta, f \COL P; \Gamma, \vec{x} \vdash f(\vec{x}) : P}
+\end{minipage}
+
+\vspace{2mm}
+
+\infrule[T-Sub]
+{\Theta ; \Gamma \vdash s : P_{1} \andalso P_{1} \le P_{2}}
+{\Theta ; \Gamma \vdash s : P_{2}}
+
 \infrule[T-Def]
 {\DOM(D) = \DOM(\Theta)
 \andalso
@@ -206,7 +248,7 @@ exists \(P_2'\) such that \(P_2 \xLongrightarrow{\rho} P_2'\) and
 {\vdash D \COL \Theta}
 % Program
 \infrule[T-Program]
-{\vdash D : \Theta \;\;\;\; \Theta; \emptyset\vdash s : P \Rtab OK_{n}(P)}
+{\vdash D : \Theta \andalso \Theta; \emptyset\vdash s : P \Rtab OK_{n}(P)}
 {\vdash (D, s) : n}
 
 \end{minipage}
@@ -214,6 +256,12 @@ exists \(P_2'\) such that \(P_2 \xLongrightarrow{\rho} P_2'\) and
 \label{fig:typingrules}
 \end{figure}
 
+The type judgment for statements is of the form $\Theta ; \Gamma
+\vdash s : P$.  It expresses that the behavior of $s$ is abstracted by
+a behavioral $P$ under the variable type environment \(\Gamma\) and
+the function type environment \(\Theta\).
+
+\todo{Rewrite this paragraph}
 Figure~\ref{fig:typingrules} shows the typing rules of our type
 system. In the rule for assignment, it does not do allocation or
 deallocation operations, so it behaves like \(\bf 0\) . In the rule
@@ -230,8 +278,8 @@ behavior of statement \(s\).
 
 % This subsection describes some theorems and lemmas for type safety.
 
-The following theorem is the main result of the current paper.  The
-proof is in Appendix~\ref{sec:proof}.
+The following theorem states soundness of the type system.  The proof
+is in the full version~\cite{fullversion}.
 
 \begin{theorem}\label{thm1}
 If $\vdash \langle D, s \rangle : n$ for some \(n\), then \(\langle D,
@@ -265,5 +313,5 @@ there exists $P'$ such that (1) $ \Theta; \Gamma \vdash s' : P'$, (2)
 \label{lem:immediateSafety}
 If $\Theta; \Gamma \vdash s \COL P$, \(\vdash D \COL \Theta\), and
 \(\OK_n(P)\), then $\langle H, R, s, n \rangle
-\not\xlongrightarrow{\rho} \OVERFLOW$ for any \(\rho\).
+\not\xlongrightarrow{\Malloc} \OVERFLOW$.
 \end{lemma}

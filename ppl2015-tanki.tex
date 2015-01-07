@@ -1,7 +1,8 @@
 %\documentclass[japanese]{jssst_ppl} %%
  \documentclass[english]{jssst_ppl} %% English
 % \documentclass[japanese,draft]{jssst_ppl} %% You can use the draft option
-\usepackage{bcprules,amsmath,amsthm,amssymb,amsfonts,extarrows,geometry,amsopn,enumerate}
+\usepackage{bcprules,amsmath,amsthm,amssymb,amsfonts,extarrows,geometry,amsopn,enumerate,xcolor,url}
+\usepackage[sort]{cite}
 \usepackage{graphicx}
 \usepackage{boxedminipage}
 \usepackage{url}
@@ -46,6 +47,9 @@
 \newcommand\OVERFLOW{\mathbf{OutOfMemory}}
 \newcommand\DOM{\mathbf{Dom}}
 \newcommand\FUNTYPE{\varphi}
+% \newcommand\set[1]{\{{#1}\}}
+\newcommand\bs{\backslash}
+\newcommand\MEMEX{\mathbf{MemEx}}
 
 \newenvironment{pfof}[1]{%
   {\it Proof of {#1}}:%
@@ -69,7 +73,7 @@
 \iffinal
 \newcommand\todo[1]{}
 \else
-\newcommand\todo[1]{{\bf KS: {#1}}}
+\newcommand\todo[1]{{\textcolor{red}{\bf KS: {#1}}}}
 \fi
 
 \title{A Behavioral Type System for \\ Memory-Leak Freedom}
@@ -85,11 +89,11 @@
 \maketitle
 \begin{abstract}
 We propose a type system to abstract the behavior of a program under
-manual memory management. Our type system uses CCS-like processes as
-types where each action corresponds to an allocation and a
-deallocation of a fixed-size memory block. The abstraction obtained by
-our type system makes it possible to estimate an upper bound of memory
-consumption of a program. Hence, by using our type system with another
+manual memory management. Our type system uses processes as types
+where each action corresponds to an allocation and a deallocation of a
+fixed-size memory block. The abstraction obtained by our type system
+makes it possible to estimate an upper bound of memory consumption of
+a program. Hence, by using our type system with another
 safe-memory-deallocation analysis proposed by Suenaga and Kobayashi,
 we can verify memory-leak freedom even for nonterminating programs.
 We define the type system, prove type soundness, and show a type

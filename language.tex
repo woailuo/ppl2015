@@ -4,6 +4,7 @@
 The following BNF defines our language \(\mathcal{L}\).
 
 \begin{eqnarray*}
+  x,y,z,\dots \mbox{ (variables)} &\in& \VAR\\
   s \mbox{ (statements)} & ::= &  \SKIP \mid s_{1};s_{2} \mid *x \leftarrow y \mid \Free(x) \\
   & \mid & \LET x = \MALLOC \IN s \mid \LET x = \NULL\ \IN s  \\
   & \mid & \LET x = y \; \IN s \mid   \LET x = *y \; \IN s \\
@@ -15,19 +16,18 @@ The following BNF defines our language \(\mathcal{L}\).
 
 The language is equipped with procedure calls, dynamic memory
 allocation and deallocation, and memory accesses with pointers.
-\(\mathbf{Var}\) is a countably infinite set of \emph{variables}
-ranged over by \(w, x, y\), and \(z\).  The statement \(\SKIP\) does
-nothing.  The statement \(s_1;s_2\) executes \(s_1\) and \(s_2\)
-sequentially.  The statement \(*x \leftarrow y\) writes \(y\) to the
-memory cell that \(x\) points to.  The statement \(\LET x = e\ \IN s\)
-evaluates the expression \(e\), binds \(x\) to the result, and
-executes \(s\).  The expression \(\Malloc()\) allocates a new memory
-cell and evaluates to the pointer to the cell.  The expression
-\(\NULL\) evaluates to the null pointer.  The expression \(y\)
-evaluates to its value.  The expression \(*y\) evaluates to the value
-in the memory cell that \(y\) points to.  The statement
-\(\IFNULL(x)\ \THEN\ s_1\ \ELSE\ s_2\) executes \(s_1\) if \(x\) is
-\(\NULL\) and executes \(s_2\) otherwise.  The statement
+\(\VAR\) is a countably infinite set of \emph{variables}.  The
+statement \(\SKIP\) does nothing.  The statement \(s_1;s_2\) executes
+\(s_1\) and \(s_2\) sequentially.  The statement \(*x \leftarrow y\)
+writes \(y\) to the memory cell that \(x\) points to.  The statement
+\(\LET x = e\ \IN s\) evaluates the expression \(e\), binds \(x\) to
+the result, and executes \(s\).  The expression \(\Malloc()\)
+allocates a new memory cell and evaluates to the pointer to the cell.
+The expression \(\NULL\) evaluates to the null pointer.  The
+expression \(y\) evaluates to its value.  The expression \(*y\)
+evaluates to the value in the memory cell that \(y\) points to.  The
+statement \(\IFNULL(x)\ \THEN\ s_1\ \ELSE\ s_2\) executes \(s_1\) if
+\(x\) is \(\NULL\) and executes \(s_2\) otherwise.  The statement
 \(f(\vec{x})\) calls procedure \(f\) with arguments \(\vec{x}\).
 
 A procedure definition ranged over by \(d\) is a map from a procedure
@@ -65,7 +65,7 @@ definitions \(D\) and a main statement \(s\).
 \subsection{Operational semantics}
 \label{sec:languageSemantics}
 
-This section introduce the operational semantics of \(\mathcal{L}\).
+This section introduces the operational semantics of \(\mathcal{L}\).
 \(\mathcal{H}\) is a countably infinite set of \emph{locations} ranged
 over by \(l\).
 
@@ -114,25 +114,24 @@ We write \(\xLongrightarrow{\rho_1\dots\rho_n}_D\) for
 %% which models registers, is a mapping from finite set of variables to
 %% $\mathcal{H}$ $\cup$ \{$null$\}.
 
-Figure~\ref{fig:transitionRules} defines the relation
-\(\xlongrightarrow{\rho}_D\). In the \rn{Tr-Free} rule, before
-deallocating a memory cell, we require \(R(x) \in \DOM(H)\); we remove
-the pointer from the heap \(H\) and the number \(n\) of available
-memory cells should increase one after deallocation.  In the
-\rn{Tr-Malloc} rule, the \(\Malloc()\) command allocates a memory cell
-and returns a pointer to a variable; contents \(v\) of the allocated
-memory cell can be any value in \(\mathcal{H} \cup \set{\NULL}\); the
-number \(n\) should decrease one after allocation.  There are three
-kinds of run-time errors: \(\bf NullEx\) for accessing null pointers,
-\(\bf MemEx\) for illegal accesses to a deallocated memory cell, and
-\(\bf Overflow\) for performing allocation after running out of memory
-cells. In our paper, we only prevent the \(\bf Overflow\).
+\todo{Rewrite this paragraph.}  Figure~\ref{fig:transitionRules}
+defines the relation \(\xlongrightarrow{\rho}_D\). In the \rn{Sem-Free}
+rule, before deallocating a memory cell, we require \(R(x) \in
+\DOM(H)\); we remove the pointer from the heap \(H\) and the number
+\(n\) of available memory cells should increase one after
+deallocation.  In the \rn{Sem-Malloc} rule, the \(\Malloc()\) command
+allocates a memory cell and returns a pointer to a variable; contents
+\(v\) of the allocated memory cell can be any value in \(\mathcal{H}
+\cup \set{\NULL}\); the number \(n\) should decrease one after
+allocation.  There are three kinds of run-time errors: \(\bf NullEx\)
+for accessing null pointers, \(\bf MemEx\) for illegal accesses to a
+deallocated memory cell, and \(\bf Overflow\) for performing
+allocation after running out of memory cells. In our paper, we only
+prevent the \(\bf Overflow\).
 
 
 \begin{figure}[p]
 \begin{minipage}{\textwidth}
-
-\todo{I'll check this later.}
 
 %% =======
 %% %% Transition rules are listed in Figure 3. In these rules, $f\{x\to v\}$ is defined as a function $f'$ such that $f'(y) = v$ if $x = y$, otherwise $f'(y) = f(y)$ and $y \in dom(f)$. There are three rules about $\mathbf{NullEx}$ which denotes accessing a null pointer, three rules about $\mathbf{Error}$ for accessing a deallocated memory cell, and one rule about $\mathbf{Error}$ which denotes allocating a memory cell when there is no memory space.
@@ -143,103 +142,92 @@ cells. In our paper, we only prevent the \(\bf Overflow\).
 %% Operational semantics are defined by the relations: $\rightarrow_{D}, \xlongrightarrow{\Malloc}_{D}, and \xlongrightarrow{\Free}_{D} $, in which $\xlongrightarrow{\Malloc}_{D}, and \xlongrightarrow{\Free}_{D} $ denote performing a allocation and deallocation operation respectively, and $\rightarrow_{D}$ expresses that performing an internal action like $\SKIP$ or assignment.
 %% >>>>>>> 9a92815042ab957eb9b2d406af7a45d4abb729b3
 
-\infax[Tr-Skip]
+\begin{minipage}{0.5\textwidth}
+\infax[Sem-Skip]
 {\langle H, R, \SKIP;s, n \rangle
 \longrightarrow_{D}
 \langle H, R, s, n \rangle}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\infrule[Sem-Seq]
+{\langle H, R, s_1, n \rangle \xlongrightarrow{\rho}_{D} \langle H', R', s_1', n' \rangle}
+{\langle H, R, s_1;s_2, n \rangle \xlongrightarrow{\rho}_{D} \langle H', R', s_1';s_2, n' \rangle}
+\end{minipage}
 
-\infrule[Tr-Assignment] { R(x) \in \DOM(H)} { \langle H, R, *x
-  \leftarrow y , n \rangle \longrightarrow_{D} \langle H \Lfc R(x)
-  \rightarrow R(y) \Rfc , R, \SKIP , n \rangle }
+\infax[Sem-Assign]
+{ \langle H \set{R(x) \mapsto v}, R, *x \leftarrow y , n \rangle \xlongrightarrow{\tau}_{D}
+  \langle H \Lfc R(x) \mapsto R(y) \Rfc , R, \SKIP , n \rangle }
 
-    \infrule[Tr-Free] {R(x) \in \DOM(H)} {\langle
-      H\coma R\coma \FREE , n \rangle \xlongrightarrow{\Free}_{D}
-      \langle H\backslash \Lfc R(x) \Rfc \coma R \coma \SKIP , n+1
-      \rangle }
+\infax[Sem-Free] 
+{\langle H\set{R(x) \mapsto v}\coma R\coma \Free(x) , n \rangle \xlongrightarrow{\Free}_{D}
+  \langle H\backslash R(x) \coma R \coma \SKIP , n+1 \rangle}
 
-\infrule[Tr-LetNull]
+\infrule[Sem-LetNull]
 {x' \notin \DOM(R)}
 {\langle H\coma R\coma  \LET x = \NULL \ \IN s , n \rangle
   \longrightarrow_{D}
-  \langle H\coma R\Lfc x' \rightarrow \NULL \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
+  \langle H\coma R\Lfc x' \mapsto \NULL \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
 
-\infrule[Tr-LetEq]
+\infrule[Sem-LetEq]
 {x' \notin \DOM(R)}
 {\langle H\coma R\coma \LET x = y \; \IN s , n \rangle
   \longrightarrow_{D}
-  \langle H\coma R\Lfc x' \rightarrow R(y) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
+  \langle H\coma R\Lfc x' \mapsto R(y) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
 
-\infrule[Tr-LetDref]
-{x' \notin \DOM(R)}
+\infrule[Sem-LetDeref]
+{x' \notin \DOM(R) \andalso R(y) \in \DOM(H)}
 {\langle H\coma R\coma  \LET x = *y \; \IN s , n \rangle
   \longrightarrow_{D}
-  \langle H\coma R\Lfc x' \rightarrow H(R(y)) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
+  \langle H\coma R\Lfc x' \mapsto H(R(y)) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
 
-\infrule[Tr-Malloc]
-{l \notin \DOM(H)}
+\infrule[Sem-Malloc]
+{l \notin \DOM(H) \andalso n > 0}
 {\langle H\coma R\coma  \LET x = \Malloc() \; \IN s , n \rangle
   \xlongrightarrow{\Malloc}_{D}
   \langle H \Lfc l \rightarrow v\Rfc \coma R\Lfc x' \rightarrow l \Rfc \coma   \Lb x'/x \Rb s , n-1  \rangle }
 
-\infrule[Tr-IfNullT]
+\infrule[Sem-IfNullT]
 {R(x) = \NULL}
-{\langle H \coma R \coma \IFNULL\Cirx   \THEN   s_{1} \ELSE\  s_{2} \coma  n \rangle
+{\langle H \coma R \coma \IFNULL\Cirx\ \THEN   s_{1}\ \ELSE\  s_{2} \coma  n \rangle
   \longrightarrow_{D}
   \langle H\coma R\coma s_{1} \coma n \rangle}
 
-\infrule[Tr-IfNullF]
+\infrule[Sem-IfNullF]
 {R(x) \neq \NULL}
-{\langle H \coma R \coma \IFNULL\Cirx \THEN  s_{1} \ELSE  s_{2} \coma  n \rangle
+{\langle H \coma R \coma \IFNULL\Cirx\ \THEN  s_{1}\ \ELSE  s_{2} \coma  n \rangle
   \longrightarrow_{D}
-  \langle H\coma R\coma s_{2} \coma  n, \rangle}
+  \langle H\coma R\coma s_{2} \coma  n \rangle}
 
-\infrule[Tr-Call]
-{f(\vec{y}) = s \in D}
+\infrule[Sem-Call]
+{D(f) = (\vec{y})s}
 { \langle H\coma R\coma  f(\vec{x}) , n \rangle
   \longrightarrow_{D}
   \langle H\coma R\coma  \Lb \vec{x}/\vec{y} \Rb s , n \rangle}
 
-\infrule[Tr-AssignNullExn]
-{R(x) = null}
+\begin{minipage}{0.5\textwidth}
+\infrule[Sem-AssignExn]
+{R(x) = \NULL \mbox{ or } R(x) \notin \DOM(H)}
 {\langle H\coma R\coma  *x \leftarrow y , n \rangle
-  \longrightarrow_{D} \bf NullEx }
+  \longrightarrow_{D} \MEMEX }
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\infrule[Sem-DerefExn]
+{R(y) = \NULL \mbox{ or } R(y) \notin \DOM(H)}
+{\langle H\coma R\coma  \LET x = *y \; \IN s, n \rangle
+    \longrightarrow_{D} \MEMEX}
+\end{minipage}
 
-\infrule[Tr-DrefNullExn]
-{R(y) = null}
-  {\langle H\coma R\coma  x = *y, n \rangle
-    \longrightarrow_{D}
-    \bf NullEx }
+\infrule[Sem-FreeExn]
+{R(x) = \NULL \mbox{ or } R(x) \notin \DOM(H)}
+{\langle H\coma R\coma \Free(x) , n \rangle \xlongrightarrow{\Free}_{D} \MEMEX}
 
-  \infrule[Tr-FreeNullExn]
-  {R(x) =  null }
-  {\langle H\coma R\coma  \FREE , n \rangle
-    \xlongrightarrow{\Free}_{D} \bf NullEx  }
-\infrule[Tr-AssignError]
-{R(x) \notin \DOM(H) \cup \Lfc null \Rfc}
-{\langle H\coma R\coma   *x \leftarrow y,  n \rangle
-  \longrightarrow_{D}
-  \bf  MemEx }
-
-\infrule[Tr-DrefError]
-{R(y) \notin \DOM(H) \cup \Lfc null \Rfc}
-{\langle H\coma R\coma  \LET x  = *y \; \IN s, n \rangle
-  \longrightarrow_{D}
-  \bf  MemEx }
-
-\infrule[Tr-FreeError]
-{R(x) \notin \DOM(H) \cup \Lfc null \Rfc}
-{\langle H\coma R\coma  \FREE , n \rangle
-  \xlongrightarrow{\Free}_{D}
-  \bf MemEx }
-
-\infax[Tr-MallocError]
+\infax[Sem-OutOfMem]
 { \langle H\coma R\coma \LET x = \Malloc() \ \IN s ,  0  \rangle    \xlongrightarrow{\Malloc}_{D}
      \OVERFLOW}
 
 \end{minipage}
 
-\caption{Definition of the labeled transition \(\langle H, R, s, n
-  \rangle \xlongrightarrow{\rho}_D \langle H', R', s', n' \rangle\).}
+\caption{Operational semantics of \(\mathcal{L}\).}
 \label{fig:transitionRules}
 \end{figure}
 
@@ -397,7 +385,9 @@ cells. In our paper, we only prevent the \(\bf Overflow\).
 %\label{example:os}
      %\end{figure}
 
-We define memory leaks as follows.
+As mentioned in Section~\ref{sec:introduction}, we define a memory
+leak to be consuming unbounded number of memory cells.  Formally, this
+is defined as follows.
 
 \begin{myDef}[Memory leaks]
 \label{df:ml}

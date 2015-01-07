@@ -1,4 +1,5 @@
 \section{Introduction}
+\label{sec:introduction}
 
 Dynamic memory management is a crucial function of programming
 languages.  Correct allocation and disposal of memory regions are
@@ -39,11 +40,12 @@ proposed~\cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigs
 This paper proposes a type-based approach to static verification of
 memory-leak freedom that works for nonterminating programs.  Although
 memory leaks are more serious in nonterminating programs (e.g.,
-operating systems and Web servers) than terminating ones, the analyses proposed so far put less emphasis
-to nontermination; they rather verify \emph{partial} memory-leak
-freedom: if a program terminates, then all the allocated memory cells
-are deallocated.  We say a program is \emph{totally} memory-leak free
-if it does not consume unbounded amount of memory during execution.
+operating systems and Web servers) than terminating ones, the analyses
+proposed so far put less emphasis to nontermination; they rather
+verify \emph{partial} memory-leak freedom: If a program terminates,
+then all the allocated memory cells are deallocated.  We say a program
+is \emph{totally} memory-leak free if it does not consume unbounded
+amount of memory during execution.
 
 
 \begin{exmp}\label{ex:ex1}
@@ -62,11 +64,11 @@ if it does not consume unbounded amount of memory during execution.
 \end{figure}
 Figure~\ref{ex:np} describes partial and total memory-leak freedom.
 Both \(h\) and \(h'\) are partially memory-leak free because they do
-not terminate.  The function \(h\) consumes at most two
-cells\footnote{We assume that every memory cell allocated by
-  \(\Malloc\) is fixed size.}; hence it is totally memory-leak free.
-However, the function \(h'\), when it is invoked, consumes unbounded
-number of memory cells; hence \(h'\) is not totally memory-leak free.
+not terminate.  The function \(h\) is totally memory-leak free since
+it consumes at most two cells\footnote{We assume that every memory
+  cell allocated by \(\Malloc\) is fixed size.}.  However, the
+function \(h'\), when it is invoked, consumes unbounded number of
+memory cells; hence \(h'\) is not totally memory-leak free.
 \end{exmp}
 
 %%<<<<<<< HEAD
@@ -102,13 +104,14 @@ execute \(h\) and \(h'\).
 %% do experiments for this, and experiments are not included in our
 %% paper.
 
-One may not see, in the example above, much difference between
+One may not observe, in the example above, much difference between
 applying a model checker to the original programs and to the assigned
 behavioral types.  However, we expect the latter is faster than the
-former in many programs because a behavioral type focuses on actions
-on allocations and deallocations, abstracting away the other features.
-Although the current paper only focuses on the theoretical aspect, we
-plan to conduct experiment with actual programs in future.
+former in many programs because a behavioral type focuses on the
+actions related to allocations and deallocations, abstracting away the
+other features.  Although the current paper deals with only the
+theoretical aspect, we plan to conduct experiment with actual programs
+in future.
 
 Notice that our type system alone does not prevent incorrect usage of
 \(\Malloc\) and \(\Free\).  Indeed, as observed from the type assigned
@@ -126,10 +129,13 @@ The rest of this paper is structured as
 follows. Section~\ref{sec:language} introduces a simple imperative
 language and the operational semantics of the
 language. Section~\ref{sec:typesystem} introduces the behavioral type
-system and proves the type soundness. Section~\ref{sec:reconstruction}
-describes a type reconstruction algorithm.
+system and states the type soundness. Section~\ref{sec:reconstruction}
+describes a type reconstruction procedure
 Section~\ref{sec:relatedwork} discusses the related
 work. Section~\ref{sec:conclusion} concludes the paper.
+
+The proof of type soundness and the detailed definition of the type
+reconstruction procedure are in the full version~\cite{fullversion}.
 
 %% \subsection{Motivation and Problems}
 
@@ -232,6 +238,26 @@ work. Section~\ref{sec:conclusion} concludes the paper.
 %% %% >>>>>>> 9a92815042ab957eb9b2d406af7a45d4abb729b3
 
 \paragraph{Notation} We write \(\vec{X}\) for a finite sequence of
-\(X\); its length, if we do not explicitly mention, is clear from the
-context or does not matter. \([x'/x]s\) denotes that the term obtained by 
-substituting \(x'\) for \(x\) in \(s\).
+\(X\).  We write \([\vec{x'}/\vec{x}]s\) for the term obtained by
+replacing every free occurrences of \(\vec{x}\) in \(s\) with
+\(\vec{x'}\).  We write \(\DOM(f)\) for the domain of the map \(f\).  For a
+map \(f\), we write \(f \set{x \mapsto v}\) and \(f \bs x\) for the
+maps defined as follows:
+\[
+\begin{array}{rcl}
+f \set{x \mapsto v} (w) &=&
+\left\{
+\begin{array}{ll}
+v & \mbox{if \(x = w\)}\\
+f(w) & \mbox{otherwise.}
+\end{array}
+\right.\\
+(f \bs x)(w) &=&
+\left\{
+\begin{array}{ll}
+\mbox{undefined} & \mbox{if \(w \in \DOM(f)\)}\\
+f(w) & \mbox{otherwise.}
+\end{array}
+\right.
+\end{array}
+\]
