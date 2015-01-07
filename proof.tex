@@ -14,54 +14,44 @@ If \(\OK_n(P)\) and \(P \xlongrightarrow{\rho} P'\), then
 
 Case analysis on \(P \xlongrightarrow{\rho} P'\).
 
-\todo{To be revised.}
+\begin{itemize}
+\item Case $P = \TSKIP;P'$
 
-\noindent Case $P = \TSKIP;P'$\\
-
-According to rule E-Skip, we should prove
+According to the rule \rn{Tr-Skip}, we need to prove
 $\sharp_{m}(P')-\sharp_{f}(P') \le n'$ where $n'$ is $n$.
 
-Because we have
-\begin{eqnarray*}
-  OK_{n}(P)  & & =  OK_{n}(\SKIP;P')\\
-  & & \Rightarrow \sharp_{m}(\SKIP;P') - \sharp_{f}(\SKIP;P') \le n \\
-  & & \Rightarrow \sharp_{m}(P') - \sharp_{f}(P') \le n \
-\end{eqnarray*}
-Then it is proved. \\
+We have \(\OK_n(\SKIP;P')\). From the definition of \(\OK_n(P)\), we
+have \( \sharp_{m}(\SKIP;P') - \sharp_{f}(\SKIP;P') \le n\). From the
+definition of \(\sharp_{\rho}(\sigma)\), we have \(\sharp_{m}(P') -
+\sharp_{f}(P') \le n\).
 
-\noindent Case $P = \Malloc;P'$ \\
+\item Case $P = \Malloc;P'$
 
-Here according to rule E-Malloc, we know the $n'$ is $n-1$.
+From the rule \rn{Tr-Malloc}, we need to prove \(\sharp_{m}(P') -
+\sharp_{f}(P') \le n'\) where \(n'\) is \(n - 1\). 
 
-Therefore we should prove $\sharp_{m}(P') - \sharp_{f}(P') \le n-1$
-\begin{eqnarray*}
-  OK_{n}(P)&& =  OK_{n}(\Malloc;P')\\
-  &&\Rightarrow \sharp_{m}(\Malloc;P') - \sharp_{f}(\Malloc;P') \le n \\
-  &&\Rightarrow  \sharp_{m}(P') + 1 - \sharp_{f}(P') \le n\\
-  &&\Rightarrow  \sharp_{m}(P')  - \sharp_{f}(P') \le n-1\\
-\end{eqnarray*}
+ We have\(\ OK_{n}(\Malloc;P')\). From the definition of \(\OK_n(P)\),
+ we have \(\sharp_{m}(\Malloc;P') - \sharp_{f}(\Malloc;P') \le
+ n\). From the definition of \(\sharp_{\rho}(\sigma)\), we have
+ \( \sharp_{m}(P') + 1 - \sharp_{f}(P') \le n\). Then, we
+ have \( \sharp_{m}(P') - \sharp_{f}(P') \le n-1\)
 
-Then it is proved.\\
+\item Case $P = \Free;P'$
 
-\noindent Case $P = \Free;P'$ \\
+From the rule \rn{Tr-Free}, we need to prove \(\sharp_{m}(P') - \sharp_{f}(P') \le n+1\).
 
-According to rule E-Free, we should prove $\sharp_{m}(P') - \sharp_{f}(P') \le n+1$.
+We have \(\OK_{n}(\Free;P')\). From the definition of \(\OK_n(P)\),
+we have \(\sharp_{m}(\Free;P') - \sharp_{f}(\Free;P') \le n\). From
+the definition of \(\sharp_{\rho}(\sigma)\), we have \(\sharp_{m}(P')
+- \sharp_{f}(P') - 1 \le n\). Then, we have \(
+\sharp_{m}(P') - \sharp_{f}(P') \le n+1\)
 
-\begin{eqnarray*}
-  OK_{n}(P)  & & =  OK_{n}(\Free;P')\\
-  & &\Rightarrow  \sharp_{m}(\Free;P') - \sharp_{f}(\Free;P') \le n \\
-  & & \Rightarrow \sharp_{m}(P')  - \sharp_{f}(P') - 1  \le n\\
-  & & \Rightarrow \sharp_{m}(P')  - \sharp_{f}(P') \le n+1\\
-\end{eqnarray*}
-
-Then it is proved. \\
-
-\noindent Case $P = P_{1};P_{2}$\\
+\item Case $P = P_{1};P_{2}$
 
 To prove it by contradiction.
 
 Suppose that $OK_{n'}(P_{1}';P_{2})$ does not hold. Then we have 
-$P_{1};P_{2} \xlongrightarrow{\alpha} P_{1}';P_{2} \xlongrightarrow{\exists \sigma} Q$, $s.t.$ $\sharp_{m}(\sigma) - \sharp_{f}(\sigma) > n'$\\
+$P_{1};P_{2} \xlongrightarrow{\alpha} P_{1}';P_{2} \xlongrightarrow{\exists \sigma} Q$, $s.t.$ $\sharp_{m}(\sigma) - \sharp_{f}(\sigma) > n'$
 
 From the premise $OK_{n}(P) = OK_{n}(P_{1};P_{2})$, we get 
 \setcounter{equation}{0}
@@ -89,6 +79,8 @@ When $\alpha = \Free$, we get that $n + 1 - 1 < n$\\
 When $\alpha = \Malloc$, we get that $ n - 1 + 1 < n $ \\
 When $ \alpha = other$,  we  get that $ n < n $ \\
  All of the three cases are equal to $n$. Therefore we get the contradiction.
+
+\end{itemize}
 \end{proof}
 
 \begin{pfof}{Lemma~\ref{}}
