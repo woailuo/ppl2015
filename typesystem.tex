@@ -80,10 +80,7 @@ following behaves like \(\bf 0\). For the type \(P_1 + P_2\), it only
 makes a choice between \(P_1\) and \(P_2\) and do nothing else, so it
 performs the internal action and then behave like either \(P_1) or
 \(P_2\). The type \(\mu \alpha.P\) performs nothing but substitution,
-so it makes an internal action and behaves like a substitution.
-
-performs internal
-action and then turns into \([\mu\alpha.P/\alpha]P\).
+so it makes an internal action and behaves like a substitution \([\mu\alpha.P/\alpha]P\).
 
 % Type Judgments
 
@@ -92,7 +89,7 @@ action and then turns into \([\mu\alpha.P/\alpha]P\).
 The type judgment of our type system is of the form $\Theta ; \Gamma
 \vdash s : P$. It intuitively expresses that the behavior of $s$ is
 represented $P$ under variable and function environments $\Theta$ and
-$\Gamma$.  
+$\Gamma$. 
 
 %%  We design the type system so that
 %% this type judgment implies the property: when $s$ executes
@@ -217,14 +214,16 @@ exists \(P_2'\) such that \(P_2 \xLongrightarrow{\rho} P_2'\) and
 \end{figure}
 
 Figure~\ref{fig:typingrules} shows the typing rules of our type
-system. In the rule for assignment, it behaves like \(\bf 0\). In the
-rule for \(\Free\), the deallocation command behaves like \(\Free\).
-In the rule for \(\Malloc\), this let-expression behaves like
-\(\Malloc;P\) in which \(\Malloc\) is the behavior type of
-\(\Malloc()\) command and \(P\) is the behavior type of statement
+system. In the rule for assignment, it does not do allocation or
+deallocation operations, so it behaves like \(\bf 0\) . In the rule
+for \(\Free\), it performs an allocation, so it behaves like
+\(\Free\).  In the rule for \(\Malloc\), this let-expression performs
+an allocation and then executes the statement \(s\), so its behavior
+like \(\Malloc;P\) where the \(P\) is the behavior type of statement
 \(s\). In the rule for other let-expressions like \rn{Tr-LetEq},
-\rn{Tr-LetDref} and \rn{Tr-LetNull}, these expressions behave like
-what the statement \(s\) behaves, for example, \(P\).
+\rn{Tr-LetDref} and \rn{Tr-LetNull}, they do not perform any
+allocation and deallocation, so they behave like \(P\) which is the
+behavior of statement \(s\).
 
 
 \subsection{Type soundness}
