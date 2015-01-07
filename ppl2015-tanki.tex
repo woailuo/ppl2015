@@ -6,6 +6,8 @@
 \usepackage{boxedminipage}
 \usepackage{url}
 
+\newif\ifdraft\draftfalse
+
 % set some new commands %
 \newcommand\tB{\;|\;}
 \newcommand\LET{\mathbf{let}\;}
@@ -96,6 +98,8 @@ consumption using an off-the-shelf model checker.
 \bibliographystyle{abbrv}
 \bibliography{tan}
 
+\ifdraft
+\elseif
 \newpage
 \appendix
 \section*{Appendix}
@@ -103,5 +107,6 @@ consumption using an off-the-shelf model checker.
 \input{proof}
 \input{sdtyping}
 \input{typeinference}
+\fi
 
 \end{document}

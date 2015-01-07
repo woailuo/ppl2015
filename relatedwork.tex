@@ -1,5 +1,6 @@
 
 \section{Related work}
+
 Many methods for static memory-leak freedom verification have been
 proposed~\cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06,DBLP:conf/sas/OrlovichR06,DBLP:conf/issta/SuiYX12}. These
 methods guarantee partial memory-leak freedom and lack of illegal
@@ -7,4 +8,11 @@ accesses, whereas our type system guarantees total memory-leak
 freedom. By using both their methods and our type system, we can
 guarantee safe memory deallocation for nonterminating programs.
 
-Behavioral type systems.
+Behavioral types are extensively studied in the context of concurrent
+program
+verification~\cite{DBLP:conf/esop/HondaVK98,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/VieiraCS08,DBLP:journals/lmcs/KobayashiSW06}.
+These type systems guarantee that the communication pattern of
+concurrent programs are as intended.  Our type system is largely
+inspired by one by Kobayashi et
+al.~\cite{DBLP:journals/lmcs/KobayashiSW06}, which guarantees that a
+concurrent program accesses resources according to specification.
