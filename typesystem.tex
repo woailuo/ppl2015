@@ -260,18 +260,16 @@ The type judgment for statements is of the form $\Theta ; \Gamma
 a behavioral $P$ under the variable type environment \(\Gamma\) and
 the function type environment \(\Theta\).
 
-\todo{Rewrite this paragraph}
-Figure~\ref{fig:typingrules} shows the typing rules of our type
-system. In the rule for assignment, it does not do allocation or
-deallocation operations, so it behaves like \(\bf 0\) . In the rule
-for \(\Free\), it performs an allocation, so it behaves like
-\(\Free\).  In the rule for \(\Malloc\), this let-expression performs
-an allocation and then executes the statement \(s\), so its behavior
-like \(\Malloc;P\) where the \(P\) is the behavior type of statement
-\(s\). In the rule for other let-expressions like \rn{Tr-LetEq},
-\rn{Tr-LetDref} and \rn{Tr-LetNull}, they do not perform any
-allocation and deallocation, so they behave like \(P\) which is the
-behavior of statement \(s\).
+\todo{Rewrite this paragraph} Figure~\ref{fig:typingrules} shows the
+typing rules of our type system. In the rule for assignment, the
+expression behaves like \(\bf 0\) . In the rule for \(\Free\), it
+performs an allocation, so it behaves like \(\Free\).  In the rule for
+\(\Malloc\), this let-expression performs an allocation and then
+executes the statement \(s\), so its behavior like \(\Malloc;P\) where
+the \(P\) is the behavior type of statement \(s\). In the rule for
+other let-expressions like \rn{Tr-LetEq}, \rn{Tr-LetDref} and
+\rn{Tr-LetNull}, they do not perform any allocation and deallocation,
+so they behave like \(P\) which is the behavior of statement \(s\).
 
 \subsection{Type soundness}
 

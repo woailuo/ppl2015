@@ -115,34 +115,34 @@ We write \(\xLongrightarrow{\rho_1\dots\rho_n}_D\) for
 %% $\mathcal{H}$ $\cup$ \{$null$\}.
 
 % <<<<<<< HEAD
-\todo{Rewrite this paragraph.}  Figure~\ref{fig:transitionRules}
-defines the relation \(\xlongrightarrow{\rho}_D\). In the \rn{Sem-Free}
-rule, before deallocating a memory cell, we require \(R(x) \in
-\DOM(H)\); we remove the pointer from the heap \(H\) and the number
-\(n\) of available memory cells should increase one after
-deallocation.  In the \rn{Sem-Malloc} rule, the \(\Malloc()\) command
-allocates a memory cell and returns a pointer to a variable; contents
-\(v\) of the allocated memory cell can be any value in \(\mathcal{H}
-\cup \set{\NULL}\); the number \(n\) should decrease one after
-allocation.  There are three kinds of run-time errors: \(\bf NullEx\)
-for accessing null pointers, \(\bf MemEx\) for illegal accesses to a
-deallocated memory cell, and \(\bf Overflow\) for performing
-allocation after running out of memory cells. In our paper, we only
-prevent the \(\bf Overflow\).
-%% =======
-%% Figure~\ref{fig:transitionRules} defines the relation
-%% \(\xlongrightarrow{\rho}_D\). In the rule for \(\Free\), we require
-%% that a memory cell has been allocated before deallocating it, and
-%% after deallocating the memory cell from the heap \(H\), the number
-%% \(n\) of available memory cells should increase one.  In the rule for
-%% \(\Malloc\), the \(\Malloc()\) command allocates a new memory cell
-%% \(l\) of which contents \(v\) can be any value in \(\mathcal{H} \cup
-%% \set{\NULL}\) and reduces the number of available memory cells by
-%% one. There are three kinds of run-time errors: \(\bf NullEx\) for
-%% accessing null pointers, \(\bf MemEx\) for illegal accesses to a
-%% deallocated memory cell, and \(\OVERFLOW\) for performing
-%% allocation after running out of memory cells.
-%% >>>>>>> a91f7d182d30e822222cb94af11d8b63486c7a46
+%% \todo{Rewrite this paragraph.}  Figure~\ref{fig:transitionRules}
+%% defines the relation \(\xlongrightarrow{\rho}_D\). In the \rn{Sem-Free}
+%% rule, before deallocating a memory cell, we require \(R(x) \in
+%% \DOM(H)\); we remove the pointer from the heap \(H\) and the number
+%% \(n\) of available memory cells should increase one after
+%% deallocation.  In the \rn{Sem-Malloc} rule, the \(\Malloc()\) command
+%% allocates a memory cell and returns a pointer to a variable; contents
+%% \(v\) of the allocated memory cell can be any value in \(\mathcal{H}
+%% \cup \set{\NULL}\); the number \(n\) should decrease one after
+%% allocation.  There are three kinds of run-time errors: \(\bf NullEx\)
+%% for accessing null pointers, \(\bf MemEx\) for illegal accesses to a
+%% deallocated memory cell, and \(\bf Overflow\) for performing
+%% allocation after running out of memory cells. In our paper, we only
+%% prevent the \(\bf Overflow\).
+%% %% =======
+Figure~\ref{fig:transitionRules} defines the relation
+\(\xlongrightarrow{\rho}_D\). In the rule for \(\Free\), we require
+that a memory cell has been allocated before deallocating it, and
+after deallocating the memory cell from the heap \(H\), the number
+\(n\) of available memory cells should increase one.  In the rule for
+\(\Malloc\), the number of available memory cells should be positive;
+the \(\Malloc\) command allocate e cell for allocates a new memory
+cell \(l\) of which contents \(v\) can be any value in \(\mathcal{H}
+\cup \set{\NULL}\) and reduces the number of available memory cells by
+one. The \(\bf NullEx\) for accessing null pointers or illegal accessing to a
+deallocated memory cell, and \(\OVERFLOW\) for performing allocation
+after running out of memory cells.
+
 
 
 \begin{figure}[p]
