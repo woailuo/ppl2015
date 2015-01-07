@@ -1,8 +1,13 @@
 
 \section{Language \(\mathcal{L}\)}\label{sec:language}
 
-The following BNF defines our language \(\mathcal{L}\).
+This section gives the definition of language \(\mathcal{L}\), an
+imperative language with memory allocation/deallocation primitives.
+The language is essentially the same as one used by Sueanga et
+al.~\cite{DBLP:conf/aplas/SuenagaK09}, where they proposes a
+type-based analysis for partial memory-leak freedom analysis.
 
+The syntax of language \(\mathcal{L}\) is as follows.
 \begin{eqnarray*}
   x,y,z,\dots \mbox{ (variables)} &\in& \VAR\\
   s \mbox{ (statements)} & ::= &  \SKIP \mid s_{1};s_{2} \mid *x \leftarrow y \mid \Free(x) \\
@@ -69,9 +74,9 @@ This section introduces the operational semantics of \(\mathcal{L}\).
 \(\mathcal{H}\) is a countably infinite set of \emph{locations} ranged
 over by \(l\).
 
-We give the operational semantics of the language \(\mathcal{L}\) as a
-labeled transition on \emph{configurations} \(\langle H, R, s, n
-\rangle\).  A configuration consists of the following four components:
+We represent a state of computation by \emph{configuration} \(\langle
+H, R, s, n \rangle\).  A configuration consists of the following four
+components:
 \begin{itemize}
 \item \(H\), a \emph{heap}, is a finite mapping from \(\mathcal{H}\)
   to \(\mathcal{H} \cup \set{\NULL}\);
@@ -84,14 +89,14 @@ labeled transition on \emph{configurations} \(\langle H, R, s, n
 \(n\) in a configuration is later used to formalize memory leaks
 caused by nonterminating program.
 
-The operational semantics is given by a labeled transition relation
-\(\langle H, R, s, n \rangle \xlongrightarrow{\rho}_D \langle H', R',
-s', n' \rangle\) where \(\rho\), an \emph{action}, is \(\Malloc\),
-\(\Free\), or \(\tau\).  The action \(\Malloc\) expresses an
-allocation of a memory cell; \(\Free\) expresses a deallocation;
-\(\tau\) expresses the other actions.  We often omit \(\tau\) in
-\(\xlongrightarrow{\tau}_D\).  We use a metavariable \(\sigma\) for a
-finite sequence of actions \(\rho_1\dots\rho_n\).  We write
+The operational semantics is given by relation \(\langle H, R, s, n
+\rangle \xlongrightarrow{\rho}_D \langle H', R', s', n' \rangle\)
+where \(\rho\), an \emph{action}, is \(\Malloc\), \(\Free\), or
+\(\tau\).  The action \(\Malloc\) expresses an allocation of a memory
+cell; \(\Free\) expresses a deallocation; \(\tau\) expresses the other
+actions.  We often omit \(\tau\) in \(\xlongrightarrow{\tau}_D\).  We
+use a metavariable \(\sigma\) for a finite sequence of actions
+\(\rho_1\dots\rho_n\).  We write
 \(\xlongrightarrow{\rho_1\dots\rho_n}_D\) for
 \(\xlongrightarrow{\rho_1}_D\xlongrightarrow{\rho_2}_D\dots\xlongrightarrow{\rho_n}_D\).
 We write \(\xLongrightarrow{\rho}_D\) for
@@ -115,20 +120,40 @@ We write \(\xLongrightarrow{\rho_1\dots\rho_n}_D\) for
 %% $\mathcal{H}$ $\cup$ \{$null$\}.
 
 % <<<<<<< HEAD
-\todo{Rewrite this paragraph.}  Figure~\ref{fig:transitionRules}
-defines the relation \(\xlongrightarrow{\rho}_D\). In the \rn{Sem-Free}
-rule, before deallocating a memory cell, we require \(R(x) \in
-\DOM(H)\); we remove the pointer from the heap \(H\) and the number
-\(n\) of available memory cells should increase one after
-deallocation.  In the \rn{Sem-Malloc} rule, the \(\Malloc()\) command
-allocates a memory cell and returns a pointer to a variable; contents
-\(v\) of the allocated memory cell can be any value in \(\mathcal{H}
-\cup \set{\NULL}\); the number \(n\) should decrease one after
-allocation.  There are three kinds of run-time errors: \(\bf NullEx\)
-for accessing null pointers, \(\bf MemEx\) for illegal accesses to a
-deallocated memory cell, and \(\bf Overflow\) for performing
-allocation after running out of memory cells. In our paper, we only
-prevent the \(\bf Overflow\).
+
+Figure~\ref{fig:transitionRules} defines the relation
+\(\xlongrightarrow{\rho}_D\).  We add explanation to several important
+rules.
+\begin{itemize}
+\item \rn{Sem-Free}: Deallocation of a memory cell pointed to by \(x\)
+  is expressed by deleting the entry for \(R(x)\) from heap.  This
+  action increments the number of available cells (i.e., \(n\)) by one
+  (i.e., \(n+1\)).
+\item \rn{Sem-Malloc} and \rn{Sem-OutOfMem}: Allocation of a memory
+  cell is expressed by adding a fresh entry to heap.  This action is
+  allowed only if the number of available cells is positive; if the
+  number is zero, then the configuration leads to an error state
+  \(\OVERFLOW\).
+\item \rn{Sem-*Exn}: These rules express an illegal access to memory.
+  If such action is performed, then the configuration leads to
+  exceptional state \(\MEMEX\).  This state \(\MEMEX\) is not seen as
+  an erroneous state in the current paper, hence is not excluded by
+  the type system in Figure~\ref{sec:typesystem}.
+\end{itemize}
+
+%% In the \rn{Sem-Free} rule, before deallocating a memory cell, we
+%% require \(R(x) \in \DOM(H)\); we remove the pointer from the heap
+%% \(H\) and the number \(n\) of available memory cells should
+%% increase one after deallocation.  In the \rn{Sem-Malloc} rule, the
+%% \(\Malloc()\) command allocates a memory cell and returns a pointer
+%% to a variable; contents \(v\) of the allocated memory cell can be
+%% any value in \(\mathcal{H} \cup \set{\NULL}\); the number \(n\)
+%% should decrease one after allocation.  There are three kinds of
+%% run-time errors: \(\bf NullEx\) for accessing null pointers, \(\bf
+%% MemEx\) for illegal accesses to a deallocated memory cell, and
+%% \(\bf Overflow\) for performing allocation after running out of
+%% memory cells. In our paper, we only prevent the \(\bf Overflow\).
+
 %% =======
 %% Figure~\ref{fig:transitionRules} defines the relation
 %% \(\xlongrightarrow{\rho}_D\). In the rule for \(\Free\), we require
@@ -169,14 +194,6 @@ prevent the \(\bf Overflow\).
 {\langle H, R, s_1;s_2, n \rangle \xlongrightarrow{\rho}_{D} \langle H', R', s_1';s_2, n' \rangle}
 \end{minipage}
 
-\infax[Sem-Assign]
-{ \langle H \set{R(x) \mapsto v}, R, *x \leftarrow y , n \rangle \xlongrightarrow{\tau}_{D}
-  \langle H \Lfc R(x) \mapsto R(y) \Rfc , R, \SKIP , n \rangle }
-
-\infax[Sem-Free] 
-{\langle H\set{R(x) \mapsto v}\coma R\coma \Free(x) , n \rangle \xlongrightarrow{\Free}_{D}
-  \langle H\backslash R(x) \coma R \coma \SKIP , n+1 \rangle}
-
 \infrule[Sem-LetNull]
 {x' \notin \DOM(R)}
 {\langle H\coma R\coma  \LET x = \NULL \ \IN s , n \rangle
@@ -188,18 +205,6 @@ prevent the \(\bf Overflow\).
 {\langle H\coma R\coma \LET x = y \; \IN s , n \rangle
   \longrightarrow_{D}
   \langle H\coma R\Lfc x' \mapsto R(y) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
-
-\infrule[Sem-LetDeref]
-{x' \notin \DOM(R) \andalso R(y) \in \DOM(H)}
-{\langle H\coma R\coma  \LET x = *y \; \IN s , n \rangle
-  \longrightarrow_{D}
-  \langle H\coma R\Lfc x' \mapsto H(R(y)) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
-
-\infrule[Sem-Malloc]
-{l \notin \DOM(H) \andalso n > 0}
-{\langle H\coma R\coma  \LET x = \Malloc() \; \IN s , n \rangle
-  \xlongrightarrow{\Malloc}_{D}
-  \langle H \Lfc l \rightarrow v\Rfc \coma R\Lfc x' \rightarrow l \Rfc \coma   \Lb x'/x \Rb s , n-1  \rangle }
 
 \infrule[Sem-IfNullT]
 {R(x) = \NULL}
@@ -218,6 +223,27 @@ prevent the \(\bf Overflow\).
 { \langle H\coma R\coma  f(\vec{x}) , n \rangle
   \longrightarrow_{D}
   \langle H\coma R\coma  \Lb \vec{x}/\vec{y} \Rb s , n \rangle}
+
+\infax[Sem-Assign]
+{ \langle H \set{R(x) \mapsto v}, R, *x \leftarrow y , n \rangle \xlongrightarrow{}_{D}
+  \langle H \Lfc R(x) \mapsto R(y) \Rfc , R, \SKIP , n \rangle }
+
+\infrule[Sem-LetDeref]
+{x' \notin \DOM(R) \andalso R(y) \in \DOM(H)}
+{\langle H\coma R\coma  \LET x = *y \; \IN s , n \rangle
+  \longrightarrow_{D}
+  \langle H\coma R\Lfc x' \mapsto H(R(y)) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
+
+\infax[Sem-Free] 
+{\langle H\set{R(x) \mapsto v}\coma R\coma \Free(x) , n \rangle \xlongrightarrow{\Free}_{D}
+  \langle H\backslash R(x) \coma R \coma \SKIP , n+1 \rangle}
+
+\infrule[Sem-Malloc]
+{l \notin \DOM(H) \andalso n > 0}
+{\langle H\coma R\coma  \LET x = \Malloc() \; \IN s , n \rangle
+  \xlongrightarrow{\Malloc}_{D}
+  \langle H \Lfc l \rightarrow v\Rfc \coma R\Lfc x' \rightarrow l \Rfc \coma   \Lb x'/x \Rb s , n-1  \rangle }
+
 
 \begin{minipage}{0.5\textwidth}
 \infrule[Sem-AssignExn]
