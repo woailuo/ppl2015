@@ -4,6 +4,7 @@ Dynamic memory management is a crucial function of programming
 languages.  Correct allocation and disposal of memory regions are
 fundamental for software to be reliable.
 
+<<<<<<< HEAD
 The problem of correct dynamic memory management is challenging if a
 programming language is equipped with manual memory management
 primitives (e.g., \texttt{malloc} and \texttt{free} in the C
@@ -24,6 +25,29 @@ rather verify \emph{partial} memory-leak freedom: if a program
 terminates, then all the allocated memory cells are deallocated.  We
 say a program is \emph{totally} memory-leak free if it does not
 consume unbounded amount of memory during execution.
+=======
+Correct dynamic memory management is challenging if a programming
+language is equipped with manual memory management primitives (e.g.,
+\texttt{malloc} and \texttt{free} in the C language.)  With such
+primitives, one can write a program that accesses to deallocated
+memory regions (i.e., accesses to dangling pointers) and that does not
+dispose memory region when it becomes unnecessary (i.e., memory leak.)
+In order to detect bugs related to such primitives at the early stage
+of software development, many static verification methods have been
+proposed~\cite{}.
+
+This paper proposes a type-based approach to static verification of
+memory-leak freedom that works for nonterminating programs.  Although
+memory leaks are more serious in nonterminating programs (e.g.,
+operating systems and Web servers)
+%% \footnote{Memory leaks in nonterminating programs is that a program
+%%   consumes unbounded number of memory cells and goes overflow.}
+than terminating ones, the analyses proposed so far put less emphasis
+to nontermination; they rather verify \emph{partial} memory-leak
+freedom: if a program terminates, then all the allocated memory cells
+are deallocated.  We say a program is \emph{totally} memory-leak free
+if it does not consume unbounded amount of memory during execution.
+>>>>>>> 9de3b2e7efceb350a61d3588773d9007a53e6b5a
 
 \begin{exmp}\label{ex:ex1}
 %% Functions $h$ and $h'$ shown in Figure~\ref{ex:np} describe
@@ -41,13 +65,14 @@ consume unbounded amount of memory during execution.
 \end{figure}
 Figure~\ref{ex:np} describes partial and total memory-leak freedom.
 Both \(h\) and \(h'\) are partially memory-leak free because they do
-not terminate.  However, the function \(h'\), when it is invoked,
-consumes unbounded number of memory cells; hence \(h'\) is not totally
-memory-leak free.  On the other hand, the function \(h\) consumes two
-cells at most\footnote{We assume that every memory cell allocated by
+not terminate.  The function \(h\) consumes at most two
+cells\footnote{We assume that every memory cell allocated by
   \(\Malloc\) is fixed size.}; hence it is totally memory-leak free.
+However, the function \(h'\), when it is invoked, consumes unbounded
+number of memory cells; hence \(h'\) is not totally memory-leak free.
 \end{exmp}
 
+<<<<<<< HEAD
 As the first step to the verification of total memory-leak freedom,
 this paper proposes a \emph{behavioral type
   system}~\cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}
@@ -55,6 +80,14 @@ for a programming language with manual memory-management primitives.
 Our type system captures an abstract behavior related to memory
 allocation and deallocation as a CCS-like process.  For example, our
 type system can assign a type \(
+=======
+As a first step to the verification of total memory-leak freedom, this
+paper proposes a \emph{behavioral type system}~\cite{} for a
+programming language with manual memory-management primitives.  Our
+type system captures an abstract behavior related to memory allocation
+and deallocation as a CCS-like process.  For example, our type system
+can assign a type \(
+>>>>>>> 9de3b2e7efceb350a61d3588773d9007a53e6b5a
 \mu\alpha.\Malloc\TSEQ\Malloc\TSEQ\Free\TSEQ\Free\TSEQ\alpha\) to the
 function \(h\) above.  This type expresses that \(h\) can allocate a
 memory cell twice, deallocate a memory cell twice, and then iterate
@@ -77,8 +110,12 @@ to \(h\) and \(h'\) above, our types include information only about
 the number and the order of allocations, deallocations, and recursive
 function calls; hence, the type system does not guarantee, for
 example, there is no accesses to deallocated cells.  For such
+<<<<<<< HEAD
 properties, we expect a program to be verified by other
 no-illegal-access verifiers~\cite{DBLP:conf/aplas/SuenagaK09}.
+=======
+properties, we can use other no-illegal-access verifiers~\cite{}.
+>>>>>>> 9de3b2e7efceb350a61d3588773d9007a53e6b5a
 
 The rest of this paper is structured as
 follows. Section~\ref{sec:language} introduces a simple imperative

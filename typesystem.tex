@@ -51,9 +51,9 @@ transition system.
 \infax
 {\mathbf{0};P \xlongrightarrow{\tau} P}
 \infax
-{\Malloc \xlongrightarrow{\Malloc} \bf 0}
+{\Malloc \xlongrightarrow{\Malloc} {\bf 0}}
 \infax
-{\Free \xlongrightarrow{\Free} \bf 0}
+{\Free \xlongrightarrow{\Free} {\bf 0}}
 \infax
 {\mu \alpha.P \xlongrightarrow{\tau}  [\mu \alpha . P/\alpha]  P}
 \infax
@@ -154,6 +154,8 @@ exists \(P_2'\) such that \(P_2 \xLongrightarrow{\rho} P_2'\) and
 \begin{figure}[tp]
 \begin{minipage}{\textwidth}
 
+\todo{I'll check this later.}
+
 % Skip type
 \infax[T-Skip]
 {\Theta ; \Gamma \vdash \SKIP : \mathbf{0}}
@@ -162,9 +164,9 @@ exists \(P_2'\) such that \(P_2 \xLongrightarrow{\rho} P_2'\) and
 {\Theta ; \Gamma \vdash s_{1} : P_{1} \Rtab \Theta ; \Gamma \vdash s_{2} : P_{2}}
 {\Theta ; \Gamma \vdash s_{1} ; s_{2} : P_{1};P_{2} }
 % Assignment type
-\infrule[T-Assign]
-{\Theta ; \Gamma \vdash y  \Rtab \Theta ; \Gamma \vdash x }
-{\Theta ; \Gamma \vdash *x \leftarrow y : \mathbf{0} }
+\infax[T-Assign]
+% {\Theta ; \Gamma \vdash y  \Rtab \Theta ; \Gamma \vdash x }
+{\Theta ; \Gamma, x, y \vdash *x \leftarrow y : \mathbf{0} }
 % Free(deallocate) type
 \infrule[T-Free]
 {\Theta ; \Gamma \vdash x  }
@@ -261,8 +263,8 @@ there exists $P'$ such that (1) $ \Theta; \Gamma \vdash s' : P'$, (2)
 %% \end{lemma}
 
 \begin{lemma}[Lack of immediate overflow]
-\label
+\label{lem:immediateSafety}
 If $\Theta; \Gamma \vdash s \COL P$, \(\vdash D \COL \Theta\), and
 \(\OK_n(P)\), then $\langle H, R, s, n \rangle
-\not\xlongrightarrow{\rho}$ for any \(\rho\).
+\not\xlongrightarrow{\rho} \OVERFLOW$ for any \(\rho\).
 \end{lemma}

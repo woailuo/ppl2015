@@ -81,10 +81,10 @@ labeled transition on \emph{configurations} \(\langle H, R, s, n
 \item \(n\) is a natural number that represents the number of
   available memory cells.
 \end{itemize}
-\(n\) in a configuration is later used to formalize memory leak caused
-by nonterminating program.
+\(n\) in a configuration is later used to formalize memory leaks
+caused by nonterminating program.
 
-The operational semantics is given by a labeled translation relation
+The operational semantics is given by a labeled transition relation
 \(\langle H, R, s, n \rangle \xlongrightarrow{\rho}_D \langle H', R',
 s', n' \rangle\) where \(\rho\), an \emph{action}, is \(\Malloc\),
 \(\Free\), or \(\tau\).  The action \(\Malloc\) expresses an
@@ -131,6 +131,9 @@ cells. In our paper, we only prevent the \(\bf Overflow\).
 
 \begin{figure}[p]
 \begin{minipage}{\textwidth}
+
+\todo{I'll check this later.}
+
 %% =======
 %% %% Transition rules are listed in Figure 3. In these rules, $f\{x\to v\}$ is defined as a function $f'$ such that $f'(y) = v$ if $x = y$, otherwise $f'(y) = f(y)$ and $y \in dom(f)$. There are three rules about $\mathbf{NullEx}$ which denotes accessing a null pointer, three rules about $\mathbf{Error}$ for accessing a deallocated memory cell, and one rule about $\mathbf{Error}$ which denotes allocating a memory cell when there is no memory space.
 %% %\begin{figure}[h]
