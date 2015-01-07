@@ -131,19 +131,19 @@ We write \(\xLongrightarrow{\rho_1\dots\rho_n}_D\) for
 %% prevent the \(\bf Overflow\).
 %% %% =======
 Figure~\ref{fig:transitionRules} defines the relation
-\(\xlongrightarrow{\rho}_D\). In the rule for \(\Free\), we require
-that a memory cell has been allocated before deallocating it, and
-after deallocating the memory cell from the heap \(H\), the number
-\(n\) of available memory cells should increase one.  In the rule for
-\(\Malloc\), the number of available memory cells should be positive;
-the \(\Malloc\) command allocate e cell for allocates a new memory
-cell \(l\) of which contents \(v\) can be any value in \(\mathcal{H}
-\cup \set{\NULL}\) and reduces the number of available memory cells by
-one. The \(\bf NullEx\) for accessing null pointers or illegal accessing to a
-deallocated memory cell, and \(\OVERFLOW\) for performing allocation
-after running out of memory cells.
+\(\xlongrightarrow{\rho}_D\). In the rule for \(\Free\), the \(\Free\) command correctly disposes  a memory cell which is pointed to by a pointer \(x\), and after doing \(\Free\) action, the number of available memory cells increases one.  In the rule for \(\Malloc\), the \(\Malloc()\) command need at least one cell for it to allocate a new memory cell \(l\) which is pointed to by the pointer \(x\), and after performing the \(\Malloc\) action, the number of available memory cells will decrease one.  The \(\bf MemEx\) for accessing null pointers or illegal accessing to a deallocated memory cell, and \(\OVERFLOW\) for performing allocation after running out of memory cells.
 
-
+%% we require
+%% that a memory cell has been allocated before deallocating it, and
+%% after deallocating the memory cell from the heap \(H\), the number
+%% \(n\) of available memory cells should increase one.  In the rule for
+%% \(\Malloc\), the number of available memory cells should be positive;
+%% the \(\Malloc\) command allocate e cell for allocates a new memory
+%% cell \(l\) of which contents \(v\) can be any value in \(\mathcal{H}
+%% \cup \set{\NULL}\) and reduces the number of available memory cells by
+%% one. The \(\bf NullEx\) for accessing null pointers or illegal accessing to a
+%% deallocated memory cell, and \(\OVERFLOW\) for performing allocation
+%% after running out of memory cells.
 
 \begin{figure}[p]
 \begin{minipage}{\textwidth}
