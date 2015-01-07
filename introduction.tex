@@ -12,14 +12,13 @@ accesses to deallocated memory regions (i.e., accesses to dangling
 pointers) and that does not dispose memory region when it becomes
 unnecessary (i.e., memory leak.)  In order to detect bugs related to
 such primitives at the early stage of software development, many
-static verification methods have been proposed~\cite{}.
+static verification methods have been
+proposed~\cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06,DBLP:conf/sas/OrlovichR06,DBLP:conf/issta/SuiYX12}.
 
 This paper proposes a type-based approach to static verification of
 memory-leak freedom that works for nonterminating programs.  Although
 memory leaks are relatively more serious in nonterminating programs
-(e.g., operating systems and Web servers)\footnote{Memory leaks in
-  nonterminating programs is that a program consumes unbounded number
-  of memory cells and goes overflow.} than terminating ones, the
+(e.g., operating systems and Web servers) than terminating ones, the
 analyses proposed so far put less emphasis to nontermination; they
 rather verify \emph{partial} memory-leak freedom: if a program
 terminates, then all the allocated memory cells are deallocated.  We
@@ -50,11 +49,12 @@ cells at most\footnote{We assume that every memory cell allocated by
 \end{exmp}
 
 As the first step to the verification of total memory-leak freedom,
-this paper proposes a \emph{behavioral type system}~\cite{} for a
-programming language with manual memory-management primitives.  Our
-type system captures an abstract behavior related to memory allocation
-and deallocation as a CCS-like process.  For example, our type system
-can assign a type \(
+this paper proposes a \emph{behavioral type
+  system}~\cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}
+for a programming language with manual memory-management primitives.
+Our type system captures an abstract behavior related to memory
+allocation and deallocation as a CCS-like process.  For example, our
+type system can assign a type \(
 \mu\alpha.\Malloc\TSEQ\Malloc\TSEQ\Free\TSEQ\Free\TSEQ\alpha\) to the
 function \(h\) above.  This type expresses that \(h\) can allocate a
 memory cell twice, deallocate a memory cell twice, and then iterate
@@ -64,13 +64,11 @@ which expresses that \(h'\) can allocate a memory cell twice, call
 itself recursively, and then deallocate a memory cell twice.  Hence,
 by inspecting the inferred types (by using off-the-shelf model
 checkers, for example), one can estimate the upper bound required to
-execute \(h\) and \(h'\). This method is better than directly
-modelchecking the original program, because to directly modelchecking
-original one we should add assertions for guaranteeing it no overflow
-and calculation for memory consumption after each allocation and
-deallocation where they appear, whereas by the abstracted behavior we
-only use two functions, each one consists of an assertion and a
-calculation, to fulfill this task.
+execute \(h\) and \(h'\). This way may be better than directly
+modelchecking the original program, because we can ignore any other
+statements except allocation and deallocation. We are now
+investigating some practical programs to do experiments for this, and
+experiments are not included in our paper.
 
 
 Notice that our type system alone does not prevent incorrect usage of
@@ -80,7 +78,7 @@ the number and the order of allocations, deallocations, and recursive
 function calls; hence, the type system does not guarantee, for
 example, there is no accesses to deallocated cells.  For such
 properties, we expect a program to be verified by other
-no-illegal-access verifiers~\cite{}.
+no-illegal-access verifiers~\cite{DBLP:conf/aplas/SuenagaK09}.
 
 The rest of this paper is structured as
 follows. Section~\ref{sec:language} introduces a simple imperative
@@ -193,4 +191,5 @@ work. Section~\ref{sec:conclusion} concludes the paper.
 
 \paragraph{Notation} We write \(\vec{X}\) for a finite sequence of
 \(X\); its length, if we do not explicitly mention, is clear from the
-context or does not matter.
+context or does not matter. \([x'/x]s\) denotes that the term obtained by 
+substituting \(x'\) for \(x\) in \(s\).
