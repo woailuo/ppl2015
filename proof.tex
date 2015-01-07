@@ -50,35 +50,26 @@ the definition of \(\sharp_{\rho}(\sigma)\), we have \(\sharp_{m}(P')
 
 To prove it by contradiction.
 
-Suppose that $OK_{n'}(P_{1}';P_{2})$ does not hold. Then we have 
-$P_{1};P_{2} \xlongrightarrow{\alpha} P_{1}';P_{2} \xlongrightarrow{\exists \sigma} Q$, $s.t.$ $\sharp_{m}(\sigma) - \sharp_{f}(\sigma) > n'$
+Suppose that \(OK_{n'}(P_{1}';P_{2})\) does not hold. Then, we have
+\(P_{1};P_{2} \xlongrightarrow{\rho} P_{1}';P_{2}
+\xlongrightarrow{\exists \rho_1} Q\), \(s.t.\) \(\sharp_{m}(\rho_1) -
+\sharp_{f}(\rho_1) > n'\)
 
-From the premise $OK_{n}(P) = OK_{n}(P_{1};P_{2})$, we get 
-\setcounter{equation}{0}
-\begin{align}
-  &  \sharp_{m}(\alpha \cdot \sigma) - \sharp_{f}(\alpha \cdot \sigma) \le n \label{eqok1.1}
-\end{align}
+From the definition of \(\OK_n(P)\), we have \( \sharp_{m}(\rho \cdot \rho_1) - \sharp_{f}(\rho \cdot \rho_1) \le n\).  We also have \(\sharp_{m}(\rho) + \sharp_{m}(\rho_1) - \sharp_{f}(\rho) -\sharp_{f}(\rho_1) \le n\).   From the assumption \(\sharp_{m}(\rho_1) - \sharp_{f}(\rho_1) > n'\), we have 
+\infax{ n' + \sharp_m(\rho) - \sharp_f(\rho) <  \sharp_{m}(\rho) + \sharp_{m}(\rho_1) - \sharp_{f}(\rho) -\sharp_{f}(\rho_1) \le n}
 
-From \eqref{eqok1.1}, we get
-\begin{align}
-\sharp_{m}(\alpha) + \sharp_{m}(\sigma) - \sharp_{f}(\alpha) - \sharp_{f}(\sigma) \  \label{eqok1.2}
-\end{align}
-and with
+We have
 $$
    n'=\left\{
    \begin{aligned}
-     n + 1, && \alpha = \Free \\
-     n - 1,  && \alpha = \Malloc  \\
+     n + 1, && \rho = \Free \\
+     n - 1,  && \rho = \Malloc  \\
      n ,      && otherwise
    \end{aligned}
    \right.
 $$
-Therefore, we get \\
-$n' + \sharp_{m}(\alpha) - \sharp_{f}(\alpha) < \sharp_{m}(\alpha) + \sharp_{m}(\sigma) - \sharp_{f}(\alpha) - \sharp_{f}(\sigma) \le n $ \\
-When $\alpha = \Free$, we get that $n + 1 - 1 < n$\\
-When $\alpha = \Malloc$, we get that $ n - 1 + 1 < n $ \\
-When $ \alpha = other$,  we  get that $ n < n $ \\
- All of the three cases are equal to $n$. Therefore we get the contradiction.
+
+Hence, we have: if \(\rho = \Free\), then \(n + 1 - 1 < n\) from the definition of \(\sharp_{\rho}(\sigma)\); if \(\rho = \Malloc\), then \( n - 1 + 1 < n \); if \( \rho = other\), then \( n < n \). All of the three cases have \(n < n\). Therefore, we get the contradiction.
 
 \end{itemize}
 \end{proof}
