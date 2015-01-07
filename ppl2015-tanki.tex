@@ -6,6 +6,13 @@
 \usepackage{boxedminipage}
 \usepackage{url}
 
+% Write \fulltrue after \iffull for the full version; otherwise, write
+% \fullfalse.
+\newif\iffull\fullfalse
+% Write \finaltrue after \iffinal for the final version; otherwise,
+% write \finalfalse.
+\newif\iffinal\finalfalse
+
 % set some new commands %
 \newcommand\tB{\;|\;}
 \newcommand\LET{\mathbf{let}\;}
@@ -59,7 +66,11 @@
   \csname flalign*\endcsname}
  {\csname endflalign*\endcsname\ignorespacesafterend}
 
+\iffinal
+\newcommand\todo[1]{}
+\else
 \newcommand\todo[1]{{\bf KS: {#1}}}
+\fi
 
 \title{A Behavioral Type System for \\ Memory-Leak Freedom}
 \author{Qi Tan, Kohei Suenaga, and Atsushi Igarashi}
@@ -96,6 +107,7 @@ consumption using an off-the-shelf model checker.
 \bibliographystyle{abbrv}
 \bibliography{tan}
 
+\iffull
 \newpage
 \appendix
 \section*{Appendix}
@@ -103,5 +115,7 @@ consumption using an off-the-shelf model checker.
 \input{proof}
 \input{sdtyping}
 \input{typeinference}
+\else
+\fi
 
 \end{document}

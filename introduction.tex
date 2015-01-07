@@ -79,25 +79,36 @@ number of memory cells; hence \(h'\) is not totally memory-leak free.
 %% type system can assign a type \(
 %% =======
 As a first step to the verification of total memory-leak freedom, this
-paper proposes a \emph{behavioral type system}~\cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98} for a
-programming language with manual memory-management primitives.  Our
-type system captures an abstract behavior related to memory allocation
-and deallocation as a CCS-like process.  For example, our type system
-can assign a type \(\mu\alpha.\Malloc\TSEQ\Malloc\TSEQ\Free\TSEQ\Free\TSEQ\alpha\) to the
-function \(h\) above.  This type expresses that \(h\) can allocate a
-memory cell twice, deallocate a memory cell twice, and then iterate
-this behavior.  On the other hand, the type assigned to \(h'\) is
+paper proposes a \emph{behavioral type
+  system}~\cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}
+for a programming language with manual memory-management primitives.
+Our type system captures an abstract behavior related to memory
+allocation and deallocation as a CCS-like process.  For example, our
+type system can assign a type
+\(\mu\alpha.\Malloc\TSEQ\Malloc\TSEQ\Free\TSEQ\Free\TSEQ\alpha\) to
+the function \(h\) above.  This type expresses that \(h\) can allocate
+a memory cell twice, deallocate a memory cell twice, and then iterate
+this behavior, whereas the type assigned to \(h'\) is
 \(\mu\alpha.\Malloc\TSEQ\Malloc\TSEQ\alpha\TSEQ\Free\TSEQ\Free\),
 which expresses that \(h'\) can allocate a memory cell twice, call
 itself recursively, and then deallocate a memory cell twice.  Hence,
 by inspecting the inferred types (by using off-the-shelf model
 checkers, for example), one can estimate the upper bound required to
-execute \(h\) and \(h'\). This way may be better than directly
-modelchecking the original program, because we can ignore any other
-statements except allocation and deallocation. We are now
-investigating some practical programs to do experiments for this, and
-experiments are not included in our paper.
+execute \(h\) and \(h'\).
 
+%% This way may be better than directly modelchecking the original
+%% program, because we can ignore any other statements except allocation
+%% and deallocation. We are now investigating some practical programs to
+%% do experiments for this, and experiments are not included in our
+%% paper.
+
+One may not see, in the example above, much difference between
+applying a model checker to the original programs and to the assigned
+behavioral types.  However, we expect the latter is faster than the
+former in many programs because a behavioral type focuses on actions
+on allocations and deallocations, abstracting away the other features.
+Although the current paper only focuses on the theoretical aspect, we
+plan to conduct experiment with actual programs in future.
 
 Notice that our type system alone does not prevent incorrect usage of
 \(\Malloc\) and \(\Free\).  Indeed, as observed from the type assigned
@@ -110,7 +121,6 @@ example, there is no accesses to deallocated cells.  For such
 %% no-illegal-access verifiers~\cite{DBLP:conf/aplas/SuenagaK09}.
 %% =======
 properties, we can use other no-illegal-access verifiers~\cite{DBLP:conf/aplas/SuenagaK09}.
-
 
 The rest of this paper is structured as
 follows. Section~\ref{sec:language} introduces a simple imperative
