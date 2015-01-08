@@ -8,16 +8,16 @@ The syntax of the types is as follows.
 \[
 \begin{array}{rlcl}
   P & (\mbox{behavioral types})&::=& {\bf 0} \tB P_{1};P_{2} \tB P_{1}+P_{2} \tB \Malloc \tB \Free \tB \alpha \tB \mu\alpha.P \\
-  \Gamma &　(\mbox{variable type environments}) &::=& \set{x_1, x_2, \dots, x_n}\\
-  \Theta &　(\mbox{function type environments}) &::=& \set{f_1\COL P_1,\dots,f_n\COL P_n}\\
+  \Gamma & (\mbox{variable type environments}) &::=& \set{x_1, x_2, \dots, x_n}\\
+  \Theta & (\mbox{function type environments}) &::=& \set{f_1\COL P_1,\dots,f_n\COL P_n}\\
 \end{array}
 \]
-We use metavariable \(P\) for \emph{behavioral types} which are
+We use metavariable \(P\) for \emph{behavioral types}, which are
 abstractions of the behavior of programs.  The type ${\bf 0}$
 represents do-nothing behavior.  The type \(P_1;P_2\) represents the
 sequential execution of \(P_1\) and \(P_2\).  The type \(P_1 + P_2\)
 represents the choice between \(P_1\) and \(P_2\).  The type
-\(\Malloc\) represents an allocation a memory cell exactly once.  The
+\(\Malloc\) represents an allocation of a memory cell exactly once.  The
 type \(\Free\) represents a deallocation.  \(\alpha\) is a type
 variable. The type \(\mu \alpha.P\) represents the behavior of
 \(\alpha\) defined by the recursive equation \(\alpha = P\).
@@ -162,7 +162,7 @@ the behavior of a program that uses at most \(n\) memory cells.
 
 We also define subtyping.  Following the idea of Kobayashi et
 al.~\cite{DBLP:journals/tcs/IgarashiK04}, we define subtyping by
-simulation between behavioral types.
+using simulation between behavioral types.
 
  \begin{myDef}[Subtyping]
 % $P_{1} \le P_{2}$ represents that $P_{1}$ is the subtype of $P_{2}$ and  means that:
@@ -294,7 +294,7 @@ This judgment represents that the behavior assigned to each function
 symbol \(f\) in \(\Theta\) indeed abstracts the behavior of its
 function body, which is guaranteed by \rn{T-Def}.
 
-Type judgment for programs, \(\vdash \langle D, s \rangle \COL n\),
+The type judgment for programs, \(\vdash \langle D, s \rangle \COL n\),
 expresses that the program does not require more than \(n\) memory
 cells when it is run.  In order to guarantee this, rule \rn{T-Prog}
 forces a side condition \(\OK_n(P)\) where \(P\) is a behavioral type

@@ -4,7 +4,7 @@
 This section gives the definition of language \(\mathcal{L}\), an
 imperative language with memory allocation/deallocation primitives.
 The language is essentially the same as one used by Sueanga et
-al.~\cite{DBLP:conf/aplas/SuenagaK09}, where they proposes a
+al.~\cite{DBLP:conf/aplas/SuenagaK09}, where they propose a
 type-based analysis for partial memory-leak freedom analysis.
 
 The syntax of language \(\mathcal{L}\) is as follows.
@@ -122,7 +122,7 @@ We write \(\xLongrightarrow{\rho_1\dots\rho_n}_D\) for
 Figure~\ref{fig:transitionRules} defines the relation
 %% <<<<<<< HEAD
 %% \(\xlongrightarrow{\rho}_D\). In the rule for \(\Free\), the \(\Free\) command correctly disposes  a memory cell which is pointed to by a pointer \(x\), and after doing \(\Free\) action, the number of available memory cells increases one.  In the rule for \(\Malloc\), the \(\Malloc()\) command need at least one cell for it to allocate a new memory cell \(l\) which is pointed to by the pointer \(x\), and after performing the \(\Malloc\) action, the number of available memory cells will decrease one.  The \(\bf MemEx\) for accessing null pointers or illegal accessing to a deallocated memory cell, and \(\OVERFLOW\) for performing allocation after running out of memory cells.
-
+%
 %% we require
 %% that a memory cell has been allocated before deallocating it, and
 %% after deallocating the memory cell from the heap \(H\), the number
@@ -135,15 +135,15 @@ Figure~\ref{fig:transitionRules} defines the relation
 %% deallocated memory cell, and \(\OVERFLOW\) for performing allocation
 %% after running out of memory cells.
 %=======
-\(\xlongrightarrow{\rho}_D\).  We add explanation to several important
+\(\xlongrightarrow{\rho}_D\).  We add explanations to several important
 rules.
 \begin{itemize}
 \item \rn{Sem-Free}: Deallocation of a memory cell pointed to by \(x\)
-  is expressed by deleting the entry for \(R(x)\) from heap.  This
+  is expressed by deleting the entry for \(R(x)\) from the heap.  This
   action increments the number of available cells (i.e., \(n\)) by one
   (i.e., \(n+1\)).
 \item \rn{Sem-Malloc} and \rn{Sem-OutOfMem}: Allocation of a memory
-  cell is expressed by adding a fresh entry to heap.  This action is
+  cell is expressed by adding a fresh entry to the heap.  This action is
   allowed only if the number of available cells is positive; if the
   number is zero, then the configuration leads to an error state
   \(\OVERFLOW\).
