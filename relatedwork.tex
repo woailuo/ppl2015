@@ -17,14 +17,21 @@ inspired by one proposed by Kobayashi et
 al.~\cite{DBLP:journals/lmcs/KobayashiSW06}, which guarantees that a
 concurrent program accesses resources according to specification.
 
-Model checking is a widely used technique for automatically verifying
-correctness properties of finite-state
-system~\cite{clarke1999model,ben2008principles,beyer2011cpachecker}. We
-assume that some model checkers solves the constraints \(\OK_\nu(P)\)
-in our paper. We expect that applying model checker to inferred
-behavioral types is better than to the original programs, because a
-behavioral type focuses on the actions related to allocations and
-deallocations, abstracted away from other features. We plan to do some
-experiments for this prospect.
+%% Model checking is a widely used technique for automatically verifying
+%% correctness properties of finite-state
+%% system~\cite{clarke1999model,ben2008principles,beyer2011cpachecker}. We
+%% assume that some model checkers solves the constraints \(\OK_\nu(P)\)
+%% in our paper. We expect that applying model checker to inferred
+%% behavioral types is better than to the original programs, because a
+%% behavioral type focuses on the actions related to allocations and
+%% deallocations, abstracted away from other features. We plan to do some
+%% experiments for this prospect.
 
-
+One possible approach to total memory-leak freedom verification would
+be checking that a program consumes only bounded number of memory
+cells by using a model
+checker~\cite{clarke1999model,ben2008principles,beyer2011cpachecker}.
+We guess that the resource required for model checking would become
+smaller if we apply a model checker to the inferred behavior, which
+focuses on memory allocation and deallocation; we plan to conduct
+experiment to confirm whether this is true.

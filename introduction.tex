@@ -18,10 +18,10 @@ fundamental for software to be reliable.
 %% =======
 Correct dynamic memory management is challenging if a programming
 language is equipped with manual memory management primitives (e.g.,
-\texttt{malloc} and \texttt{free} in the C language.)  With such
+\texttt{malloc} and \texttt{free} in the C language).  With such
 primitives, one can write a program that accesses to deallocated
 memory cells (i.e., accesses to dangling pointers) and that does not
-dispose memory cell when they become unnecessary (i.e., memory leak).
+dispose memory cells even when they become unnecessary (i.e., memory leaks).
 In order to detect bugs related to such primitives at the early stage
 of software development, many static verification methods have been
 proposed~\cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06,DBLP:conf/sas/OrlovichR06,DBLP:conf/issta/SuiYX12}.
@@ -113,7 +113,7 @@ The rest of this paper is structured as
 follows. Section~\ref{sec:language} introduces a simple imperative
 language and the operational semantics of the
 language. Section~\ref{sec:typesystem} introduces the behavioral type
-system and states the type soundness. Section~\ref{sec:reconstruction}
+system and states its type soundness. Section~\ref{sec:reconstruction}
 describes a type reconstruction procedure.
 Section~\ref{sec:relatedwork} discusses the related
 work. Section~\ref{sec:conclusion} concludes the paper.  The proof of
