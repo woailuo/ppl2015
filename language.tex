@@ -36,11 +36,12 @@ statement \(\IFNULL(x)\ \THEN\ s_1\ \ELSE\ s_2\) executes \(s_1\) if
 \(f(\vec{x})\) calls procedure \(f\) with arguments \(\vec{x}\).
 
 A procedure definition ranged over by \(d\) is a map from a procedure
-name to an abstraction of the form \((\vec{x})s\).  We assume that
-there is no arity mismatch between function definitions and function
-calls.  We use a metavariable \(D\) for a set of function definitions
-\(d_1 \cup \dots \cup d_n\).  A program is a pair of function
-definitions \(D\) and a main statement \(s\).
+name to an abstraction of the form \((\vec{x})s\).  We use a
+metavariable \(D\) for a set of function definitions \(d_1 \cup \dots
+\cup d_n\).  We assume that there are no duplicated definitions of
+each function.  We also assume that there is no arity mismatch between
+function definitions and function calls.  A program is a pair of
+function definitions \(D\) and a main statement \(s\).
 
 
 %% A program is a pair $(D,s)$, where $D$ is the set of definition.\\ The
@@ -71,11 +72,11 @@ definitions \(D\) and a main statement \(s\).
 \label{sec:languageSemantics}
 
 This section introduces the operational semantics of \(\mathcal{L}\).
-\(\mathcal{H}\) is a countably infinite set of \emph{locations} ranged
-over by \(l\).
+We assume a countably infinite set \(\mathcal{H}\) of \emph{locations}
+ranged over by \(l\).
 
-We represent a state of computation by \emph{configuration} \(\langle
-H, R, s, n \rangle\).  A configuration consists of the following four
+We express a state of computation by \emph{configuration} \(\langle H,
+R, s, n \rangle\).  A configuration consists of the following four
 components:
 \begin{itemize}
 \item \(H\), a \emph{heap}, is a finite mapping from \(\mathcal{H}\)
@@ -83,11 +84,11 @@ components:
 \item \(R\), an \emph{environment}, is a finite mapping from \(\VAR\)
   to \(\mathcal{H} \cup \set{\NULL}\);
 \item \(s\) is the statement that is being executed; and
-\item \(n\) is a natural number that represents the number of
-  available memory cells.
+\item \(n\) is a natural number that represents the number of memory
+  cells available for allocation.
 \end{itemize}
-\(n\) in a configuration is later used to formalize memory leaks
-caused by nonterminating program.
+We later use \(n\) to formalize memory leaks caused by nonterminating
+program.
 
 The operational semantics is given by relation \(\langle H, R, s, n
 \rangle \xlongrightarrow{\rho}_D \langle H', R', s', n' \rangle\)
@@ -120,21 +121,6 @@ We write \(\xLongrightarrow{\rho_1\dots\rho_n}_D\) for
 %% $\mathcal{H}$ $\cup$ \{$null$\}.
 
 Figure~\ref{fig:transitionRules} defines the relation
-%% <<<<<<< HEAD
-%% \(\xlongrightarrow{\rho}_D\). In the rule for \(\Free\), the \(\Free\) command correctly disposes  a memory cell which is pointed to by a pointer \(x\), and after doing \(\Free\) action, the number of available memory cells increases one.  In the rule for \(\Malloc\), the \(\Malloc()\) command need at least one cell for it to allocate a new memory cell \(l\) which is pointed to by the pointer \(x\), and after performing the \(\Malloc\) action, the number of available memory cells will decrease one.  The \(\bf MemEx\) for accessing null pointers or illegal accessing to a deallocated memory cell, and \(\OVERFLOW\) for performing allocation after running out of memory cells.
-
-%% we require
-%% that a memory cell has been allocated before deallocating it, and
-%% after deallocating the memory cell from the heap \(H\), the number
-%% \(n\) of available memory cells should increase one.  In the rule for
-%% \(\Malloc\), the number of available memory cells should be positive;
-%% the \(\Malloc\) command allocate e cell for allocates a new memory
-%% cell \(l\) of which contents \(v\) can be any value in \(\mathcal{H}
-%% \cup \set{\NULL}\) and reduces the number of available memory cells by
-%% one. The \(\bf NullEx\) for accessing null pointers or illegal accessing to a
-%% deallocated memory cell, and \(\OVERFLOW\) for performing allocation
-%% after running out of memory cells.
-%=======
 \(\xlongrightarrow{\rho}_D\).  We add explanation to several important
 rules.
 \begin{itemize}
@@ -229,7 +215,7 @@ rules.
 {l \notin \DOM(H) \andalso n > 0}
 {\langle H\coma R\coma  \LET x = \Malloc() \; \IN s , n \rangle
   \xlongrightarrow{\Malloc}_{D}
-  \langle H \Lfc l \rightarrow v\Rfc \coma R\Lfc x' \rightarrow l \Rfc \coma   \Lb x'/x \Rb s , n-1  \rangle }
+  \langle H \Lfc l \mapsto v\Rfc \coma R\Lfc x' \mapsto l \Rfc \coma   \Lb x'/x \Rb s , n-1  \rangle }
 
 
 \begin{minipage}{0.5\textwidth}
@@ -413,9 +399,9 @@ rules.
 %\label{example:os}
      %\end{figure}
 
-As mentioned in Section~\ref{sec:introduction}, we define a memory
-leak to be consuming unbounded number of memory cells.  Formally, this
-is defined as follows.
+As mentioned in Section~\ref{sec:introduction}, a program is said to
+leak memory if it consumes unbounded number of memory cells.
+Formally, this is defined as follows.
 
 \begin{myDef}[Memory leaks]
 \label{df:ml}
@@ -425,9 +411,8 @@ is defined as follows.
 A configuration \(\langle H, R, s, n \rangle\) \emph{goes overflow} if
 there is \(\sigma\) such that \(\langle H, R, s, n \rangle
 \xLongrightarrow{\sigma} \OVERFLOW\).  A program \(\langle D, s
-\rangle\) \emph{requires more than \(n\) cells} if \(\langle
-\emptyset, \emptyset, s, n \rangle\) goes overflow.  A program
-\(\langle D, s \rangle\) is \emph{totally memory-leak free} if there
-is a natural number \(n\) such that it does not require more than
-\(n\) cells.
+\rangle\) \emph{requires at least \(n\) cells} if \(\langle \emptyset,
+\emptyset, s, n \rangle\) goes overflow.  A program \(\langle D, s
+\rangle\) is \emph{totally memory-leak free} if there is a natural
+number \(n\) such that it does not require more than \(n\) cells.
 \end{myDef}
