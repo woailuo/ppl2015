@@ -84,9 +84,10 @@ As a first step to the verification of total memory-leak freedom, this
 paper proposes a \emph{behavioral type
   system}~\cite{DBLP:journals/lmcs/KobayashiSW06,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/HondaVK98}
 for a programming language with manual memory-management primitives.
-Our type system captures an abstract behavior related to memory
-allocation and deallocation as a CCS-like process.  For example, our
-type system can assign a type
+captures an abstract behavior related to memory allocation and
+deallocation as a sequential process.
+
+For example, our type system can assign a type
 \(\mu\alpha.\Malloc\TSEQ\Malloc\TSEQ\Free\TSEQ\Free\TSEQ\alpha\) to
 the function \(h\) above.  This type expresses that \(h\) can allocate
 a memory cell twice, deallocate a memory cell twice, and then iterate
