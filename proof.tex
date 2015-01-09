@@ -29,28 +29,22 @@ Case analysis on \(P \xlongrightarrow{\rho} P'\).
   \(\sharp_m(\rho) - \sharp_f(\rho) \le n\). Therefore, we get the
   contradiction.
 
-\item Case $P = \Malloc$, \Rtab \(\Malloc \xlongrightarrow{\Malloc} \TSKIP\)
+\item Case $P = \Malloc$, \Rtab \(\Malloc
+  \xlongrightarrow{\Malloc} \TSKIP\)
 
-%We need to prove \(\OK_{n-1}()
-  
-We need to prove \(\sharp_{m}(P') -
-\sharp_{f}(P') \le n'\), where \(n'\) is \(n - 1\) and \(P'\) is \(\bf
-0\). That is, we need to prove \( 1 \le n \).
+  We need to prove \(\OK_{n-1}(\TSKIP)\).  From the definition of
+  \(\OK_n(P)\), we have that \(\OK_{n-1}(\TSKIP)\) holds if, for any
+  \(P'\), if \(\TSKIP \xlongrightarrow{\sigma} P'\) then
+  \(\sharp_m(\sigma) - \sharp_f(\sigma) \le n\). There is no such \(P'\) s.t. \(\TSKIP
+  \xlongrightarrow{\sigma} P'\), therefore, \(\OK_{n-1}(\TSKIP)\).
 
- We have\(\ OK_{n}(\Malloc)\). From the definition of \(\OK_n(P)\),
- we have \(\sharp_{m}(\Malloc) - \sharp_{f}(\Malloc) \le
- n\). From the definition of \(\sharp_{\rho}(\sigma)\), we have
- \( 1 \le n\).
+  \item Case $P = \Free$, \Rtab \(\FREE \xlongrightarrow{\tau} \TSKIP\).
 
-\item Case $P = \Free$
-
-From the rule \rn{Sem-Free}, we need to prove \(\sharp_{m}(P') -
-\sharp_{f}(P') \le n'\) where \(n'\) is \(n + 1\) and \(P'\) is \(\bf
-0\). That is, we need to prove \( 0 \le n + 1\).
-
-We have \(\OK_{n}(\Free)\). From the definition of \(\OK_n(P)\), we
-have \(\sharp_{m}(\Free) - \sharp_{f}(\Free) \le n\). From the
-definition of \(\sharp_{\rho}(\sigma)\), we have \( \ 0 \le n+1\).
+    We need to prove \(\OK_{n+1}(\TSKIP)\).  From the definition of
+  \(\OK_n(P)\), we have that \(\OK_{n+1}(\TSKIP)\) holds if, for any
+  \(P'\), if \(\TSKIP \xlongrightarrow{\sigma} P'\) then
+  \(\sharp_m(\sigma) - \sharp_f(\sigma) \le n\). There is no such \(P'\) s.t. \(\TSKIP
+  \xlongrightarrow{\sigma} P'\), therefore, \(\OK_{n+1}(\TSKIP)\).
 
 \item Case $P = P_{1} + P_{2}$, \Rtab \(P_1 + P_2 \xlongrightarrow{\tau} P_1\)
 
@@ -261,7 +255,7 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
   \(P'\).  Then, \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\) hold.  We
   also have \(\Theta; \Gamma \vdash [x'/x]s\COL P\) from \rn{T-Sub},
   \(\Theta; \Gamma \vdash [x'/x]s\COL P_{1}\)\( P_{1} \le
-  P\). 
+  P\).
 
 \item Case: $\langle H, R, \LET x = *y \ \IN \ s, n \rangle
   \rightarrow \langle H', R', [x'/x]s, n \rangle $
