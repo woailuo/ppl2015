@@ -15,48 +15,76 @@ If \(\OK_n(P)\) and \(P \xlongrightarrow{\rho} P'\), then
 Case analysis on \(P \xlongrightarrow{\rho} P'\).
 
 \begin{itemize}
-\item Case $P = \TSKIP;P'$
+\item Case $P = \TSKIP;P'$, \Rtab \(\TSKIP;P' \xlongrightarrow{\tau} P'\)
 
-According to the rule \rn{Tr-Skip}, we need to prove
-$\sharp_{m}(P')-\sharp_{f}(P') \le n'$ where $n'$ is $n$.
+  We need to prove \(\OK_n(P')\).   We suppose that
+  \(\OK_n(P')\) does not hold. Then, we have \(\TSKIP;P'
+  \xlongrightarrow{\tau} P' \xlongrightarrow{\exists \rho}
+  Q\), \(s.t.\) \(\sharp_{m}(\rho) - \sharp_{f}(\rho) > n\).
 
-We have \(\OK_n(\SKIP;P')\). From the definition of \(\OK_n(P)\), we
-have \( \sharp_{m}(\SKIP;P') - \sharp_{f}(\SKIP;P') \le n\). From the
-definition of \(\sharp_{\rho}(\sigma)\), we have \(\sharp_{m}(P') -
-\sharp_{f}(P') \le n\).
+  From the definition of \(\OK_n(P)\), we have \(\sharp_m(\tau \cdot
+  \rho) - \sharp_f(\tau \cdot \rho) \le n \). Then, we get
+  \(\sharp_m(\tau) + \sharp_m(\rho) - \sharp_f(\tau) - \sharp_f(\rho)
+  \le n\). From the definition of \(\sharp_\rho(\sigma)\), we have
+  \(\sharp_m(\rho) - \sharp_f(\rho) \le n\). Therefore, we get the
+  contradiction.
 
-\item Case $P = \Malloc;P'$
+\item Case $P = \Malloc$, \Rtab \(\Malloc \xlongrightarrow{\Malloc} \TSKIP\)
 
-From the rule \rn{Tr-Malloc}, we need to prove \(\sharp_{m}(P') -
-\sharp_{f}(P') \le n'\) where \(n'\) is \(n - 1\). 
+%We need to prove \(\OK_{n-1}()
+  
+We need to prove \(\sharp_{m}(P') -
+\sharp_{f}(P') \le n'\), where \(n'\) is \(n - 1\) and \(P'\) is \(\bf
+0\). That is, we need to prove \( 1 \le n \).
 
- We have\(\ OK_{n}(\Malloc;P')\). From the definition of \(\OK_n(P)\),
- we have \(\sharp_{m}(\Malloc;P') - \sharp_{f}(\Malloc;P') \le
+ We have\(\ OK_{n}(\Malloc)\). From the definition of \(\OK_n(P)\),
+ we have \(\sharp_{m}(\Malloc) - \sharp_{f}(\Malloc) \le
  n\). From the definition of \(\sharp_{\rho}(\sigma)\), we have
- \( \sharp_{m}(P') + 1 - \sharp_{f}(P') \le n\). Then, we
- have \( \sharp_{m}(P') - \sharp_{f}(P') \le n-1\)
+ \( 1 \le n\).
 
-\item Case $P = \Free;P'$
+\item Case $P = \Free$
 
-From the rule \rn{Tr-Free}, we need to prove \(\sharp_{m}(P') - \sharp_{f}(P') \le n+1\).
+From the rule \rn{Sem-Free}, we need to prove \(\sharp_{m}(P') -
+\sharp_{f}(P') \le n'\) where \(n'\) is \(n + 1\) and \(P'\) is \(\bf
+0\). That is, we need to prove \( 0 \le n + 1\).
 
-We have \(\OK_{n}(\Free;P')\). From the definition of \(\OK_n(P)\),
-we have \(\sharp_{m}(\Free;P') - \sharp_{f}(\Free;P') \le n\). From
-the definition of \(\sharp_{\rho}(\sigma)\), we have \(\sharp_{m}(P')
-- \sharp_{f}(P') - 1 \le n\). Then, we have \(
-\sharp_{m}(P') - \sharp_{f}(P') \le n+1\)
+We have \(\OK_{n}(\Free)\). From the definition of \(\OK_n(P)\), we
+have \(\sharp_{m}(\Free) - \sharp_{f}(\Free) \le n\). From the
+definition of \(\sharp_{\rho}(\sigma)\), we have \( \ 0 \le n+1\).
+
+\item Case $P = P_{1} + P_{2}$, \Rtab \(P_1 + P_2 \xlongrightarrow{\tau} P_1\)
+
+  We prove \(\OK_n(P_1)\) by contradiction.  Assuming that
+  \(OK_{n}(P_1)\) does not hold.  Then, we have \(P_{1} + P_{2}
+  \xlongrightarrow{\tau} P_{1} \xlongrightarrow{\exists \rho} Q\),
+  \(s.t.\) \(\sharp_{m}(\rho) - \sharp_{f}(\rho) > n\).
+
+  From the definition of \(\OK_n(P)\),
+  we have \(\sharp_m(\tau \cdot \rho) -\sharp_f(\tau \cdot \rho) \le
+  n\). Then, we have \(\sharp_m(\tau) + \sharp_m(\rho) -
+  \sharp_f(\tau) -\sharp_f(\rho) \le n\).  By the definition of
+  \(\sharp_\rho(\sigma)\),  we get \(\sharp_m(\rho) -\sharp_f(\rho)
+  \le n\). Therefore, we get the contradiction.
+
+\item Case $P = P_{1} + P_{2}$, \Rtab \(P_1 + P_2 \xlongrightarrow{\tau} P_2\)
+
+ The same to above.
 
 \item Case $P = P_{1};P_{2}$
 
-To prove it by contradiction.
+  We need to prove \(\OK_n(P_1)\).  To prove it by contradiction.
+  Assuming that \(OK_{n'}(P_{1}';P_{2})\) does not hold. Then, we have
+  \(P_{1};P_{2} \xlongrightarrow{\rho} P_{1}';P_{2}
+  \xlongrightarrow{\exists \rho_1} Q\), \(s.t.\) \(\sharp_{m}(\rho_1)
+  - \sharp_{f}(\rho_1) > n'\).
 
-Suppose that \(OK_{n'}(P_{1}';P_{2})\) does not hold. Then, we have
-\(P_{1};P_{2} \xlongrightarrow{\rho} P_{1}';P_{2}
-\xlongrightarrow{\exists \rho_1} Q\), \(s.t.\) \(\sharp_{m}(\rho_1) -
-\sharp_{f}(\rho_1) > n'\)
-
-From the definition of \(\OK_n(P)\), we have \( \sharp_{m}(\rho \cdot \rho_1) - \sharp_{f}(\rho \cdot \rho_1) \le n\).  We also have \(\sharp_{m}(\rho) + \sharp_{m}(\rho_1) - \sharp_{f}(\rho) -\sharp_{f}(\rho_1) \le n\).   From the assumption \(\sharp_{m}(\rho_1) - \sharp_{f}(\rho_1) > n'\), we have 
-\infax{ n' + \sharp_m(\rho) - \sharp_f(\rho) <  \sharp_{m}(\rho) + \sharp_{m}(\rho_1) - \sharp_{f}(\rho) -\sharp_{f}(\rho_1) \le n}
+  From the definition of \(\OK_n(P)\), we have \( \sharp_{m}(\rho
+  \cdot \rho_1) - \sharp_{f}(\rho \cdot \rho_1) \le n\).  We also have
+  \(\sharp_{m}(\rho) + \sharp_{m}(\rho_1) - \sharp_{f}(\rho)
+  -\sharp_{f}(\rho_1) \le n\).  From the assumption
+  \(\sharp_{m}(\rho_1) - \sharp_{f}(\rho_1) > n'\), we have \infax{ n'
+    + \sharp_m(\rho) - \sharp_f(\rho) < \sharp_{m}(\rho) +
+    \sharp_{m}(\rho_1) - \sharp_{f}(\rho) -\sharp_{f}(\rho_1) \le n}
 
 We have
 $$
@@ -69,7 +97,62 @@ $$
    \right.
 $$
 
-Hence, we have: if \(\rho = \Free\), then \(n + 1 - 1 < n\) from the definition of \(\sharp_{\rho}(\sigma)\); if \(\rho = \Malloc\), then \( n - 1 + 1 < n \); if \( \rho = other\), then \( n < n \). All of the three cases have \(n < n\). Therefore, we get the contradiction.
+   Hence, we have: if \(\rho = \Free\), then \(n + 1 - 1 < n\) from
+   the definition of \(\sharp_{\rho}(\sigma)\); if \(\rho = \Malloc\),
+   then \( n - 1 + 1 < n \); if \( \rho = other\), then \( n < n
+   \). All of the three cases have \(n < n\). Therefore, we get the
+   contradiction.
+
+ \item Case  \(P = \mu\alpha.P'\),\Rtab  \( \mu\alpha.P' \xlongrightarrow{\tau} [\mu\alpha.P'\slash\alpha]P'\)
+
+   We need to prove \(\OK_n([\mu\alpha.P'\slash\alpha]P')\).
+
+   Considering the position of type variable \(\alpha\) in \(P'\), we need prove the following subcases:
+$$
+   P'=\left\{
+   \begin{aligned}
+     &P_1;\alpha,& \\
+     &P_1;\alpha;P_2, and&  \\
+     &\alpha;P_1&
+   \end{aligned}
+   \right.
+$$
+
+   \begin{itemize}
+   \item Subcase \(P = \mu\alpha.P_1;\alpha\),\Rtab \(
+     \mu\alpha.P_1;\alpha \xlongrightarrow{\tau} P_1;(\mu\alpha.P_1;\alpha) \)
+     
+     We need to prove \(\OK_n(P_1;(\mu\alpha.P_1;\alpha) \).
+
+     By contradiction, we suppose that \( \mu\alpha.P_1;\alpha
+     \xlongrightarrow{\tau} P_1;(\mu\alpha.P_1;\alpha)
+     \xlongrightarrow{\exists \rho} Q s.t.  \sharp_m(\rho) -
+     \sharp_f(\rho) > n\).
+
+     We have \(\OK_n(P)\)).  By the definition of \(\OK_n(P)\), we
+     have \(\sharp_m(\tau \cdot \rho) -\sharp_f(\tau \cdot \rho) \le
+     n\). Hence, we have \(\sharp_m(\tau) + \sharp_m(\rho) -
+     \sharp_f(\tau) -\sharp_f(\rho) \le n\).  From the definition of
+     \(\sharp_\rho(\sigma)\), we have \(\sharp_m(\rho) -\sharp_f(\rho)
+  \le n\). Therefore, we get the contradiction.
+
+\item Subcase  \(P = \mu\alpha.P_1;\alpha;P_2\),\Rtab \(\mu\alpha.P_1;\alpha;P_2 \xlongrightarrow{\tau} P_1;(\mu\alpha.P_1;\alpha;P_2);P_2 \).
+
+  We need to prove  \(\OK_n(P_1;(\mu\alpha.P_1;\alpha;P_2);P_2) \).
+
+  By contradiction, the proof is similar to the above subcase.
+
+     \item Subcase \(P = \mu\alpha.\alpha;P_1\),\Rtab
+       \(\mu\alpha.\alpha;P_1 \xlongrightarrow{\tau}
+       (\mu\alpha.\alpha;P_1);P_1 \).
+
+       We need to prove \(\OK_n((\mu\alpha.\alpha;P_1);P_1)\).
+
+       We can observe that this subcase is of the form like
+       \(P\xlongrightarrow{\tau}P'\xlongrightarrow{\tau}P''\xlongrightarrow{\tau}
+       \cdots\). Clearly, \(\OK_n(P')\) holds.
+
+     \end{itemize}
 
 \end{itemize}
 \end{proof}
