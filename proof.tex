@@ -70,13 +70,13 @@ definition of \(\sharp_{\rho}(\sigma)\), we have \( \ 0 \le n+1\).
 
  The same to above.
 
-\item Case $P = P_{1};P_{2}$
+\item Case $P = P_{1};P_{2}$,\Rtab \(P_1;P_2 \xlongrightarrow{\rho} P_1';P_2\).
 
-  We need to prove \(\OK_n(P_1)\).  To prove it by contradiction.
-  Assuming that \(OK_{n'}(P_{1}';P_{2})\) does not hold. Then, we have
-  \(P_{1};P_{2} \xlongrightarrow{\rho} P_{1}';P_{2}
-  \xlongrightarrow{\exists \rho_1} Q\), \(s.t.\) \(\sharp_{m}(\rho_1)
-  - \sharp_{f}(\rho_1) > n'\).
+
+  We need to prove \(\OK_{n'}(P_1';P_2)\).  Assuming that
+  \(OK_{n'}(P_{1}';P_{2})\) does not hold. Then, we have \(P_{1};P_{2}
+  \xlongrightarrow{\rho} P_{1}';P_{2} \xlongrightarrow{\exists \rho_1}
+  Q\) s.t. \(\sharp_{m}(\rho_1) - \sharp_{f}(\rho_1) > n'\).
 
   From the definition of \(\OK_n(P)\), we have \( \sharp_{m}(\rho
   \cdot \rho_1) - \sharp_{f}(\rho \cdot \rho_1) \le n\).  We also have
@@ -84,9 +84,9 @@ definition of \(\sharp_{\rho}(\sigma)\), we have \( \ 0 \le n+1\).
   -\sharp_{f}(\rho_1) \le n\).  From the assumption
   \(\sharp_{m}(\rho_1) - \sharp_{f}(\rho_1) > n'\), we have \infax{ n'
     + \sharp_m(\rho) - \sharp_f(\rho) < \sharp_{m}(\rho) +
-    \sharp_{m}(\rho_1) - \sharp_{f}(\rho) -\sharp_{f}(\rho_1) \le n}
+    \sharp_{m}(\rho_1) - \sharp_{f}(\rho) -\sharp_{f}(\rho_1) \le n}.
 
-We have
+With
 $$
    n'=\left\{
    \begin{aligned}
@@ -97,10 +97,9 @@ $$
    \right.
 $$
 
-   Hence, we have: if \(\rho = \Free\), then \(n + 1 - 1 < n\) from
-   the definition of \(\sharp_{\rho}(\sigma)\); if \(\rho = \Malloc\),
-   then \( n - 1 + 1 < n \); if \( \rho = other\), then \( n < n
-   \). All of the three cases have \(n < n\). Therefore, we get the
+   Hence, if \(\rho = \Free\), then \(n + 1 - 1 < n\); if \(\rho =
+   \Malloc\), then \( n - 1 + 1 < n \); if \( \rho = other\), then \(
+   n < n \). Therefore, we have \(n < n\), and then we get the
    contradiction.
 
  \item Case  \(P = \mu\alpha.P'\),\Rtab  \( \mu\alpha.P' \xlongrightarrow{\tau} [\mu\alpha.P'\slash\alpha]P'\)
@@ -122,14 +121,14 @@ $$
    \item Subcase \(P = \mu\alpha.P_1;\alpha\),\Rtab \(
      \mu\alpha.P_1;\alpha \xlongrightarrow{\tau} P_1;(\mu\alpha.P_1;\alpha) \)
      
-     We need to prove \(\OK_n(P_1;(\mu\alpha.P_1;\alpha) \).
-
-     By contradiction, we suppose that \( \mu\alpha.P_1;\alpha
+     We prove \(\OK_n(P_1;(\mu\alpha.P_1;\alpha) \) by
+     contradiction. Supposing that u\(\OK_n(P_1;(\mu\alpha.P_1;\alpha)
+     \) does not hold. Then, we have \( \mu\alpha.P_1;\alpha
      \xlongrightarrow{\tau} P_1;(\mu\alpha.P_1;\alpha)
-     \xlongrightarrow{\exists \rho} Q s.t.  \sharp_m(\rho) -
+     \xlongrightarrow{\exists \rho}Q\) s.t.\(\sharp_m(\rho) -
      \sharp_f(\rho) > n\).
 
-     We have \(\OK_n(P)\)).  By the definition of \(\OK_n(P)\), we
+     We have \(\OK_n(P)\).  By the definition of \(\OK_n(P)\), we
      have \(\sharp_m(\tau \cdot \rho) -\sharp_f(\tau \cdot \rho) \le
      n\). Hence, we have \(\sharp_m(\tau) + \sharp_m(\rho) -
      \sharp_f(\tau) -\sharp_f(\rho) \le n\).  From the definition of
@@ -158,7 +157,14 @@ $$
 \end{proof}
 
 \begin{pfof}{Lemma~\ref{lem:preservation}}
-By induction on the derivation of evaluation rules.\\
+By induction on the derivation of evaluation rules.
+
+\paragraph{Notation}
+ The type of \([x'\slash x]s\) is same as \(s\), because our interest
+ is the behavior of a program, a variable type environment does not
+ carry information on the types of variables. For example, if
+ \(\Theta;\Gamma \vdash s\COL P\), then \(\Theta;\Gamma \vdash
+         [x'\slash x]s\COL P\).
 
 \begin{itemize}
 \item Case: $\langle H, R, \FREE, n \rangle \xlongrightarrow{\Free}
@@ -166,13 +172,13 @@ By induction on the derivation of evaluation rules.\\
 
 We have \(\OK_n(P)\) and \(\Theta; \Gamma \vdash \Free(x) \COL P\).
 From inversion of the typing rules, we have \(\Theta; \Gamma \vdash
-\Free(x) \COL \Free\) and \(\Free \le P\) for some \(P'\).  Hence,
-from the definition of subtyping, we have \(\TSKIP \le P''\) and \(P
+\Free(x) \COL \Free\) and \(\Free \le P\).  Hence, from the definition
+of subtyping, we have \(\TSKIP \le P''\) and \(P
 \xLongrightarrow{\Free} P''\) for some \(P''\).
 
-We need to find \(P_1\) such that \(P \xLongrightarrow{\Free} P_1\),
-\(\Theta; \Gamma \vdash \SKIP \COL P_1\), and \(\OK_{n+1}(P_1)\).
-Take \(P''\) as \(P_1\).  Then, \(P \xLongrightarrow{\Free} P''\) as
+We need to find \(P'\) such that \(P \xLongrightarrow{\Free} P'\),
+\(\Theta; \Gamma \vdash \SKIP \COL P'\), and \(\OK_{n+1}(P')\).
+Take \(P''\) as \(P'\).  Then, \(P \xLongrightarrow{\Free} P''\) as
 we stated above.  We also have \(\Theta; \Gamma \vdash \SKIP \COL
 P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
 \(\OK_{n+1}(P'')\) follows from Lemma~\ref{lem:okPreserved}.
@@ -191,7 +197,7 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
   \rightarrow P_{1}\), then we have \(\Malloc;P_{1}
   \xLongrightarrow{\Malloc} P_{1}\). Hence, By the definition of
   subtyping, we have \(P \xLongrightarrow{\Malloc}P''\) and \(P_{1}
-  \le P''\) for some \(P''\)
+  \le P''\) for some \(P''\).
 
   We need to find \(P'\) such that \(\Theta; \Gamma' \vdash
   [x'/x]s\COL P'\),\(P\xLongrightarrow{\Malloc} P'\). Take \(P''\) as
@@ -232,7 +238,7 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
 \item Case: $\langle H, R, \LET x = y\ \IN s , n \rangle
   \rightarrow \langle H', R', [x'/x]s, n \rangle $.
 
-  We have \(\Theta; \Gamma \vdash \LET x = y\ \IN \ s \COL P\) and
+  We have \(\Theta; \Gamma \vdash \LET x = y \IN s \COL P\) and
   \(OK_{n}(P)\). From the inversion of typing rules, we have \(\Theta;
   \Gamma \vdash s\COL P_{1}\) and \(P_{1} \le P\).
 
@@ -315,7 +321,7 @@ Prove by contradiction.
 
 Assuming that \(\langle H, R, s, n \rangle
 \not\xlongrightarrow{\Malloc} \OVERFLOW \) does not hold. Then, we
-have that \(n\) is \(0\) and the action is \(\Malloc\) from transition rule
+have that \(n\) is \(0\) and that the action is \(\Malloc\), from transition rule
 \rn{Sem-OutOfMem}.
 
 We have \(\Theta;\Gamma \vdash s \COL P\) and \(\OK_n(P)\). From the
