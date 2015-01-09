@@ -35,16 +35,16 @@ Case analysis on \(P \xlongrightarrow{\rho} P'\).
   We need to prove \(\OK_{n-1}(\TSKIP)\).  From the definition of
   \(\OK_n(P)\), we have that \(\OK_{n-1}(\TSKIP)\) holds if, for any
   \(P'\), if \(\TSKIP \xlongrightarrow{\sigma} P'\) then
-  \(\sharp_m(\sigma) - \sharp_f(\sigma) \le n\). There is no such \(P'\) s.t. \(\TSKIP
-  \xlongrightarrow{\sigma} P'\), therefore, \(\OK_{n-1}(\TSKIP)\).
+  \(\sharp_m(\sigma) - \sharp_f(\sigma) \le n - 1\). There is no such \(P'\) s.t. \(\TSKIP
+  \xlongrightarrow{\sigma} P'\), therefore, \(\OK_{n-1}(\TSKIP)\) holds.
 
-  \item Case $P = \Free$, \Rtab \(\FREE \xlongrightarrow{\tau} \TSKIP\).
+  \item Case $P = \Free$, \Rtab \(\Free \xlongrightarrow{\Free} \TSKIP\).
 
     We need to prove \(\OK_{n+1}(\TSKIP)\).  From the definition of
   \(\OK_n(P)\), we have that \(\OK_{n+1}(\TSKIP)\) holds if, for any
   \(P'\), if \(\TSKIP \xlongrightarrow{\sigma} P'\) then
-  \(\sharp_m(\sigma) - \sharp_f(\sigma) \le n\). There is no such \(P'\) s.t. \(\TSKIP
-  \xlongrightarrow{\sigma} P'\), therefore, \(\OK_{n+1}(\TSKIP)\).
+  \(\sharp_m(\sigma) - \sharp_f(\sigma) \le n + 1\). There is no such \(P'\) s.t. \(\TSKIP
+  \xlongrightarrow{\sigma} P'\), therefore, \(\OK_{n+1}(\TSKIP)\) holds.
 
 \item Case $P = P_{1} + P_{2}$, \Rtab \(P_1 + P_2 \xlongrightarrow{\tau} P_1\)
 
