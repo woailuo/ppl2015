@@ -20,7 +20,7 @@ Case analysis on \(P \xlongrightarrow{\rho} P'\).
   We need to prove \(\OK_n(P')\).   We suppose that
   \(\OK_n(P')\) does not hold. Then, we have \(\TSKIP;P'
   \xlongrightarrow{\tau} P' \xlongrightarrow{\exists \rho}
-  Q\), \(s.t.\) \(\sharp_{m}(\rho) - \sharp_{f}(\rho) > n\).
+  Q\) s.t. \(\sharp_{m}(\rho) - \sharp_{f}(\rho) > n\).
 
   From the definition of \(\OK_n(P)\), we have \(\sharp_m(\tau \cdot
   \rho) - \sharp_f(\tau \cdot \rho) \le n \). Then, we get
@@ -50,8 +50,8 @@ Case analysis on \(P \xlongrightarrow{\rho} P'\).
 
   We prove \(\OK_n(P_1)\) by contradiction.  Assuming that
   \(OK_{n}(P_1)\) does not hold.  Then, we have \(P_{1} + P_{2}
-  \xlongrightarrow{\tau} P_{1} \xlongrightarrow{\exists \rho} Q\),
-  \(s.t.\) \(\sharp_{m}(\rho) - \sharp_{f}(\rho) > n\).
+  \xlongrightarrow{\tau} P_{1} \xlongrightarrow{\exists \rho} Q\)
+  s.t. \(\sharp_{m}(\rho) - \sharp_{f}(\rho) > n\).
 
   From the definition of \(\OK_n(P)\),
   we have \(\sharp_m(\tau \cdot \rho) -\sharp_f(\tau \cdot \rho) \le
@@ -78,7 +78,7 @@ Case analysis on \(P \xlongrightarrow{\rho} P'\).
   -\sharp_{f}(\rho_1) \le n\).  From the assumption
   \(\sharp_{m}(\rho_1) - \sharp_{f}(\rho_1) > n'\), we have \infax{ n'
     + \sharp_m(\rho) - \sharp_f(\rho) < \sharp_{m}(\rho) +
-    \sharp_{m}(\rho_1) - \sharp_{f}(\rho) -\sharp_{f}(\rho_1) \le n}.
+    \sharp_{m}(\rho_1) - \sharp_{f}(\rho) -\sharp_{f}(\rho_1) \le n}
 
 With
 $$
@@ -116,10 +116,10 @@ $$
      \mu\alpha.P_1;\alpha \xlongrightarrow{\tau} P_1;(\mu\alpha.P_1;\alpha) \)
      
      We prove \(\OK_n(P_1;(\mu\alpha.P_1;\alpha) \) by
-     contradiction. Supposing that u\(\OK_n(P_1;(\mu\alpha.P_1;\alpha)
+     contradiction. Supposing that \(\OK_n(P_1;(\mu\alpha.P_1;\alpha)
      \) does not hold. Then, we have \( \mu\alpha.P_1;\alpha
      \xlongrightarrow{\tau} P_1;(\mu\alpha.P_1;\alpha)
-     \xlongrightarrow{\exists \rho}Q\) s.t.\(\sharp_m(\rho) -
+     \xlongrightarrow{\exists \rho}Q\) s.t. \(\sharp_m(\rho) -
      \sharp_f(\rho) > n\).
 
      We have \(\OK_n(P)\).  By the definition of \(\OK_n(P)\), we
@@ -314,8 +314,8 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
 Prove by contradiction.
 
 Assuming that \(\langle H, R, s, n \rangle
-\not\xlongrightarrow{\Malloc} \OVERFLOW \) does not hold. Then, we
-have that \(n\) is \(0\) and that the action is \(\Malloc\), from transition rule
+\not\xlongrightarrow{\Malloc} \OVERFLOW \) does not hold. Then, \(n\)
+is \(0\) and the action is \(\Malloc\), from transition rule
 \rn{Sem-OutOfMem}.
 
 We have \(\Theta;\Gamma \vdash s \COL P\) and \(\OK_n(P)\). From the
@@ -342,9 +342,7 @@ It suffices to prove \( \langle \emptyset, \emptyset, s, n\rangle
 
 By contradiction, we assume that \( \langle \emptyset, \emptyset,
 s, n\rangle \xlongrightarrow{\sigma} \OVERFLOW \) for any \(\sigma =
-\rho_0\rho_1\cdots\rho_m\).
-
-We have \( \langle \emptyset, \emptyset, s, n\rangle
+\rho_0\rho_1\cdots\rho_m\).  That is, \( \langle \emptyset, \emptyset, s, n\rangle
 \xlongrightarrow{\rho_0} \langle H_0, R_0, s_0, n_0\rangle
 \xlongrightarrow{\rho_1} \cdots \xlongrightarrow{\rho_m} \langle H_m,
 R_m, s_m, n_m \rangle \xlongrightarrow{\Malloc} \OVERFLOW \).
