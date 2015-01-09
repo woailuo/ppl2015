@@ -313,16 +313,15 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
 \begin{pfof}{Lemma~\ref{lem:immediateSafety}}
 Prove by contradiction.
 
+Assuming that \(\langle H, R, s, n \rangle
+\not\xlongrightarrow{\Malloc} \OVERFLOW \) does not hold. Then, we
+have that \(n\) is \(0\) and the action is \(\Malloc\) from transition rule
+\rn{Sem-OutOfMem}.
 
 We have \(\Theta;\Gamma \vdash s \COL P\) and \(\OK_n(P)\). From the
 definition of \(\OK_n(P)\), we have \(P \xlongrightarrow{\rho} P'\)
-for some \(P'\) and \(\sharp_m(\rho) - \sharp_f(\rho) \le n \).
-
-Assuming \(\langle H, R, s, n\rangle \xlongrightarrow{\Malloc}
-\OVERFLOW\), that is, \(\OK_n(P)\) does not hold, then we have \(P
-\xlongrightarrow{\Malloc} Q s.t. \sharp_m(\Malloc) -
-\sharp_f(\Malloc) > n \).  But we have \(\sharp_m(\rho) -
-\sharp_f(\rho) \le n \), take \(\Malloc\) as \(\rho\), then we get the
+for some \(P'\) and \(\sharp_m(\rho) - \sharp_f(\rho) \le n \). Take
+\(\rho\) as \(\Malloc\), we get \( 1 \le n \). Therefore, we get the
 contradiction.
 
 \end{pfof}
