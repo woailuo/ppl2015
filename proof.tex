@@ -308,3 +308,51 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
 \end{itemize}
 
 \end{pfof}
+
+
+\begin{pfof}{Lemma~\ref{lem:immediateSafety}}
+Prove by contradiction.
+
+
+We have \(\Theta;\Gamma \vdash s \COL P\) and \(\OK_n(P)\). From the
+definition of \(\OK_n(P)\), we have \(P \xlongrightarrow{\rho} P'\)
+for some \(P'\) and \(\sharp_m(\rho) - \sharp_f(\rho) \le n \).
+
+Assuming \(\langle H, R, s, n\rangle \xlongrightarrow{\Malloc}
+\OVERFLOW\), that is, \(\OK_n(P)\) does not hold, then we have \(P
+\xlongrightarrow{\Malloc} Q s.t. \sharp_m(\Malloc) -
+\sharp_f(\Malloc) > n \).  But we have \(\sharp_m(\rho) -
+\sharp_f(\rho) \le n \), take \(\Malloc\) as \(\rho\), then we get the
+contradiction.
+
+\end{pfof}
+
+
+\section{Proof of Theorem}
+
+\begin{pfof}{Theorem~\ref{thm1}}
+
+
+We have \( \Theta;\emptyset \vdash s\COL P, \vdash D\COL \Theta\) and
+\(\OK_n(P)\) from the well-typed program \(\vdash \langle D,
+s\rangle\).
+
+It suffices to prove \( \langle \emptyset, \emptyset, s, n\rangle
+\not\xlongrightarrow{\sigma} \OVERFLOW\) for any action sequence
+\(\sigma\).
+
+By contradiction, we assume that \( \langle \emptyset, \emptyset,
+s, n\rangle \xlongrightarrow{\sigma} \OVERFLOW \) for any \(\sigma =
+\rho_0\rho_1\cdots\rho_m\).
+
+We have \( \langle \emptyset, \emptyset, s, n\rangle
+\xlongrightarrow{\rho_0} \langle H_0, R_0, s_0, n_0\rangle
+\xlongrightarrow{\rho_1} \cdots \xlongrightarrow{\rho_m} \langle H_m,
+R_m, s_m, n_m \rangle \xlongrightarrow{\Malloc} \OVERFLOW \).
+
+By Lemma~\ref{lem:preservation}, we have \(\OK_{n_m}(P_m)\),
+\(\Theta;\Gamma\vdash s_m \COL P_m\) and \(P \xLongrightarrow{\sigma}
+P_m\). Then, by the lemma~\ref{lem:immediateSafety}, we get the
+contradiction.
+
+\end{pfof}
