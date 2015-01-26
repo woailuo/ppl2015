@@ -336,10 +336,11 @@ immediate overflow.
 
 \begin{lemma}[Preservation]
 \label{lem:preservation}
-If $OK_{n}(P)$, $\Theta; \Gamma \vdash s : P$ and $\langle H,R,s,n
-\rangle \xlongrightarrow{\rho} \langle H',R',s', n' \rangle$, then
-there exists $P'$ such that (1) $ \Theta; \Gamma \vdash s' : P'$, (2)
-\(P \xLongrightarrow{\rho} P'\), and (3) \(OK_{n'}(P')\).
+If $OK_{n}(P)$, $\Theta; \Gamma \vdash s : P$, \(\vdash D \COL
+\Theta\), and $\langle H,R,s,n \rangle \xlongrightarrow{\rho} \langle
+H',R',s', n' \rangle$, then there exists $P'$ such that (1) $ \Theta;
+\Gamma \vdash s' : P'$, (2) \(P \xLongrightarrow{\rho} P'\), and (3)
+\(OK_{n'}(P')\).
 \end{lemma}
 
 %% \begin{lemma}[Preservation $\mathbf{II}$]%\label{preser}

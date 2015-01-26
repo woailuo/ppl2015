@@ -24,7 +24,7 @@ Case analysis on \(P \xlongrightarrow{\rho} P'\).
   of \(\OK_n(P)\), we have \(\sharp_m(\tau\sigma) - \sharp_f(\tau
   \sigma) \le n \).  From the definition of \(\sharp_\rho(\sigma)\),
   we get \(\sharp_m(\tau) + \sharp_m(\rho) - \sharp_f(\tau) -
-  \sharp_f(\rho) \le n\) that is equivalent to \(\sharp_m(\isgma) -
+  \sharp_f(\rho) \le n\) that is equivalent to \(\sharp_m(\sigma) -
   \sharp_f(\sigma) \le n\), which is contradiction.
 
 \item Case $P = \Malloc$ and \(\Malloc
@@ -158,16 +158,19 @@ n \ge \sharp_m(\tau\sigma) - \sharp_f(\tau\sigma) = \sharp_m(\sigma) - \sharp_f(
 \end{proof}
 
 \begin{pfof}{Lemma~\ref{lem:preservation}}
-By induction on the derivation of evaluation rules.
 
-\paragraph{Notation}
- The type of \([x'\slash x]s\) is same as \(s\), because our interest
- is the behavior of a program, a variable type environment does not
- carry information on the types of variables. For example, if
- \(\Theta;\Gamma \vdash s\COL P\), then \(\Theta;\Gamma \vdash
-         [x'\slash x]s\COL P\).
+By induction on the derivation of \(\langle H,R,s,n \rangle
+\xlongrightarrow{\rho} \langle H',R',s', n' \rangle\).
+
+%% \paragraph{Notation}
+%%  The type of \([x'\slash x]s\) is same as \(s\), because our interest
+%%  is the behavior of a program, a variable type environment does not
+%%  carry information on the types of variables. For example, if
+%%  \(\Theta;\Gamma \vdash s\COL P\), then \(\Theta;\Gamma \vdash
+%%          [x'\slash x]s\COL P\).
 
 \begin{itemize}
+
 \item Case: $\langle H, R, \FREE, n \rangle \xlongrightarrow{\Free}
   \langle H', R', \SKIP, n + 1 \rangle $.
 
@@ -175,37 +178,35 @@ We have \(\OK_n(P)\) and \(\Theta; \Gamma \vdash \Free(x) \COL P\).
 From inversion of the typing rules, we have \(\Theta; \Gamma \vdash
 \Free(x) \COL \Free\) and \(\Free \le P\).  Hence, from the definition
 of subtyping, we have \(\TSKIP \le P''\) and \(P
-\xLongrightarrow{\Free} P''\) for some \(P''\).
-
-We need to find \(P'\) such that \(P \xLongrightarrow{\Free} P'\),
-\(\Theta; \Gamma \vdash \SKIP \COL P'\), and \(\OK_{n+1}(P')\).
-Take \(P''\) as \(P'\).  Then, \(P \xLongrightarrow{\Free} P''\) as
-we stated above.  We also have \(\Theta; \Gamma \vdash \SKIP \COL
-P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
-\(\OK_{n+1}(P'')\) follows from Lemma~\ref{lem:okPreserved}.
-
+\xLongrightarrow{\Free} P''\) for some \(P''\).  We need to find
+\(P'\) such that \(P \xLongrightarrow{\Free} P'\), \(\Theta; \Gamma
+\vdash \SKIP \COL P'\), and \(\OK_{n+1}(P')\).  Take \(P''\) as
+\(P'\).  Then, \(P \xLongrightarrow{\Free} P''\) as we stated above.
+We also have \(\Theta; \Gamma \vdash \SKIP \COL P''\) from
+\rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.  \(\OK_{n+1}(P'')\)
+follows from Lemma~\ref{lem:okPreserved}.
 
 \item Case: $\langle H, R, \LET x = \MALLOC \IN s, n \rangle
-  \xlongrightarrow{\Malloc} \langle H', R', [x'/x]s, n - 1 \rangle
-  $.
+  \xlongrightarrow{\Malloc} \langle H', R', [x'/x]s, n - 1 \rangle $.
 
-  From the assumption, we have \(\Theta; \Gamma \vdash \LET x =
-  \MALLOC \IN s \COL P\) and \(\OK_{n}(P)\). By the inversion of
-  typing rules, we have \(\Malloc;P_1 \le P\) and \(\Theta; \Gamma
-  \vdash s : P_{1}\) for some \(P_1\). We have the following
-  derivation: \infrule{ \Malloc \xlongrightarrow{\Malloc} 0}
-  {\Malloc;P_1 \xlongrightarrow{\Malloc} 0;P_{1}} and \(0;P_1
-  \rightarrow P_{1}\), then we have \(\Malloc;P_{1}
-  \xLongrightarrow{\Malloc} P_{1}\). Hence, By the definition of
-  subtyping, we have \(P \xLongrightarrow{\Malloc}P''\) and \(P_{1}
-  \le P''\) for some \(P''\).
+From the assumption, we have \(\Theta; \Gamma \vdash \LET x = \MALLOC
+\IN s \COL P\) and \(\OK_{n}(P)\). By the inversion of typing rules,
+we have \(\Malloc;P_1 \le P\) and \(\Theta; \Gamma \vdash s : P_{1}\)
+for some \(P_1\). We have the following derivation: \infrule{ \Malloc
+  \xlongrightarrow{\Malloc} 0} {\Malloc;P_1 \xlongrightarrow{\Malloc}
+  0;P_{1}} and \(0;P_1 \rightarrow P_{1}\), then we have
+\(\Malloc;P_{1} \xLongrightarrow{\Malloc} P_{1}\). Hence, By the
+definition of subtyping, we have \(P \xLongrightarrow{\Malloc}P''\)
+and \(P_{1} \le P''\) for some \(P''\).
 
-  We need to find \(P'\) such that \(\Theta; \Gamma' \vdash
-  [x'/x]s\COL P'\),\(P\xLongrightarrow{\Malloc} P'\). Take \(P''\) as
-  \(P'\). Then \(P \xLongrightarrow{\Malloc} P''\) as we state above. We
-  also have \(\Theta;\Gamma \vdash [x'/x]s \COL P''\) from \rn{T-Sub},
-  \(\Theta;\Gamma \vdash [x'/x]s \COL P_1\) and \(P_1 \le
-  P''\). \(\OK_{n-1}(P'')\) follows from Lemma~\ref{lem:okPreserved}.
+We need to find \(P'\) and \(\Gamma'\) such that \(\Theta; \Gamma'
+\vdash [x'/x]s\COL P'\) and \(P\xLongrightarrow{\Malloc} P'\). Take
+\(P''\) as \(P'\) and \([x'/x]\Gamma\) as \(\Gamma'\).  (Note that
+\([x'/x]\Gamma\) is well-formed because \(x'\) is fresh.)  Then \(P
+\xLongrightarrow{\Malloc} P''\) as we state above. We also have
+\(\Theta;[x'/x]\Gamma \vdash [x'/x]s \COL P''\) from \rn{T-Sub},
+\(\Theta;[x'/x]\Gamma \vdash [x'/x]s \COL P_1\), and \(P_1 \le P''\).
+\(\OK_{n-1}(P'')\) follows from Lemma~\ref{lem:okPreserved}.
 
 \item Case: $\langle H, R, \SKIP;s, n \rangle \rightarrow \langle
   H, R, s, n \rangle $.
@@ -243,12 +244,13 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
   \(OK_{n}(P)\). From the inversion of typing rules, we have \(\Theta;
   \Gamma \vdash s\COL P_{1}\) and \(P_{1} \le P\).
 
-  We need to find $P'$ such that \(\Theta; \Gamma \vdash [x'/x]s : P'\) ,
-  \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P'\)). Take \(P\) as
-  \(P'\). Then \( P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\) hold.  We
-  also have \(\Theta; \Gamma \vdash [x'/x]s\COL P\) from \rn{T-Sub},
-  \(\Theta; \Gamma \vdash [x'/x]s\COL P_{1}\) and \( P_{1} \le
-  P\).
+  We need to find $P'$ and \(\Gamma'\) such that \(\Theta; \Gamma'
+  \vdash [x'/x]s : P'\) , \(P \xLongrightarrow{\tau} P'\) and
+  \(\OK_n(P'\)). Take \(P\) as \(P'\) and \([x'/x]\Gamma\) as
+  \(\Gamma'\). Then \( P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\)
+  hold.  We also have \(\Theta; \Gamma \vdash [x'/x]s\COL P\) from
+  \rn{T-Sub}, \(\Theta; \Gamma \vdash [x'/x]s\COL P_{1}\) and \( P_{1}
+  \le P\).
 
 \item Case: $\langle H, R, \LET x = \NULL \ \IN \ s, n \rangle
   \rightarrow \langle H', R', [x'/x]s, n \rangle $
@@ -257,12 +259,13 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
   and \(OK_{n}(P)\). From the inversion of typing rules, we have
   \(\Theta; \Gamma \vdash s\COL P_{1}\) and \( P_{1} \le P\).
 
-  We need to find $P'$ such that \(\Theta; \Gamma' \vdash [x'/x]s\COL P'\),
-  \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\).  Take \(P\) as
-  \(P'\).  Then, \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\) hold.  We
-  also have \(\Theta; \Gamma \vdash [x'/x]s\COL P\) from \rn{T-Sub},
-  \(\Theta; \Gamma \vdash [x'/x]s\COL P_{1}\)\( P_{1} \le
-  P\).
+  We need to find $P'$ and \(\Gamma'\) such that \(\Theta; \Gamma'
+  \vdash [x'/x]s\COL P'\), \(P \xLongrightarrow{\tau} P'\) and
+  \(\OK_n(P')\).  Take \(P\) as \(P'\) and \([x'/x]\Gamma\) as
+  \(\Gamma'\).  Then, \(P \xLongrightarrow{\tau} P'\) and
+  \(\OK_n(P')\) hold.  We also have \(\Theta; \Gamma \vdash
+       [x'/x]s\COL P\) from \rn{T-Sub}, \(\Theta; \Gamma \vdash
+       [x'/x]s\COL P_{1}\)\( P_{1} \le P\).
 
 \item Case: $\langle H, R, \LET x = *y \ \IN \ s, n \rangle
   \rightarrow \langle H', R', [x'/x]s, n \rangle $
@@ -271,14 +274,16 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
   \(OK_{n}(P)\). From the inversion of typing rules, we have \(\Theta;
   \Gamma \vdash s\COL P_{1}\) and \(P_{1} \le P\).
 
-  We need to find \(P'\) such that \(\Theta; \Gamma \vdash [x'/x]s\COL
-  P'\), \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\). Take \(P\) as
-  \(P'\). Then, \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\) hold.  We
-  also have \(\Theta; \Gamma' \vdash [x'/x]s\COL P\) from \rn{T-Sub},
-  \(\Theta; \Gamma' \vdash [x'/x]s\COL P_{1}\) and \(P_{1} \le P\).
+  We need to find \(P'\) and \(\Gamma'\) such that \(\Theta; \Gamma'
+  \vdash [x'/x]s\COL P'\), \(P \xLongrightarrow{\tau} P'\) and
+  \(\OK_n(P')\). Take \(P\) as \(P'\) and \([x'/x]\Gamma\) as
+  \(\Gamma'\). Then, \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\)
+  hold.  We also have \(\Theta; \Gamma' \vdash [x'/x]s\COL P\) from
+  \rn{T-Sub}, \(\Theta; \Gamma' \vdash [x'/x]s\COL P_{1}\) and \(P_{1}
+  \le P\).
         
-\item Case(\rn{Tr-IfNullT}): \(\langle H, R, \IFNULL \Cirx \ \THEN s_{1} \ \ELSE \ s_{2},
-  n \rangle \rightarrow \langle H, R, s_{1}, n \rangle\)
+\item Case: \(\langle H, R, \IFNULL \Cirx \ \THEN s_{1} \ \ELSE
+  \ s_{2}, n \rangle \rightarrow \langle H, R, s_{1}, n \rangle\)
 
   We have \(\Theta; \Gamma \vdash \IFNULL \Cirx \ \THEN \ s_{1}
   \ \ELSE \ s_{2}\COL P\) and \(\OK_{n}(P)\). From the inversion of
@@ -286,77 +291,114 @@ P''\) from \rn{T-Skip}, \(\TSKIP \le P''\), and \rn{T-Sub}.
   \le P\).
 
   We need to find $P'$ such that \(\Theta; \Gamma \vdash s_1\COL P'\)
-  , \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P'\)).  Take P as P'.  Then,
-  \(\OK_n(P')\) and \(P \xLongrightarrow{\tau} P'\) hold. We also have \(\Theta;
-  \Gamma' \vdash s_{1}\COL P\) from \(\Theta; \Gamma \vdash s_{1}\COL
-  P_1\), \(P_{1} \le P\) and \rn{T-Sub}.
+  , \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P'\)).  Take \(P\) as
+  \(P'\).  Then, \(\OK_n(P')\) and \(P \xLongrightarrow{\tau} P'\)
+  hold. We also have \(\Theta; \Gamma' \vdash s_{1}\COL P\) from
+  \(\Theta; \Gamma \vdash s_{1}\COL P_1\), \(P_{1} \le P\) and
+  \rn{T-Sub}.
 
 \item Case(\rn{Tr-IfNullF}): \(\langle H, R, \IFNULL \Cirx \ \THEN s_{1} \ \ELSE \ s_{2},
   n \rangle \rightarrow \langle H, R, s_{2}, n \rangle\).
 
- The proof is similar to case \rn{Tr-IfNullT}. 
+ The proof is similar to case of \(\langle H, R, \IFNULL \Cirx \ \THEN
+ s_{1} \ \ELSE \ s_{2}, n \rangle \rightarrow \langle H, R, s_{1}, n
+ \rangle\).
 
 \item Case: $\langle H, R, f(\vec{x}) , n \rangle \rightarrow  \langle H, R, [\vec{x}/\vec{y}]s, n  \rangle $
 
-  Assuming that \(D(f) = s\) and \(\Theta(f) = P_1\), we have \(s\COL
-  P_1\). The \([\vec{x}/\vec{y}]s\) also has a type \(P_1\).
+% We have \(D(f) = s\) and \(\Theta(f) = P_1\), we have \(s \COL P_1\). 
 
-  From the assumption, we have \(\Theta;\Gamma \vdash f(x)\COL P\) and
-  \(\OK_n(P)\). From the inversion, we have \(\Theta;\Gamma \vdash
-  f(x)\COL P_1\) and \(P_1 \le P\).
+From the inversion of \rn{T-Call}, we have \(\Theta; \Gamma \vdash
+f(\vec{x}) \COL \Theta(f)\) and \(\Theta(f) \le P\).  From
+\rn{Sem-Call}, we have \(D(f) = (\vec{y})s\).  From the assumption
+\(\vdash D \COL \Theta\), we have \(\Theta; \vec{y} \vdash s \COL
+\Theta(f)\); hence, with \(\Theta(f) \le P\), we have \(\Theta;
+\vec{y} \vdash s \COL P\).  We then have \(\Theta; \vec{x} \vdash
+    [\vec{x}/\vec{y}]s \COL P\) as required.
 
-  We need to find \(P'\) such that \(\Theta;\Gamma \vdash [\vec{x}/\vec{y}]s\COL
-  P'\), \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\). Take \(P\) as
-  \(P'\). Then \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\) hold. We
-  also have \(\Theta;\Gamma \vdash [\vec{x}/\vec{y}]s\COL P \) from
-  \(\Theta;\Gamma \vdash [\vec{x}/\vec{y}]s\COL P_1\), \(P_1 \le P\) and
-  \rn{T-Sub}.
+%% The \([\vec{x}/\vec{y}]s\) also has a type \(P_1\).  From the
+%% assumption, we have \(\Theta;\Gamma \vdash f(x)\COL P\) and
+%% \(\OK_n(P)\). From the inversion, we have \(\Theta;\Gamma \vdash
+%% f(x)\COL P_1\) and \(P_1 \le P\).  We need to find \(P'\) such that
+%% \(\Theta;\Gamma \vdash [\vec{x}/\vec{y}]s\COL P'\), \(P
+%% \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\). Take \(P\) as
+%% \(P'\). Then \(P \xLongrightarrow{\tau} P'\) and \(\OK_n(P')\)
+%% hold. We also have \(\Theta;\Gamma \vdash [\vec{x}/\vec{y}]s\COL P \)
+%% from \(\Theta;\Gamma \vdash [\vec{x}/\vec{y}]s\COL P_1\), \(P_1 \le
+%% P\) and \rn{T-Sub}.
 
 \end{itemize}
-
 \end{pfof}
 
+\begin{corollary}
+\label{cor:preservation}
+If $OK_{n}(P)$, $\Theta; \Gamma \vdash s : P$, \(\vdash D \COL
+\Theta\), and $\langle H,R,s,n \rangle \xlongrightarrow{\sigma}
+\langle H',R',s', n' \rangle$, then there exists $P'$ such that (1) $
+\Theta; \Gamma \vdash s' : P'$, (2) \(P \xLongrightarrow{\sigma} P'\),
+and (3) \(OK_{n'}(P')\).
+\end{corollary}
+
+We write \(\langle H, R, s, n \rangle \xlongrightarrow{\rho}\) if
+there is a transition \(\xlongrightarrow{\rho}\) from \(\langle H, R,
+s, n \rangle\).
+
+\begin{lemma}
+\label{lem:enabled}
+If \(\Theta; \Gamma \vdash s \COL P\) and \(\langle H, R, s, n \rangle
+\xlongrightarrow{\rho}\) and \(\rho \in \set{\Malloc, \Free}\), then
+there exists \(P'\) such that \(P \xLongrightarrow{\rho} P'\).
+\end{lemma}
+
+\begin{proof}
+Induction on the derivation of \(\Theta; \Gamma \vdash s \COL P\).
+\end{proof}
 
 \begin{pfof}{Lemma~\ref{lem:immediateSafety}}
-Prove by contradiction.
 
-Assuming that \(\langle H, R, s, n \rangle
-\not\xlongrightarrow{\Malloc} \OVERFLOW \) does not hold. Then, \(n\)
-is \(0\) and the action is \(\Malloc\), from transition rule
-\rn{Sem-OutOfMem}.
+By contradiction.  Assume \(\langle H, R, s, n \rangle
+\xlongrightarrow{\rho} \OVERFLOW\). Then, \(n\) is \(0\) and \(\rho =
+\Malloc\) from \rn{Sem-OutOfMem}.  From the assumption \(\Theta;\Gamma
+\vdash s \COL P\) and \(\OK_0(P)\).  From Lemma~\ref{lem:enabled},
+there exists \(P'\) such that \(P \xLongrightarrow{\Malloc} P'\).
+However, this contradicts \(\OK_0(P)\).
 
-We have \(\Theta;\Gamma \vdash s \COL P\) and \(\OK_n(P)\). From the
-definition of \(\OK_n(P)\), we have \(P \xlongrightarrow{\rho} P'\)
-for some \(P'\) and \(\sharp_m(\rho) - \sharp_f(\rho) \le n \). Take
-\(\Malloc\) as \(\rho\), we get \( 1 \le n \). Therefore, we get the
-contradiction.
+%% From the definition of \(\OK_n(P)\), we have \(P
+%% \xlongrightarrow{\rho} P'\) for some \(P'\) and \(\sharp_m(\rho) -
+%% \sharp_f(\rho) \le n \). Take \(\Malloc\) as \(\rho\), we get \( 1 \le
+%% n \). Therefore, we get the contradiction.
 
 \end{pfof}
 
-
-\section{Proof of Theorem}
 
 \begin{pfof}{Theorem~\ref{thm1}}
 
+We have \(\Theta;\emptyset \vdash s\COL P, \vdash D\COL \Theta\) and
+\(\OK_n(P)\).
+%%  from the well-typed program \(\vdash \langle D, s\rangle\).
+Suppose that there exists \(\sigma\) such that \(\langle \emptyset,
+\emptyset, s, n\rangle \xlongrightarrow{\sigma} \langle H', R', s',
+n'\rangle \xlongrightarrow{\rho} \OVERFLOW\).  Then, \(n' = 0\) and
+\(\rho = \Malloc\).  From Lemma~\ref{cor:preservation}, there exists
+\(P'\) such that \(\Theta; \Gamma' \vdash s \COL P'\), \(P
+\xLongrightarrow{\sigma} P'\), and \(\OK_0(P')\); hence \(\langle H',
+R', s', 0\rangle \xlongrightarrow{\Malloc}\).  However, this
+contradicts Lemma~\ref{lem:immediateSafety}.
 
-We have \( \Theta;\emptyset \vdash s\COL P, \vdash D\COL \Theta\) and
-\(\OK_n(P)\) from the well-typed program \(\vdash \langle D,
-s\rangle\).
+%% It suffices to prove \( \langle \emptyset, \emptyset, s, n\rangle
+%% \not\xlongrightarrow{\sigma} \OVERFLOW\) for any action sequence
+%% \(\sigma\).
 
-It suffices to prove \( \langle \emptyset, \emptyset, s, n\rangle
-\not\xlongrightarrow{\sigma} \OVERFLOW\) for any action sequence
-\(\sigma\).
+%% By contradiction, we assume that \( \langle \emptyset, \emptyset,
+%% s, n\rangle \xlongrightarrow{\sigma} \OVERFLOW \) for any \(\sigma =
+%% \rho_0\rho_1\cdots\rho_m\).  That is, \( \langle \emptyset, \emptyset, s, n\rangle
+%% \xlongrightarrow{\rho_0} \langle H_0, R_0, s_0, n_0\rangle
+%% \xlongrightarrow{\rho_1} \cdots \xlongrightarrow{\rho_m} \langle H_m,
+%% R_m, s_m, n_m \rangle \xlongrightarrow{\Malloc} \OVERFLOW \).
 
-By contradiction, we assume that \( \langle \emptyset, \emptyset,
-s, n\rangle \xlongrightarrow{\sigma} \OVERFLOW \) for any \(\sigma =
-\rho_0\rho_1\cdots\rho_m\).  That is, \( \langle \emptyset, \emptyset, s, n\rangle
-\xlongrightarrow{\rho_0} \langle H_0, R_0, s_0, n_0\rangle
-\xlongrightarrow{\rho_1} \cdots \xlongrightarrow{\rho_m} \langle H_m,
-R_m, s_m, n_m \rangle \xlongrightarrow{\Malloc} \OVERFLOW \).
-
-By Lemma~\ref{lem:preservation}, we have \(\OK_{n_m}(P_m)\),
-\(\Theta;\Gamma\vdash s_m \COL P_m\) and \(P \xLongrightarrow{\sigma}
-P_m\). Then, by the lemma~\ref{lem:immediateSafety}, we get the
-contradiction.
+%% By Lemma~\ref{lem:preservation}, we have \(\OK_{n_m}(P_m)\),
+%% \(\Theta;\Gamma\vdash s_m \COL P_m\) and \(P \xLongrightarrow{\sigma}
+%% P_m\). Then, by the lemma~\ref{lem:immediateSafety}, we get the
+%% contradiction.
 
 \end{pfof}
