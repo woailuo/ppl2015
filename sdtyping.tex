@@ -1,14 +1,19 @@
 \section{Syntax Directed Typing Rules}
 
-Typing rules showed in Figure are not immediately suitable for type
-inference. The reason is that the subtyping rule can be applied to any
-kind of term. This means that, any kind of term $s$ can be applied by
-either subtyping rule or the other rule whose conclusion matches the
-shape of the $s$ \cite{plain:book1}.
+%% Typing rules in Figure are not immediately suitable for type
+%% inference. The reason is that the subtyping rule can be applied to any
+%% kind of term. This means that, any kind of term $s$ can be applied by
+%% either subtyping rule or the other rule whose conclusion matches the
+%% shape of the $s$ \cite{plain:book1}.
 
-In order to yield a type inference algorithm, we should do something with the subtyping rule. The method is to merge the subtyping rule with the other rules by introducing a set $C$ of constraints, where $C$ consists of subtype constraints on behavioral types of the form $P_{1}\le P_{2}$ and $OK_{n}(P)$.
+%% In order to yield a type inference algorithm, we should do something with the subtyping rule. The method is to merge the subtyping rule with the other rules by introducing a set $C$ of constraints, where $C$ consists of subtype constraints on behavioral types of the form $P_{1}\le P_{2}$ and $OK_{n}(P)$.
 
-Syntax directed typing rules are listed in Figure 
+%% Syntax directed typing rules are listed in Figure 
+
+Figure~\ref{fig:sdtyping} shows the syntax-directed version of the
+typing rules in Figure~\ref{fig:typingrules}.  Based on these rules,
+we design a constraint generation algorithm for the type
+reconstruction, which is presented in Figure~\ref{fig:tyin}.
 
 $$
      \frac{ C = \emptyset}
