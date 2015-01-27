@@ -15,6 +15,9 @@ typing rules in Figure~\ref{fig:typingrules}.  Based on these rules,
 we design a constraint generation algorithm for the type
 reconstruction, which is presented in Figure~\ref{fig:tyin}.
 
+\begin{figure}[tp]
+\begin{minipage}{\textwidth}
+
 $$
      \frac{ C = \emptyset}
            {\Theta; \Gamma; C \vdash \SKIP : \mathbf{0}}
@@ -65,6 +68,8 @@ $$
      {C \vdash (D , s) }
      \Rtab \mbox{(ST-Program)}
 $$
-$$
-    \mathbf{Figure \; 5.} \;\; \mbox{Syntax Directed Typing Rules}
-$$
+
+\end{minipage}
+\caption{Syntax Directed Typing Rules.}
+\label{fig:sdtyping}
+\end{figure}
