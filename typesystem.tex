@@ -164,7 +164,7 @@ the behavior of a program that requires at most \(n\) memory cells.
 \label{df:okn}
 \(OK_{n}(P)\) holds if, for any \(P'\), if \(P
 \xlongrightarrow{\sigma}P'\) then
-\(\sharp_{malloc}(\sigma)-\sharp_{free}(\sigma)\le n\).
+\(\sharp_{\Malloc}(\sigma)-\sharp_{\Free}(\sigma)\le n\).
 \end{myDef}
 
 We also define subtyping.  Following the idea of Kobayashi et
@@ -339,7 +339,7 @@ immediate overflow.
 If $OK_{n}(P)$, $\Theta; \Gamma \vdash s : P$, \(\vdash D \COL
 \Theta\), and $\langle H,R,s,n \rangle \xlongrightarrow{\rho} \langle
 H',R',s', n' \rangle$, then there exists $P'$ such that (1) $ \Theta;
-\Gamma \vdash s' : P'$, (2) \(P \xLongrightarrow{\rho} P'\), and (3)
+\Gamma^{'} \vdash s' : P'$, (2) \(P \xLongrightarrow{\rho} P'\), and (3)
 \(OK_{n'}(P')\).
 \end{lemma}
 

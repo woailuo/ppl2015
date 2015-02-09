@@ -223,7 +223,8 @@ rules.
   \longrightarrow_{D}
   \langle H\coma R\Lfc x' \mapsto H(R(y)) \Rfc \coma   \Lb x'/x \Rb s , n  \rangle }
 
-\infax[Sem-Free] 
+\infrule[Sem-Free]
+{R(x) \neq \NULL \mbox{ and } R(x) \in \DOM(H)}
 {\langle H\set{R(x) \mapsto v}\coma R\coma \Free(x) , n \rangle \xlongrightarrow{\Free}_{D}
   \langle H\backslash R(x) \coma R \coma \SKIP , n+1 \rangle}
 
