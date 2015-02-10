@@ -248,20 +248,21 @@ rules.
     \longrightarrow_{D} \MEMEX}
 \end{minipage}
 
-\infrule[Sem-FreeExn]
+\infrule[Sem-FreeExn\protect\footnotemark]
 {R(x) = \NULL \mbox{ or } R(x) \notin \DOM(H)}
 {\langle H\coma R\coma \Free(x) , n \rangle \xlongrightarrow{\Free}_{D} \MEMEX}
 
+
 \infax[Sem-OutOfMem]
 { \langle H\coma R\coma \LET x = \Malloc() \ \IN s ,  0  \rangle    \xlongrightarrow{\Malloc}_{D}
-     \OVERFLOW}
+  \OVERFLOW}
 
 \end{minipage}
 
 \caption{Operational semantics of \(\mathcal{L}\).}
 \label{fig:transitionRules}
 \end{figure}
-
+\footnotetext{The semantic for deallocating null pointer here is different from the C language.}
 %% Transition rules are listed in Figure 3. In these rules, $f\{x\to v\}$
 %% is defined as a function $f'$ such that $f'(y) = v$ if $x = y$,
 %% otherwise $f'(y) = f(y)$ and $y \in dom(f)$. There are three rules
