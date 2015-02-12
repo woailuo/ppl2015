@@ -43,12 +43,22 @@ resources required for model checking become smaller if applying model
 checkers to the abstracted behavior, since the abstracted behavior
 only consists of allocation and deallocation.
 
-One thing we should notice in Figure~\ref{fig:statistic} is that
-the
-result of \texttt{true} or \texttt{fals}e in the\texttt{fixe num} column may
-be different for the same program, for example, linklist.c has the
-true under original column but the false under behavioral column,
-because
+One thing we should notice in Figure~\ref{fig:statistic} is that for
+each line, the result of \texttt{true} or \texttt{fals}e in
+the\texttt{fixe num} column should be the same when model checking on
+original programs and abstracted behavior, but it is not, for example,
+\texttt{linklist.c} has the \texttt{true} under \texttt{original
+  programs} column but the false under \texttt{abstracted behavior}
+column. The reason is that our approach, abstracted behavior, can not
+deal with conditional statements, function calls in another files,
+loop statements, for example, the \texttt{linklist.c} consists of
+statements like if-then-else and for-loop statements, which is
+abstracted as $\Malloc;\mu\alpha.((\Malloc;\alpha) +
+0));\mu\alpha.((\Free;\alpha) + 0)$. In fact, the \texttt{linklist.c}
+does $\Malloc$ 6 times, and then $\Free$ 6 times, so it is safe; but
+the abstracted behavior may perform like
+$\Malloc;\mu\alpha.(\Malloc;\alpha));0$, this means consuming unbound
+number of memory cells.
 
 \begin{figure}
  \centering
