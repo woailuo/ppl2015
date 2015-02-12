@@ -22,13 +22,23 @@ or \texttt{false} behind \texttt{fixed num} means it is \texttt{true}
 if the number of the memory cells which a program consumes does not
 exceed the \texttt{fixed num}, otherwise it is \texttt{false}.
 
-The programs used for the experiments are described as follows:[TODO]
+The programs used for the experiments are described as follows:
 \begin{itemize}
-\item \texttt{linklist.c} and \texttt{linklist2.c} create a list,
-\item \texttt{linkstack.c} creates a stack.
-\item \texttt{linkqueue.c} creates a queue.
-\item \texttt{binarysorttree.c} sorts a binarytree
-\item \texttt{database.c} creates a database.
+\item \texttt{linklist.c} and \texttt{linklist2.c} initialize a list,
+  and perform some operations on the list (insert , delete, locate a
+  node and traverses the list), and destroy the list. The difference
+  between \texttt{linklist.c} and \texttt{linklist2.c} is that the
+  former creates list by the head-insertion, whereas the latter creates a list
+  by the tail-insertion.
+\item \texttt{linkstack.c} creates a stack, pushes some elements in
+  the stack, traverses the stack and clear the stack.
+\item \texttt{linkqueue.c} initializes a queue, inserts, deletes some
+  elements in the queue, clears the queue and destroys the queue.
+\item \texttt{binarysorttree.c} inserts some nodes in a binary tree
+  and deletes all the allocated nodes.
+\item \texttt{database.c} models a database. It opens a database and
+  performs some operations on the database (retrieve, delete and
+  update data, or create a new database) and closes the database.
 \item \texttt{ihex2fw.c} is a file from Linux kernel
   \texttt{/firmware/ihex2fw.c}, which converts ihex files into binary
   representation for use by Linux kernel.
@@ -60,9 +70,92 @@ the abstracted behavior may perform like
 $\Malloc;\mu\alpha.(\Malloc;\alpha));0$, this means consuming unbound
 number of memory cells.
 
-\begin{figure}
- \centering
- \includegraphics[width=14cm]{statistic.png}
-\caption{Comparison}
-\label{fig:statistic}
-\end{figure}
+\begin{table}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+& \multicolumn{5}{|c|}{original programs}  \\
+\hline
+ & $\sharp$loc & $\sharp$fun & cpu time (total) & memory (MB) & fixed num \\
+\hline
+linklist.c & 154 & 13 & 9.770 & 2943 & 6(true)  \\
+\hline
+linklst2.c & 140 & 13 & 25.620 & 2955 & 21(true) \\
+\hline
+linkstack.c  & 87 & 10 & 10.830 & 2941 & 11(true) \\
+\hline
+linkqueue.c & 119 & 11 & 13.110 & 2939 & 4(true) \\
+\hline
+binarysorttree.c & 80 & 5 & 30.210 & 2950 & 10(true)  \\
+\hline
+database.c & 179 & 12 & 4.930 & 2922 & 3(true) \\
+\hline
+ihex2fw.c & 202 & 7 & 23.490 & 2882 & 5(false) \\
+\hline
+gen\_init\_cpio.c & 346 & 19 & 9.580 & 2809 & 1(true) \\
+\hline
+\end{tabular}
+%%\caption{My first table}
+\end{table}
+
+\begin{table}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+&\multicolumn{5}{|c|}{abstracted behavior} \\
+\hline
+ &$\sharp$loc & $\sharp$fun & cpu time (total) & memory (MB) & fixed num \\
+\hline
+linklist.c &  20 & 4 & 3.190 & 2918 & 6(false) \\
+\hline
+linklst2.c & 20 & 4 & 10.72 & 2945 & 21(false) \\
+\hline
+linkstack.c & 20 & 4 & 4.990 & 2916 & 11(false) \\
+\hline
+linkqueue.c & 25 & 4 & 2.660 & 2919 & 4(false) \\
+\hline
+binarysorttree.c & 19 & 4 & 5.130 & 2935 & 10(false) \\
+\hline
+database.c  & 21 & 4 & 2.760 & 2920 & 2(false) \\
+\hline
+ihex2fw.c  & 15 & 4 & 2.160 & 2797 & 5(false) \\
+\hline
+gen\_init\_cpio.c & 15 & 4 & 2.160 & 2799 & 1(false) \\
+\hline
+\end{tabular}
+%%\caption{My first table}
+\end{table}
+
+
+%% \begin{table}
+%% \tiny
+%% \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+%% \hline
+%% & \multicolumn{5}{|c|}{original programs} & \multicolumn{5}{|c|}{abstracted behavior} \\
+%% \hline
+%%  & $\sharp$loc & $\sharp$fun & cpu time (total) & memory (MB) & fixed num & $\sharp$loc & $\sharp$fun & cpu time (total) & memory (MB) & fixed num \\
+%% \hline
+%% linklist.c & 154 & 13 & 9.770 & 2943 & 6(true) & 20 & 4 & 3.190 & 2918 & 6(false) \\
+%% \hline
+%% linklst2.c & 140 & 13 & 25.620 & 2955 & 21(true) & 20 & 4 & 10.72 & 2945 & 21(false) \\
+%% \hline
+%% linkstack.c  & 87 & 10 & 10.830 & 2941 & 11(true) & 20 & 4 & 4.990 & 2916 & 11(false) \\
+%% \hline
+%% linkqueue.c & 119 & 11 & 13.110 & 2939 & 4(true) & 25 & 4 & 2.660 & 2919 & 4(false) \\
+%% \hline
+%% binarysorttree.c & 80 & 5 & 30.210 & 2950 & 10(true) & 19 & 4 & 5.130 & 2935 & 10(false) \\
+%% \hline
+%% database.c & 179 & 12 & 4.930 & 2922 & 3(true) & 21 & 4 & 2.760 & 2920 & 2(false) \\
+%% \hline
+%% ihex2fw.c & 202 & 7 & 23.490 & 2882 & 5(false) & 15 & 4 & 2.160 & 2797 & 5(false) \\
+%% \hline
+%% gen\_init\_cpio.c & 346 & 19 & 9.580 & 2809 & 1(true) & 15 & 4 & 2.160 & 2799 & 1(false) \\
+%% \hline
+%% \end{tabular}
+%% %%\caption{My first table}
+%% \end{table}
+
+%% \begin{figure}
+%%  \centering
+%%  \includegraphics[width=14cm]{statistic.png}
+%% \caption{Comparison}
+%% \label{fig:statistic}
+%% \end{figure}
