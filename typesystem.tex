@@ -92,6 +92,7 @@ around variable and function environments.
 \infrule[Tr-Seq]
 {P_{1} \xlongrightarrow{\rho} P_{1}' }
 {P_{1};P_{2} \xlongrightarrow{\rho} P_{1}';P_{2}}
+
 \caption{Semantics of behavioral types.}
 \label{fig:semBTypes}
 \end{figure}
@@ -149,7 +150,7 @@ first define predicate \(\OK_n(P)\) that means that \(P\) describes
 the behavior of a program that requires at most \(n\) memory cells.
 
 \begin{myDef}[\(\sharp_{\rho}(\sigma)\)]
- \label{df:sharf}
+\label{df:sharf}
 \(\sharp_{\rho}(\sigma)\) is the number of \(\rho\) in the sequence
 \(\sigma\).
 \end{myDef}
@@ -268,9 +269,12 @@ exists \(P_2'\) such that \(P_2 \xLongrightarrow{\rho} P_2'\) and
 {\vdash \langle D, s \rangle : n}
 
 \end{minipage}
-\caption{Typing rules.}
+\caption{Typing rules\protect\footnotemark.}
 \label{fig:typingrules}
 \end{figure}
+
+\footnotetext{Till now, we do not know the answer if the type system
+  is decidable or not.}
 
 The type judgment for statements is of the form $\Theta ; \Gamma
 \vdash s : P$.  It expresses that, under the variable type environment
