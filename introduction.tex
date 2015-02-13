@@ -63,9 +63,10 @@ Figure~\ref{ex:np} describes partial and total memory-leak freedom.
 Both \(h\) and \(h'\) are partially memory-leak free because they do
 not terminate.  The function \(h\) is totally memory-leak free since
 it consumes at most two cells\footnote{We assume that every memory
-  cell allocated by \(\Malloc\) is fixed size.}.  However, the
-function \(h'\), when it is invoked, consumes unbounded number of
-memory cells; hence \(h'\) is not totally memory-leak free.
+  cell allocated by \(\Malloc\) is fixed size. Because variable-length
+  memory cell is ubiquitous, we plan to deal with it in the future.}.
+However, the function \(h'\), when it is invoked, consumes unbounded
+number of memory cells; hence \(h'\) is not totally memory-leak free.
 \end{exmp}
 
 As a first step to the verification of total memory-leak freedom, this
