@@ -24,28 +24,29 @@ denoates memory-leak.
 
 The programs used for the experiments are described as follows:[TODO]
 \begin{itemize}
-\item \texttt{linklist.c} and \texttt{linklist2.c} initialize a list,
-  and perform some operations on the list (insert , delete, locate a
-  node and traverses the list), and destroy the list. The difference
-  between \texttt{linklist.c} and \texttt{linklist2.c} is that the
-  former creates list by the head-insertion, whereas the latter creates a list
-  by the tail-insertion.
-\item \texttt{linkstack.c} creates a stack, pushes some elements in
-  the stack, traverses the stack and clear the stack.
-\item \texttt{linkqueue.c} initializes a queue, inserts, deletes some
-  elements in the queue, clears the queue and destroys the queue.
-\item \texttt{binarysorttree.c} inserts some nodes in a binary tree
-  and deletes all the allocated nodes.
+%% \item \texttt{linklist.c} and \texttt{linklist2.c} initialize a list,
+%%   and perform some operations on the list (insert , delete, locate a
+%%   node and traverses the list), and destroy the list. The difference
+%%   between \texttt{linklist.c} and \texttt{linklist2.c} is that the
+%%   former creates list by the head-insertion, whereas the latter creates a list
+%%   by the tail-insertion.
+%% \item \texttt{linkstack.c} creates a stack, pushes some elements in
+%%   the stack, traverses the stack and clear the stack.
+%% \item \texttt{linkqueue.c} initializes a queue, inserts, deletes some
+%%   elements in the queue, clears the queue and destroys the queue.
+%% \item \texttt{binarysorttree.c} inserts some nodes in a binary tree
+%%   and deletes all the allocated nodes.
 \item \texttt{database.c} models a database. It opens a database and
   performs some operations on the database (retrieve, delete and
-  update data, or create a new database) and closes the database.
-\item \texttt{ihex2fw.c} is a file from Linux kernel
-  \texttt{/firmware/ihex2fw.c}, which converts ihex files into binary
-  representation for use by Linux kernel.
-\item \texttt{gen\_init\_cpio.c} is a file from Linux kernel
-  \texttt{/usr/gen\_init\_cpio.c}, which produces a binary file which
-  performs on a file containing newline separated entries that
-  describe the files to be included in the initramfs archive.
+  update data, or create a new database) and closes the database. We
+  rewrite this program as \texttt{database\_rw.c}.
+%% \item \texttt{ihex2fw.c} is a file from Linux kernel
+%%   \texttt{/firmware/ihex2fw.c}, which converts ihex files into binary
+%%   representation for use by Linux kernel.
+%% \item \texttt{gen\_init\_cpio.c} is a file from Linux kernel
+%%   \texttt{/usr/gen\_init\_cpio.c}, which produces a binary file which
+%%   performs on a file containing newline separated entries that
+%%   describe the files to be included in the initramfs archive.
 \end{itemize}
 
 The results present in the these two tables show that the
@@ -53,23 +54,25 @@ resources required for model checking become smaller if applying model
 checkers to the abstracted behavior, since the abstracted behavior
 only consists of allocation and deallocation.
 
-[TODO]
-One thing we should notice in these two tables is that for the same
-programs, the \texttt{verified result} should be the same when model
-checking on original programs and abstracted behavior; but it is not,
-for example, \texttt{binarysorttree.c} has the \texttt{TRUE} in the
+One thing we should notice in these two tables is that for the
+same programs, the \texttt{verified result} should be the same when
+model checking on original programs and abstracted behavior; but it is
+not, for example, \texttt{database.c} has the \texttt{TRUE} in the
 Table~\ref{tb:mcc} but the \texttt{FALSE} in the Table~\ref{tb:mca}.
 . The reason is that our approach, abstracted behavior, may not
 correctly deal with some conditional statements, function calls which
 locate in another files consisting of allocation or deallocation
-operations, loop statements; for example, the
-\texttt{binarysorttree.c} consists of statements like if-then-else and
-for-loop statements, which is abstracted as
-$\Malloc;\mu\alpha.((\Malloc;\alpha) + 0));\mu\alpha.((\Free;\alpha) +
-0)$. In fact, the \texttt{binarysorttree.c} does $\Malloc$ 6 times,
-and then $\Free$ 6 times, so it is safe; but the abstracted behavior
-may perform like $\Malloc;\mu\alpha.(\Malloc;\alpha));0$, this means
-consuming unbound number of memory cells.
+operations; for example, the \texttt{database.c} consists of
+statements like if-then-else and for-loop statements, which is
+abstracted as $\mu\alpha.(\Malloc;\Malloc;((\Free + 0);\Free) +
+0);\alpha)$. In fact, the \texttt{database.c} does $\Malloc$ 2 times,
+and then $\Free$ 2 times, so it is safe; but the abstracted behavior
+may perform like $\mu\alpha.(\Malloc;\Malloc;0;\alpha)$, this means
+consuming unbound number of memory cells. Therefore, we rewrite this
+program to \texttt{database\_rw.c} which does not change the semantics
+of original program, and the behavior of \texttt{database\_rw.c} can
+be abstrated as a safe behavior type$\mu\alpha.(\Malloc;(\Malloc + \Free) +
+0);\Free;\alpha)$.
 
 \begin{table}
   \scriptsize
