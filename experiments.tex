@@ -54,25 +54,25 @@ resources required for model checking become smaller if applying model
 checkers to the abstracted behavior, since the abstracted behavior
 only consists of allocation and deallocation.
 
-One thing we should notice in these two tables is that for the
-same programs, the \texttt{verified result} should be the same when
-model checking on original programs and abstracted behavior; but it is
-not, for example, \texttt{database.c} has the \texttt{TRUE} in the
-Table~\ref{tb:mcc} but the \texttt{FALSE} in the Table~\ref{tb:mca}.
-. The reason is that our approach, abstracted behavior, may not
-correctly deal with some conditional statements, function calls which
-locate in another files consisting of allocation or deallocation
-operations; for example, the \texttt{database.c} consists of
-statements like if-then-else and for-loop statements, which is
+One thing we should notice in these two tables is that for the same
+programs, the \texttt{verified result} should be the same when model
+checking on original programs and abstracted behavior; but it is not,
+for example, \texttt{database.c} has the \texttt{TRUE} in the
+Table~\ref{tb:mcc} but the \texttt{FALSE} in the
+Table~\ref{tb:mca}. The reason is that our approach, abstracted
+behavior, may not correctly deal with some conditional statements,
+function calls which locate in another files consisting of allocation
+or deallocation operations; for example, the \texttt{database.c}
+consists of statements like if-then-else statements, which is
 abstracted as $\mu\alpha.(\Malloc;\Malloc;((\Free + 0);\Free) +
 0);\alpha)$. In fact, the \texttt{database.c} does $\Malloc$ 2 times,
 and then $\Free$ 2 times, so it is safe; but the abstracted behavior
-may perform like $\mu\alpha.(\Malloc;\Malloc;0;\alpha)$, this means
+may perform like $\mu\alpha.(\Malloc;\Malloc;0;\alpha)$, which means
 consuming unbound number of memory cells. Therefore, we rewrite this
 program to \texttt{database\_rw.c} which does not change the semantics
-of original program, and the behavior of \texttt{database\_rw.c} can
-be abstrated as a safe behavior type$\mu\alpha.(\Malloc;(\Malloc + \Free) +
-0);\Free;\alpha)$.
+of original program, and the behavior of \texttt{database\_rw.c} is
+$\mu\alpha.(\Malloc;(\Malloc + \Free) + 0);\Free;\alpha)$ which
+returns \texttt{TRUE} when doing model checking on it.
 
 \begin{table}
   \scriptsize
