@@ -44,6 +44,17 @@ allocated memory cells are eventually deallocated \emph{if a program
   terminates}.  We say a program is \emph{totally} memory-leak free if
 it does not consume unbounded amount of memory during execution.
 
+In real-world programs, the total memory-leak freedom is a very
+important property for programs, such as the OS and Web servers
+mentioned above which run for a long time and allocate memory cells
+over time, digital image processing which may allocate memory cell
+frequently, embedded systems like medical instruments and airplanes
+appliances which have limited memory but process unbounded stream of
+inputs. Without this property, these programs may eventually crash and
+cause serious problems due to lack of memory cells. If the number of
+of memory consumption can be determined by static analysis, the OS can
+allocate a mount of memory for a program before the execution so
+that allocating operation never fails.
 
 \begin{exmp}\label{ex:ex1}
 %% Functions $h$ and $h'$ shown in Figure~\ref{ex:np} describe
