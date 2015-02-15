@@ -5,7 +5,6 @@ Dynamic memory management is a crucial function of programming
 languages.  Correct allocation and disposal of memory cells are
 fundamental for software to be reliable.
 
-
 %% This paper proposes a type-based approach to static verification of
 %% memory-leak freedom that works for nonterminating programs.  Although
 %% memory leaks are relatively more serious in nonterminating programs
@@ -16,6 +15,7 @@ fundamental for software to be reliable.
 %% say a program is \emph{totally} memory-leak free if it does not
 %% consume unbounded amount of memory during execution.
 %% =======
+
 Correct dynamic memory management is challenging if a programming
 language is equipped with manual memory management primitives (e.g.,
 \texttt{malloc} and \texttt{free} in the C language).  With such
@@ -109,9 +109,9 @@ applying a model checker to the original programs and to the assigned
 behavioral types.  However, we expect the latter is faster than the
 former in many programs because a behavioral type focuses on the
 actions related to allocations and deallocations, abstracting away the
-other actions.  Although the current paper deals with only the
-theoretical aspect, we plan to conduct experiment with actual programs
-in future.
+other actions. %%  Although the current paper deals with only the
+%% theoretical aspect, we plan to conduct experiment with actual programs
+%% in future.
 
 Notice that our type system alone does not prevent incorrect usage of
 \(\Malloc\) and \(\Free\).  Indeed, as observed from the type assigned
@@ -126,8 +126,9 @@ follows. Section~\ref{sec:language} introduces a simple imperative
 language and the operational semantics of the
 language. Section~\ref{sec:typesystem} introduces the behavioral type
 system and states its type soundness. Section~\ref{sec:reconstruction}
-describes a type reconstruction procedure.
-Section~\ref{sec:relatedwork} discusses the related
+describes a type reconstruction
+procedure. Section~\ref{sec:experiment} shows the preliminary
+experiments. Section~\ref{sec:relatedwork} discusses the related
 work. Section~\ref{sec:conclusion} concludes the paper.  The proof of
 type soundness and the detailed definition of the type reconstruction
 procedure are in the full version~\cite{fullversion}.
