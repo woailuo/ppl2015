@@ -14,18 +14,11 @@ The syntax of the types is as follows.
 \]
 We use metavariable \(P\) for \emph{behavioral types}, which are
 abstractions of the behavior of programs.  The type ${\bf 0}$
-%<<<<<<< HEAD
-%% represents the do-nothing behavior.  The type \(P_1;P_2\) represents
-%% the sequential execution of \(P_1\) and \(P_2\).  The type \(P_1 +
-%% P_2\) represents the choice between \(P_1\) and \(P_2\).  The type
-%% \(\Malloc\) represents an allocation a memory cell exactly once.  The
-%% =======
 represents do-nothing behavior.  The type \(P_1;P_2\) represents the
 sequential execution of \(P_1\) and \(P_2\).  The type \(P_1 + P_2\)
 represents the choice between \(P_1\) and \(P_2\).  The type
-\(\Malloc\) represents an allocation of a memory cell exactly once.  The
-%>>>>>>> 4423a1ce9aed6c247aa532bd4d789da44f8e4939
-type \(\Free\) represents a deallocation.  \(\alpha\) is a type
+\(\Malloc\) represents an allocation of a memory cell exactly once.
+The type \(\Free\) represents a deallocation.  \(\alpha\) is a type
 variable. The type \(\mu \alpha.P\) represents the behavior of
 \(\alpha\) defined by the recursive equation \(\alpha = P\).
 
@@ -274,7 +267,12 @@ exists \(P_2'\) such that \(P_2 \xLongrightarrow{\rho} P_2'\) and
 \end{figure}
 
 \footnotetext{Till now, we do not know the answer if the type system
-  is decidable or not.}
+  is decidable or not. Because of the choice type $P_1 + P_2$, a
+  statement like $\IFNULL(x) \; \THEN \FREE \ELSE \SKIP$ can be typed
+  as $\Free + \mathbf{0}$ by T-Sub and T-If, otherwise it cannot be
+  typed, and when any two types $P_ 1$ and $P_2$ are given, we need this
+  choice type in order to obtain the lower bound of them.}
+
 
 The type judgment for statements is of the form $\Theta ; \Gamma
 \vdash s : P$.  It expresses that, under the variable type environment
