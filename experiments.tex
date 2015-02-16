@@ -9,11 +9,19 @@ investigate potential issues in the current framework.  For the
 following C programs, we extract the behavioral types manually in the
 form of another C programs.
 \begin{itemize}
-\item \texttt{database.c}: models a database. It opens a database and
-  performs some operations on the database (retrieve, delete and
-  update data, or create a new database) and closes the database. We
-  rewrite this program as \texttt{database\_rw.c} without changing its
-  meaning.
+
+\item \texttt{poker.c}: a program changed according to the program
+  \texttt{person.c} from website
+  (http://c.learncodethehardway.org/book/ex16.html), which models a
+  poker game. It random  We rewrite this program as \texttt{poker\_rw.c} without
+  changing its meaning.
+
+\item \texttt{database.c}: from website
+  (http://c.learncodethehardway.org/book/ex17.html), modeling a
+  database. It opens a database and performs some operations on the
+  database (retrieve, delete and update data, or create a new
+  database) and closes the database. We rewrite this program as
+  \texttt{database\_rw.c} without changing its meaning.
 \item \texttt{gen\_init\_cpio.c} is a file from Linux kernel
   \texttt{/usr/gen\_init\_cpio.c}. It produces a binary file which
   performs on a file containing newline separated entries that
