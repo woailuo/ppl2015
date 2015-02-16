@@ -30,6 +30,15 @@ form of another C programs.
     the Linux kernel.  We rewrite it to the file \texttt{decompress\_unlzo\_rw.c}
 \end{itemize}
 
+We apply a model checker on these programs to check the property --
+the number of memory usage does not exceed the number of available
+memory cells.  In order to do it, in a program, we fixed a global
+number $n$ which denotes the number of available memory for
+allocation, it will decrease 1 when doing allocation and increase 1
+when doing deallocation; we insert an assertion statement, $assert(n
+>= 0)$, to check if doing one more allocation when the $n$ has
+decreased to $0$.
+
 Table~\ref{tb:mcc} and Table~\ref{tb:mca} give the result.  All of the
 experiments are done on a machine with an Intel(R) Core(TM) i7-3770
 CPU @ 3.40GHz, 8MB cache and 3.76GB memory, running on Debian (kernel
