@@ -138,13 +138,7 @@ action \(\rho\), \(P\) turns into \(P'\).
 %% \(\vdash D \COL \Theta\) denotes that the set \(D\) of definitions
 %% has a type \(\Theta\).
 
-We need several auxiliary definitions to present typing
-rules\footnote{Till now, we do not know the answer if the type system
-  is decidable or not. Because of the choice type $P_1 + P_2$, a
-  statement like $\IFNULL(x) \; \THEN \FREE \ELSE \SKIP$ can be typed
-  as $\Free + \mathbf{0}$ by T-Sub and T-If, otherwise it cannot be
-  typed, and when any two types $P_ 1$ and $P_2$ are given, we need
-  this choice type in order to obtain the lower bound of them.}.  We
+We need several auxiliary definitions to present typing rules.  We
 first define predicate \(\OK_n(P)\) that means that \(P\) describes
 the behavior of a program that requires at most \(n\) memory cells.
 
@@ -317,6 +311,24 @@ cells when it is run.  In order to guarantee this, rule \rn{T-Prog}
 forces a side condition \(\OK_n(P)\) where \(P\) is a behavioral type
 assigned to \(s\) under \(\Theta\) assigned to \(D\).
 %>>>>>>> 4423a1ce9aed6c247aa532bd4d789da44f8e4939
+
+%% \footnote{Till now, we do not know the answer if the type system is
+%%   decidable or not. Because of the choice type $P_1 + P_2$, a
+%%   statement like $\IFNULL(x) \; \THEN \FREE \ELSE \SKIP$ can be typed
+%%   as $\Free + \mathbf{0}$ by T-Sub and T-If, otherwise it cannot be
+%%   typed, and when any two types $P_ 1$ and $P_2$ are given, we need
+%%   this choice type in order to obtain the lower bound of them.}
+ 
+\begin{remark}
+The constructs \(P_1 + P_2\) and \(\mu\alpha. P\) may seem redundant
+since they do not appear in the typing rules.  We designate these
+constructs so that there is (1) the join for arbitrary two behavioral
+types \(P_1\) and \(P_2\) and (2) the least fixed point for a map
+\(\set{\alpha \mapsto P}\).  Without these constructs, for example, a
+program \(\IFNULL(x) \; \THEN \FREE \ELSE \SKIP\) is not well-typed
+under a type environment \(x\).
+\end{remark}
+
 
 \subsection{Type soundness}
 

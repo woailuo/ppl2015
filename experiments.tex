@@ -1,12 +1,34 @@
 \section{Preliminary Experiments}
 \label{sec:experiment}
-In this section, we did the experiments by comparing applying a model
-checker to original C language programs with to abstracted
-behavior. Table~\ref{tb:mcc} and Table~\ref{tb:mca} give some statistics
-of the experiments. All of the experiments are done on a machine with
-an Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz, 8MB cache and 3.76GB
-memory, running on Debian (kernel version 2.6.32-5-amd64) and
-CPAchecker (version 1.3.4).
+
+%% by comparing applying a model checker to original C language programs
+%% with to abstracted behavior.
+
+We conducted preliminary experiments to check feasibility and to
+investigate potential issues in the current framework.  For the
+following C programs, we extract the behavioral types manually in the
+form of another C programs.
+\begin{itemize}
+\item \texttt{database.c}: models a database. It opens a database and
+  performs some operations on the database (retrieve, delete and
+  update data, or create a new database) and closes the database. We
+  rewrite this program as \texttt{database\_rw.c} without changing its
+  meaning.
+\item \texttt{gen\_init\_cpio.c} is a file from Linux kernel
+  \texttt{/usr/gen\_init\_cpio.c}. It produces a binary file which
+  performs on a file containing newline separated entries that
+  describe the files to be included in the initramfs archive. Also, we
+  rewrite this program to \texttt{gen\_init\_cpio\_rw.c}.
+  \item \texttt{decompress\_unlzo.c} is a file from Linux kernel
+    \texttt{/lib/decompress\_unlzo.c}. This is a LZO decompressor for
+    the Linux kernel. We rewrite it to the file
+    \texttt{decompress\_unlzo\_rw.c}
+\end{itemize}
+
+Table~\ref{tb:mcc} and Table~\ref{tb:mca} give the result.  All of the
+experiments are done on a machine with an Intel(R) Core(TM) i7-3770
+CPU @ 3.40GHz, 8MB cache and 3.76GB memory, running on Debian (kernel
+version 2.6.32-5-amd64) and CPAchecker (version 1.3.4).
 
 \begin{table}
   \scriptsize
@@ -82,24 +104,6 @@ allocation; the \texttt{TRUE} in the \texttt{verified result} column
 means the number of the memory cells which a program consumes does not
 exceed the \texttt{fixed num}, otherwise it is \texttt{FALSE} which
 denotes overflow.
-
-The programs used for the experiments are described as follows:
-\begin{itemize}
-\item \texttt{database.c} models a database. It opens a database and
-  performs some operations on the database (retrieve, delete and
-  update data, or create a new database) and closes the database. We
-  rewrite this program as \texttt{database\_rw.c} without changing its
-  meaning.
-\item \texttt{gen\_init\_cpio.c} is a file from Linux kernel
-  \texttt{/usr/gen\_init\_cpio.c}. It produces a binary file which
-  performs on a file containing newline separated entries that
-  describe the files to be included in the initramfs archive. Also, we
-  rewrite this program to \texttt{gen\_init\_cpio\_rw.c}.
-  \item \texttt{decompress\_unlzo.c} is a file from Linux kernel
-    \texttt{/lib/decompress\_unlzo.c}. This is a LZO decompressor for
-    the Linux kernel. We rewrite it to the file
-    \texttt{decompress\_unlzo\_rw.c}
-\end{itemize}
 
 The results present in the these two tables show that the
 resources required for model checking become smaller if applying model

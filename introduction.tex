@@ -44,17 +44,22 @@ allocated memory cells are eventually deallocated \emph{if a program
   terminates}.  We say a program is \emph{totally} memory-leak free if
 it does not consume unbounded amount of memory during execution.
 
-In real-world programs, the total memory-leak freedom is a very
-important property for programs, such as the OS and Web servers
-mentioned above which run for a long time and allocate memory cells
-over time, digital image processing which may allocate memory cell
-frequently, embedded systems like medical instruments and airplanes
-appliances which have limited memory but process unbounded stream of
-inputs. Without this property, these programs may eventually crash and
-cause serious problems due to lack of memory cells. If the number of
-of memory consumption can be determined by static analysis, the OS can
-allocate a mount of memory for a program before the execution so
-that allocating operation never fails.
+Total memory-leak freedom is indeed an important property in
+real-world programs.  For example, memory-leak freedom of a controller
+in an embedded system is crucial.  However, partial memory-leak
+freedom is not enough for such software that does not terminate.
+
+%% In real-world programs, the total memory-leak freedom is a very
+%% important property for programs, such as the OS and Web servers
+%% mentioned above which run for a long time and allocate memory cells
+%% over time, digital image processing which may allocate memory cell
+%% frequently, embedded systems like medical instruments and airplanes
+%% appliances which have limited memory but process unbounded stream of
+%% inputs. Without this property, these programs may eventually crash and
+%% cause serious problems due to lack of memory cells. If the number of
+%% of memory consumption can be determined by static analysis, the OS can
+%% allocate a mount of memory for a program before the execution so that
+%% allocating operation never fails.
 
 \begin{exmp}\label{ex:ex1}
 %% Functions $h$ and $h'$ shown in Figure~\ref{ex:np} describe
@@ -74,10 +79,11 @@ Figure~\ref{ex:np} describes partial and total memory-leak freedom.
 Both \(h\) and \(h'\) are partially memory-leak free because they do
 not terminate.  The function \(h\) is totally memory-leak free since
 it consumes at most two cells\footnote{We assume that every memory
-  cell allocated by \(\Malloc\) is fixed size. Because variable-length
-  memory cell is ubiquitous, we plan to deal with it in the future.}.
-However, the function \(h'\), when it is invoked, consumes unbounded
-number of memory cells; hence \(h'\) is not totally memory-leak free.
+  cell allocated by \(\Malloc\) is fixed size to simplify our type
+  system introduced in Section~\ref{sec:typesystem}.  Extension with
+  variable-length cells is one of our future work.}.  However, the
+function \(h'\), when it is invoked, consumes unbounded number of
+memory cells; hence \(h'\) is not totally memory-leak free.
 \end{exmp}
 
 As a first step to the verification of total memory-leak freedom, this
@@ -109,9 +115,10 @@ applying a model checker to the original programs and to the assigned
 behavioral types.  However, we expect the latter is faster than the
 former in many programs because a behavioral type focuses on the
 actions related to allocations and deallocations, abstracting away the
-other actions. %%  Although the current paper deals with only the
-%% theoretical aspect, we plan to conduct experiment with actual programs
-%% in future.
+other actions.
+
+%%  Although the current paper deals with only the theoretical aspect,
+%% we plan to conduct experiment with actual programs in future.
 
 Notice that our type system alone does not prevent incorrect usage of
 \(\Malloc\) and \(\Free\).  Indeed, as observed from the type assigned
